@@ -1,0 +1,58 @@
+\documentclass{article}
+\input{mypreamble/a-preamble}
+\usepackage[all]{xy}
+
+\newcommand{\dMan}{\textnormal{d}\mathcal{M}\textnormal{an}}
+\newcommand{\dRing}{\mathcal{E}^{\infty}\textnormal{Ring}^{\geq 0}}
+\newcommand{\qcoh}{\textnormal{QCoh}}
+\newcommand{\st}{\textnormal{St}}
+\newcommand{\amod}{\textnormal{Mod}}
+\newcommand{\aff}{\textnormal{Aff}}
+\newcommand{\Sp}{\mathcal{S}}
+\newcommand{\op}{\textnormal{op}}
+
+%%%%% TITLE PAGE
+\title{Shifted Symplectic Integration}
+
+\begin{document}
+
+\maketitle
+
+\section{First Definitions}
+
+We work with $\infty$-stacks on the $\infty$-category of connective commutative derived rings in characteristic $0$: equivalently defined as the sind-cocompletion of polynomial algebra (free finitely generated $k$-algebras), simplicial commutative algebra, CDGA in positive (homological) degree, connective $\mathcal{E}^\infty$-algebras in $k\amod$,... The topology is étale and the stacks must have a suitable theory of (co)tangent modules (it has to be a dualizable object), for example we can use Artin stacks.
+
+Ideally, I'd like to study stacks on $\dMan$ at some point: the point is that geometric quantization should be more likely to exist in the $\mathcal{C}^\infty$-setting rather than the algebraic one. It probably won't change any of what follows.
+
+\begin{remark}[Working on Points]
+    Recall for a stack $X \in \aff^{\op} \to \Sp$, we define
+\[
+    \qcoh(X) = \Lim_{X} (\aff^{\op} \xto[-\amod] \Cat)
+\]
+by point-wise right Kan extension. Automatically, this implies that $qcoh$ sends colimits of (pre)stacks to limits (of categories).
+
+Let us consider $F\in\B \to \st$ a finite diagram of stacks. Then $\Lim F$ is a stack and we have a correspondence between $A$-points $x$ of $\Lim F$ and cones on $A$ of $F$. We can define functors
+\[
+    \mathbb{L}_x \in \begin{cases}[rCl]
+        \mathcal{B} &\longrightarrow& A\amod\\
+        b &\longmapsto& x_b^*(\mathbb{L}_{Fb})
+    \end{cases}
+\]
+and its linear dual $\mathbb{T}_x$. We then have
+\[
+    x^*\mathbb{L}_{\Lim F} = \Colim_{\mathcal{B}} \mathbb{L}_x \\
+    x^*\mathbb{T}_{\Lim F} = \Lim_{\mathcal{B}} \mathbb{T}_x
+\]
+Using this, building (shifted) maps between tangent and cotangent modules is equivalent to building such maps the respective (co)limits on the $A$-points, naturally in the points.
+\end{remark}
+
+\begin{remark}[How about \textbf{closed} forms?] It's not clear to me yet, how one could translate being a closed form at points like this? It's probably not possible: I will have to deal with this eventually.
+\end{remark}
+
+\begin{definition}
+    
+\end{definition}
+
+\section{Example}
+
+\end{document}

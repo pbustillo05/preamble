@@ -1,0 +1,175 @@
+\documentclass{article}
+\input{mypreamble/a-preamble}
+\usepackage{mathdots}
+
+%%%%% TITLE PAGE
+\title{Higher Morita Categories}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\makeatletter
+\show\@starttoc
+\makeatother
+
+\section{Goal and Ideas}
+
+\begin{enumerate}
+    \item Construct a most general higher morita category by successive enrchiment. Requirement: stable under factorization homology.
+
+    \item Embed such Morita category into nPr such that it controls all dualizable objects/cells.
+
+    \item Duals up to $n$ = adjoints, then duals at $n+1$ = finiteness, and duals at $> n+1$ = invertibility. Extend characterization to 1 $\beta$-level and recover \textbf{fusion} categories.
+
+    \item Link with Kozsul duality? Which objects are part of a Kozsul pair?
+
+    \item Link to K-theory?
+
+    \item Compute factorization homology of Mor (which is the natural domain for.. factorization homology). This corresponds to finding its full pasting calculus.
+
+    \item Compute Brauer spectrum for several enrichment context.
+\end{enumerate}
+
+\section{Notations and Assumptions}
+
+We assume a working theory of $(\infty,n)$-categories in which:
+\begin{enumerate}
+    \item $\mathcal{E}^k$-monoidal $(\infty,n)$-categories $\A$ have a $k$-delooping $\mathbb{B}^k\A$ which is an $(\infty,n+k)$-category,
+\end{enumerate}
+
+\section{Dualizable Objects}
+
+\subsection{Adjunctions}
+
+Recall the work of RV.
+
+\subsection{Full-Adjunctions}
+
+How to phrase unicity of higher adjunctions?
+
+\subsection{The rest}
+
+Recall that a morphism $f\in A \to B \in \A$ in an $(\infty,n)$-category has a left/right adjoint if it has a left/right adjoint in the bicategory $\tau_{\leq 2}\A$. [Cite RV]
+
+\begin{definition}[Has Adjoints] Let $\A$ be an $(\infty,n)$-category. We say that $\A$ \textbf{has adjoints} if all $k$-morphisms have a left and right adjoint for $1 \leq k \leq n-1$.
+\end{definition}
+
+\begin{definition}[Fully-Adjoint] By \textbf{induction} on $n$, we define the following. Let $\A$ be an $(\infty,n)$-category. A morphism $f\in A \to B \in \A$ is $\textbf{fully-adjoint}$ if:
+\begin{enumerate}
+    \item $f$ is part of an infinite chain of adjunctions 
+    \[
+        \cdots \dashv f_{-n} \dashv \cdots \dashv f_{-1} \dashv f \dashv f_{1} \dashv \cdots \dashv f_{n} \dashv \cdots
+    \]
+    with (co)units $\epsilon_k$, $\eta_k$ for $k \inset \mathbb{Z}$,
+    \item (and if $n \geq 3$) for all $k \inset \mathbb{Z}$, $\epsilon_k$ and $\eta_k$ are fully-adjoint in the corresponding hom-$(\infty,n-1)$-categories.
+\end{enumerate} 
+\end{definition}
+
+The following two results should be obviously true:
+\begin{conjecture}[almost Lurie Claim 2.3.19] The $(\infty,1)$-category $(\infty,n)\textnormal{-}\Cat^{\textnormal{adj}}$ of (small) $(\infty,n)$-categories with adjoints is a \textbf{coreflexive subcategory} of the $(\infty,1)$-category $(\infty,n)\textnormal{-}\Cat$ of (small) $(\infty,n)$-categories. We denote the coreflector by $\tau_{\textnormal{adj}}$.
+\end{conjecture}
+\begin{conjecture} Let $\A$ be an $(\infty,n)$-category. A $k$-morphism in $\A$ is $\textbf{fully-adjoint}$ if it lies in the image of $\tau_{\textnormal{adj}}\A \to \A$.
+\end{conjecture}
+
+If the category $\A$ is monoïdal, one can define what it means for objects to be fuly-adjoints themselves:
+\begin{definition}[Fully-Dualizable, Has Duals] Let $\A$ be an $\mathcal{E}^1$-monoïdal $(\infty,n)$-category. An object $A \in \A$ is \textbf{fully-dualizable} if it is \textbf{fully-adjoint} as a $1$-morphism of $\mathbb{B}\A$. We say that $\A$ \textbf{has duals} if $\mathbb{B}\A$ has adjoints.
+\end{definition}
+
+\begin{remark} If $\A$ is $\mathcal{E}^k$-monoïdal for $k \geq 2$, then an object (seen as a morphism of $\mathbb{B}\A$) has a left adjoint if and only if it has a right adjoint if and only if it is part of an infinite chain of adjunctions. We get identifications $X^{\vee 2n} \simeq X$, which can be made canonical for $\A$ symmetric-monoïdal.
+\end{remark}
+
+\begin{example} $\Bordfr$ is symmetric-monoïdal and has duals. In particular, the point $\{+\}$ is a fully-dualizable object. 
+\end{example}
+
+\begin{remark} Recall that we have functors $\Bordfr_k \to \Bordfr_n$ given by extending the framing trivially. \textbf{Warning:} these functors are \textbf{not} truncations.
+\end{remark}
+
+Recall the following result:
+\begin{theorem}[4.4.18 from RV] The 
+    
+\end{theorem}
+
+\begin{lemma}[Unicity of Full-Adjoints]
+    
+\end{lemma}
+
+\begin{lemma}[Constructing Full-Adjunctions] Let $\A$ be a symmetric-monoïdal $(\infty,n+1)$-category together with a functor $F\in \Bordfr_n \to \A$ sending $\{+\}$ to an object $A$. Then $A$ is fully-dualizable if and only if, for every $n$-morphism $u$ in $\Bordfr_n$, $Fu$ is part of an infinite chain of adjunctions.
+\end{lemma}
+\begin{proof} For $n = 0$, $\Bordfr_0$ is the trivial category $\{\bullet\}$ and the statement is tautological. Now assume it true for $n \geq 0$. Clearly, $A$ (seen as a morphism in $\mathbb{B}\A$) is part of an infnite chain of adjunctions given by the image of $\Bordfr_1 \to \Bordfr_n \to \A$.
+\end{proof}
+
+\section{Alpha-Case: Objects}
+
+Recall that $\Mor_n$ is an $(\infty,n+1)$-category.
+
+\subsection{First Step: $n$-dualizability}
+
+Clearly, any $k$-morphism in $\Mor_n$ for $0 \leq k \leq n-1$ has a dual:
+\begin{enumerate}
+    \item \textbf{objects:} the dual of $A$ is $A^{\op}$,
+    \item \textbf{higher morphisms:} the dual of an (algebra in) bimodule is given by exchanging left and right actions.
+\end{enumerate}
+
+Using factorization homology, we can make this more explicit: 
+
+\begin{theorem}[] For $A \in \EAlg{n}(S)$, we have a functor
+\[
+    \int_{-} A\in \Bordfr_n \longto \Mor_n 
+\]
+from an $(\infty,n)$-category to an $(\infty,n+1)$-category.
+\end{theorem}
+
+Because it's obvious that the point $\{\bullet\} \in \Bordfr_n$ is $n$-dualizable, we know $A$ is $n$-dualizable.
+
+\subsection{Second Step: $(n+1)$-cells}
+
+For $A$ to be $n+1$-dualizable, it suffices for the $n$-cells involved in its $n$-dualizable structure to have adjoints. A priori, the cobordism hypothesis's inductive proof relies on the claim that it's enough to check adjoints on some of these cells (the spheres). We can prove it formally in this context.
+
+The strategy is the following:
+\begin{enumerate}[label = (\roman*)]
+    \item Any arbitrarily complicated $n$-cell $x\in a_{n-1}\to b_{n-1}\in \ldots \in a_0 \to b_0$ in the image of our functor, can be seen (after smoothing) as the data of a $n$-manifold with boundary $M$ and where the action is given by the canonical map of $\mathcal{E}^1$-algebra
+    \[
+        \int_{\partial M \times \mathbb{R}} A \longto \End\left(\int_M A\right)
+    \]
+
+    \item To find a dual, we need to 
+\end{enumerate}
+
+\section{Alpha-Case: Higher Cells}
+
+Lots of elements in the proof are based on the idea that we have an inductive definition of $\Mor_n$, which was proved formally by Rune Haugseng I believe (Thm $1.3$). For dualizability to be recognized as a finiteness condition, one simply need to find a type of $\infty$-categories left unchanged by this inductive process:
+
+\begin{definition}[Good Categories] A $n$-good category is a stable presentable $\Disk_n$-$\infty$-category, \emph{i.e.} a $n$-disk algebra in the $\infty$-category of stable presentable categories with its usual symmetric tensor product. 
+\end{definition}
+
+\begin{lemma}[Categories of Bimodules are Good] Let $\mathcal{S}$ be a $n$-good category and let $a, b\in \Disk_n(\mathcal{S})$ be $n$-disk algebra objects. Then ${}_a\Bimod_b(\mathcal{S})$ is a $(n-1)$-good category.
+\end{lemma}
+\begin{proof} Stability and presentability should probably be proven in [HA]. The $(n-1)$-disk operation should be clear to define. 
+\end{proof}
+
+We first need to identify which $n$-cells are dualizable. First, we need to define a higher notion of two-sided bar construction (arguably a ``stratified-$S^{n-1}$''-sided bar construction).
+
+\begin{definition}[Higher Bar Construction]
+Let us define a stratification of $\mathbb{R}^{n}$ as follows: for $0\leq k \leq n-1$, we have two strata of the form $\{0\}^k \times \mathbb{R}_{\epsilon} \times \mathbb{R}^{n-k-1}$ with respectively $\epsilon \inset \{>0, <0\}$ and they are respectively called $A_{k}$ and $B_{k}$, and we have the additional strata $\{0\}^{n}$ called $X$. We can this stratified space $\BarCon_n$. For any $x\in a_{n-1}\to b_{n-1}\in \ldots \in a_0 \to b_0$ in $\Mor_n(\mathcal{S})$, we can then define $\int_{\BarCon_n} x$ where the stratas are labelled in the obvious way.
+\end{definition}
+
+\begin{lemma}[Dualizability of the highest-level cells] A $n$-cell $x\in a_{n-1}\to b_{n-1}\in \ldots \in a_0 \to b_0$ is dualizable in $\Mor_n(\mathcal{S})$ if and only if $x$ is a finite $\int_{\BarCon_{n-1}} a_{n-1}$-left-module and a finite $\int_{\BarCon_{n-1}}b_{n-1}$-right-module in $\mathcal{S}$.
+\end{lemma}
+\begin{proof} By the iterative definition of $\Mor_n(\mathcal{S})$, we see that $x$ is dualizable whenever it is dualizable as a $1$-cell in $\Mor_1({}_{a_{n-2}}\Bimod_{b_{n-2}}(\ldots {}_{a_0}\Bimod_{b_0}(\mathcal{S})))$. By [Insert reference to HA], $x$ is then dualizable if and only if it is a finite $a_{n-1}$-left-module and a finite $b_{n-1}$-right-module in this iterated bimodule category. Equivalently, it has to be dualizable as a finite $\int_{\BarCon_{n-1}} a_{n-1}$-left-module and a finite $\int_{\BarCon_{n-1}}b_{n-1}$-right-module in $\mathcal{S}$ directly (the categories should be equivalent, would be interesting to prove carefully).
+\end{proof}
+
+\begin{theorem}[Dualizability in $\Mor_n$]\label{dual} A $k$-cell $x\in a_{k-1}\to b_{k-1}\in \ldots \in a_0 \to b_0$ is dualizable if and only if
+\begin{enumerate}
+    \item $x$ is a finite $\int_{\BarCon_{k-1}} a_{k-1}$-left-module and a finite $\int_{\BarCon_{k-1}}b_{k-1}$-right-module in $\mathcal{S}$,
+    \item for all $0\leq m \leq n-k-1$, $x$ is a finite $\int_{X_m} x$-module where $X_m$ is the stratified space $\mathbb{R}^{m+1} \times \BarCon_{k-1}$ with an additional strata $S^m \subset \mathbb{R}^{m+1}\times \{0\}^{k-1}$ with $x$ supported on the $m$-sphere, either $a_{k-1}$ or $b_{k-1}$ supported on the inside or outside (one can further multiply the space by $\mathbb{R}^{n-m-k}$ which is at least $1$-dimensional, hence it gives an algebra).
+\end{enumerate}
+\end{theorem}
+\begin{proof} Dualizability can be checked at the level of $1$-cells in $\Mor_{n-k+1}({}_{a_{k-2}}\Bimod_{b_{k-2}}(\ldots {}_{a_0}\Bimod_{b_0}(\mathcal{S})))$.
+\end{proof}
+
+What does the frame version look like? One has to use that $S^m\times \mathbb{R}$ is canonically $(m+1)$-framed.
+
+\end{document}

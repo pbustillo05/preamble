@@ -1,0 +1,107 @@
+%%%%% PROGRAMMING PACKAGES
+\usepackage{expl3,xparse}     %LaTeX3
+\usepackage{mfirstuc}    %first letter uppercase with \makefirstuc (used in todo notes)
+\usepackage{settobox}     %get box dimensions with \settoboxwidth (used in fit environment) => pretty stupid package.. could be avoided
+
+%%%%% FIGURES, BOXES, COLORS
+\usepackage{graphics,graphicx,trimclip,adjustbox}     %figures and box management
+\usepackage{color,xcolor}     %to use colors (used in the todonotes)
+    
+%%%%% ENUMERATE
+\usepackage{enumitem}   %to use "enumerate"
+    \setlist[enumerate,1]{label = $\bullet$}   %default label at bullet points
+    
+%%%%% TODO NOTES
+\usepackage[textwidth=16.3mm,textsize=scriptsize]{todonotes}   %to put notes everywhere
+\newcommand*{\newcommentator}[2][red!20]{%
+    \expandafter\newcommand\csname #2\endcsname[1]{\todo[color=#1]{{\bf\makefirstuc{#2}:} ##1}}%
+    \expandafter\newcommand\csname big#2\endcsname[1]{\todo[inline,color=#1]{{\bf\makefirstuc{#2}:} ##1}}}
+\newcommentator{pablo}
+
+%%%%% MY HYPERLINK AND REF/LABEL MACROS
+\usepackage{mypreamble/linkref}
+
+%%%%% MATH PACKAGES
+\usepackage{amssymb,amsmath}     %math original package
+    \numberwithin{equation}{section}
+\usepackage{mathtools}     %improves AMSmath
+\usepackage{stackrel}     %better stacking of math symbols
+\usepackage{mleftright}     %defines \mleft and \mright
+    \mleftright     %redefines \left as \mleft and \right as \mright
+\usepackage{pgfcore}
+\usepackage{tikz-cd}     %advanced and rigorous diagrams
+    
+%%%%% MY SPECIAL PACKAGES
+\usepackage{mypreamble/mathenv}     %improves on AMSmath's equation
+\usepackage{mypreamble/thmenv}     %replaces the AMSthm package
+
+%%%%% MATH MACROS AND FONT PACKAGES
+%\usepackage{fontspec}
+\usepackage{mypreamble/mathcro}
+
+%%%%% HYPERREF PACKAGE
+\makeatletter
+\pretocmd\refstepcounter{%
+ \zref@setcurrent{counter}{#1}}{}{}
+\makeatother
+\usepackage[pdfencoding=auto]{hyperref}   %hyperlinks parts of the pdf
+    \hypersetup{
+        bookmarksopen=true,   %expends tree of bookmarks in Acrobat pdf reader
+        bookmarksnumbered=true,  %show numbers of sections in bookmarks
+        linktoc=all,   %both section and page numbers are links
+        hidelinks   %links (color+border) are hidden
+    }
+\providecommand*{\definitionautorefname}{Definition}
+\providecommand*{\notationautorefname}{Notation}
+\providecommand*{\conventionautorefname}{Convention}
+\providecommand*{\conjectureautorefname}{Conjecture}
+\providecommand*{\assumptionautorefname}{Assumption}
+\providecommand*{\remarkautorefname}{Remark}
+\providecommand*{\observationautorefname}{Observation}
+\providecommand*{\lemmaautorefname}{Lemma}
+\providecommand*{\propositionautorefname}{Proposition}
+\providecommand*{\corollaryautorefname}{Corollary}
+\providecommand*{\exampleautorefname}{Example}
+\providecommand*{\exerciseautorefname}{Exercise}
+\providecommand*{\openquestionautorefname}{Open Question}
+
+%%%%% OUTPUT LAYOUT PACKAGES
+\usepackage{geometry}     %to set margins
+\geometry{
+    a4paper,
+    total={170mm,257mm},
+    left=20mm,
+    top=20mm,
+    marginparwidth=20mm,
+}
+%% Clearpage before sections but not before TOC
+\let\oldsection\section
+\renewcommand\section{\clearpage\oldsection}
+\makeatletter
+\renewcommand\tableofcontents{%
+    \oldsection*{\contentsname\@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}}\@starttoc{toc}%
+}
+\makeatother    %ensures the TOC stays in front page
+
+%%%%% TYPESET DEBUGGING
+%\usepackage{showframe}     %to make margins appear
+%\usepackage{lua-visual-debug}     %to make all boxes appear
+%\overfullrule=1pt   %creates 1pt wide black bars next to any overfull hbox
+
+%%%%% QUIVER SETUP
+\usetikzlibrary{calc,decorations.pathmorphing}
+% A TikZ style for curved arrows of a fixed height, due to AndréC.
+\tikzset{curve/.style={settings={#1},to path={(\tikztostart)
+    .. controls ($(\tikztostart)!\pv{pos}!(\tikztotarget)!\pv{height}!270:(\tikztotarget)$)
+    and ($(\tikztostart)!1-\pv{pos}!(\tikztotarget)!\pv{height}!270:(\tikztotarget)$)
+    .. (\tikztotarget)\tikztonodes}},
+    settings/.code={\tikzset{quiver/.cd,#1}
+        \def\pv##1{\pgfkeysvalueof{/tikz/quiver/##1}}},
+    quiver/.cd,pos/.initial=0.35,height/.initial=0}
+
+% TikZ arrowhead/tail styles.
+\tikzset{tail reversed/.code={\pgfsetarrowsstart{tikzcd to}}}
+\tikzset{2tail/.code={\pgfsetarrowsstart{Implies[reversed]}}}
+\tikzset{2tail reversed/.code={\pgfsetarrowsstart{Implies}}}
+% TikZ arrow styles.
+\tikzset{no body/.style={/tikz/dash pattern=on 0 off 1mm}}
