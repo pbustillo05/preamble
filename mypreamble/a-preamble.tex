@@ -19,7 +19,7 @@
 \newcommentator{pablo}
 
 %%%%% MY HYPERLINK AND REF/LABEL MACROS
-\usepackage{mypreamble/linkref}
+%\usepackage{mypreamble/linkref}
 
 %%%%% MATH PACKAGES
 \usepackage{amssymb,amsmath}     %math original package
@@ -40,10 +40,10 @@
 \usepackage{mypreamble/mathcro}
 
 %%%%% HYPERREF PACKAGE
-\makeatletter
-\pretocmd\refstepcounter{%
- \zref@setcurrent{counter}{#1}}{}{}
-\makeatother
+%\makeatletter
+%\pretocmd\refstepcounter{%
+% \zref@setcurrent{counter}{#1}}{}{}
+%\makeatother
 \usepackage[pdfencoding=auto]{hyperref}   %hyperlinks parts of the pdf
     \hypersetup{
         bookmarksopen=true,   %expends tree of bookmarks in Acrobat pdf reader
