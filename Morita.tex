@@ -15,6 +15,20 @@
 
 \section{Goal and Ideas}
 
+For a given enrichment context $\mathcal{V}\in \EAlg{n}(\PrL)$, we have a sequence of symmetric-monoidal functors
+\begin{equation}
+    \EAlg{n} \longto \Mor_n^\alpha \longmono \Mor_n^\beta \longmono \PrL_n \longmono \Cat{n}^{\Colim}
+\end{equation}
+most of which are fully-faithful. The first category is $(\infty,1)$-$\mathcal{V}$-enriched, the others $(\infty,n+1)$-$\mathcal{V}$-enriched. The question of finding $k$-dualizable objects in these should be:
+\begin{enumerate}
+    \item (essentially) Kozsul duality in the first one (maybe more clear with augmented algebras),
+    \item factorization homology in the Morita ones then smoothness/properness
+    \item \dots
+\end{enumerate}
+
+
+
+
 \begin{enumerate}
     \item Construct a most general higher morita category by successive enrchiment. Requirement: stable under factorization homology.
 
@@ -84,8 +98,10 @@ where $\Delta_\infty$ (resp. $\Delta_{-\infty}$) is the category of finite non-e
 \end{enumerate} 
 \end{definition}
 
-\begin{theorem} 
+\begin{theorem}[Unicity of iterated adjunctions]\label{thm:unicity} To write.
 \end{theorem}
+
+We use \autoref{thm:unicity} to prove
 
 \subsection{the rest}
 
@@ -94,7 +110,7 @@ where $\Delta_\infty$ (resp. $\Delta_{-\infty}$) is the category of finite non-e
 \end{definition}
 
 The following two results should be obviously true:
-\begin{conjecture}[almost Lurie Claim 2.3.19] The $(\infty,1)$-category $(\infty,n)\textnormal{-}\Cat^{\textnormal{adj}}$ of $(\infty,n)$-categories with adjoints is a \textbf{coreflexive subcategory} of the $(\infty,1)$-category $(\infty,n)\textnormal{-}\Cat$ of (small) $(\infty,n)$-categories. We denote the coreflector by $\tau_{\textnormal{adj}}$.
+\begin{conjecture}[almost Lurie Claim 2.3.19] The $(\infty,1)$-category $\Cat{n}^{\textnormal{adj}}$ of $(\infty,n)$-categories with adjoints is a \textbf{coreflexive subcategory} of the $(\infty,1)$-category $\Cat{n}$ of (small) $(\infty,n)$-categories. We denote the coreflector by $\tau_{\textnormal{adj}}$.
 \end{conjecture}
 \begin{conjecture} Let $\A$ be an $(\infty,n)$-category. A $k$-morphism in $\A$ is $\textbf{fully-adjoint}$ if it lies in the image of $\tau_{\textnormal{adj}}\A \to \A$.
 \end{conjecture}
