@@ -82,62 +82,56 @@ Combinatorially, one can also describe explicitly the hom-categories as:
     \Adj(-,-) &=& \Delta_+^\op = \textnormal{Free}^{\textnormal{co-}\mathcal{E}^1}_{\textnormal{co-}\mathcal{E}^1}(\{LR\})\\
     \Adj(-,+) &=& \Delta_{-\infty}
 \end{cases}\]
-where $\Delta_\infty$ (resp. $\Delta_{-\infty}$) is the category of finite non-empty linear orders with top (resp. bottom) element preserving morphisms. 
+where $\Delta_\infty$ (resp. $\Delta_{-\infty}$) is the category of finite non-empty linear orders with top (resp. bottom) element preserving morphisms.
 
-\subsection{Full-Adjunctions}
+\subsection{Iterated Adjunctions and Duals}
 
 \begin{definition}[Fully-Adjoint]
-    By \textbf{induction} on $n$, we define the following. Let $\A$ be an $(\infty,n)$-category. A morphism $f\in A \to B \in \A$ is $\textbf{fully-adjoint}$ if:
+    Let $\A$ be an $(\infty,n)$-category. By induction on $1\leq l$, we define the following. For $1 \leq k$, a $k$-morphism $f\in a_{k-1}\to b_{k-1}\in \ldots \in a_0 \to b_0$ is $l$-adjoint if:
 \begin{enumerate}
-    \item $f$ is part of an infinite chain of adjunctions 
+    \item $f$ is part of an infinite chain of adjunctions in $(\A(a_0,b_0)\ldots)(a_{k-2}, b_{k-2})$ (interpreted as $\A$ when $k=1$)
     \[
-        \cdots \dashv f_{-n} \dashv \cdots \dashv f_{-1} \dashv f \dashv f_{1} \dashv \cdots \dashv f_{n} \dashv \cdots
+        \cdots \dashv f^{\vee-n} \dashv \cdots \dashv f^{\vee-1} \dashv f \dashv f^{\vee1} \dashv \cdots \dashv f^{\vee n} \dashv \cdots
     \]
     with (co)units $\epsilon_k$, $\eta_k$ for $k \inset \mathbb{Z}$,
-    \item (and if $n \geq 3$) for all $k \inset \mathbb{Z}$, $\epsilon_k$ and $\eta_k$ are fully-adjoint in the corresponding hom-$(\infty,n-1)$-categories.
-\end{enumerate} 
+    \item (and if $l \leq 2$) for all $k \inset \mathbb{Z}$, $\epsilon_k$ and $\eta_k$ are $(l-1)$-adjoint.
+\end{enumerate}
+If $k+l = n$, we say that $f$ is fully-adjoint.
 \end{definition}
 
-\begin{theorem}[Unicity of iterated adjunctions]\label{thm:unicity} To write.
-\end{theorem}
-
-We use \autoref{thm:unicity} to prove
-
-\subsection{the rest}
-
-\begin{definition}[Has Adjoints]
-    Let $\A$ be an $(\infty,n)$-category. We say that $\A$ \textbf{has adjoints} if all $k$-morphisms have a left and right adjoint for $1 \leq k \leq n-1$.
-\end{definition}
-
-The following two results should be obviously true:
-\begin{conjecture}[almost Lurie Claim 2.3.19] The $(\infty,1)$-category $\Cat{n}^{\textnormal{adj}}$ of $(\infty,n)$-categories with adjoints is a \textbf{coreflexive subcategory} of the $(\infty,1)$-category $\Cat{n}$ of (small) $(\infty,n)$-categories. We denote the coreflector by $\tau_{\textnormal{adj}}$.
-\end{conjecture}
-\begin{conjecture} Let $\A$ be an $(\infty,n)$-category. A $k$-morphism in $\A$ is $\textbf{fully-adjoint}$ if it lies in the image of $\tau_{\textnormal{adj}}\A \to \A$.
-\end{conjecture}
-
-If the category $\A$ is monoïdal, one can define what it means for objects to be fully-adjoints themselves:
-\begin{definition}[Fully-Dualizable, Has Duals] Let $\A$ be an $\mathcal{E}^1$-monoïdal $(\infty,n)$-category. An object $A \in \A$ is \textbf{fully-dualizable} if it is \textbf{fully-adjoint} as a $1$-morphism of $\mathbb{B}\A$. We say that $\A$ \textbf{has duals} if $\mathbb{B}\A$ has adjoints.
-\end{definition}
-
-\begin{remark} If $\A$ is $\mathcal{E}^k$-monoïdal for $k \geq 2$, then an object (seen as a morphism of $\mathbb{B}\A$) has a left adjoint if and only if it has a right adjoint if and only if it is part of an infinite chain of adjunctions. We get identifications $X^{\vee 2n} \simeq X$, which can be made canonical for $\A$ symmetric-monoïdal.
+\begin{remark}
+    For $n + 1\geq k+l$, we recover the notion of invertibility.
 \end{remark}
 
-\begin{example} $\Bordfr$ is symmetric-monoïdal and has duals. In particular, the point $\{+\}$ is a fully-dualizable object. 
+\begin{definition}[Fully-Dualizable Object] Let $\A$ be an $\mathcal{E}^1$-monoïdal $(\infty,n)$-category. For $1 \leq l$, an object $a \in \A$ is $l$-dualizable if it is $l$-adjoint as a $1$-morphism of $\mathbb{B}\A$. If $l=n$, we say that $a$ is fully-dualizable.
+\end{definition}
+
+\begin{definition}[Has Adjoints or Duals]\leavevmode
+    \begin{enumerate}
+        \item Let $\A$ be an $(\infty,n)$-category. We say that $\A$ \textbf{has adjoints} if all $k$-morphisms have a left and right adjoint for $1 \leq k \leq n-1$, or equivalently, if all $k$-morphisms are fully-adjoints.
+        \item Let $\A$ be an $\mathcal{E}^1$-monoïdal $(\infty,n)$-category. We say that $\A$ \textbf{has duals} if $\mathbb{B}\A$ has adjoints.
+    \end{enumerate}
+\end{definition}
+
+\begin{remark} If $\A$ is $\mathcal{E}^k$-monoïdal for $k \geq 2$, then an object (seen as a morphism of $\mathbb{B}\A$) has a left adjoint if and only if it has a right adjoint if and only if it is part of an infinite chain of adjunctions. We get identifications $a^{\vee 2n} \simeq a$, which can be made canonical for $\A$ symmetric-monoïdal.
+\end{remark}
+
+\begin{example}\label{rem:pointdual} $\Bordfr$ is symmetric-monoïdal and has duals. In particular, the point $\{+\}$ is a fully-dualizable object. 
 \end{example}
+
+\begin{theorem}[Unicity]\label{thm:unicity} To write.
+\end{theorem}
+
+\subsection{Finding Fully-Dualizable Objects}
 
 \begin{remark} Recall that we have functors $\Bordfr_k \to \Bordfr_n$ given by extending the framing trivially. \textbf{Warning:} these functors are \textbf{not} truncations.
 \end{remark}
 
-Recall the following result:
-\begin{theorem}[4.4.18 from RV] The 
-    
-\end{theorem}
-
-\begin{lemma}[Unicity of Full-Adjoints]
-    lol
-\end{lemma}
-
-\begin{lemma}[Constructing Full-Adjunctions] Let $\A$ be a symmetric-monoïdal $(\infty,n+1)$-category together with a functor $F\in \Bordfr_n \to \A$ sending $\{+\}$ to an object $A$. Then $A$ is fully-dualizable if and only if, for every $n$-morphism $u$ in $\Bordfr_n$, $Fu$ is part of an infinite chain of adjunctions.
+\begin{lemma}[Constructing Full-Adjunctions]\label{lem:constr} Let $\A$ be a symmetric-monoïdal $(\infty,n+1)$-category together with a functor $F\in \Bordfr_n \to \A$ sending $\{+\}$ to some object $a$. Then $A$ is fully-dualizable if and only if, for every $n$-morphism
+    \[
+        f\in a_{n-1}\to b_{n-1}\in \ldots \in a_0 \to b_0\in \Bordfr_n
+    \]
+    $Ff$ is part of an infinite chain of adjunctions.
 \end{lemma}
 \begin{proof} For $n = 0$, $\Bordfr_0$ is the trivial category $\{\bullet\}$ and the statement is tautological. Now assume it true for $n \geq 0$. Clearly, $A$ (seen as a morphism in $\mathbb{B}\A$) is part of an infnite chain of adjunctions given by the image of $\Bordfr_1 \to \Bordfr_n \to \A$.
 \end{proof}
@@ -148,22 +142,16 @@ Recall that $\Mor_n$ is an $(\infty,n+1)$-category.
 
 \subsection{First Step: n-dualizability}
 
-Clearly, any $k$-morphism in $\Mor_n$ for $0 \leq k \leq n-1$ has a dual:
-\begin{enumerate}
-    \item \textbf{objects:} the dual of $A$ is $A^{\op}$,
-    \item \textbf{higher morphisms:} the dual of an (algebra in) bimodule is given by exchanging left and right actions.
-\end{enumerate}
+It's well-known that every $k$-morphisms of $\Mor_n$ is $(n-k)$-adjoints (but not necessarily fully-adjoint). Using factorization homology, we can make the $n$-dualizability data of an object more explicit: 
 
-Using factorization homology, we can make this more explicit: 
-
-\begin{theorem}[] For $A \in \EAlg{n}(S)$, we have a functor
+\begin{theorem}[Cite Claudia and John] Let $\mathcal{V}\in \EAlg{n}\left(\Cat{1}^{\textnormal{sifted}-\Colim}\right)$ . For $a \in \EAlg{n}(\mathcal{V})$, we have a functor
 \[
-    \int_{-} A\in \Bordfr_n \longto \Mor_n 
+    \int_{-} a\in \Bordfr_n \longto \Mor_n(\mathcal{V})
 \]
 from an $(\infty,n)$-category to an $(\infty,n+1)$-category.
 \end{theorem}
 
-Because it's obvious that the point $\{\bullet\} \in \Bordfr_n$ is $n$-dualizable, we know $A$ is $n$-dualizable.
+By Lemma \ref{lem:constr}, we then have the following:
 
 \subsection{Second Step: (n+1)-cells}
 
