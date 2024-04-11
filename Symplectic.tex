@@ -1,15 +1,5 @@
 \documentclass{article}
 \input{mypreamble/a-preamble}
-\usepackage[all]{xy}
-
-\newcommand{\dMan}{\textnormal{d}\mathcal{M}\textnormal{an}}
-\newcommand{\dRing}{\mathcal{E}^{\infty}\textnormal{Ring}^{\geq 0}}
-\newcommand{\qcoh}{\textnormal{QCoh}}
-\newcommand{\st}{\textnormal{St}}
-\newcommand{\amod}{\textnormal{Mod}}
-\newcommand{\aff}{\textnormal{Aff}}
-\newcommand{\Sp}{\mathcal{S}}
-\newcommand{\op}{\textnormal{op}}
 
 %%%%% TITLE PAGE
 \title{Shifted Symplectic Integration}
@@ -25,7 +15,7 @@ We work with $\infty$-stacks on the $\infty$-category of connective commutative 
 Ideally, I'd like to study stacks on $\dMan$ at some point: the point is that geometric quantization should be more likely to exist in the $\mathcal{C}^\infty$-setting rather than the algebraic one. It probably won't change any of what follows.
 
 \begin{remark}[Working on Points]
-    Recall for a stack $X \in \aff^{\op} \to \Sp$, we define
+    Recall for a stack $X \in \aff^{\op} \to \Spa$, we define
 \[
     \qcoh(X) = \Lim_{X} (\aff^{\op} \xto[-\amod] \Cat)
 \]
@@ -49,10 +39,36 @@ Using this, building (shifted) maps between tangent and cotangent modules is equ
 \begin{remark}[How about \textbf{closed} forms?] It's not clear to me yet, how one could translate being a closed form at points like this? It's probably not possible: I will have to deal with this eventually.
 \end{remark}
 
-\begin{definition}
-    
+\section{Some Ideas}
+
+What does the de Rham complex look like on a point?
+Basically $d$ becomes $0$ but we still have symmetric powers of the cotangent at a point.
+If we want to capture the behavior of $d$ we need to look at open covers, or something else.
+The coefficient field is initial in CDGA and hence terminal in Aff. As a stack, it is also terminal. This gives a forgetful $\qcoh(X) \to k\amod$ and we can find $d$ in the image.
+
+\section{Poincar\'e Duality}
+
+Let $\B \to \Bsc$ be a tangential structure, \textit{i.e.} a right fibration. We have the following categories:
+\[
+    \Bsc(\mathcal{B})_+, \Bsc(\mathcal{B})^+ \longmono \ZBsc(\mathcal{B})
+\]
+where an object of $\Bsc(\mathcal{B})_+$ is a $\B$-basic adjointed a separate point $U\sqcup \{\infty\}$ and an object of $\Bsc(\mathcal{B})^+$ is a $\B$-basic adjointed a compactifying point $V^+$.
+More explicitly, $\B \to \Bsc(\mathcal{B})_+$ canonically makes the hom-spaces pointed (by adding a discrete point), and $\Bsc(\mathcal{B})^+ \simeq \left(\Bsc(\mathcal{B})_+\right)^\op$ canonically.
+In $\ZBsc(\mathcal{B})$, the hom-spaces between mixed types are either trivial or
+\[
+    \ZBsc(\mathcal{B})(U\sqcup \{\infty\}, V^+)
+\]
+which can be described by some simplicial set.
+
+A functor $\B \to A\amod$ can be extended to $\Bsc(\mathcal{B})_+$ by using zero-maps and to $\Bsc(\mathcal{B})^+$ if it lands into dualizable objects.
+
+\begin{definition}[Poincar\'e Context] A \textbf{Poincar\'e Context} is the data of an extension of a functor $\B \to A\amod$ to a Poincar\'e/Kozsul duality $\ZBsc(\mathcal{B}) \to A\amod$.
 \end{definition}
 
-\section{Example}
+\subsection{Examples}
+
+\begin{enumerate}
+    \item $\{\bullet\} \to \Bsc^{fr}$ picking $\mathbb{R}^n$ gives an object $A$ together with an isomorphism $A \simeq A^\vee[n]$
+\end{enumerate}
 
 \end{document}

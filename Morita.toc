@@ -2,8 +2,8 @@
 \contentsline {section}{\numberline {2}Notations and Assumptions}{3}{section.2}%
 \contentsline {section}{\numberline {3}Dualizable Objects}{4}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Adjunctions}{4}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Full-Adjunctions}{4}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}the rest}{4}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.2}Iterated Adjunctions and Duals}{4}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Finding Fully-Dualizable Objects}{5}{subsection.3.3}%
 \contentsline {section}{\numberline {4}Alpha-Case: Objects}{6}{section.4}%
 \contentsline {subsection}{\numberline {4.1}First Step: n-dualizability}{6}{subsection.4.1}%
 \contentsline {subsection}{\numberline {4.2}Second Step: (n+1)-cells}{6}{subsection.4.2}%
