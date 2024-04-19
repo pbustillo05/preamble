@@ -47,9 +47,12 @@ most of which are fully-faithful. The first category is $(\infty,1)$-$\mathcal{V
 
 \section{Notations and Assumptions}
 
-We assume a working theory of $(\infty,n)$-categories in which:
+We assume a working theory of $(\infty,n)$-categories, for example the iterated enrichment model, in which we have:
 \begin{enumerate}
+    \item for each $n\geq 0$, an $(\infty, 1)$-category $\Cat{n}$,
+    \item for each $n\geq 0$ and each $\mathcal{C} \in \Cat{n}$, a hom-functor
     \item $\mathcal{E}^k$-monoidal $(\infty,n)$-categories $\A$ have a $k$-delooping $\mathbb{B}^k\A$ which is an $(\infty,n+k)$-category,
+    \item the $(\infty, 1)$
 \end{enumerate}
 
 \section{Dualizable Objects}
@@ -57,6 +60,7 @@ We assume a working theory of $(\infty,n)$-categories in which:
 \subsection{Adjunctions}
 
 For $\mathcal{C}$ a higher category, we let $\mathcal{C}^{\to} = [\{\to\},\mathcal{C}]$ be the space of morphisms.
+One can define the ``walking adjunction'' as follows:
 
 \begin{theorem}[Unicity of Adjoints]
     There is a $2$-category $\Adj$ together with the data of two morphisms $L, R \in \Adj^\to$ such that, for any $\mathcal{C}$ $(\infty,2)$-category, the precompositions
@@ -84,6 +88,17 @@ Combinatorially, one can also describe explicitly the hom-categories as:
 \end{cases}\]
 where $\Delta_\infty$ (resp. $\Delta_{-\infty}$) is the category of finite non-empty linear orders with top (resp. bottom) element preserving morphisms.
 
+Similarly, one can talk about $k$-morphisms in an $(\infty,n)$-category being adjoints.
+Explicitly, if we let $\Adj_1 = \Adj$, one can build by induction the following ``walking adjunct pair of $k$-morphisms'' as the representing object in $\Cat{k+1}$ of the functor sending $\mathcal{C}\in\Cat{k+1}$ to the fibration of spaces classifying
+% https://q.uiver.app/#q=WzAsNCxbMCwxLCJcXHRhdV8wXFxtYXRoY2Fse0N9XFx0aW1lcyBcXHRhdV8wXFxtYXRoY2Fse0N9Il0sWzEsMSwiXFxDYXR7a30iXSxbMCwwLCJcXENhdHtrKzF9KFxcQWRqX2ssIFxcbWF0aGNhbHtDfSkiXSxbNCwxLCJcXFNwYSJdLFswLDEsIlxcbWF0aGNhbHtDfSgtLC0pIiwyXSxbMiwwLCIiLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMSwzLCJcXENhdHtrfShcXEFkal97ay0xfSwtKSIsMl1d
+\[\begin{tikzcd}
+	{\Cat{k+1}(\Adj_k, \mathcal{C})} \\
+	{\tau_0\mathcal{C}\times \tau_0\mathcal{C}} & {\Cat{k}} &&& \Spa
+	\arrow[dashed, from=1-1, to=2-1]
+	\arrow["{\mathcal{C}(-,-)}"', from=2-1, to=2-2]
+	\arrow["{\Cat{k}(\Adj_{k-1},-)}"', from=2-2, to=2-5]
+\end{tikzcd}\]
+
 \subsection{Iterated Adjunctions and Duals}
 
 \begin{definition}[Fully-Adjoint]
@@ -93,8 +108,8 @@ where $\Delta_\infty$ (resp. $\Delta_{-\infty}$) is the category of finite non-e
     \[
         \cdots \dashv f^{\vee-n} \dashv \cdots \dashv f^{\vee-1} \dashv f \dashv f^{\vee1} \dashv \cdots \dashv f^{\vee n} \dashv \cdots
     \]
-    with (co)units $\epsilon_k$, $\eta_k$ for $k \inset \mathbb{Z}$,
-    \item (and if $l \leq 2$) for all $k \inset \mathbb{Z}$, $\epsilon_k$ and $\eta_k$ are $(l-1)$-adjoint.
+    with (co)units $\epsilon(f^{\vee k})$, $\eta(f^{\vee k})$ of $f^{\vee k} \dashv f^{\vee k+1}$ for $k \inset \mathbb{Z}$,
+    \item (and if $l \leq 2$) for all $k \inset \mathbb{Z}$, $\epsilon(f^{\vee k})$ and $\eta(f^{\vee k})$ are $(l-1)$-adjoint.
 \end{enumerate}
 If $k+l = n$, we say that $f$ is fully-adjoint.
 \end{definition}
@@ -119,7 +134,17 @@ If $k+l = n$, we say that $f$ is fully-adjoint.
 \begin{example}\label{rem:pointdual} $\Bordfr$ is symmetric-monoïdal and has duals. In particular, the point $\{+\}$ is a fully-dualizable object. 
 \end{example}
 
-\begin{theorem}[Unicity]\label{thm:unicity} To write.
+For the next result, we need to briefly define a notation for the data involved in a $l$-adjunction:
+
+\begin{definition}[Higher Adjunction Data]
+    An adjunction data is a word $\omega$ using the symbols $\epsilon$, $\eta$, $-^{\vee n}$ (for any $n \inset \mathbb{Z}$) applied to $f$. The depth of an adjunction data is the number $\textnormal{depth}(\omega)$ of times either of the letters $\eta$ or $\epsilon$ were used.
+\end{definition}
+
+For example $\eta(\eta(\epsilon(f^{\vee -5}))^{\vee 12})$ is an adjunction data of depth $3$.
+
+\begin{theorem}[Unicity]\label{thm:unicity}
+    Let $\A$ be an $(\infty,n)$-category, $1 \leq k, l$, $f\in a_{k-1}\to b_{k-1}\in \ldots \in a_0 \to b_0$ a $l$-adjoint $k$-morphism $l$-adjoint and $\omega$ be a word 
+    Let $\omega$ be any word using the symbols $\epsilon$, $\eta$, $-^{\vee n}$ (for any $n \inset \mathbb{Z}$) applied to $f$.
 \end{theorem}
 
 \subsection{Finding Fully-Dualizable Objects}
