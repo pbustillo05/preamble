@@ -39,6 +39,19 @@ Using this, building (shifted) maps between tangent and cotangent modules is equ
 \begin{remark}[How about \textbf{closed} forms?] It's not clear to me yet, how one could translate being a closed form at points like this? It's probably not possible: I will have to deal with this eventually.
 \end{remark}
 
+Recall we have
+% https://q.uiver.app/#q=WzAsMixbMCwwLCJcXE1vZCJdLFswLDIsIlxcRUFsZ3tcXGluZnR5fShrXFxNb2QpIl0sWzAsMSwiUlxcb3BsdXMgTSIsMV0sWzAsMSwiUiIsMCx7ImN1cnZlIjotMn1dLFsxLDAsIlxcbWF0aGJie0x9IiwwLHsiY3VydmUiOi0zfV0sWzQsMiwiXFxkYXNodiIsMSx7InNob3J0ZW4iOnsic291cmNlIjoyMCwidGFyZ2V0IjoyMH0sInN0eWxlIjp7ImJvZHkiOnsibmFtZSI6Im5vbmUifSwiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dXQ==
+\[\begin{tikzcd}
+	\amod \\
+	\\
+	{\EAlg{\infty}(k\amod)}
+	\arrow[""{name=0, anchor=center, inner sep=0}, "{R\oplus M}"{description}, from=1-1, to=3-1]
+	\arrow["R", curve={height=-12pt}, from=1-1, to=3-1]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "{\mathbb{L}}", curve={height=-18pt}, from=3-1, to=1-1]
+	\arrow["\dashv"{description}, draw=none, from=1, to=0]
+\end{tikzcd}\]
+where $R$ is a bifibration, $R\oplus M$ is a right adjoint and $\mathbb{L}$ its left adjoint. Furthermore, we have $R \circ \mathbb{L} \simeq 1$, meaning that the cotangent of $A$ is an $A$-module.
+
 \section{Some Ideas}
 
 What does the de Rham complex look like on a point?
@@ -62,8 +75,10 @@ which can be described by some simplicial set.
 
 A functor $\B \to A\amod$ can be extended to $\Bsc(\mathcal{B})_+$ by using zero-maps and to $\Bsc(\mathcal{B})^+$ if it lands into dualizable objects.
 
-\begin{definition}[Poincar\'e Context] A \textbf{Poincar\'e Context} is the data of an extension of a functor $\B \to A\amod$ to a Poincar\'e/Kozsul duality $\ZBsc(\mathcal{B}) \to A\amod$.
-\end{definition}
+Our goal is to prove the following: 
+\begin{theorem}
+    A functor $\mathcal{B}$ to stacks extends to a functor... if and only if it factors though.. 
+\end{theorem}
 
 \subsection{Examples}
 
