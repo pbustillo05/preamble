@@ -1,0 +1,142 @@
+\documentclass{article}
+\input{mypreamble/a-preamble}
+\usepackage{mathdots}
+\usepackage{bookmark}
+
+%%%%% TITLE PAGE
+\title{Solutions 321-1}
+\author{Pablo Bustillo Vazquez}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Week 1}
+
+\begin{example}[Exercice 2] We have to prove that $\alpha = \sup(E)$ if and only if:
+\[\begin{cases}[l]
+    \forall x \inset E, \quad x \leq \alpha \\
+    \forall \epsilon > 0, \quad \exists x \inset E, \quad \alpha - \epsilon \leq x
+\end{cases}\]
+The first condition is precisely the definition of upper bound. The second condition can be rewritten as
+\begin{equation*}[c+l+l]
+    & \forall \beta, \quad \beta < \alpha \quad \implies \quad \exists x \inset E, \quad \beta \leq x &\\
+    \iff    & \forall \beta, \quad \beta < \alpha \quad \implies \quad \beta \textnormal{ is not an upper bound} & \textnormal{(by defintion)}\\
+    \iff    & \forall \beta, \quad \beta \textnormal{ is an upper bound} \quad \implies \quad \alpha \leq \beta & \textnormal{(by contraposition)}\\
+\end{equation*}
+which adds that $\alpha$ is the smallest upper bound.
+\end{example}
+
+\begin{example}[Exercice 3]\leavevmode
+\begin{enumerate}[label = (\alph*)]
+    \item The set $\mathbb{Z}_{\leq x} = \{n \inset \mathbb{Z} \mid n \leq x\}$ is bounded above by $x$ and contains $0$, hence has a supremum that we will denote $\lfloor x \rfloor$.
+    Because $x$ is an upper bound, we clearly have $\lfloor x \rfloor \leq x$. By exerice 2, with $\epsilon = 1$, there exists $n \leq x$ such that
+    \begin{equation}[c+l]
+        \nonumber & \lfloor x \rfloor - 1 < n \leq \lfloor x \rfloor \\
+       \label{first_ineq}\implies & \lfloor x \rfloor  < n + 1
+    \end{equation}
+    Assume for the sake of contradiction that $\epsilon = \lfloor x \rfloor - n > 0$. By exercice 2 again, we have $m \leq x$ such that
+    \begin{equation*}[c+l+l]
+        & n = \lfloor x \rfloor - \epsilon < m \leq \lfloor x \rfloor &\\
+       \implies & \lfloor x \rfloor < n + 1 \leq m \leq \lfloor x \rfloor & \textnormal{(by \autoref{first_ineq} and by successor property)}
+    \end{equation*} 
+    which is a contradiction. Hence $\lfloor x \rfloor = n$ is an integer and hence a maximum of $\mathbb{Z}_{\leq x}$.
+
+    \item We have 
+    \begin{equation*}[c+l]
+        & \sum_{j=0}^{k-1} \frac{n_j}{10^j} \leq x \\
+       \iff &  n_k \leq x 10^k - \sum_{j=0}^{k-1} n_j 10^{k-j}
+    \end{equation*}
+    Hence the sets of all $n_k \inset \mathbb{Z}$ satisfying either property are identical. By part $(a)$,
+    \[
+        n_k \coloneqq \left\lfloor x 10^k - \sum_{j=0}^{k-1} n_j 10^{k-j} \right\rfloor
+    \]
+    satisfies the desired property.
+
+    \item Recall that in part $(a)$, we established that: for all $x \inset \mathbb{R}_{\geq 0}$, we have $\lfloor x \rfloor \inset \mathbb{Z}_{\geq 0}$ such that $\lfloor x \rfloor \leq x < \lfloor x \rfloor + 1$.
+    In particular, using the construction of part $(b)$ inductively, we automatically have
+    \begin{equation}[c+l]
+        \nonumber & n_k \leq x 10^k - \sum_{j=0}^{k-1} n_j 10^{k-j} < n_k + 1 \\
+        \label{decimal} \iff & 0 \leq x - \sum_{j=0}^{k} \frac{n_j}{10^j} < \frac{1}{10^k}
+    \end{equation}
+    for all $k \geq 0$. Now for the second part, take $k \geq 1$, using \autoref{decimal} with $k-1$ we get
+    \begin{equation*}[c+l]
+        & 0 \leq x 10^k - \sum_{j=0}^{k-1} n_j 10^{k-j} < 10 \\
+        \implies & 0 \leq n_k \leq x 10^k - \sum_{j=0}^{k-1} n_j 10^{k-j} < 10
+    \end{equation*}
+    as required, where the first inequality comes from $0$ being in the defining set whose supremum is $n_k$.
+
+    \item For all $x > 0$, 
+    \[
+        (1 + x)^k = 1 + kx + \sum_{i=2}^{n} \binom{k}{i} x^i \geq 1 + kx
+    \]
+    Taking $x  = c-1$ in the above, if $\{c^k \mid k \inset \mathbb{N}\}$ is bounded above by $M$, then $\mathbb{N}$ is bounded above by $\frac{M-1}{c - 1}$.
+    Using part $(a)$, this makes it impossible for the successor integer $\left \lfloor \frac{M-1}{c - 1} \right \rfloor + 1$ to exist.
+    By contraposition, $\{c^k \mid k \inset \mathbb{N}\}$ must be unbounded.
+
+    \item It's clear that this set is nonempty and bounded bellow by $0$.
+    Using exercice $2$, we show that $0$ is the infimum.
+    Let $\epsilon > 0$.
+    By part $(d)$, we know that $1/\epsilon$ is not an upper bound of $\{c^k \mid k \inset \mathbb{N}\}$.
+    Hence there exists $k \inset \mathbb{N}$ such that 
+    \begin{equation*}[c+l]
+        & 1/\epsilon < c^k \\
+        \implies & 0 \leq c^{-k} < \epsilon
+    \end{equation*}
+    proving that
+    \[
+        0 = \inf \{c^{-k} \mid k \inset \mathbb{N}\}
+    \]
+
+    \item This set is non-empty by construction.
+    By definition of the $n_k$'s, we clearly have that $x$ is an upper bound for this set.
+    Using exercice $2$, we show that $x$ is the supremum.
+    Let $\epsilon > 0$.
+    Applying part $(e)$ to $c = 10$, there exists $k \geq 0$ such that $10^{-k} < \epsilon$.
+    Hence by \autoref{decimal}
+    \[
+        x - \epsilon < x - \frac{1}{10^k} < \sum_{j=0}^{k} \frac{n_j}{10^j} \leq x
+    \]
+    showing that $x$ is the supremum.
+
+    \item This set is non-empty by construction. For all $k \geq 0$,
+    \[
+        \sum_{j=0}^{k} \frac{m_j}{10^j} \leq m_0 + \sum_{j=1}^{k} \frac{9}{10^j} = m_0 + 1 - \frac{1}{10^k} < m_0 + 1
+    \]
+    Hence $m_0 + 1$ is an upper bound for this set.
+
+    \item Let $A = \{ k \inset \mathbb{N} \mid n_k \neq m_k\}$.
+    Assume for the sake of contradiction that this set is non-empty.
+    By the well-ordering principle, $A$ has a minimum $k_0$.
+    Without loss of generality, assume $n_{k_0} < m_{k_0}$.
+    By assumption we can find $k_1 \geq k_0$ such that either $n_{k_1} \neq 9$.
+    By exercice $2$ with $\epsilon = 10^{-k_1}$, we have $k_2$ and $k_3$ such that
+    \[\begin{cases}
+            x - \frac{1}{10^{k_1}} < \sum_{j=0}^{k_3} \frac{n_j}{10^j}\\
+            x - \frac{1}{10^{k_1}} < \sum_{j=0}^{k_4} \frac{m_j}{10^j}
+    \end{cases}\]
+    Let $k = \max(k_1, k_2, k_3)$.
+    Because the sequences considered are increasing, we have
+    \begin{equation*}[l+c]
+        & \begin{cases}
+            x - \frac{1}{10^k} < \sum_{j=0}^{k} \frac{n_j}{10^j} < x\\
+            x - \frac{1}{10^k} < \sum_{j=0}^{k} \frac{m_j}{10^j} < x
+        \end{cases}\\
+        \implies & \sum_{j = k_0}^{k} \frac{m_j - n_j}{10^j} =  \sum_{j = 0}^{k} \frac{m_j - n_j}{10^j} < \frac{1}{10^{k_1}}
+    \end{equation*}
+    However, we also have
+    \begin{equation*}[rCl]
+        \sum_{j = k_0}^{k} \frac{m_j - n_j}{10^j} &  \geq & \frac{m_{k_0} - n_{k_0}}{10^{k_0}} - \sum_{j = k_0 + 1}^{k_1 - 1} \frac{|m_j - n_j|}{10^j} + \frac{m_{k_1} - n_{k_1}}{10^{k_1}} - \sum_{j = k_1 + 1}^{k} \frac{|m_j - n_j|}{10^j} \\
+        &\geq & \frac{1}{10^{k_0}} - \sum_{j = k_0 + 1}^{k_1 - 1} \frac{9}{10^j} - \frac{8}{10^{k_1}} - \sum_{j = k_1 + 1}^{k} \frac{9}{10^j} \\
+        & = & \frac{1}{10^{k_1}} + \frac{1}{10^{k}}\\
+        & > & \frac{1}{10^{k_1}}
+    \end{equation*}
+    which is contradiction.
+    Therefore $A = \emptyset$ and we have as required: for all $k \geq 0$, $n_k = m_k$.
+\end{enumerate}
+    
+\end{example}
+
+\end{document}
