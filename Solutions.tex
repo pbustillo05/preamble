@@ -33,21 +33,21 @@ which adds that $\alpha$ is the smallest upper bound.
 \begin{enumerate}[label = (\alph*)]
     \item The set $\mathbb{Z}_{\leq x} = \{n \inset \mathbb{Z} \mid n \leq x\}$ is bounded above by $x$ and contains $0$, hence has a supremum that we will denote $\lfloor x \rfloor$.
     Because $x$ is an upper bound, we clearly have $\lfloor x \rfloor \leq x$. By exerice 2, with $\epsilon = 1$, there exists $n \leq x$ such that
-    \begin{equation}[c+l]
+    \begin{equation}[c+c+x]
         \nonumber & \lfloor x \rfloor - 1 < n \leq \lfloor x \rfloor \\
        \label{first_ineq}\implies & \lfloor x \rfloor  < n + 1
     \end{equation}
     Assume for the sake of contradiction that $\epsilon = \lfloor x \rfloor - n > 0$. By exercice 2 again, we have $m \leq x$ such that
-    \begin{equation*}[c+l+l]
+    \begin{equation*}[c+l+c]
         & n = \lfloor x \rfloor - \epsilon < m \leq \lfloor x \rfloor &\\
        \implies & \lfloor x \rfloor < n + 1 \leq m \leq \lfloor x \rfloor & \textnormal{(by \autoref{first_ineq} and by successor property)}
     \end{equation*} 
     which is a contradiction. Hence $\lfloor x \rfloor = n$ is an integer and hence a maximum of $\mathbb{Z}_{\leq x}$.
 
     \item We have 
-    \begin{equation*}[c+l]
-        & \sum_{j=0}^{k-1} \frac{n_j}{10^j} \leq x \\
-       \iff &  n_k \leq x 10^k - \sum_{j=0}^{k-1} n_j 10^{k-j}
+    \begin{equation*}[c+rCl+x]
+        & \sum_{j=0}^{k-1} \frac{n_j}{10^j} &\leq& x \\
+       \iff &  n_k &\leq& x 10^k - \sum_{j=0}^{k-1} n_j 10^{k-j}
     \end{equation*}
     Hence the sets of all $n_k \inset \mathbb{Z}$ satisfying either property are identical. By part $(a)$,
     \[
@@ -57,12 +57,12 @@ which adds that $\alpha$ is the smallest upper bound.
 
     \item Recall that in part $(a)$, we established that: for all $x \inset \mathbb{R}_{\geq 0}$, we have $\lfloor x \rfloor \inset \mathbb{Z}_{\geq 0}$ such that $\lfloor x \rfloor \leq x < \lfloor x \rfloor + 1$.
     In particular, using the construction of part $(b)$ inductively, we automatically have
-    \begin{equation}[c+l]
+    \begin{equation}[c+c+x]
         \nonumber & n_k \leq x 10^k - \sum_{j=0}^{k-1} n_j 10^{k-j} < n_k + 1 \\
         \label{decimal} \iff & 0 \leq x - \sum_{j=0}^{k} \frac{n_j}{10^j} < \frac{1}{10^k}
     \end{equation}
     for all $k \geq 0$. Now for the second part, take $k \geq 1$, using \autoref{decimal} with $k-1$ we get
-    \begin{equation*}[c+l]
+    \begin{equation*}[c+c+x]
         & 0 \leq x 10^k - \sum_{j=0}^{k-1} n_j 10^{k-j} < 10 \\
         \implies & 0 \leq n_k \leq x 10^k - \sum_{j=0}^{k-1} n_j 10^{k-j} < 10
     \end{equation*}
@@ -81,7 +81,7 @@ which adds that $\alpha$ is the smallest upper bound.
     Let $\epsilon > 0$.
     By part $(d)$, we know that $1/\epsilon$ is not an upper bound of $\{c^k \mid k \inset \mathbb{N}\}$.
     Hence there exists $k \inset \mathbb{N}$ such that 
-    \begin{equation*}[c+l]
+    \begin{equation*}[c+c+x]
         & 1/\epsilon < c^k \\
         \implies & 0 \leq c^{-k} < \epsilon
     \end{equation*}
@@ -119,7 +119,7 @@ which adds that $\alpha$ is the smallest upper bound.
     \end{cases}\]
     Let $k = \max(k_1, k_2, k_3)$.
     Because the sequences considered are increasing, we have
-    \begin{equation*}[l+c]
+    \begin{equation*}[c+c+x]
         & \begin{cases}
             x - \frac{1}{10^k} < \sum_{j=0}^{k} \frac{n_j}{10^j} < x\\
             x - \frac{1}{10^k} < \sum_{j=0}^{k} \frac{m_j}{10^j} < x
