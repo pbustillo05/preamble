@@ -17,17 +17,17 @@
 For a given enrichment context $\mathcal{V}\in \EAlg{n}(\PrL)$, we have a sequence of symmetric-monoidal functors
 
 \begin{equation}
-    \EAlg{n} \longto \Mor_n^\alpha \longmono \Mor_n^\beta \longmono \PrL_n \longmono \Cat{n}^{\Colim}
+    \EAlg{n} \longto \Mor_n^\alpha \longto \Mor_n^\beta \longto \PrL_n \longto \Cat{n}^{\Colim}
 \end{equation}
-most of which are fully-faithful. The first category is $(\infty,1)$-$\mathcal{V}$-enriched, the others $(\infty,n+1)$-$\mathcal{V}$-enriched. The question of finding $k$-dualizable objects in these should be:
+The first category is $(\infty,1)$-$\mathcal{V}$-enriched, the others $(\infty,n+1)$-$\mathcal{V}$-enriched. The question of finding $k$-dualizable objects in these should be:
 \begin{enumerate}
-    \item (essentially) Kozsul duality in the first one (maybe more clear with augmented algebras),
+    \item (essentially) Kozsul duality in the first one (maybe more clear with augmented algebras?),
     \item factorization homology in the Morita ones then smoothness/properness
-    \item \dots
+    \item higher condensation of previous ones
+    \item same
 \end{enumerate}
 
-
-
+Our goals are:
 
 \begin{enumerate}
     \item Construct a most general higher morita category by successive enrchiment. Requirement: stable under factorization homology.
@@ -229,6 +229,30 @@ For example $\eta(\eta(\epsilon(f^{\vee -5}))^{\vee 12})$ is an adjunction data 
     Let $\omega$ be any word using the symbols $\epsilon$, $\eta$, $-^{\vee n}$ (for any $n \inset \mathbb{Z}$) applied to $f$.
 \end{theorem}
 
+\subsection{Identifying Handlebodies}
+
+\subsubsection{Just $\epsilon$}
+
+Ok so we want $D^k \mono \mathbb{R}^k \times (0,1)$ with first coordinate canonical and second coordinate $\vec{x} \mapsto (1-r^2)/2$. 
+
+\subsection{General}
+
+Let $a + b \leq n$. We then have
+\[
+    \partial(D^a \times D^b) = S^a \times D^b \bigsqcup_{S^a \times S^b} D^a \times S^b
+\]
+Using a tubular neighbourhood $S^a \times S^b \times D^1 \mono D^a \times S^b$, we have
+\[
+    \partial(D^a \times D^b) = S^a \times D^b \bigsqcup_{S^a \times S^b} S^a \times S^b \times D^1 \bigsqcup_{S^a \times S^b} D^a \times S^b
+\]
+
+\subsection{Redundancy of Adjunction Data}
+
+\begin{theorem}[Redundancy]\label{thm:redundancy}
+    Let $\A$ be an $(\infty,n)$-category, $1 \leq k, l$, $f\in a_{k-1}\to b_{k-1}\in \ldots \in a_0 \to b_0$ a $l$-adjoint $k$-morphism.
+    Then $f$ is $(l+1)$-adjoint if and only if......
+\end{theorem}
+
 \subsection{Finding Fully-Dualizable Objects}
 
 \begin{remark} Recall that we have functors $\Bordfr_k \to \Bordfr_n$ given by extending the framing trivially. \textbf{Warning:} these functors are \textbf{not} truncations.
@@ -271,7 +295,7 @@ The strategy is the following:
         \int_{\partial M \times \mathbb{R}} A \longto \End\left(\int_M A\right)
     \]
 
-    \item To find a dual, we need to 
+    \item To find a dual, we need to proceed by handle decomposition and show that each handle has a dual. TODO: link handles to the half-spheres.
 \end{enumerate}
 
 \section{Alpha-Case: Higher Cells}
@@ -285,6 +309,9 @@ Lots of elements in the proof are based on the idea that we have an inductive de
 \end{lemma}
 \begin{proof} Stability and presentability should probably be proven in [HA]. The $(n-1)$-disk operation should be clear to define. 
 \end{proof}
+
+
+I need [HA.4.6.2.13] to show that "being a left adjoint" only depends on the codomain algebra. Then general manipulations of disk-operads show it only depends on the bar construction. Then if $\mathcal{S}$ is spectra, or maybe R-mod, we know it means finite module. In more general setup it'd be some absolute colimits maybe? (using the link between being absolute and having a dual).
 
 We first need to identify which $n$-cells are dualizable. First, we need to define a higher notion of two-sided bar construction (arguably a ``stratified-$S^{n-1}$''-sided bar construction).
 
@@ -308,4 +335,155 @@ Let us define a stratification of $\mathbb{R}^{n}$ as follows: for $0\leq k \leq
 
 What does the frame version look like? One has to use that $S^m\times \mathbb{R}$ is canonically $(m+1)$-framed.
 
+\section{Defining Morita Categories}
+
+For $\mathcal{V} \in \EAlg{a+1}(\Pr)$, we want
+\[
+    \Mor_{a+1}(\mathcal{V})(A, B) = \Mor_{(a-1)+1}([A^\op \times B, \mathcal{V}])
+\]
+
+For $\mathcal{V} \in \EAlg{2}(\Pr)$, we want
+\[
+    \Mor_{0+2}(\mathcal{V})(A, B) = \Mor_{0+1}((A^\op \times B)^{\textnormal{loc.}\Colim})
+\]
+
+For $\mathcal{W}$ a locally-cocomplete $(\infty,2)$-category, we have $\mathcal{W}\Pr = \left[\mathcal{W}, \Cat{1}^{\Colim}\right]^{\textnormal{compact}}$. If $\mathcal{W}$ is localy-presentable, we should have $\mathcal{W}\Pr = \left[\mathcal{W}, \Pr\right]$.
+
+Locally, $\Mor_{0+2}(\mathcal{V}) \to 2\Pr^\mathcal{V}$ should be given by some
+\[
+    \Mor_{0+1}((A^\op \times B)^{\textnormal{loc.}\Colim}) \longrightarrow \left[A^\op \times B, \Pr\right]
+\]
+
+Assuming the recognition of dualizable objects still work, one should find that dualizable endomorphism in $2\Pr^\mathcal{V}$ are retracts of one from the morita context. For this to work, one need to recover the monoidal structure... 
+
+\section{One Beta Level}
+
+\begin{conjecture}
+    Fully-dualizable $n$-monoidal rigid $(\infty,1)$-$\mathcal{V}$-categories are Morita-equivalent to a fully-dualizable $(n+1)$-monoidal algebra.
+\end{conjecture}
+
+Because $\cat{A}$ is a finite $\cat{A} \times \cat{A}^\op$-module, we have 
+
+\begin{conjecture}
+    Fully-dualizable $n$-monoidal rigid $(\infty,1)$-$\mathcal{V}$-categories are \textbf{pivotal}: there exists a natural maps $x \simeq x^{\vee 2}$. 
+\end{conjecture}
+
+
+
+Question: in what way is this compatible with the monoidal structure?
+
+Idea of proof: one can show they are morita equivalen to an alpha-version $A$. The biggest such is the ``category of finite one-sided modules''. There everything is an absolute colimit of $A$. The dual should be the corresponding absolute limit of $A$. Maybe this helps? Alternate between limit and colimit.
+
+\begin{conjecture}
+    One can construct a trace for any $n$-monoidal rigid pivotal $(\infty,1)$-$\mathcal{V}$-category.
+\end{conjecture}
+
+How would that construction work? Pivotal means we have a forgetful enriched-functor $\int_{S^1} \mathcal{C} \to \mathcal{V}$. In a way that means: one can almost define cyclic tensor product but only on underlying $\mathcal{V}$-objects.
+
+\begin{conjecture}
+    Fully-dualizable $n$-monoidal rigid $(\infty,1)$-$\mathcal{V}$-categories are \textbf{spherical}: the two possible traces coincide. 
+\end{conjecture}
+
+What other higher notions of the sort are true?
+
+These ideas don't seem to give a "smallness/finiteness" to the category. They're probably not sufficient to characterize fd. It might be a good first step in understanding them though.
+
+
+\section{Azumaya over Algebraically Closed Field}
+
+\begin{proposition}\label{p2'}
+Let $k$ be algebraically closed and $B$ a $n$-Azumaya $k$-algebra. Then $B$ is Morita equivalent to the trivial $k$-algebra $k$.
+\end{proposition}
+
+\textit{Proof:} The Künneth Theorem can be seen as a symmetric monoïdal functor $kMod \to kVect^{gr}$ from an $(\infty,1)$-category to a $1$-category.
+
+
+For this, we let $H^{*}(B)$ be the graded cohomology $k$-algebra of $B$. As we are working over a field, 
+we have natural identifications of graded $k$-vector spaces. 
+$$H^{*}(B\otimes_{k}B^{op})\simeq H^{*}(B)\otimes_{k}H^{*}(B)^{op}$$
+$$H^{*}(\mathbb{R}\underline{Hom}_{k}(B,B))\simeq Hom^{*}_{k}(H^{*}(B),H^{*}(B)).$$
+These identifications, and conditions $\mathbf{(Az-1)}$ and $\mathbf{(Az-2)}$ imply that 
+$H^{*}(B)$ is itself an Azumaya $k$-algebra, and more precisely that $H^{*}(B)$, considered as 
+a graded bi-$H^{*}(B)$-module, induces an equivalence between the categories
+of graded modules
+$$H^{*}(B)\otimes_{k}H^{*}(B)^{op}-Mod^{gr} \simeq  k-Mod^{gr}.$$
+This implies that in particular that $H^{*}(B)$ is a graded projective 
+$H^{*}(B)\otimes_{k}H^{*}(B)^{op}$-module, 
+and therefore that $H^{*}(B)$ is a semi-simple graded $k$-algebra (i.e. that 
+$H^{*}(B)-Mod^{gr}$ is semi-simple $k$-linear abelian category), and thus that any 
+graded $H^{*}(B)$-module is graded projective. 
+
+We have a graded functor 
+$$\phi : D(B) \longrightarrow H^{*}(B)-Mod^{gr}$$
+sending a $B$-dg-module $E$ to its cohomology $H^{*}(E)$. 
+
+\begin{lemma}\label{l2}
+The functor above $\phi$ is an equivalence of (graded) categories. 
+\end{lemma}
+
+\textit{Proof:} Let call an object $E\in D(B)$ \emph{graded free} if it is a (possibly infinite) 
+sum of shifts of $B$. An object of $D(B)$ will then be called \emph{graded projective} if it is a
+retract of a graded free object. It is clear by definition that the functor $\phi$ is fully faithful when 
+restricted to graded free objects, and thus also when restricted to graded projective objects. In order to 
+show that $\phi$ is fully faithful it is then enough to show that any object in $D(B)$ is graded projective. 
+
+Let $E \in D(B)$, and let $H^{*}(E)$ be the corresponding graded $H^{*}(B)$-module, which is graded projective 
+as we saw. Let $p$ be a projector on some graded free graded $H^{*}(B)$-module $P$ with image $H^{*}(E)$. 
+If we write 
+$$P=\bigoplus_{d}(H^{*}(B)[p]^{(I_{p})}),$$
+then $p$ defines a projector $q$ in $D(B)$ on the graded free object
+$$Q:=\bigoplus_{d}(B[p]^{(I_{p})}) \in D(B).$$
+As $D(B)$ is Karoubian complete (see for instance \cite[Sous-lemme 3]{to4}), we now that this projector splits
+$$q : \xymatrix{
+Q \ar[r]^-{k} & E' \ar[r]^-{j} & Q,}$$
+with $E' \in D(B)$. We claim that $E$ and $E'$ are isomorphic objects in $D(B)$. Indeed, by the choice of 
+$p$, there exists a factorisation in $H^{*}(B)-Mod^{gr}$
+$$p : \xymatrix{
+P \ar[r]^-{r} & H^{*}(E) \ar[r]^-{i} & P.}$$
+The images of $k$ and $j$ by $\phi$ provides another such factorisation
+$$\phi(q)=p : \xymatrix{
+P \ar[r]^-{\phi(k)} & H^{*}(E') \ar[r]^-{\phi(l)} & P.}$$
+By the uniqueness of such factorisation, we have that 
+the composite morphism 
+$$\xymatrix{
+H^{*}(E') \ar[r]^-{\phi(l)} & P \ar[r]^-{r} & H^{*}(E)}$$
+is an isomorphism.
+Now, from the definition of $\phi$, the morphism $r$ lifts uniquily to a morphism 
+$r' : Q \longrightarrow E$
+with $\phi(r')=r$. We thus get a morphism in $D(B)$
+$$\xymatrix{E' \ar[r]^-{j} & Q \ar[r]^-{r'} & E,}$$
+whose image by $\phi$ is $r\circ \phi(l)$, which we have seen to be an isomorphism. 
+As the functor $\phi$ is conservative we have $E \simeq E'$ in $D(B)$. 
+
+We thus have that all objects in $D(B)$ are graded projective, and therefore that 
+$\phi$ is fully faithful. All the objects $H^{*}(B)[p]$ belong to the essential image of $\phi$, and 
+therefore so do all graded free $H^{*}(B)$-module. As $\phi$ is fully faithful and as 
+$D(B)$ is  Karoubian closed, we deduce that any 
+graded projective $H^{*}(B)$-module also belongs to the essential image of $\phi$. But, as all
+graded $H^{*}(B)$-module are graded projective we have that $\phi$ is essentially surjective and thus an 
+equivalence of categories. 
+\hfill $\Box$ \\
+
+We use the previous lemma as follows. Let $E\in H^{*}(B)-Mod^{gr}$ be a simple object, which is
+automatically finite dimensional over $k$, as  $H^{*}(B)$ is so.  
+Because $k$ is algebraically closed we have 
+$$Hom^{0}_{H^{*}(B)-Mod^{gr}}(E,E) \simeq k.$$
+Moreover, for any $n\neq 0$, we have
+$$Hom^{n}_{H^{*}(B)-Mod^{gr}}(E,E)=Hom^{0}_{H^{*}(B)-Mod^{gr}}(E,E[n])=0,$$
+unless $E$ would be isomorphic to $E[n]$ which would a condradiction with the 
+finite dimensionality of $E$. Let now $E' \in D(B)$ be an object such that 
+$\phi(E')\simeq E$. As the graded functor $\phi$ is an equivalence, we have
+$$[E',E']\simeq k \qquad [E',E'[n]]=0 \; if \, n\neq 0.$$
+This implies that, the $k$-dg-algebra
+$\mathbb{R}\underline{Hom}_{k}(E',E')$ is quasi-isomorphic to $k$, and thus that the pair of adjoint 
+functors
+$$E \otimes_{k} - : D(k) \longrightarrow D(B) \qquad 
+\mathbb{R}\underline{Hom}_{k}(E,-) : D(B) \longrightarrow D(k)$$
+defines a full embedding $D(k) \hookrightarrow D(B)$. Therefore, when considered
+as a morphism $k \rightarrow B$ in $Hom_{k}$, the object $E$ exhibits $k$ as a retract of $B$. 
+By dualizing $B$ we get that $B^{op}$ is a retract of $k$ in $Hom_{k}$. The object 
+$B^{op}$ is then the image of a projector $p$ on $k$ in $Hom_{k}$, which corresponds to 
+a compact object $P \in D(k)$ with the property that $P\otimes_{k}P \simeq P$. The only possibility is
+$P\simeq k$, giving that the projector $p$ is in fact the identity. This implies that $B^{op}$ is isomorphic
+to $k$ in $Hom_{k}$, and by duality that $B$ is isomorphic to $k$.  \hfill $\Box$ \\
 \end{document}

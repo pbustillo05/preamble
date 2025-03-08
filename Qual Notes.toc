@@ -1,0 +1,4 @@
+\contentsline {section}{\numberline {1}Geometric Stacks à la Toën-Vezzosi}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Coaffine Stacks}{2}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Total Stack of a Module}{2}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Cotangent Stack}{3}{subsection.1.3}%
