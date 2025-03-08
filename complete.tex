@@ -1,0 +1,28 @@
+\documentclass{article}
+\input{mypreamble/a-preamble}
+\usepackage{mathdots}
+\usepackage{bookmark}
+
+%%%%% TITLE PAGE
+\title{Complete Bordism Categories}
+\author{Pablo Bustillo Vazquez}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+For $m \geq 0$, we let $[m]$ be the stratified line with $m$ points.
+
+\begin{definition} We define $\Bord^{fr}(X, m_1, \ldots, m_n)$ to be the space whose points are the data of:
+    \begin{enumerate}
+        \item a framed open manifolds $(M^n, \eta)$ where $\eta\in \{\bullet\} \simeq \tau_M \in M \to BO(n)$,
+        \item a continuous map $\pi \in M \to X \times \prod_{i=1}^n [m_i]$,
+        \item a trivialization of $M$ over each strata.
+    \end{enumerate}
+
+    A path in the space should be a map of manifolds over $X$ (\textbf{not} over $\prod_{i=1}^n [m_i]$) which "preserves infinite directions" in a way to be precisely defined.
+\end{definition}
+
+\end{document}
