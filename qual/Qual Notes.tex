@@ -1,0 +1,843 @@
+\documentclass{article}
+\input{mypreamble/a-preamble}
+
+%%%%% TITLE PAGE
+\title{Qualification Exam Notes}
+\author{Pablo Bustillo Vazquez}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Syllabus}
+
+The topic of this Qualification Examination is the computation of the classifying space of the $\infty$-category of cobordism, from the seminal work of Galatius, Madsen, Tillman and Weiss \cite{GMTW09}.
+We state here their main result.
+Fix $d \geq 0$ an integer.
+
+\begin{definition}
+    Let $\cat{X}$ be the $(1,1)$-category of manifolds without boundary and smooth maps, together with its usual Grothendieck topology.
+\end{definition}
+
+\begin{definition}
+    We have a functor $|-|\in \sh(\cat{X}) \to \Spa$ given by
+\[
+    \mathcal{F} \mapsto \Colim_{[n] \inset \Delta^\op} \mathcal{F}(\Delta_e^n)
+\]
+A morphism of sheaves is called a \textbf{weak homotopy equivalence} if the induced map on spaces is a weak homotopy equivalence.
+\end{definition}
+
+For $a, b \in X \to \mathbb{R}$, we write $a < b$ when $\forall x \inset X, a_0(x) \leq a_1(x)$ and $\{x \inset X\mid a_0(x) = a_1(x)\}$ is clopen.
+We also write $X \underline{\times} (a, b) = \{(x,t) \inset X \times \mathbb{R} \mid a(x) < t < b(x)\}$.
+
+\begin{definition}
+    We have a $\sh(\cat{X})$-internal category $\cat{C}^\perp$ whose:
+    \begin{enumerate}
+        \item collection of objects is the sheaf
+        \[
+            \ob(\cat{C}^\perp)(X) = \{a \in X \to \mathbb{R}, M \subset_d X \times \mathbb{R}^\infty \epi X \textnormal{ proper submersion with $d$-dimensional fibers}\}
+        \]
+        \item collection of morphisms is the sheaf
+        \[
+            \mor(\cat{C}^\perp)(X) = \Colim_{\epsilon \in X \to \mathbb{R}} \bigsqcup_{a_0 < a_1 \in X \to \mathbb{R}} \cat{C}^\perp(X, a_0, a_1, \epsilon)
+        \]
+        where $\cat{C}^\perp(X, a_0, a_1, \epsilon)$ is the set of $W \subset X \underline{\times} (a_0-\epsilon, a_1+\epsilon) \times \mathbb{R}^\infty$ such that:
+        \begin{enumerate}
+            \item (smooth family) $W \epi X$ is a submersion with $d$-dimensional fibers,
+            \item (compact cobordisms) $W \to X \underline{\times} (a_0-\epsilon, a_1+\epsilon)$ is proper,
+            \item (tubularity) corestricted to $X \underline{\times} (a_i-\epsilon, a_i+\epsilon)$ for $i \inset \{0,1\}$, $W$ splits as a product.
+        \end{enumerate}
+    \end{enumerate}
+\end{definition}
+
+This gives a category object in spaces after applying the functor $|-|$.
+The latter is the object of interest here, which we call the $\infty$-category of cobordism.
+
+\begin{theorem}[Goal]
+    The classifying space of the $\infty$-category of cobordism is
+    \[
+        \Omega^{\infty-1} MTO(d) = \Colim_{n \to \infty} \Omega^{n + d - 1}\Thom(\gamma_d^\perp \to \Gr_d(\mathbb{R}^{n+d}))
+    \]
+\end{theorem}
+
+The core of the proof lies in using Phillips Submersion Theorem, one of the first instance of a \textbf{microflexible h-Principle}.
+Instead of following Phillips' original proof to the letter, we will follow an exposition of his proof by Haeflinger \cite{Hae71}, further elucidated by Geiges \cite{Gei03}.
+At no cost, one can change notations to transform this argument into a proof of a microflexible h-Principle for general isotopy-invariant $\cat{X}$-sheaves, which we will do.
+
+
+\section{Smoothly Parametrized Spaces}
+
+\subsection{Definitions}
+
+\begin{definition}
+    Let $\cat{X}$ be the $(1,1)$-category of manifolds without boundary and smooth maps, together with its usual Grothendieck topology.
+\end{definition}
+
+\begin{definition}
+    Let $Y$ be a compact manifold with corners and $\cat{F} \in \sh(\cat{X})$ a sheaf.
+    We define the stalk $\cat{F}(Y) = \Colim_{Y \subset U} \cat{F}(U)$ as the colimit on all fatenings of $Y$.
+    By abuse of notation, we will denote an element of $\cat{F}(Y)$ by $Y \to \cat{F}$.
+\end{definition}
+
+Note that $\cat{F} \mapsto \cat{F}(Y)$ commutes with finite limits but not all limits.
+It's not a corepresentable sheaf, but as long as we never consider infinite limit diagrams, we have some flexibility with this notation.
+
+\begin{remark}\label{rmk:compact-objects}
+    Note that compact manifolds with corners are compact objects in $\sh(\cat{X})$.
+\end{remark}
+
+\begin{definition}
+    We have a functor $|-|\in \sh(\cat{X}) \to \Top$ given by
+\[
+    \mathcal{F} \mapsto |[n] \mapsto \mathcal{F}(\Delta_e^n)|
+\]
+A morphism of sheaves is an \textbf{equivalence} if the induced map on spaces is a weak homotopy equivalence.
+\end{definition}
+
+\begin{definition}
+    A morphism of sheaves $\mathcal{F} \to \mathcal{G}$ is called a \textbf{microfibration} if for all $X$ compact manifold (with or without boundary), there exists $0 < \epsilon \leq 1$ and a lift
+    % https://q.uiver.app/#q=WzAsNSxbMiwwLCJcXG1hdGhjYWx7Rn0iXSxbMiwxLCJcXG1hdGhjYWx7R30iXSxbMSwxLCJYIFxcdGltZXMgWzAsMV0iXSxbMSwwLCJYXFx0aW1lcyBcXHswXFx9Il0sWzAsMSwiWCBcXHRpbWVzIFswLFxcZXBzaWxvbl0iXSxbMCwxXSxbMiwxXSxbMywyXSxbMywwXSxbNCwyXSxbMyw0XSxbNCwwLCIiLDEseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
+    \[\begin{tikzcd}
+        & {X\times \{0\}} & {\mathcal{F}} \\
+        {X \times [0,\epsilon]} & {X \times [0,1]} & {\mathcal{G}}
+        \arrow[from=1-2, to=1-3]
+        \arrow[from=1-2, to=2-1]
+        \arrow[from=1-2, to=2-2]
+        \arrow[from=1-3, to=2-3]
+        \arrow[dashed, from=2-1, to=1-3]
+        \arrow[from=2-1, to=2-2]
+        \arrow[from=2-2, to=2-3]
+    \end{tikzcd}\]
+    It's called a \textbf{fibration} (concordance lifting property) if one can always pick $\epsilon = 1$.
+\end{definition}
+\begin{remark}\label{rmk:pullback-stability}
+    Note that the pullback of a fibration is a fibration.
+\end{remark}
+
+\subsection{Concordances}
+
+\begin{definition}
+    Let $X$ be a smooth manifold and $\cat{F} \in \sh(\cat{X})$ be a sheaf.
+    There is a natural equivalence relation on $\cat{F}(X)$ given by $u \sim v$ when we have
+    % https://q.uiver.app/#q=WzAsNCxbMSwxLCJcXG1hdGhjYWx7Rn0iXSxbMSwwLCJYXFx0aW1lc1swLDFdIl0sWzIsMCwiWFxcdGltZXNcXHsxXFx9Il0sWzAsMCwiWFxcdGltZXNcXHswXFx9Il0sWzEsMCwiIiwxLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzMsMV0sWzIsMV0sWzMsMCwidSIsMl0sWzIsMCwidiJdXQ==
+\[\begin{tikzcd}
+	{X\times\{0\}} & {X\times[0,1]} & {X\times\{1\}} \\
+	& {\mathcal{F}}
+	\arrow[from=1-1, to=1-2]
+	\arrow["u"', from=1-1, to=2-2]
+	\arrow[dashed, from=1-2, to=2-2]
+	\arrow[from=1-3, to=1-2]
+	\arrow["v", from=1-3, to=2-2]
+\end{tikzcd}\]
+    The set of equivalence classes is denoted $\mathcal{F}[X]$.
+    Let $A \subset X$ be a closed subset and $s \inset \Colim_{A \subset U} \mathcal{F}(U)$ be a germ.
+    We define the set $\cat{F}[X,A,s]$ to be the set of sections which restrict to $s$ around $A$, up to the equivalence $u \sim v$ above given by these $X \times [0,1] \to \cat{F}$ factoring through $s$ in some neighbourhood of $A$.
+\end{definition}
+
+\begin{proposition}[{\cite[Prop. 2.17, A.1]{MW07}}]
+    Let $X \in \cat{X}$, $A \subset X$ closed and $z \inset \cat{F}(\bullet)$.
+    We have $\mathcal{F}[X,A,z] \simeq \pi_0[(X,A), (|\mathcal{F}|,z)]$ natural in $\cat{F}$.
+\end{proposition}
+\begin{remark}[Extended Triangulation]
+    For any triangulation of $X$ with vertex set $\mathbb{T}$, one can construct the following data, called an \textbf{extended triangulation} of $X$.
+    For all $S \inset \mathbb{T}$ distinguished set (set of vertices of a simplex), we denote $c_S \in \Delta(S) \mono X$ the embedding and $\Delta_e(S)$ the extended simplex.
+    We can pick embeddings $(c_{S,e} \in \Delta_e(S) \mono X)_{S \subset  \mathbb{T} \textnormal{ distinguished}}$ extending the $c_S$'s and $h \in X \times [0,1] \to X$ such that: 
+    \begin{enumerate}
+        \item $h_t = 1_X$ for $t$ in a neighbourhood of $0$,
+        \item $h_t$ constant for $t$ in a neighbourhood of $1$,
+        \item for all $t$, $h_t(c_{S}(\Delta(S))) \subset c_{S}(\Delta(S))$,
+        \item for all $t$, $h_t(c_{S,e}(\Delta_e(S))) \subset c_{S,e}(\Delta_e(S))$,
+        \item for all $S \inset \mathbb{T}$ distinguished set, we have an open neighbourhood $\Delta(S) \subset V_S$ such that $h_1(V_S) \subset c_{S}(\Delta(S))$.
+    \end{enumerate}\pablo{Draw illustration on the Kindle}
+\end{remark}
+\begin{proof}
+    First we prove the result for $A = \emptyset$.
+    \begin{enumerate}
+        \item \textbf{Defining $\xi \in \mathcal{F}[X] \to \pi_0[X, |\mathcal{F}|]$}
+        Pick an extended triangulation of $X$ with vertex set $\mathbb{T}$.
+        Let $u \inset \mathcal{F}(X)$ be a section.
+        For each $S\inset \mathbb{T}$ distinguished set, we have an element $u_S = c_{S,e}^*u \inset \cat{F}(\Delta_e(S))$ of $|\cat{F}|(S)$.
+        This gives a unique map $\xi(u) \in X \to |\cat{F}|$ such that each of the following diagrams commute
+        % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXERlbHRhKFMpIl0sWzAsMSwiWCJdLFsxLDEsInxcXGNhdHtGfXwiXSxbMCwxLCJjX1MiLDJdLFsxLDIsIlxceGkodSkiLDJdLFswLDIsInVfUyJdXQ==
+        \[\begin{tikzcd}
+            {\Delta(S)} \\
+            X & {|\cat{F}|}
+            \arrow["{c_S}"', from=1-1, to=2-1]
+            \arrow["{u_S}", from=1-1, to=2-2]
+            \arrow["{\xi(u)}"', from=2-1, to=2-2]
+        \end{tikzcd}\]
+        as $X$ is the colimit (and homotopy colimit) of the simplices of its triangulation.
+        It's clear that this only depends on the equivalence class of $u$, as changing it corresponds to having a homotopy of cocone diagrams.
+        It's also clear that this is stable under refinements.
+        \textbf{Importantly}, this is natural in $\cat{F}$.
+
+        \item \textbf{Defining $\nu \in \pi_0[X, |\mathcal{F}|] \to \mathcal{F}[X]$}
+        Let $g \in X \to |\cat{F}|$.
+        By the Simplicial Approximation Theorem, can find a triangulation of $X$ such that $g$ is homotopy equivalent to a simplicial map, and we can extend this triangulation.
+        To each $S \inset \mathbb{T}$ distinguished set is associated an element $g \circ c_S \inset |\mathcal{F}|(\Delta(S)) = \mathcal{F}(\Delta_e(S))$.
+        We can define a section $\nu(g) \inset \mathcal{F}(X)$ by glueing the sections
+        \[
+            V_R \xto[h_1] c_S(\Delta(S)) \mono c_{S,e}(\Delta_e(S)) \xto[c^{-1}_{S,e}] \Delta_e(S) \xto[g \circ c_S] \mathcal{F}
+        \]
+        It's clear they do glue, and that this is independent of both the homotopy class of $g$ and the triangulation. \pablo{practically speaking, this makes the sections constant on a neighbourhood of the skeleton}
+
+        \item \textbf{Showing $\nu \circ \xi = 1$:}
+        Using the homotopy $h$, we have a concordance between $u$ and $\nu(\xi(u))$.
+    
+        \item \textbf{Showing $\xi \circ \nu = 1$:}
+        Let $g \in X \to |\cat{F}|$ and consider the construction above of $\nu(g)$. Define the smooth $H \in X \times \mathbb{R} \to X$ by
+        \[
+        H(x,t) = \begin{cases}[r"l]
+            h_0(x)  & \textnormal{if } t \leq 0, \\
+            h_t(x)  & \textnormal{if } t \inset [0,1], \\
+            h_1(x)  & \textnormal{if } t \geq 1.
+        \end{cases}
+        \]
+        Note we have two maps of sheaves $\pi_0, \pi_1 \in \cat{F}(- \times \mathbb{R}) \to \cat{F}$ which are homotopic after applying $|-|$.
+        This gives a unique map $G \in X \to |\cat{F}(- \times \mathbb{R})|$ such that each of the following diagrams commute
+        % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXERlbHRhKFMpIl0sWzAsMSwiWCJdLFsxLDEsInxcXGNhdHtGfSgtIFxcdGltZXMgXFxtYXRoYmJ7Un0pfCJdLFswLDEsImNfUyIsMl0sWzEsMiwiRyIsMl0sWzAsMiwiR19TIl1d
+        \[\begin{tikzcd}
+            {\Delta(S)} \\
+            X & {|\cat{F}(- \times \mathbb{R})|}
+            \arrow["{c_S}"', from=1-1, to=2-1]
+            \arrow["{G_S}", from=1-1, to=2-2]
+            \arrow["G"', from=2-1, to=2-2]
+        \end{tikzcd}\]
+        where $G_S$ is the composition of the maps
+        \[
+            \Delta_e(S) \times \mathbb{R} \xto[(c_{S,e}, 1)] c_{S,e}(\Delta_{e}(S)) \times \mathbb{R} \xto[H] c_{S,e}(\Delta_{e}(S)) \xto[c_{S,e}^{-1}] \Delta_{e}(S) \xto[g \circ c_S] \cat{F}
+        \]
+        Clearly, $g = |\pi_0 \circ G| \simeq |\pi_1 \circ G| = \xi \circ \nu(g)$.
+    \end{enumerate}
+
+    Now the case where $A \neq \emptyset$, we can repeat the same argument, by considering only triangulations where the simplex which meet $A$ are contained in the neighbourhood where the section is constant at $z$.
+\end{proof}
+
+\begin{corollary}[{\cite[Thm. E]{Clo23}}]
+    $|-|$ sends filtered colimits to homotopy colimits.
+\end{corollary}
+\begin{proof}
+    We simply need to check $\Colim \cat{F}[X, A, z] \simeq (\Colim \cat{F})[X, A, z]$, which is a direct conseuquence of \autoref{rmk:compact-objects}.
+\end{proof}
+
+\begin{corollary}[{\cite[Prop. A.6]{MW07}}]
+    $|-|$ sends a pullback square by a fibration to a homotopy pullback.
+\end{corollary}
+\begin{proof}
+    Consider
+    % https://q.uiver.app/#q=WzAsOCxbMSwxLCJ8XFxjYXR7QX18Il0sWzEsMywifFxcY2F0e0J9fCJdLFszLDEsInxcXGNhdHtDfXwiXSxbMywzLCJ8XFxjYXR7RH18Il0sWzAsMiwiXFxidWxsZXQiXSxbMiwyLCJcXGJ1bGxldCJdLFsyLDAsInxcXGNhdHtDfV9kfCJdLFswLDAsInxcXGNhdHtBfV9ifCJdLFsyLDMsIlxcY2lyYyIsM10sWzAsMSwiXFxjaXJjIiwzXSxbMSwzXSxbMCwyXSxbNCwxLCJiIiwyXSxbNSwzLCJkIiwyXSxbNCw1XSxbNiw1XSxbNyw0XSxbNyw2XSxbNiwyXSxbNywwXV0=
+    \[\begin{tikzcd}
+        {|\cat{A}_b|} && {|\cat{C}_d|} \\
+        & {|\cat{A}|} && {|\cat{C}|} \\
+        \bullet && \bullet \\
+        & {|\cat{B}|} && {|\cat{D}|}
+        \arrow[from=1-1, to=1-3]
+        \arrow[from=1-1, to=2-2]
+        \arrow[from=1-1, to=3-1]
+        \arrow[from=1-3, to=2-4]
+        \arrow[from=1-3, to=3-3]
+        \arrow[from=2-2, to=2-4]
+        \arrow["\circ"{marking, allow upside down}, from=2-2, to=4-2]
+        \arrow["\circ"{marking, allow upside down}, from=2-4, to=4-4]
+        \arrow[from=3-1, to=3-3]
+        \arrow["b"', from=3-1, to=4-2]
+        \arrow["d"', from=3-3, to=4-4]
+        \arrow[from=4-2, to=4-4]
+    \end{tikzcd}\]
+    It suffices to show that for any $b \inset \cat{B}(\bullet)$, the sheaves $\cat{A}_b$ and $\cat{C}_d$ are homotopy fibers, and that the map $\cat{A}_b \to \cat{C}_d$ is an equivalence.
+    \begin{enumerate}
+        \item \textbf{Homotopy Fibers:} We have a canonical map $|\cat{A}_b| \to \fib(|\cat{A}| \to |\cat{B}|)$, which we want to prove is an equivalence.
+        Let $a \inset \cat{A}_b(\bullet)$ and $n \geq 0$.
+        One can build an inverse $\pi_n(\fib(|\cat{A}| \to |\cat{B}|, a) \to \pi_n(|\cat{A}_b|, a)$ by considering 
+        % https://q.uiver.app/#q=WzAsNyxbMCwwLCJcXGNhdHtBfV9iIl0sWzEsMCwiXFxjYXR7QX0iXSxbMSwxLCJcXGNhdHtCfSJdLFswLDEsIlxcYnVsbGV0Il0sWzIsMSwiU15uXFx0aW1lcyBbMCwxXSJdLFsyLDAsIlNeblxcdGltZXMgXFx7MFxcfSJdLFsxLDIsIlNeblxcdGltZXMgXFx7MVxcfSJdLFsxLDIsIlxcY2lyYyIsM10sWzAsMV0sWzAsM10sWzMsMiwiYiIsMl0sWzQsMl0sWzUsNF0sWzUsMV0sWzQsMSwiIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzYsNF0sWzYsM10sWzYsMCwiIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV1d
+        \[\begin{tikzcd}
+            {\cat{A}_b} & {\cat{A}} & {S^n\times \{0\}} \\
+            \bullet & {\cat{B}} & {S^n\times [0,1]} \\
+            & {S^n\times \{1\}}
+            \arrow[from=1-1, to=1-2]
+            \arrow[from=1-1, to=2-1]
+            \arrow["\circ"{marking, allow upside down}, from=1-2, to=2-2]
+            \arrow[from=1-3, to=1-2]
+            \arrow[from=1-3, to=2-3]
+            \arrow["b"', from=2-1, to=2-2]
+            \arrow[dashed, from=2-3, to=1-2]
+            \arrow[from=2-3, to=2-2]
+            \arrow[dashed, from=3-2, to=1-1]
+            \arrow[from=3-2, to=2-1]
+            \arrow[from=3-2, to=2-3]
+        \end{tikzcd}\]
+        \textbf{Left to the reader:} Check that this is indeed an inverse.
+
+        \item \textbf{Equivalence:} The map of sheaves $\cat{A}_b \to \cat{C}_d$ is an isomorphism.
+    \end{enumerate}
+\end{proof}
+
+\begin{lemma}[Criterion $2.5$]
+    A map $f \in \cat{F} \to \cat{G}$ of sheaves is a weak homotopy equivalence whenever: for all $X \in \cat{X}$, $A \subset X$ closed and $z \inset \cat{F}(A)$, we have a surjection
+    \[
+        \mathcal{F}[X,A,z] \epi \mathcal{G}[X,A,z]
+    \]
+\end{lemma}
+\begin{proof}
+    By the proposition above, we have a surjective map $\pi_n(|\cat{F}|, z) \to \pi_n(|\cat{F}|, f(z))$ for all $n \geq 0$ and based point $z \inset \cat{F}(\bullet)$.
+    We need to show the kernels are trivial (for $n=0$, this is to be interpreted in the category of pointed sets).
+    \pablo{to be completed}
+\end{proof}
+
+\subsection{Classifying Spaces}
+
+Let $\cat{A}$ be a $\sh(\cat{X})$-enriched category.
+We construct here a sheaf $\beta\cat{A} \in \sh(\cat{X})$ together with a map $\cat{A} \to \beta\cat{A}$ which is a weak homotopy equivalence on classifying spaces.
+
+\begin{definition}
+    We let 
+\end{definition}
+
+\section{Microflexible h-Principle}
+
+\begin{definition}
+    Let $\Mfld_{n}$ be the $\sh(\cat{X})$-enriched category of finatary $n$-dimensional manifolds without boundary (interior of compact manifolds with boundary) and open embeddings.
+    More precisely, for $X \in \cat{X}$, we let
+    \[
+        \Emb(M,N)(X) = \{ f\in X\times M \to X \times N \textnormal{ smooth over } X \mid \forall x \inset X, f(x,-) \textnormal{ is an open embedding} \}
+    \]
+    We consider once again the usual Grothendieck topology on $\Mfld_{n}$.
+\end{definition}
+
+\begin{definition}
+    A sheaf $\Phi \in \Mfld_{n}^\op \to \sh(\cat{X})$ is called a \textbf{microflexible} in $M$ if for all $K_0 \subset K_1 \subset M$ compact and all $X$ compact manifold (with or without boundary),
+    % https://q.uiver.app/#q=WzAsNSxbMiwwLCJcXFBoaShLXzApID0gXFxDb2xpbV97S18wIFxcc3Vic2V0IFV9IFxcUGhpKFUpIl0sWzIsMSwiXFxQaGkoS18xKSA9IFxcQ29saW1fe0tfMSBcXHN1YnNldCBVfSBcXFBoaShVKSJdLFswLDEsIlhcXHRpbWVzWzAsXFxlcHNpbG9uXSJdLFsxLDEsIlggXFx0aW1lcyBbMCwxXSJdLFsxLDAsIlggXFx0aW1lcyBcXHswXFx9Il0sWzIsM10sWzQsMl0sWzQsM10sWzIsMCwiIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzQsMF0sWzMsMV0sWzAsMV1d
+\[\begin{tikzcd}
+	& {X \times \{0\}} & {\Phi_M(K_0) = \Colim_{K_0 \subset U} \Phi(U)} \\
+	{X\times[0,\epsilon]} & {X \times [0,1]} & {\Phi_M(K_1) = \Colim_{K_1 \subset U} \Phi(U)}
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-2, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=1-3, to=2-3]
+	\arrow[dashed, from=2-1, to=1-3]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+\end{tikzcd}\]
+    we have a lift.
+    The sheaf is called \textbf{flexible} if one can always pick $\epsilon = 1$.
+\end{definition}
+
+\begin{lemma}
+    For all sheaves $\Phi$, the stalk $\Phi(\mathbb{R}^n) \simeq \Phi_0$ is an equivalence.
+\end{lemma}
+\begin{proof}
+    The maps $\Phi(B_\epsilon(0)) \to \Phi(B_\epsilon'(0))$ are all equivalences, as they clearly come with a homotopy inverse.
+    The colimit indexed by $\epsilon$ is a homotopy colimit.
+    Hence the transfinite composition of these maps is an equivalence.
+\end{proof}
+
+\subsection{Honmotopy Sheaf Formulation}
+
+\begin{lemma}
+    There is an equivalence of categories between homotopy sheaves and spaces over $B\mathcal{O}(n)$.
+\end{lemma}
+
+\begin{theorem}[Flexible h-Principle]
+    If a sheaf $\Phi$ is flexible, then $|\Phi|$ is a homotopy sheaf.
+\end{theorem}
+
+If $\Phi$ is microflexible in $M$, it's clearly microflexible in any $M'$ which can be openly embedded in $M$.
+
+\begin{theorem}[Microflexible h-Principle]
+    If a sheaf $\Phi$ is microflexible in $M$ \textbf{open}, then $|\Phi|$ is a homotopy sheaf in $M$.
+\end{theorem}
+
+\subsection{Scanning Map Formulation}
+
+\begin{theorem}[Microflexible Approximation h-Principle]
+    Let $f\in \Phi \to \Xi$ be a map between microflexible sheaves on $M$.
+    Then the following are equivalent:
+    \begin{enumerate}
+        \item $f$ is a pointwise equivalence,
+        \item $f_{\mathbb{R}^n}$ is an equivalence,
+        \item $f_{0}$ is an equivalence,
+    \end{enumerate}
+\end{theorem}
+
+\subsection{Application of the h-Principle}
+
+\subsubsection{Submanifolds}
+
+\begin{definition}
+    Fix $d \geq 0$.
+    Let $M^{n+d}$ be a manifold.
+    Define the sheaf 
+    \[
+        \Phi(M)(X) = \{ W \subset_d X \times M \epi X \textnormal{ of dimension } d \textnormal{ fibers}\}
+    \]
+\end{definition}
+
+We have for each point $m \inset M$
+% https://q.uiver.app/#q=WzAsOSxbMSwyLCJNXntuK2R9Il0sWzIsMiwiXFxHcl97bitkfShcXG1hdGhiYntSfV5cXGluZnR5KSJdLFsyLDEsIlxcRmwobixkKSJdLFsxLDEsIlxcR3JfZChUTSkiXSxbMiwwLCJcXGdhbW1hX25ee1xcaW5mdHl9Il0sWzEsMCwiXFxnYW1tYV97ZCwgTX1eXFxwZXJwIl0sWzAsMiwiXFxidWxsZXQiXSxbMCwxLCJcXEdyX2QoXFxtYXRoYmJ7Un1ee24rZH0pIl0sWzAsMCwiXFxnYW1tYV9kXlxccGVycCJdLFswLDFdLFsyLDFdLFszLDBdLFszLDJdLFs0LDJdLFs1LDNdLFs1LDRdLFs1LDIsIiIsMSx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXIifX1dLFs2LDAsIm0iXSxbNyw2XSxbNywzXSxbOCw3XSxbOCw1XSxbOCwzLCIiLDAseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XSxbMywxLCIiLDAseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XSxbNywwLCIiLDAseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XV0=
+\[\begin{tikzcd}
+	{\gamma_d^\perp} & {\gamma_{d, M}^\perp} & {\gamma_n^{\infty}} \\
+	{\Gr_d(\mathbb{R}^{n+d})} & {\Gr_d(TM)} & {\Fl(n,d)} \\
+	\bullet & {M^{n+d}} & {\Gr_{n+d}(\mathbb{R}^\infty)}
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-2, to=2-2]
+	\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-2, to=2-3]
+	\arrow[from=1-3, to=2-3]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-1, to=3-1]
+	\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=2-1, to=3-2]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-2, to=3-2]
+	\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=2-2, to=3-3]
+	\arrow[from=2-3, to=3-3]
+	\arrow["m", from=3-1, to=3-2]
+	\arrow[from=3-2, to=3-3]
+\end{tikzcd}\]
+and we define $\Thom^\fib(\gamma_{b,M}^\perp) \to M$ to be the fiberwise Thom construction.
+The assignmenet $M \mapsto \Gamma(\Thom^\fib(\gamma_{b,M}^\perp) \to M)$ is a homotopy sheaf and it corresponds to the $\mathcal{O}(n)$-space given by the rotation action on $\Thom(\gamma_d^\perp \to \Gr_d(\mathbb{R}^{n+d}))$.
+
+\begin{lemma}
+    We have an $\mathcal{O}(n)$-equivariant weak homotopy equivalence
+    \[
+        |\Phi(\mathbb{R}^n)| \to \Thom(\gamma_d^\perp \to \Gr_d(\mathbb{R}^{n+d}))
+    \]
+\end{lemma}
+\begin{proof}
+    Take the "closest point on $W$ to $0$" map.
+    It's clearly $\mathcal{O}(n)$-equivariant.
+    One can show that $\Phi(\mathbb{R}^n)[X, A, s] \to \Thom(\gamma_d^\perp \to \Gr_d(\mathbb{R}^{n+d}))[X, A, s]$ is a surjection for all $X \inset \cat{X}$, $A \subset X$ closed and $s \inset \Phi(\mathbb{R}^n)(A)$.
+    Around the closed set $A$, one just need an isotopy of $\mathbb{R}^n$ that dilates in the direction of the tangent space to the closest point.
+\end{proof}
+
+\begin{corollary}[of the h-Principle]
+    We have a natural weak homotopy equivalence
+    \[
+        |\Phi(M)| \simeq \Gamma(\Thom^\fib(\gamma_b^M) \to M)
+    \]
+\end{corollary}
+
+\begin{definition}
+    Fix $M$.
+    We define a sheaf of "compactly-supported sections in the $M$-direction" as follows:
+    \[
+        \Phi^c(R \times M)(X) = \{W \subset_d X \times \mathbb{R} \times M \epi X \mid W \to X \times \mathbb{R} \textnormal{ proper}\}
+    \]
+\end{definition}
+
+Note that we can see this functor as the colimit on all "compactly-thickened paths" in $M$.
+This colimit is filtered, hence a homotopy colimit.
+Restricting to the empty manifold outside that thickened path is taking a homotopy fiber (pullback of a fibration on a point).
+Hence we get the following result:
+
+\begin{corollary}[of the h-Principle]
+    We have a natural weak homotopy equivalence
+    \[
+        |\Phi^c(\mathbb{R} \times M)| \simeq \Gamma^c(\Thom^\fib(\gamma_{b,M\times \mathbb{R}}^\perp) \to M)
+    \]
+\end{corollary}
+
+Note that for $M = \mathbb{R}^{n+d-1}$, we have a canonical equivariant
+\[
+    |\Phi^c(\mathbb{R} \times \mathbb{R}^{n+d-1})| \simeq \Omega^{n+d-1}\Thom(\gamma_b^\perp)
+\]
+as the fiberwise Thom-bundle is then trivial.
+
+\subsubsection{Submersions}
+
+\begin{proposition}
+    Let $N$ be a manifold. The sheaf 
+    \[
+        \Sub(M,N)(X) = \{ f \in X \times M \to X \times N \textnormal{ fiberwise submersion over } X\}
+    \]
+    is microflexible on all manifolds and the sheaf 
+    \[
+        \Max(TM,TN)(X) = \{ f \in X \times TM \to X \times TN \textnormal{ vector bundle map, fiberwise surjective over } X\}
+    \]
+    is flexible on all manifolds.
+\end{proposition}
+
+    We have an obvious $d \in \Sub(-,N) \simeq \Max(T-,TN)$ given by the fiberwise derivative.
+
+\begin{proposition}
+    The stalk of the derivative $d_0 \in \Sub(-,N)_0 \simeq \Max(T-,TN)_0$ is an equivalence.
+\end{proposition}
+\begin{proof}
+    Pick a partial exponential map $TN \supset U \xto[e] N$.
+    We construct a map of sheaves $\nu\in \Max(T-,TN)_0 \to \Sub(-,N)_0$ and show it's a homotopy inverse.
+    \begin{enumerate}
+        \item\textbf{Defining the Map:}
+        Consider $X \underline{\times} TB_\epsilon(\mathbb{R}^n) \xto[f] X \times TN$ for some $\epsilon\in X \to (0,\infty)$ small enough that $B_\epsilon(T_0\mathbb{R}^n)$ is mapped to $U$.
+        We define $\nu(f)\in X \underline{\times} B_\epsilon(T_0\mathbb{R}^n) \to X \underline{\times} TB_\epsilon(\mathbb{R}^n) \to X \times U \xto[e] N$.
+        
+        \item \textbf{Homotopy $d_0 \circ \nu \simeq 1$:} Trivial.
+        
+        \item \textbf{Homotopy $\nu \circ d_0 \simeq 1$:} For small enough $\epsilon\in X \to (0,\infty)$, we can define
+        \[
+            H(x, m, t) = f(x,0) + \frac{f(x,tm) - f(x,0)}{t}
+        \]
+    \end{enumerate}
+\end{proof}
+
+\subsection{Proof of the h-Principle}
+
+\begin{lemma}
+    Every open finatary manifold $M$ has a finite handlebody decomposition without $n$-handles.
+\end{lemma}
+\begin{proof}
+    Without loss of generality, we can assume $M$ is connected.
+    We can see $M$ as a cobordism from $N$ to $\emptyset$ for $N$ some compact $(n-1)$-manifold.
+    It's equivalent to show that $N$ has a finite handlebody decomposition without $0$-handles.
+    Pick a finite handlebody decomposition of $M$ with a minimal amount $k$ of $0$-handles.
+    Suppose for the sake of contradiction that $k > 0$.
+    We can see the handlebody decomposition as $N \times [0,1) \bigsqcup \sqcup_{i=1}^k D^n_i$ where $D^n_i \simeq D^n$ on which is attached (in some order) all $i$-handles for $i > 0$.
+    The only handle attachments that change $\pi_0$ are the $1$-handles.
+    There must be a step where the connected component of $D_0^n$ gets attached by a $1$-handle to one of the other connected components.
+    We can pick a smooth isotopy that slides that attaching map inside $D_0^n$.
+    We can now remove $D_0^n$ and this $1$-handle to the decomposition.
+    This contradicts the minimality of $k$.
+\end{proof}
+
+\begin{proposition}[{\cite[Prop. 3.14]{Gei03}} and {\cite[Prop. 3]{Hae71}}]
+    Suppose $\Phi$ is microflexible in an open neighbourhood of $k$-handle $D_2^{k} \times D^{n-k}$ for $k < n$.
+    Then the restriction map
+    \[
+        \Phi(D_2^{k} \times D^{n-k}) \to \Phi(D_{[1,2]}^{k} \times D^{n-k})
+    \]
+    is a fibration (slight abuse of notations: the context manifold is omitted).
+\end{proposition}
+\begin{proof}
+    Let $X$ be a compact parametrizing manifold (with or without boundary) and let us pick
+    % https://q.uiver.app/#q=WzAsNCxbMSwwLCJcXFBoaShEX3syfV5rIFxcdGltZXMgRF57bi1rfSkiXSxbMSwxLCJcXFBoaShEX3tbMSwyXX1eayBcXHRpbWVzIERee24ta30pIl0sWzAsMSwiWCBcXHRpbWVzIFswLDFdIl0sWzAsMCwiWCBcXHRpbWVzIFxcezBcXH0iXSxbMywyXSxbMywwLCJnXzAiXSxbMiwxLCJmIiwyXSxbMCwxXV0=
+\[\begin{tikzcd}
+	{X \times \{0\}} & {\Phi(D_{2}^k \times D^{n-k})} \\
+	{X \times [0,1]} & {\Phi(D_{[1,2]}^k \times D^{n-k})}
+	\arrow["{g_0}", from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow["f"', from=2-1, to=2-2]
+\end{tikzcd}\]
+    \begin{enumerate}[label  = (\alph*)]
+        \item \textbf{Haeflinger's Step $(a)$:} By definition of $\Phi(D_{[1,2]}^k \times D^{n-k})$, we have $\alpha < 1$ and a factorization of $f$ through $X \times \mathbb{R} \to \Phi(D_{[\alpha,2]}^k \times D^{n-k}) \to \Phi(D_{[1,2]}^k \times D^{n-k})$.
+        
+        \item \textbf{Haeflinger's Step $(b)$ and Geiges' Step $(1)$:} By Microflexibility, we have $\epsilon > 0$ and a lift
+        % https://q.uiver.app/#q=WzAsNixbMywxLCJcXFBoaSgoU197XFxhbHBoYX1ee2stMX0gXFxzcWN1cCBEX3tbMSwyXX1eaykgXFx0aW1lcyBEXntuLWt9KSJdLFszLDAsIlxcUGhpKERfe1tcXGFscGhhLDJdfV5rIFxcdGltZXMgRF57bi1rfSkiXSxbMSwxLCIoWCBcXHRpbWVzIFswLDFdKSBcXHRpbWVzIFswLDFdIl0sWzEsMCwiKFggXFx0aW1lcyBbMCwxXSkgXFx0aW1lcyBcXHswXFx9Il0sWzIsMSwiXFxQaGkoU197XFxhbHBoYX1ee2stMX0gXFx0aW1lcyBEXntuLWt9KSBcXHByb2QgXFxQaGkoIERfe1sxLDJdfV5rIFxcdGltZXMgRF57bi1rfSkiXSxbMCwxLCIoWCBcXHRpbWVzIFswLDFdKSBcXHRpbWVzIFswLCBcXGVwc2lsb25dIl0sWzMsMl0sWzEsMF0sWzQsMCwiXFxzaW1lcSJdLFszLDEsImYiXSxbMiw0LCIoZl91LCBmX3t1K3Z9KSIsMl0sWzUsMl0sWzMsNV0sWzUsMSwiIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV1d
+        \[\begin{tikzcd}
+            & {(X \times [0,1]) \times \{0\}} && {\Phi(D_{[\alpha,2]}^k \times D^{n-k})} \\
+            {(X \times [0,1]) \times [0, \epsilon]} & {(X \times [0,1]) \times [0,1]} & {\Phi(S_{\alpha}^{k-1} \times D^{n-k}) \prod \Phi( D_{[1,2]}^k \times D^{n-k})} & {\Phi((S_{\alpha}^{k-1} \sqcup D_{[1,2]}^k) \times D^{n-k})}
+            \arrow["f", from=1-2, to=1-4]
+            \arrow[from=1-2, to=2-1]
+            \arrow[from=1-2, to=2-2]
+            \arrow[from=1-4, to=2-4]
+            \arrow[dashed, from=2-1, to=1-4]
+            \arrow[from=2-1, to=2-2]
+            \arrow["{(f_u, f_{u+v})}"', from=2-2, to=2-3]
+            \arrow["\simeq", from=2-3, to=2-4]
+        \end{tikzcd}\]
+        We pick a finite sequence $0 = t_0 < t_1 < \ldots < t_s = 1$ such that for all $0 \leq n < s$, $t_{n+1} - t_n \leq \epsilon$.
+        Denote by $\mu_n \in (X \times \{t_n\}) \times [t_n, t_{n+1}] \to \Phi(D_{[\alpha,2]}^k \times D^{n-k})$ the restrictions of the lift above.
+        Note that, by construction, the $(\mu_n)_{|S_\alpha^{k-1}}$ are time-independent: we can pick some neighbourhood $S_\alpha^{k-1} \times \{0\} \subset U_\alpha$ on which the $\mu_n$ don't depend on $t$.
+
+        \item \textbf{Haeflinger's Step $(c)$ and Geiges' Step $(2)$:} By induction, we define lifts
+        % https://q.uiver.app/#q=WzAsNSxbMywxLCJcXFBoaShEX3tbXFxiZXRhLDJdfV5rIFxcdGltZXMgRF57bi1rfSkiXSxbMywwLCJcXFBoaShEX3syfV5rIFxcdGltZXMgRF57bi1rfSkiXSxbMSwwLCJYIFxcdGltZXMgXFx7MFxcfSJdLFswLDEsIlhcXHRpbWVzWzAsdF9uXSJdLFsxLDEsIlhcXHRpbWVzIFswLDFdIl0sWzEsMF0sWzIsMSwiZ18wIl0sWzIsM10sWzMsMSwiZ19uIiwxLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzMsNF0sWzQsMCwiZiIsMl0sWzIsNF1d
+        \[\begin{tikzcd}
+            & {X \times \{0\}} && {\Phi(D_{2}^k \times D^{n-k})} \\
+            {X\times[0,t_n]} & {X\times [0,1]} && {\Phi(D_{[\beta,2]}^k \times D^{n-k})}
+            \arrow["{g_0}", from=1-2, to=1-4]
+            \arrow[from=1-2, to=2-1]
+            \arrow[from=1-2, to=2-2]
+            \arrow[from=1-4, to=2-4]
+            \arrow["{g_n}"{description}, dashed, from=2-1, to=1-4]
+            \arrow[from=2-1, to=2-2]
+            \arrow["f"', from=2-2, to=2-4]
+        \end{tikzcd}\]
+        for some $\alpha < \beta < 1$.
+        \begin{enumerate}[label  = $\bullet$]
+            \item \textbf{Initialization:} We have a pullback square giving us a lift
+            % https://q.uiver.app/#q=WzAsNixbMiwxLCJcXFBoaShEX3syfV5rIFxcdGltZXMgRF57bi1rfSkiXSxbMywwLCJcXFBoaShEX3tbMCxcXGFscGhhXX1eayBcXHRpbWVzIERee24ta30pIl0sWzQsMSwiXFxQaGkoU197XFxhbHBoYX1ee2stMX0gXFx0aW1lcyBEXntuLWt9KSJdLFszLDIsIlxcUGhpKERfe1tcXGFscGhhLCAyXX1eayBcXHRpbWVzIERee24ta30pIl0sWzAsMSwiWCBcXHRpbWVzIFswLCB0XzFdIl0sWzEsMCwiWFxcdGltZXNcXHswXFx9Il0sWzAsMV0sWzAsM10sWzEsMl0sWzMsMl0sWzAsMiwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV0sWzQsMCwiZ18xIiwwLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzQsMywiXFxtdV8wIiwyLHsiY3VydmUiOjJ9XSxbNCw1XSxbNSwxLCJnXzAiXV0=
+            \[\begin{tikzcd}
+                & {X\times\{0\}} && {\Phi(D_{[0,\alpha]}^k \times D^{n-k})} \\
+                {X \times [0, t_1]} && {\Phi(D_{2}^k \times D^{n-k})} && {\Phi(S_{\alpha}^{k-1} \times D^{n-k})} \\
+                &&& {\Phi(D_{[\alpha, 2]}^k \times D^{n-k})}
+                \arrow["{g_0}", from=1-2, to=1-4]
+                \arrow[from=1-4, to=2-5]
+                \arrow[from=2-1, to=1-2]
+                \arrow["{g_1}", dashed, from=2-1, to=2-3]
+                \arrow["{\mu_0}"', curve={height=12pt}, from=2-1, to=3-4]
+                \arrow[from=2-3, to=1-4]
+                \arrow["\lrcorner"{anchor=center, pos=0.125, rotate=45}, draw=none, from=2-3, to=2-5]
+                \arrow[from=2-3, to=3-4]
+                \arrow[from=3-4, to=2-5]
+            \end{tikzcd}\]
+            Indeed, the square commutes precisely because $(\mu_0)_{|S_\alpha^{k-1}}$ is time-independent, and hence equal to its value at $t=0$ being $g_0$.
+
+            \item \textbf{Induction Step:} Suppose we have already defined $g_{n}$.
+            Let $U$ be some neighbourhood of $D_{[\alpha, \beta]}^k \times D^{n-k}$ on which $\mu_{n}$ and $f$ are defined, and which has a nonzero distance to $D_{[1, 2]}^k \times D^{n-k}$.
+            \begin{enumerate}[label  = (\arabic*)]
+                \item \textbf{Haeflinger's Isotopy and Geiges' Figure $3.5$:} We pick an isotopy $\psi \in [0,t_n]\to \Emb(D_2^k \times D^{n-k})$ such that:
+                \begin{enumerate}[label  = (\roman*)]
+                    \item $\psi_t$ is the identity for $t \leq t_n/3$ and constant for $t \geq 2 t_n/3$.
+                    \item $\psi$ is the identity outside of $U$ and on a neighbourhood $S_\beta^{k-1} \times \{0\} \subset U_\beta$ on which $f$ and $g_n$ match (by Induction Hypothesis).
+                    \item $\psi_{t_n}$ maps $S_\gamma^k \times \{0\} \mapsto S_\alpha^k \times \{0\}$ for some $\beta < \gamma < 1$.
+                \end{enumerate}
+                Let $(D_2^k \times \{0\} \bigcup D_{[1,2]}^k) \times D^{n-k} \subset V$ and $S_\gamma^{k-1} \times \{0\} \subset U_\gamma \subset V$ be neighbourhoods such that $U_\gamma$ is mapped to $U_\alpha$ by $\psi_{t_n}$.
+
+                \item We define $\overline{g}_{n+1} \in X \times [0, t_{n+1}] \to \Phi(V)$ in a piecewise manner as follows.
+                We first define the following families of sections:
+                \begin{enumerate}[label = (\Roman*)]
+                    \item We let $I \in X \times [0,t_n] \xto[g_{n}] \Phi(D_{2}^k \times D^{n-k}) \to \Phi(V_{< \beta} \cup U_\beta)$,
+                    \item We let $II \in X \times [0, t_n] \xto[(\psi, f)] \Emb(V_{> \beta} \cup U_\beta ,V_{> \alpha} \cup U) \times \Phi(V_{> \alpha} \cup U) \to \Phi(V_{> \beta} \cup U_\beta)$.
+                \end{enumerate}
+                We can merge these two maps using the sheaf property on the ambiant manifold as is illustrated by the following limit diagram:
+                % https://q.uiver.app/#q=WzAsNyxbMCwxLCJYIFxcdGltZXMgWzAsdF9uXSAiXSxbMSwwLCJcXFBoaShEX3syfV5rIFxcdGltZXMgRF57bi1rfSkiXSxbMiwwLCJcXFBoaShWX3s8IFxcYmV0YX0gXFxjdXAgVV9cXGJldGEpIl0sWzEsMiwiXFxFbWIoVl97PiBcXGJldGF9IFxcY3VwIFVfXFxiZXRhICxWX3s+IFxcYWxwaGF9IFxcY3VwIFUpIFxcdGltZXMgXFxQaGkoVl97PiBcXGFscGhhfSBcXGN1cCBVKSAiXSxbMiwyLCJcXFBoaShWX3s+IFxcYmV0YX0gXFxjdXAgVV9cXGJldGEpIl0sWzEsMSwiXFxQaGkoVlxcY3VwIFVfXFxiZXRhKSJdLFszLDEsIlxcUGhpKFVfXFxiZXRhKSJdLFswLDMsIihcXHBzaSxmKSIsMl0sWzAsMSwiZ19uIl0sWzEsMl0sWzMsNF0sWzUsMl0sWzUsNF0sWzAsNSwiXFxvdmVybGluZXtnfV97bisxfSIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFsyLDZdLFs0LDZdLFs1LDYsIiIsMSx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXIifX1dXQ==
+                \[\begin{tikzcd}
+                    & {\Phi(D_{2}^k \times D^{n-k})} & {\Phi(V_{< \beta} \cup U_\beta)} \\
+                    {X \times [0,t_n] } & {\Phi(V\cup U_\beta)} && {\Phi(U_\beta)} \\
+                    & {\Emb(V_{> \beta} \cup U_\beta ,V_{> \alpha} \cup U) \times \Phi(V_{> \alpha} \cup U) } & {\Phi(V_{> \beta} \cup U_\beta)}
+                    \arrow[from=1-2, to=1-3]
+                    \arrow[from=1-3, to=2-4]
+                    \arrow["{g_n}", from=2-1, to=1-2]
+                    \arrow["{\overline{g}_{n+1}}", dashed, from=2-1, to=2-2]
+                    \arrow["{(\psi,f)}"', from=2-1, to=3-2]
+                    \arrow[from=2-2, to=1-3]
+                    \arrow["\lrcorner"{anchor=center, pos=0.125, rotate=45}, draw=none, from=2-2, to=2-4]
+                    \arrow[from=2-2, to=3-3]
+                    \arrow[from=3-2, to=3-3]
+                    \arrow[from=3-3, to=2-4]
+                \end{tikzcd}\]
+                because on $U_\beta$, $\psi$ is the identity, hence the bottom section matches $f$, which also matches $g_n$ by definition of $U_\beta$.
+                We can now define the following maps:
+                \begin{enumerate}
+                    \item[(III)] We let $III \in X \times [t_{n}, t_{n+1}] \xto[\mu_{n}] \Phi(V_{> \alpha} \cup U) \xto[\psi_{t_{n}}^*] \Phi(V_{> \gamma} \cup U_\gamma)$,
+                    \item[(IV)] We let $IV \in X \times [t_{n}, t_{n+1}] \to X \times \{t_{n}\} \xto[\overline{g}_{n+1}] \Phi(V) \to \Phi(V_{< \gamma} \cup U_\gamma)$.
+                    \pablo{could be improved: it's strange how this depends on $I$ and $II$ merging}
+                \end{enumerate}
+                We can merge these two maps using the sheaf property on the ambiant manifold as is illustrated by the following limit diagram:
+                % https://q.uiver.app/#q=WzAsOCxbMCwxLCJYIFxcdGltZXMgW3Rfe259LCB0X3tuKzF9XSJdLFsxLDAsIlxcUGhpKFZfez4gXFxhbHBoYX0gXFxjdXAgVSkiXSxbMiwwLCJcXFBoaShWX3s+IFxcZ2FtbWF9IFxcY3VwIFVfXFxnYW1tYSkiXSxbMSwyLCJcXFBoaShWKSJdLFsyLDIsIlxcUGhpKFZfezwgXFxnYW1tYX0gXFxjdXAgVV9cXGdhbW1hKSJdLFsxLDEsIlxcUGhpKFYpIl0sWzMsMSwiXFxQaGkoVV9cXGdhbW1hKSJdLFswLDIsIlggXFx0aW1lcyBcXHt0X3tufVxcfSJdLFswLDEsImdfbiJdLFsxLDIsIlxccHNpX3t0X259XioiXSxbMyw0XSxbNSwyXSxbNSw0XSxbMCw1LCJcXG92ZXJsaW5le2d9X3tuKzF9IiwwLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzIsNl0sWzQsNl0sWzUsNiwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV0sWzAsN10sWzcsMywiKFxcb3ZlcmxpbmV7Z31fe24rMX0pX3t0X259IiwyXV0=
+                \[\begin{tikzcd}
+                    & {\Phi(V_{> \alpha} \cup U)} & {\Phi(V_{> \gamma} \cup U_\gamma)} \\
+                    {X \times [t_{n}, t_{n+1}]} & {\Phi(V)} && {\Phi(U_\gamma)} \\
+                    {X \times \{t_{n}\}} & {\Phi(V)} & {\Phi(V_{< \gamma} \cup U_\gamma)}
+                    \arrow["{\psi_{t_n}^*}", from=1-2, to=1-3]
+                    \arrow[from=1-3, to=2-4]
+                    \arrow["{g_n}", from=2-1, to=1-2]
+                    \arrow["{\overline{g}_{n+1}}", dashed, from=2-1, to=2-2]
+                    \arrow[from=2-1, to=3-1]
+                    \arrow[from=2-2, to=1-3]
+                    \arrow["\lrcorner"{anchor=center, pos=0.125, rotate=45}, draw=none, from=2-2, to=2-4]
+                    \arrow[from=2-2, to=3-3]
+                    \arrow["{(\overline{g}_{n+1})_{t_n}}"', from=3-1, to=3-2]
+                    \arrow[from=3-2, to=3-3]
+                    \arrow[from=3-3, to=2-4]
+                \end{tikzcd}\]
+                because at $t_n$, $\psi$ maps $U_\gamma$ inside $U_\alpha$, on which $\mu_n$ is time-independent.
+                By construction, on $U_\alpha$, $\mu_n$ matches $f_{t_n}$, hence on $U_\gamma$, $\psi_{t_n}^*\mu_n$ matches $\psi_{t_n}^*f_{t_n}$.
+
+                Using the sheaf property on the parametrizing manifold, we can then merge these two maps to obtain $\overline{g}_{n+1} \in X \times [0, t_{n+1}] \longto \Phi(V)$.
+                By construction, the only overlap to check is on $V_{>\gamma} \cup U_\gamma$.
+                The sections mathces because $(\mu_n)_{t_n}$ matches $f_{t_n}$ on $U \supset V_{>\gamma} \cup U_\gamma$.
+
+                \item \textbf{Final Isotopy - Squeezing into $V$: } We pick an isotopy $\xi\in [0,t_{n+1}] \to \Emb(D_2^k \times D^{n-k})$ such that:
+                \begin{enumerate}[label  = (\roman*)]
+                    \item $\xi_0$ is the identity,
+                    \item $\xi_t(D_2^k \times D^{n-k}) \subset V$ for $t \geq t_n/4$ ,
+                    \item $\xi_t$ is the identity near $D_{[1,2]}^k \times D^{n-k}$ for all $t$.
+                \end{enumerate}
+
+                \item \textbf{Final Construction:} We finally define $g_{n+1}$ using the sheaf property on the parametrizing manifold as follows:
+                % https://q.uiver.app/#q=WzAsNyxbMSwwLCJYIFxcdGltZXMgWzAsIHRfe259LzNdIl0sWzAsMSwiWCBcXHRpbWVzIFt0X3tufS80LCB0X24vM10iXSxbMSwyLCJYIFxcdGltZXMgW3Rfe259LzQsIHRfe24rMX1dIl0sWzIsMSwiWCBcXHRpbWVzIFswLCB0X3tuKzF9XSJdLFs0LDEsIlxcUGhpKERfezJ9XmsgXFx0aW1lcyBEXntuLWt9KSJdLFszLDIsIlxcRW1iKFYsIERfMl5rIFxcdGltZXMgRF57bi1rfSkgXFx0aW1lcyBcXFBoaShWKSJdLFszLDAsIlxcRW1iKERfMl5rIFxcdGltZXMgRF57bi1rfSkgXFx0aW1lcyBcXFBoaShEX3syfV5rIFxcdGltZXMgRF57bi1rfSkiXSxbMSwwXSxbMSwyXSxbMCwzXSxbMiwzXSxbMywxLCIiLDEseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XSxbMiw1LCIoXFx4aSwgXFxvdmVybGluZXtnfV97bisxfSkiLDJdLFs1LDRdLFszLDQsIiIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFs2LDRdLFswLDYsIihcXHhpLCBnX24pIl1d
+                \[\begin{tikzcd}
+                    & {X \times [0, t_{n}/3]} && {\Emb(D_2^k \times D^{n-k}) \times \Phi(D_{2}^k \times D^{n-k})} \\
+                    {X \times [t_{n}/4, t_n/3]} && {X \times [0, t_{n+1}]} && {\Phi(D_{2}^k \times D^{n-k})} \\
+                    & {X \times [t_{n}/4, t_{n+1}]} && {\Emb(V, D_2^k \times D^{n-k}) \times \Phi(V)}
+                    \arrow["{(\xi, g_n)}", from=1-2, to=1-4]
+                    \arrow[from=1-2, to=2-3]
+                    \arrow[from=1-4, to=2-5]
+                    \arrow[from=2-1, to=1-2]
+                    \arrow[from=2-1, to=3-2]
+                    \arrow["\lrcorner"{anchor=center, pos=0.125, rotate=-135}, draw=none, from=2-3, to=2-1]
+                    \arrow[dashed, from=2-3, to=2-5]
+                    \arrow[from=3-2, to=2-3]
+                    \arrow["{(\xi, \overline{g}_{n+1})}"', from=3-2, to=3-4]
+                    \arrow[from=3-4, to=2-5]
+                \end{tikzcd}\]
+                because on $[t_n/4, t_n/3]$, $\psi$ is the identity, so $\overline{g}_{n+1}$ matches $g_n$, so $\xi^*\overline{g}_{n+1}$ matches $\xi^*g_n$.
+
+                \item \textbf{Checking the Lifting Diagram:} Because both $\phi_t$ and $\xi_t$ are the identity on a neighbourhood of $D_{[1,2]}^k \times D^{n-k}$, and because $\mu_n$ agrees with $f$ on $D_{[1,2]}^k \times D^{n-k}$, we have some new $\alpha < \beta' < 1$ such that the desired lifting diagram commutes.
+            \end{enumerate}
+        \end{enumerate}
+    \end{enumerate}
+\end{proof}
+
+\begin{proof}[of the h-Principle]
+    The directions $(i) \implies (ii) \iff (iii)$ are trivial.
+    We prove here $(ii) \iff (i)$.
+    Firstly, by induction on the index, we show that all the $\Phi(D_{[1,2]}^{k} \times D^{n-k}) \to \Xi(D_{[1,2]}^{k} \times D^{n-k})$ are equivalences.
+    Secondly, by induction on handle decomposition, we show that $\Phi(U) \to \Xi(U)$ for all $U \subset M$ open.
+    Find a handle decomposition of $U$, which is open, by handles of index $< n$, and denote by $U_i$ the union of the first $i$ handles.
+    Then at each iteration, we have a map of pullback squares
+    % https://q.uiver.app/#q=WzAsOCxbMSwzLCJcXFBoaShEX3tbMSwyXX1ee2t9IFxcdGltZXMgRF57bi1rfSkiXSxbMywzLCJcXFhpKERfe1sxLDJdfV57a30gXFx0aW1lcyBEXntuLWt9KSJdLFszLDEsIlxcWGkoRF97Mn1ee2t9IFxcdGltZXMgRF57bi1rfSkiXSxbMSwxLCJcXFBoaShEX3syfV57a30gXFx0aW1lcyBEXntuLWt9KSJdLFswLDAsIlxcUGhpKFVfe2krMX0pIl0sWzAsMiwiXFxQaGkoVV9pKSJdLFsyLDAsIlxcWGkoVV97aSsxfSkiXSxbMiwyLCJcXFhpKFVfaSkiXSxbMywwLCJcXGNpcmMiLDNdLFsyLDEsIlxcY2lyYyIsM10sWzAsMSwiXFxzaW1lcSIsMV0sWzMsMiwiXFxzaW1lcSIsMV0sWzQsM10sWzUsMF0sWzUsNywiXFxzaW1lcSIsM10sWzYsNywiXFxjaXJjIiwzXSxbNywxXSxbNiwyXSxbNCw2LCIiLDEseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbNCw1LCJcXGNpcmMiLDFdXQ==
+    \[\begin{tikzcd}
+        {\Phi(U_{i+1})} && {\Xi(U_{i+1})} \\
+        & {\Phi(D_{2}^{k} \times D^{n-k})} && {\Xi(D_{2}^{k} \times D^{n-k})} \\
+        {\Phi(U_i)} && {\Xi(U_i)} \\
+        & {\Phi(D_{[1,2]}^{k} \times D^{n-k})} && {\Xi(D_{[1,2]}^{k} \times D^{n-k})}
+        \arrow[dashed, from=1-1, to=1-3]
+        \arrow[from=1-1, to=2-2]
+        \arrow["\circ"{description}, from=1-1, to=3-1]
+        \arrow[from=1-3, to=2-4]
+        \arrow["\circ"{marking, allow upside down}, from=1-3, to=3-3]
+        \arrow["\simeq"{description}, from=2-2, to=2-4]
+        \arrow["\circ"{marking, allow upside down}, from=2-2, to=4-2]
+        \arrow["\circ"{marking, allow upside down}, from=2-4, to=4-4]
+        \arrow["\simeq"{marking, allow upside down}, from=3-1, to=3-3]
+        \arrow[from=3-1, to=4-2]
+        \arrow[from=3-3, to=4-4]
+        \arrow["\simeq"{description}, from=4-2, to=4-4]
+    \end{tikzcd}\]
+    where the dotted arrow is forced to be an equivalence by the induction hypothesis.
+\end{proof}
+
+\section{Categories and Classifying Spaces}
+
+Fix $M =\mathbb{R}^\infty$ and write $\cat{D} = \Phi^c(M\times \mathbb{R})$.
+
+\begin{definition}
+    We let $\cat{D}^\pitchfork(X)$ be the $\sh(\cat{X})$-internal \textbf{poset} of pairs $(a,W)$ where $a \in X \to \mathbb{R}$ and $W \inset \cat{D}(X)$ such that
+    \[
+        \forall x \inset X, (W_x \to \mathbb{R}) \pitchfork a
+    \]
+\end{definition}
+
+\begin{definition}
+    We let $\cat{C}^\pitchfork(X)$ be the $\sh(\cat{X})$-internal \textbf{category} $\cat{C}^\pitchfork$ whose:
+    \begin{enumerate}
+        \item collection of objects is the sheaf
+        \[
+            \ob(\cat{C}^\pitchfork)(X) = \Colim_{\epsilon \in X \to \mathbb{R}} \bigsqcup_{a \in X \to \mathbb{R}}\cat{C}^\pitchfork(X, a, a, \epsilon)
+        \]
+        \item collection of morphisms is the sheaf
+        \[
+            \mor(\cat{C}^\pitchfork)(X) = \Colim_{\epsilon \in X \to \mathbb{R}} \bigsqcup_{a_0 < a_1 \in X \to \mathbb{R}} \cat{C}^\pitchfork(X, a_0, a_1, \epsilon)
+        \]
+        where $\cat{C}^\pitchfork(X, a_0, a_1, \epsilon)$ is the set of $W \subset X \underline{\times} (a_0-\epsilon, a_1+\epsilon) \times M$ such that:
+        \begin{enumerate}
+            \item (smooth family) $W \epi X$ is a submersion with $d$-dimensional fibers,
+            \item (compact cobordisms) $W \to X \underline{\times} (a_0-\epsilon, a_1+\epsilon)$ is proper,
+            \item (transversality) the corestrictions $W_i \to X \underline{\times} (a_i-\epsilon, a_i+\epsilon)$ for $i \inset \{0,1\}$ are submersions.
+        \end{enumerate}
+    \end{enumerate}
+\end{definition}
+
+We show in this section that the following maps are weak homotopy equivalences:
+% https://q.uiver.app/#q=WzAsNSxbMCwwLCJcXE9tZWdhXntcXGluZnR5LTF9TVQoZCkiXSxbMSwwLCJ8RHwiXSxbMiwwLCJCfEReXFxwaXRjaGZvcmt8Il0sWzQsMCwiQnxcXGNhdHtDfV5cXHBlcnB8Il0sWzMsMCwiQnxcXGNhdHtDfV5cXHBpdGNoZm9ya3wiXSxbMSwwXSxbMiwxXSxbMyw0XSxbMiw0XV0=
+\[\begin{tikzcd}
+	{\Omega^{\infty-1}MT(d)} & {|\cat{D}|} & {B|\cat{D}^\pitchfork|} & {B|\cat{C}^\pitchfork|} & {B|\cat{C}^\perp|}
+	\arrow[from=1-2, to=1-1]
+	\arrow[from=1-3, to=1-2]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-5, to=1-4]
+\end{tikzcd}\]
+
+\subsection{First Map: $\Omega^{\infty-1}MT(d) \leftarrow |\cat{D}|$}
+
+\begin{remark}
+    For $M = \mathbb{R}^{n+d-1}$, note that we can build an actual map of sheaves $|\cat{D}^\pitchfork| \to \cat{C}^0(-,\Gamma^c(\Thom^\fib(\gamma_{b,\mathbb{R}^{n+d-1}}^\perp) \to \mathbb{R}\times \mathbb{R}^{n+d-1}))$ by using a "closest point" construction.
+    This can be arranged into a filtered homotopy colimit diagram giving a map of sheaves $|\cat{D}| \to \cat{C}^0(-,\Omega^{\infty-1}MT(d))$.
+    It's now enough to show this map of sheaves is a weak homotopy equivalence.
+    We \textbf{could} do this on pairs $(X,A)$ using a relative version of Phillips Submersion Theorem.
+    Or it's enough to just show surjectivity on $\pi_1$ for all base points (or even just for one base point, say the empty manifold, by using the fact that these are $\mathcal{E}_{n+d-1}$-algebras).
+\end{remark}
+
+This is the \textbf{crucial step of the proof}, where the h-Principle is being used.
+Let $X$ be a compact manifold and take $g\in (X \times \mathbb{R}^{n+d-1})^+ \to \Omega^{n+d-1}\Thom(\gamma_d^\perp)$.
+By Whitney's Approximation Theorem, we can assume that $g$ is smooth.
+By the Thom Transversality Theorem, we can assume that $g \in X \times \mathbb{R}^{n+d-1} \to \Thom(V_d^\perp(\mathbb{R}^{n+d}))$ is transverse to the zero section.
+Let $Y = g^{-1}(\Gr_d(\mathbb{R}^{n+d})) \subset X \times \mathbb{R}^{n+d-1}$ which is a smooth submanifold codimension $n$.
+
+The \textbf{problem} is that $Y \to X$ is \textbf{not a submersion} in general.
+We consider $Y \times \mathbb{R} \to X$ and will use Phillips Submersion Theorem to deform it into a submersion.
+
+We need to construct a vector bundle surjection $T(Y \times \mathbb{R}) \epi TX$ which will recover the homotopy class of $g$ (at least, by choosing a higher $n$).
+Note that we have a caonical identification of the normal bundle of $Y \subset X \times \mathbb{R}^{n+d-1}$ as $g^*(\gamma_d^\perp)$.
+This gives
+\[\begin{cases}
+    g^*(\gamma_d^\perp) \oplus g^*(\gamma_d) \simeq \underline{\mathbb{R}^{n+d}} \\
+    g^*(\gamma_d^\perp) \oplus TY \simeq TX_{|Y} \oplus \underline{\mathbb{R}^{n+d-1}}
+\end{cases}\]
+From this we get a canonical $\underline{\mathbb{R}^{n+d}} \oplus TY \simeq \underline{\mathbb{R}^{n+d-1}} \oplus TX_{|Y} \oplus g^*(\gamma_d^\perp)$.
+By \textbf{obstruction theory}, we can deform this bundle isomorphism such that it comes from some
+\[
+    \underline{\mathbb{R}} \oplus TY \simeq TX_{|Y} \oplus g^*(\gamma_d^\perp)
+\]
+This gives a bundle surjection $T(Y \times \mathbb{R}) \epi TX$.
+
+Now by \textbf{Phillips Submersion Theorem}, we can deform $Y \times \mathbb{R} \xto[\pi] X$ into a submersion $W = Y \times \mathbb{R} \to X$, by going through bundle surjections.
+Note that $(\pi,f)$ is proper where $f$ is the canonical projection $W \to \mathbb{R}$ because $Y$ is compact (because $X$ was compact).
+
+Now, by Whitney's Embedding Theorem, we can find $N >> n$ and an embedding $W \times \mathbb{R} \subset (X \times \mathbb{R}) \times \mathbb{R} \times \mathbb{R}^{N+d-1}$ which lift $(\pi,f)$ at $t = 0$ and $(g, f)$ at $t = 1$.
+This shows that we have indeed built a lift.
+
+\textbf{Relative Version:} Similarly, one can use a relative version of Phillips Submersion Theorem to modify the projection away from the preimage of $A$ only.
+We can also use a relative version of Whitney's Approximation Theorem to ensure that this lifts to an embedding restricting to the constant isotopy on $A$.
+
+\subsection{Second Map: $|\cat{D}| \leftarrow B|\cat{D}^\pitchfork|$}
+
+This step uses the \textbf{``$\beta$''-construction} from the first section and criterion $2.5$.
+
+\textbf{Firstly}, we show $\beta \cat{D}^\pitchfork(X) \to \cat{D}(X)$ is surjective.
+Pick $W \subset_d X \times \mathbb{R} \times M \epi X$ a submersion with $d$-dimensional fibers and with $(\pi,f)\in W \to X\times \mathbb{R}$ proper.
+For each $x \inset X$, choose $a_x \inset \mathbb{R}$ a regular value of $f_x \in W_x \to \mathbb{R}$.
+Then we can find a neighbourhood $x \inset U_x \subset X$ such that $a_x$ is regular of $f_y \in W_y \to \mathbb{R}$ for all $y \inset U_x$.
+By compactness of $X$, we can find extract a finite subcover $(U_j)_{\j \inset J}$ and a list of values $(a_j)_{j \inset J}$ such that $(W_{|U_j}, a_j)  \inset \cat{D}^\pitchfork(U_j)$.
+Now picking $a_R = \min\{a_j \mid j \inset R\}$, we get $a_R \leq a_S$ and hence a cobordism $\phi_{RS}$.
+
+\textbf{Secondly}, we fix $A \subset X$ closed and we show how to extend a lift.
+This argument can be made relative to a closed subset $A \subset X$, simply by ensuring we pick regular values which are larger than the ones already picked.
+
+
+\subsection{Third Map: $B|\cat{D}^\pitchfork| \leftarrow B|\cat{C}^\pitchfork|$}
+
+This is the \textbf{easiest step of the proof}.
+We show that the map of sheaves $N_k\cat{C}^\pitchfork \to N_k\cat{D}^\pitchfork$ is a weak homotopy equivalence for all $k \geq 0$, using criterion $2.5$.
+It's enough to work on $X$ connected on which $\forall x \inset X, a_0(x) < \ldots < a_k(x)$.
+
+Suppose we have $A \subset X$ and $W \subset (X \underline{\times} (a_0-\epsilon, a_k+\epsilon) \bigcup U \times \mathbb{R}) \times M$ for some open neighbourhood $A \subset U \subset X$ such that:
+\begin{enumerate}
+    \item restricted to $X \underline{\times} (a_0-\epsilon, a_k+\epsilon)$, this is an element of $N_k\cat{C}^\pitchfork(X)$,
+    \item restricted to $U \times \mathbb{R}$, this is an element of $N_k\cat{D}^\pitchfork(U)$.
+\end{enumerate}
+We pick a diffeomorphism $\phi \in X \times \mathbb{R} \simeq X \underline{\times} (a_0-\epsilon, a_k+\epsilon) \bigcup U \times \mathbb{R}$ which is the identity on a neighbourhood of $X \underline{\times} [a_0-\epsilon/2, a_k+\epsilon/2] \cup A \times \mathbb{R}$.
+Then $\phi^*W$ is our desired lift.
+
+\subsection{Fourth Map: $B|\cat{C}^\pitchfork| \to B|\cat{C}^\perp|$}
+
+We show that the map of sheaves $N_k\cat{C}^\pitchfork \to N_k\cat{D}^\perp$ is a weak homotopy equivalence for all $k \geq 0$, using criterion $2.5$.
+It's enough to work on $X$ connected on which $\forall x \inset X, a_0(x) < \ldots < a_k(x)$.
+
+Pick a bump function $\psi\in \mathbb{R} \to [0,1]$ such that:
+\begin{enumerate}
+    \item $\psi(u) = 0$ if $u \leq 1/3$,
+    \item $\psi(u) = 1$ if $u \geq 2/3$,
+    \item $\psi' > 0$ on $\psi^{-1}((0,1))$.
+\end{enumerate}
+Write $\psi(s, u) = \psi(s) \psi(u) + (1 - \psi(s))u$.
+Pick a bump function $\rho \in X \to [0,1]$ such that $\rho = 0$ on $A$ and $\rho = 1$ on $X \setminus U$ where $U$ is an open neighbourhood of $A$ on which our lift is defined.
+We define $\Phi \in X \times \mathbb{R} \times \mathbb{R} \to  X$ as follows:
+\begin{equation*}[rr]
+        \Phi(x , s, u) = a_i(x) + a_{i+1}(x)\psi \left(s \rho(x), \frac{u - a_i(x)}{a_{i+1}(x) - a_i(x)}\right)
+        \qquad
+            & \textnormal{ for } a_i(x) < u < a_{i+1}(x),\\
+            & \textnormal{ or } i=0 \textnormal{ and } u < a_1(x),\\
+            & \textnormal{ or } i={k-1} \textnormal{ and } a_{k-1}(x) < u.
+\end{equation*}
+which is smooth and transverse to $(\pi,f)$.
+We can define $W_\Phi \subset (X \times \mathbb{R}) \times \mathbb{R} \times M$ which is a concordance between the idenity ($s = 0$) and an element in $N_k\cat{C}^\perp(X)$ ($s = 1$).
+
+
+\bibliographystyle{alpha}
+\bibliography{jabref}
+
+\end{document}

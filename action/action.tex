@@ -1,0 +1,86 @@
+\documentclass{article}
+\input{mypreamble/a-preamble}
+\usepackage{stmaryrd}
+
+%%%%% TITLE PAGE
+\title{Action on Categories with Adjoints}
+\author{Pablo Bustillo Vazquez}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Ideas}
+
+I'm starting to grow convinced that the action will come from applying the "classifying space" functor to a map of posets.
+More specifically, there's many colimit diagrams describing $c_k^{n-\adj}$ and they are arranged in a poset.
+I think roughly moving through that poset means describing the same cell by different formulae.
+This should correspond to the automorphisms of categories with adjoints.
+
+If my "signed Schubert cells" are correct, then $BO(n)$ is the realization of a poset.
+A reasonnable question is: can I find a similar poset for $PL(n)$?
+There are realizations by posets for $BPL(n)$ (triangulation/ball decompositions of the marked sphere) but they seem too flexible.
+Maybe I need to reduce to only some triangulations that are related to the signed Schubert cell picture.
+No idea how these pictures are related though.
+
+\section{Signed Schubert Cells}
+
+Fix $n \geq 0$. We write $\mathbf{n} = \{0, \ldots, n-1\}$.
+
+\begin{definition}[Shape and Submatrices]
+    A shape is an strictly increasing sequence of integers $0 \leq \sigma_1 < \ldots < \sigma_n$.
+    A submatrix of this shape is the data of subsets $I \subseteq \mathbf{n}$ and $J \subseteq \mathbb{N}$ such that $|I| = |J|$ and $\max(J) < \sigma_{\min(I)}$.
+    We denote by $\Sub(\sigma)$ the set of submatrices of shape $\sigma$.
+\end{definition}
+
+\begin{definition}[Cell]
+    Let $\sigma$ be a shape and $\epsilon\in \Sub(\sigma) \to \{-, 0, +\}$ be a function.
+    The signed Schubert cell $e_{\sigma, \epsilon}$ is the subset of $\Gr_n$ of all subspaces which row-reduce to $\sigma$ in the canonical basis and for which the sign of the determinant of the submatrices are given by $\epsilon$.
+\end{definition}
+
+\begin{lemma}
+    All signed Schubert cells $e_{\sigma, \epsilon}$ are either empty or homeomorphic to $\mathbb{R}^m$ for some $m$.
+\end{lemma}
+\begin{proof}
+    Idea: filration on each coefficient. Each time the fiber should be either: empty, a point or an open interval.
+    This is essentially because we have a bunch of \textbf{linear} inequalities on the coefficients of the matrix, which we can rewrite as $\min < x < \max$, or equalities that have unique solutions.
+
+    Take all submatrices involving some fix $x_{ij}$, \textit{i.e.} with $(i,j)\inset I \times J$, with a non-zero minor at this entry. We have either of the following cases:
+    \begin{enumerate}
+        \item one of them is sent to $0$ by the sign function $\epsilon$, in which case $x_{ij}$ is fixed to a single value, or no value.
+        \item otherwise, each of them gives an open inequality on $x_{ij}$, the collection of which results in an open interval of possibilities, potentially an empty one.
+    \end{enumerate} 
+\end{proof}
+
+This effectively proves that the signed Schubert cells are "elementary sets" in the sense of Aaron Peterson's 291 course, with any ordering on the coordinates.
+
+\begin{lemma}[Faces of Schubert Cells]
+    When $x_{ij}$ approaches its upper limit, it will approach a collection of inequalities. These effectively become equalities, the corresponding submatrices go from $\pm$ to $0$.
+    When "$1$ approaches $0$", we have a reduction operation also giving us a single face (that's why we need all the determinants).
+    Hence a "face" is choosing a subset of the $\pm$ submatrices and making them $0$.
+    There's potentially $2^{\# \text{ of } \pm}$ faces, but some of them may be empty.
+\end{lemma}
+
+What is the link? Suppose $A$ is a face of $B$.
+\begin{enumerate}
+    \item Does all of $A$ touches $B$? Yes, do some infenitesimal perturbation of the coordinates of $A$, and you'll land in $B$.
+    \item Is the link conctractible? Yes I think so.
+\end{enumerate}
+
+Then this means that the homotopy type of $BO(n)$ is the homotopy colimit of the poset of (non-empty) cells.
+
+\section{Action on Categories with Adjoints}
+\begin{enumerate}
+    \item \textbf{Case $n=1$}: We have $BO(1) = B(\mathbb{Z}/2\mathbb{Z})$ which acts by taking "op" on usual $\infty$-categories.
+    Say a 1-cell is sent to "op" exactly when the unique sign is negative.
+    Each "2-cell" is of the form $10\ldots0\pm0\ldots0\pm0\ldots0$.
+    These have 3 faces.
+    Say $-+$ gives a shortened $-$, a long $0+$ and a long $-0$.
+    It's easy to see there's always an even number of $-$ signs, so the action is well-defined on the 2-cells.
+    It's easy to see how it extends to all cells as these 2-cells are sent to identities.
+
+    \item \textbf{Case $n=2$}:
+\end{enumerate}
+\end{document}

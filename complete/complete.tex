@@ -1,0 +1,106 @@
+\documentclass{article}
+\input{mypreamble/a-preamble}
+\usepackage{mathdots}
+\usepackage{bookmark}
+
+%%%%% TITLE PAGE
+\title{Complete Bordism Categories}
+\author{Pablo Bustillo Vazquez}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Preliminaries}
+
+I need to understand the completion of a flagged higher category.
+This will depend on the underlying model.
+What model do I want for higher bordism categories?
+As far as I understand, in the literature no one ever constructed a "completion" functor explictly except Rezk for bisimplial sets.
+Maybe this means I should use bisimplicial sets as my model.
+It might also make the arguments easier to follow.
+
+\begin{lemma}
+    The completion of a 
+\end{lemma}
+
+\section{One Cobordism Level}
+
+Let $\RDiff(M, N) \subset \Diff(M \times \mathbb{R}, N \times \mathbb{R})$ be the subset on the diffeomorphisms that preserves neighbourhoods of $\pm \infty$.
+More specifically, we require that $\phi \inset \RDiff(M, N)$ if it satisfies:
+\[
+\begin{cases}[l]
+    \forall a \inset \mathbb{R}, \exists b \inset \mathbb{R}, \qquad \phi(M \times (-\infty, b]) \subset N \times (-\infty, a] \\
+    \forall a \inset \mathbb{R}, \exists b \inset \mathbb{R}, \qquad \phi(M \times [b, \infty)) \subset N \times [a, \infty)
+\end{cases}
+\]
+
+We let $\InvCob(M, N)$ be the space whose objects are \ldots
+
+\begin{lemma}
+    Let $M,N$ be compact.
+    The canonical map $\InvCob(M, N) \to \RDiff(M, N)$ is a weak equivalence.
+\end{lemma}
+\begin{proof}
+    \begin{enumerate}
+        \item \textbf{Surjectivity pn $\pi_n$:}  Let us consider $(S^n, \bullet) \to \RDiff(M, N)$ seen as an $\mathbb{R}^n$-family of diffeomorphisms $(M \times \mathbb{R}) \times \mathbb{R}^n \xto[f] (N \times \mathbb{R}) \times \mathbb{R}^n$, which is the identity on $|v| \geq 1$ for $v$ the second (vector) parameter.
+        We can find $a < b < c$ such that $\mathbf{u}(M \times \{b\} \times \mathbb{R}^n) \subset (a, c)$ where $f = (g, \mathbf{u}, \mathbf{v})$.
+        We can now "cut" and consider the intersection $f(M \times (-\infty, b] \times \mathbb{R}^n) \bigcap N \times [a, \infty) \times \mathbb{R}^n$.
+        We need to show the canonical projection to $\mathbb{R}^n$ is a submersion, and hence a fiber bundle, and that this is actually an inverse and that this is independent of the choices made.\pablo{left for later}
+
+        \item \textbf{Injectivity on $\pi_n$:} Suppose we have $H \in (S^n, \bullet)\times [0,1] \to \RDiff(M, M)$. 
+        We show that the two preimages from the construction above are equivalent.
+        We pick once again $a < b < c$.
+        The $S^n\times[0,1]$ family of embeddings of $M \times \{b\}$ can be extended into diffeomorphisms by isotopy extensions.
+
+    \end{enumerate}
+\end{proof}
+
+\subsection{Completion}
+
+Fix $d \geq 0$. We let $\Bord$ be the collection of:
+\begin{enumerate}
+    \item a fiber bundle $W \to \Delta^j$ with $d$-dimensional fibers,
+    \item $i+1$ sub-fiber bundles $W_0, \ldots, W_i$,
+    \item an element in $\pi_0(\textnormal{proper embeddings of }\mathbb{R}\mono W_0)$.
+\end{enumerate}
+such that at each fiber above $x \inset \Delta^j$, we can identify (non-canonically, this is not part of the data) this as a composition of $j$ cobordisms, with the $-\infty$ direction of the proper embedding corresponding to the domain of the composition.
+
+In particular, in the case $i = 0$, we obtain a single fiber bundle $W = W_0 \to \Delta^j$ where each fiber above some $x$ can be (non-canonically) identified with $K_x \times \mathbb{R}$ for some compact manifold $K_x$ with proper embedding $[\{\bullet\}\times 1_\mathbb{R}]$.
+
+
+\begin{definition}
+    We define a bisimplicial set $\PBord^i_j$ as follows:
+    \begin{enumerate}
+        \item Smooth maps $(a_k, b_k \inset \Delta^j_e \to \mathbb{R})_{0 \leq k \leq i}$ such that
+        \[
+            \begin{cases}
+                a_k < b_k \\
+                a_{k-1} \leq a_k \\
+                b_{k-1} \leq b_k 
+            \end{cases}
+        \]
+        \item $M$ compact $(i+j)$-dimensional submanifold of $\mathbb{R}^\infty \times (a_0, b_k) \underline{\times} \Delta^j_e$ such that:
+        \begin{enumerate}
+            \item the composition $\pi \in M \mono V \times (a_0, b_i) \underline{\times} \Delta^j_e \epi (a_0, b_k) \underline{\times} \Delta^j_e$ is proper,
+            \item its composition with the projection onto $\Delta^j_e$ is a submersion which is trivial on the extended part of the simplex,
+            \item $\pi$ is a submersion on the preimage of $\cup_{0 \leq k \leq i} (a_k, b_k) \underline{\times} \Delta^j_e$.
+        \end{enumerate}
+    \end{enumerate}
+\end{definition}
+
+\section{Space of Objects}
+
+Take the fully-extended $(\infty, d)$-version of $\Bord$.
+What is the space of objects?
+
+It should be roughly $B\Diff^{\mathbb{R}^n}(\bullet)$ of diffeomorphisms of the form $x + O(1)$.
+What is the homotopy type of this space?
+
+\begin{conjecture}
+    In the PL-case, this space is contractible.
+\end{conjecture}
+
+\end{document}

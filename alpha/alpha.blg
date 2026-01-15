@@ -1,0 +1,56 @@
+This is BibTeX, Version 0.99d (TeX Live 2024)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: alpha.aux
+The style file: alpha.bst
+Database file #1: ../mypreamble/jabref.bib
+Warning--empty journal in AF18
+Warning--empty journal in AF24
+Warning--empty school in Bar05
+Warning--empty journal in BS24
+Warning--empty journal in Hau23
+Warning--empty journal in HHLN24
+Warning--empty note in Joy97
+Warning--empty journal in Lur09a
+Warning--empty journal in Ram24a
+You've used 28 entries,
+            2543 wiz_defined-function locations,
+            739 strings with 8144 characters,
+and the built_in function-call counts, 10111 in all, are:
+= -- 1024
+> -- 437
+< -- 13
++ -- 149
+- -- 140
+* -- 748
+:= -- 1699
+add.period$ -- 86
+call.type$ -- 28
+change.case$ -- 161
+chr.to.int$ -- 25
+cite$ -- 37
+duplicate$ -- 382
+empty$ -- 727
+format.name$ -- 181
+if$ -- 1996
+int.to.chr$ -- 4
+int.to.str$ -- 0
+missing$ -- 24
+newline$ -- 145
+num.names$ -- 84
+pop$ -- 138
+preamble$ -- 1
+purify$ -- 191
+quote$ -- 0
+skip$ -- 322
+stack$ -- 0
+substring$ -- 613
+swap$ -- 20
+text.length$ -- 13
+text.prefix$ -- 13
+top$ -- 0
+type$ -- 220
+warning$ -- 9
+while$ -- 98
+width$ -- 31
+write$ -- 352
+(There were 9 warnings)

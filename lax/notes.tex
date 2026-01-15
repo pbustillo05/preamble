@@ -1,0 +1,649 @@
+\documentclass{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PACKAGES
+\usepackage[utf8]{inputenc}
+\usepackage{verbatim}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{adjustbox}
+\usepackage[textwidth=0.89in,textsize=scriptsize]{todonotes}
+\usepackage{hyperref}
+\hypersetup{
+	linktoc=all
+}
+
+\usepackage[all]{xy}
+\usepackage{amsmath,amsfonts,amssymb,amsthm,xspace,a4wide,color}
+\usepackage{mathabx, mathtools}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ENVIRONMENTS LAYOUT
+\numberwithin{equation}{section}
+\newlength\Colsep
+\setlength\Colsep{10pt}
+\theoremstyle{definition}
+\begingroup
+\newtheorem{remark}[equation]{Remark}
+\newtheorem{example}[equation]{Example}
+\newtheorem*{observation}{Observation}
+\newtheorem{nobservation}{Observation}
+\newtheorem{notation}[equation]{Notation}
+\endgroup
+\theoremstyle{plain}
+\begingroup
+\newtheorem{theorem}[equation]{Theorem}
+\newtheorem{lemma}[equation]{Lemma}
+\newtheorem{proposition}[equation]{Proposition}
+\newtheorem{corollary}[equation]{Corollary}
+\newtheorem{fact}[equation]{Fact}
+\newtheorem{facts}[equation]{Facts}
+\newtheorem{assumption}[equation]{Assumption}
+\newtheorem{definition}[equation]{Definition}
+\newtheorem{convention}[equation]{Convention}
+\newtheorem{construction}[equation]{Construction}
+\endgroup
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% (CO)LIMITS NEW COMMANDS
+\makeatletter
+\def\varcolim@#1#2{%
+	\vtop{\m@th\ialign{##\cr
+			\hfil$#1\operator@font colim$\hfil\cr
+			\noalign{\nointerlineskip\kern1.5\ex@}#2\cr
+			\noalign{\nointerlineskip\kern-\ex@}\cr}}
+}
+\def\varbilim@#1#2{%
+	\vtop{\m@th\ialign{##\cr
+			\hfil$#1\operator@font bilim$\hfil\cr
+			\noalign{\nointerlineskip\kern1.5\ex@}#2\cr
+			\noalign{\nointerlineskip\kern-\ex@}\cr}}
+}
+\def\varbicolim@#1#2{%
+	\vtop{\m@th\ialign{##\cr
+			\hfil$#1\operator@font bicolim$\hfil\cr
+			\noalign{\nointerlineskip\kern1.5\ex@}#2\cr
+			\noalign{\nointerlineskip\kern-\ex@}\cr}}
+}
+\def\Lim{%
+	\mathop{\mathpalette\varlim@{\leftarrowfill@\textstyle}}\nmlimits@
+}
+\def\Colim{%
+	\mathop{\mathpalette\varcolim@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\def\Bilim{%
+	\mathop{\mathpalette\varbilim@{\leftarrowfill@\textstyle}}\nmlimits@
+}
+\def\Bicolim{%
+	\mathop{\mathpalette\varbicolim@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+%%%%%%%%%%%%%%%%% ARROWS NEW COMMANDS
+\newcommand{\mono}{\hookrightarrow \hspace{-0.1em}}
+\newcommand{\wto}{\to \hspace{-1.1em} \circ \hspace{0.6em}}
+
+%%%%%%%%%%%%%%%%% CATS NEW COMMANDS
+\newcommand{\Set}{\textnormal{\textbf{Set}}}
+\newcommand{\Cat}{\textnormal{\textbf{Cat}}}
+\newcommand{\Bicat}{\textnormal{\textbf{Bicat}}}
+\newcommand{\Tricat}{\textnormal{\textbf{Tricat}}}
+
+%%%%%%%%%%%%%%%%% COMMENTS NEW COMMANDS
+\newcommand{\pablo}[1]{\todo[color=red!20]{{\bf Pablo:} #1}\xspace}
+\newcommand{\martin}[1]{\todo[color=green!15]{{\bf Martin:} #1}\xspace}
+\newcommand{\dorette}[1]{\todo[color=yellow!55]{{\bf Dorette:} #1}\xspace}
+\newcommand{\bigpablo}[1]{\todo[inline,color=red!20]{{\bf Pablo:} #1}}
+\newcommand{\bigmartin}[1]{\todo[inline,color=green!15]{{\bf Martin:} #1}}
+\newcommand{\bigdorette}[1]{\todo[inline,color=yellow!55]{{\bf Dorette:} #1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%% TITLE PAGE
+\title{On Laxity in Dimension 3}
+\author{}
+\date{}
+
+\begin{document}
+	
+	\maketitle
+	
+	\tableofcontents
+	
+	\newpage
+	
+\section{Laxity in Dimension 3}
+
+\subsection{Existing Literature and Overview}
+
+The collection of bicategories, pseudo-functor, pseudo-natural transformations and modification forms together a ``tricategory'' $\Bicat$. This construction was first introduced by R. Gordon, A.J. Power and R. Street in their paper \textit{Coherence for Tricategories} \cite{gordon1995coherence}. The tricategorical structure of $\Bicat$ is also discussed in \cite{gurski_2013} and can be found in more details in \cite{johnson20202dimensional}. In Buckey's work on bifibrations \cite{buckley2013fibred}, he is interested in ``trihomomorphisms''
+\[\mathcal{B} \longrightarrow \Bicat\]
+for $\mathcal{B}$ only a bicategory and with the appropriate notions of transformations, modifications and perturbations between them. He introduces the weak versions of trihomomorphisms, trinatural transformations, trimodifications and perturbations. They are all defined as the natural weak generalisation of functors and natural transformations in dimension 1, and of pseudo-functors, pseudo-natural transformations and modifications in dimension 2. The purpose of this appendix is to generalize Buckley's paper by introducing some laxity in those 3-dimensional structures. We attempt here to take the most general notion of laxity possible in order to have a Grothendieck's construction ``landing'' in $\Bicat/B$ (the strict slice).
+
+In \cite{GARNER_2009} and \cite{gurski_2013}, they introduce a definition of ``lax functor'' between tricategories. Unfortunately, there seems to be a mistake in their definitions as they introduce pasting diagrams of bicategories where one would need to paste a lax functor with a natural transformation. We correct this here by changing the definition of the associator and unitors. There are then 8 natural different ways to ``laxify'' a trihomorphism between tricategories:
+\begin{enumerate}[label = $\bullet$]
+	\item \textbf{Laxity of the Local Functors:} instead of using locally pseudo-functors between the hom-bicategories, we can use lax or colax functors.In \cite{gordon1995coherence} and \cite{gurski_2013}, they use lax functors.
+	\item \textbf{Direction of the Functoriality and Unity Constraint:} instead of using natural pseudo-equivalences $\chi$ and $\iota$, we can \textit{orient} them by chosing a direction. This is a direct generalization to dimension 3 of the notion of lax and colax functor between bicategories. In \cite{GARNER_2009} and \cite{gurski_2013}, they chose the ``lax'' direction.
+	\item \textbf{Laxity of the Functoriality and Unity Constraint:} instead of using pseudo-natural transformations for $\chi$ and $\iota$, we can chose a laxity. The laxity of $\iota$ doesn't matter as it is necessarily pseudo, but the laxity of $\chi$ offers room for generalisation. In \cite{GARNER_2009}, they chose an ``oplax'' $\chi$, and in \cite{gurski_2013}, they chose a ``lax'' $\chi$.
+\end{enumerate}
+All those choices are independent of one another as all 8 possibilities can be defined with very similar diagrams. There is also another level of laxity that can be investigated: the unitors and associators can be oriented in some direction, as explored by \cite{gordon1995coherence} and \cite{gurski_2013}. This is very similar to the idea that we can define ``lax bicategories'' by relaxing the condition that the unitors and associators are invertible. However, as explored in the literatture, this yeilds to many different approaches: one can orient them all in any direction, or one can work in an ``unbiased'' way by introducing multi-ary compositions (or in our case, mulit-ary lax functoriality constraints). This would go beyond the purpose of this paper, as we require the Grothendieck's construction to yeild bicategories. Hence, we don't mention here this path, and we orient our invertible associators and unitors in the same way that we do for bicategories.
+
+In \cite{GARNER_2009}, they define ``lax trihomomorphisms'' as requiring: ``lax'' oriented functoriality and unity Constraint, pseudo-natural functoriality and unity Constraint, and invertible associator and unitors. In \cite{gurski_2013}, he defines ``lax trihomomorphisms'' as requiring: ``lax'' oriented functoriality and unity Constraint, lax natural functoriality and unity Constraint, and ``colax'' oriented associator and unitors.
+
+We want to use here the most general notion possible of lax functor that gives us the desired Grothendieck's construction. All the orientation choices involved in chosing one of the 8 notions of laxity will be guided by this goal.
+
+\subsection{Lax Functors}
+
+\begin{remark}[WARNING] We use here the opposite convention as often found in the literature: for this appendix, a \textbf{lax} natural transformation as coherence 2-cells oriented as: for $f: a \to b$,
+	\[\theta_f: \theta_b \circ F(f) \to G(f) \circ \theta_a\]
+	The reason for this potentially odd choice is that the Grothendieck's construction offers a link between the choice of laxity of functors and the choice of laxity of natural transformation. Following this link, it appears that the natural morphism to consider between \textit{lax functors} are the natural transformations oriented as such. It is then natural to call them \textbf{lax} as in dimension 3, there are many more than 2 ways to laxify data.
+\end{remark}
+
+\begin{definition}[Lax Functor] Let $\mathcal{B}, \mathcal{C}$ be tricategories. A lax functor $F: \mathcal{B} \to \mathcal{C}$ is the data of:
+	\begin{enumerate}[label = $\bullet$]
+		\item \textbf{Function on Objects: (HDT1)} For each $b: \mathcal{B}$, an object $F(b):\mathcal{C}$
+		\item \textbf{Function on Arrows: (HDT2)} For each arrow $f: a \to b: \mathcal{B}$, an arrow $F(f): F(a) \to F(b):\mathcal{C}$
+		\item \textbf{Function on 2-cells: (HDT2)} For each 2-cell $\alpha: f \to g: a \to b: \mathcal{B}$, a 2-cell $F(\alpha): F(f) \to F(g): F(a) \to F(b):\mathcal{C}$
+		\item \textbf{Function on 3-cells: (HDT2)} For each 3-cell $\Gamma: \alpha \to \beta: f \to g: a \to b: \mathcal{B}$, a 3-cell $F(\Gamma): F(\alpha) \to F(\beta): F(f) \to F(g): F(a) \to F(b):\mathcal{C}$
+		\item \textbf{Local Lax-Functoriality: (HTD2)} For each $a,b: \mathcal{B}$, the above data forms a \textbf{lax functor} of bicategories
+		\[F_{a,b}:\mathcal{B}(a,b) \longrightarrow \mathcal{C}(F(a),F(b))\]
+		This means that we have coherence 3-cells, that we denote by omitting $a,b$ in the index, for $f,f^{\prime},f^{\prime\prime}:a \to b$ and for $\alpha:f \to f^{\prime}$, $\alpha^{\prime}:f^{\prime} \to f^{\prime\prime}$,
+		\[F^0_f= (F_{a,b}^0)_f: 1_{F(f)} \to F(1_f) \qquad \qquad F^2_{\beta, \alpha} = (F_{a,b}^2)_{\alpha^{\prime}, \alpha}: F(\alpha^{\prime}) \circ F(\alpha) \to F(\alpha^{\prime} \circ \alpha)\]
+		such that we have the ``lax associativity'' and ``lax left/right unity'' axioms satisfied.
+		\item \textbf{Lax-Natural Lax-Oriented Functoriality Constraint: (HDT3)} For each $a,b,c:\mathcal{B}$, we have an \textbf{lax natural} transformation:
+		\[\xymatrix@C=4em{
+			\mathcal{B}(b,c) \times \mathcal{B}(a,b) \ar[d]|{\circ} \ar[r]^{F_{b,c} \times F_{a,b}} \ar@{}[dr]|{\chi_{a,b,c}\Downarrow} & \mathcal{C}(F(b),F(c)) \times \mathcal{C}(F(a),F(b)) \ar[d]|{\circ}\\
+			\mathcal{B}(a,c) \ar[r]_{F_{a,c}} & \mathcal{C}(F(a),F(c))
+		}\]
+		This means that we have coherence 2-cells, that we denote by omitting $a,b,c$ in the index, for $f:a \to b$ and $g:b \to c$,
+		\[\chi_{g,f} = (\chi_{a,b,c})_{g,f}: F(g) \circ F(f) \to F(gf)\]
+		and coherence 3-cells, that we denote by omitting $a,b,c$ in the index, for $\alpha: f \to f^{\prime}:a \to b$ and $\beta: g \to g^{\prime}:b \to c$,
+		\[\chi_{\beta,\alpha} = (\chi_{a,b,c})_{\beta,\alpha}: \chi_{g^{\prime}, f^{\prime}}\circ (F(\beta) \star F(\alpha)) \to F(\beta \star \alpha) \circ \chi_{g, f}\]
+		such that we have ``lax associativity'' and ``lax left/right unity'' satisfied.
+		
+		\item \textbf{Lax-Oriented Unity Constraint:} For each $a:\mathcal{B}$, we have a natural transformation (that is automatically pseudo):
+		\[\xymatrix@C=4em{
+			& \{\bullet\} \ar[dl]_{1_a} \ar@{}[d]|{\overset{\iota_a}{\Leftarrow}} \ar[dr]^{1_{F(a)}}\\
+			\mathcal{B}(a,a) \ar[rr]_{F_{b,b}} && [F(a), F(a)]_{ps}
+		}\]
+		This means that we have a coherence 2-cell, that we denote by omitting the $\bullet$ in the index,
+		\[\iota_a = (\iota_a)_{\bullet}: 1_{F(a)} \to F(1_a)\]
+		\item \textbf{Invertible Associator: (HDT5)} For $f:a\to b$, $g:b \to c$, $h:c \to d$, we have an \textbf{invertible} coherence 3-cell:
+		\[\xymatrix{
+			& F(h\circ g) \circ Ff \ar[r]^{\chi_{h\circ g, f}} & F((h\circ g)\circ f) \ar[dr]^{Fa_{h,g,f}}\\
+			(Fh\circ Fg)\circ Ff \ar[ur]^{\chi_{h,g}\star Ff} \ar[dr]_{a_{Fh, Fg, Ff}} \ar@{}[rrr]|{\wr\Uparrow \omega_{h,g,f}} &&& F(h \circ (g\circ f))\\
+			& Fh\circ (Fg \circ Ff) \ar[r]^{Fh \star \chi_{g, f}} & Fh\circ F(g \circ f) \ar[ur]^{\chi_{h,g\circ f}}\\
+		}\]
+		with the following compatibility axiom: for $\alpha: f \to f^{\prime}:a\to b$, $\beta: g \to g^{\prime}:b \to c$, $\gamma: h\to h^{\prime}:c \to d$, we have
+		
+		\[\begin{array}{c}
+			\xymatrix@R=3em{
+				& F(h\circ g) \circ Ff \ar[r]^{\chi_{h\circ g, f}} & F((h\circ g)\circ f) \ar[dr]^{Fa_{h,g,f}} \ar`_dl/20pt[ddr]^(0.7){F((\gamma\star (\beta\star \alpha))\circ a_{h,g,f})}
+				[ddr]\\
+				(Fh\circ Fg)\circ Ff \ar[d]_{(F\gamma\star F\beta)\star F\alpha} \ar[ur]^{\chi_{h,g}\star Ff} \ar[dr]^{a_{Fh, Fg, Ff}} \ar@{}[rrr]|{\wr\Uparrow \omega_{h,g,f}} &&& F(h \circ (g\circ f)) \ar[d]|{F(\gamma\star (\beta\star \alpha))}\\
+				(Fh^{\prime}\circ Fg^{\prime})\circ Ff^{\prime} \ar[dr]_{a_{Fh^{\prime}, Fg^{\prime}, Ff^{\prime}}} & Fh\circ (Fg \circ Ff) \ar[d]|{F\gamma\star (F\beta\star F\alpha)} \ar[r]^{Fh \star \chi_{g, f}} & Fh\circ F(g \circ f) \ar[d]|{F\gamma\star F(\beta\star \alpha)} \ar[ur]^{\chi_{h,g\circ f}} & F(h^{\prime} \circ (g^{\prime}\circ f^{\prime}))\\
+				& Fh^{\prime}\circ (Fg^{\prime} \circ Ff^{\prime}) \ar[r]_{Fh^{\prime} \star \chi_{g^{\prime}, f^{\prime}}} & Fh^{\prime}\circ F(g^{\prime} \circ f^{\prime}) \ar[ur]_{\chi_{h^{\prime},g^{\prime}\circ f^{\prime}}}
+			}\\
+			\\
+			=\\
+			\\
+			\xymatrix{
+				& F(h\circ g) \circ Ff \ar[d]|{F(\gamma\star \beta)\star F\alpha} \ar[r]^{\chi_{h\circ g, f}} & F((h\circ g)\circ f) \ar[d]|{F((\gamma\star \beta)\star \alpha)} \ar`_dl/20pt[ddr]^(0.7){F((\gamma\star (\beta\star \alpha))\circ a_{h,g,f})}
+				[ddr]\\
+				(Fh\circ Fg)\circ Ff \ar[d]|{(F\gamma\star F\beta)\star F\alpha} \ar[ur]^{\chi_{h,g}\star Ff} & F(h^{\prime}\circ g^{\prime}) \circ Ff^{\prime} \ar[r]^{\chi_{h^{\prime}\circ g^{\prime}, f^{\prime}}} & F((h^{\prime}\circ g^{\prime})\circ f^{\prime}) \ar[dr]^{Fa_{h^{\prime},g^{\prime},f^{\prime}}}\\
+				(Fh^{\prime}\circ Fg^{\prime})\circ Ff^{\prime} \ar[ur]^{\chi_{h^{\prime},g^{\prime}}\star Ff^{\prime}} \ar[dr]_{1_{Fh^{\prime}\circ Fg^{\prime}\circ Ff^{\prime}}} \ar@{}[rrr]|{\wr\Uparrow \omega_{h^{\prime},g^{\prime},f^{\prime}}} &&& F(h^{\prime} \circ (g^{\prime}\circ f^{\prime}))\\
+				& Fh^{\prime}\circ (Fg^{\prime} \circ Ff^{\prime}) \ar[r]^{Fh^{\prime} \star \chi_{g^{\prime}, f^{\prime}}} & Fh^{\prime}\circ F(g^{\prime} \circ f^{\prime}) \ar[ur]^{\chi_{h^{\prime},g^{\prime}\circ f^{\prime}}}\\
+			}
+		\end{array}\]
+		
+		\item \textbf{Invertible Left Unitor: (HDT6)} For $f: a \to b$, we have an \textbf{invertible} coherence 3-cell:
+		
+		\[\xymatrix{
+			& F1_b \circ Ff \ar[r]^{\chi_{1_b,f}} & F(1_b \circ f) \ar[dr]^{Fl_f}\\
+			1_{Fb} \circ Ff \ar[ur]^{\iota_b \star Ff} \ar@/_2pc/[rrr]_{l_{Ff}} \ar@/^1pc/@{{}{ }{}}[rrr]|{\wr \Uparrow \gamma_f} &&& Ff\\
+		}\]
+		
+		with the following compatibility axiom: for $\alpha: f \to f^{\prime}: a \to b$, we have
+		
+		\[\begin{array}{c}
+			\xymatrix{
+				& F1_b \circ Ff \ar[r]^{\chi_{1_b,f}} & F(1_b \circ f) \ar[dr]^{Fl_f} \ar`_dl/20pt[ddr]^(0.7){F\alpha\circ F1_f}
+				[ddr]\\
+				1_{Fb} \circ Ff \ar[d]_{1_{Fb} \star F\alpha} \ar[ur]^{\iota_b \star Ff} \ar@/_2pc/[rrr]_{l_{Ff}} \ar@/^1pc/@{{}{ }{}}[rrr]|{\wr \Uparrow \gamma_f} &&& Ff \ar[d]^{F\alpha}\\
+				1_{Fb} \circ Ff^{\prime} \ar@/_2pc/[rrr]_{l_{Ff^{\prime}}} &&& Ff^{\prime}\\
+			}\\
+			\\
+			=\\
+			\\
+			\xymatrix{
+				& F1_b \circ Ff \ar[d]|{F1_b \star F\alpha} \ar[r]^{\chi_{1_b,f}} & F(1_b \circ f) \ar[d]|{F(1_b \star \alpha)} \ar`_dl/20pt[ddr]^(0.7){F\alpha\circ F1_f}
+				[ddr]\\
+				1_{Fb} \circ Ff \ar[ur]^{\iota_b \star Ff} \ar[d]|{1_{Fb} \star F\alpha} & F1_b \circ Ff^{\prime} \ar[r]^{\chi_{1_b,f^{\prime}}} & F(1_b \circ f^{\prime}) \ar[dr]^{Fl_f^{\prime}}\\
+				1_{Fb} \circ Ff^{\prime} \ar[ur]^{\iota_b \star Ff^{\prime}} \ar@/_2pc/[rrr]_{l_{Ff^{\prime}}} \ar@/^1pc/@{{}{ }{}}[rrr]|{\wr \Uparrow \gamma_{f^{\prime}}} &&& Ff^{\prime}\\
+			}
+		\end{array}\]
+		
+		\item \textbf{Invertible Right Unitor: (HDT6)} For $f: a \to b$, we have an \textbf{invertible} coherence 3-cell:
+		
+		\[\xymatrix{
+			& Ff \circ F1_a \ar[r]^{\chi_{f,1_a}} & F(f \circ 1_a) \ar[dr]^{Fr_f}\\
+			Ff \circ 1_{Fa} \ar[ur]^{Ff \star \iota_a} \ar@/_2pc/[rrr]_{r_{Ff}} \ar@/^1pc/@{{}{ }{}}[rrr]|{\wr \Uparrow \delta_f} &&& Ff\\
+		}\]
+		
+		with the following compatibility axiom: for $\alpha: f \to f^{\prime}: a \to b$, we have
+		
+		\[\begin{array}{c}
+			\xymatrix{
+				& Ff \circ F1_a \ar[r]^{\chi_{f,1_a}} & F(f \circ 1_a) \ar[dr]^{Fr_f} \ar`_dl/20pt[ddr]^(0.7){F\alpha\circ Fr_f}
+				[ddr]\\
+				Ff \circ 1_{Fa} \ar[d]_{F\alpha \star 1_{Fa}} \ar[ur]^{Ff \star \iota_a} \ar@/_2pc/[rrr]_{r_{Ff}} \ar@/^1pc/@{{}{ }{}}[rrr]|{\wr \Uparrow \delta_f} &&& Ff \ar[d]^{F\alpha}\\
+				Ff^{\prime} \circ 1_{Fa} \ar@/_2pc/[rrr]_{r_{Ff^{\prime}}} &&& Ff^{\prime}\\
+			}\\
+			\\
+			=\\
+			\\
+			\xymatrix{
+				& Ff \circ F1_a \ar[d]|{F\alpha \star F1_a} \ar[r]^{\chi_{f,1_a}} & F(f \circ 1_a) \ar[d]|{F(\alpha \star 1_a)} \ar`_dl/20pt[ddr]^(0.7){F\alpha\circ Fr_f}
+				[ddr]\\
+				Ff \circ 1_{Fa} \ar[ur]^{Ff \star \iota_a} \ar[d]|{F\alpha \star 1_{Fa}} & Ff^{\prime} \circ F1_a \ar[r]^{\chi_{f^{\prime}, 1_a}} & F(f^{\prime}\circ 1_a) \ar[dr]^{Fr_f^{\prime}}\\
+				Ff^{\prime} \circ 1_{Fa} \ar[ur]^{Ff^{\prime}\star \iota_a} \ar@/_2pc/[rrr]_{r_{Ff^{\prime}}} \ar@/^1pc/@{{}{ }{}}[rrr]|{\wr \Uparrow \delta_{f^{\prime}}} &&& Ff^{\prime}\\
+			}
+		\end{array}\]
+		
+	\end{enumerate}
+	subject to two axioms, a unity and a pentagon axiom, as described in \cite{gordon1995coherence} and \cite{gurski_2013}.
+\end{definition}
+
+\begin{definition}[Trihomomorphism] Let $\mathcal{B}, \mathcal{C}$ be tricategories. A trihomomorphism $F:\mathcal{B} \to \mathcal{C}$ is a lax functor such that:
+	\begin{enumerate}[label = $(\roman*)$]
+		\item the local functors $F_{-,-}$ are \textbf{pseudo-functorial}, \textnormal{i.e.} the coherence 3-cells $F^0_f$ and $F^2_{\alpha^{\prime},\alpha}$ are invertible
+		\item the functoriality constraint $\chi$ is a \textbf{pseudo-natural equivalence}, \textnormal{i.e.} the coherence 2-cells $\chi_{g,f}$ are equivalences and the coherence 3-cells $F^2_{\alpha^{\prime},\alpha}$ are invertible
+		\item the unity constraint $\iota$ is a \textbf{pseudo-natural equivalence}, \textnormal{i.e.} the coherence 2-cells $\iota_a$ are equivalences
+	\end{enumerate}
+\end{definition}
+
+\begin{remark}[Our case] In our case, we only need $\mathcal{B}$ a bicategory and $\mathcal{C} = \Bicat$. This means that the coherence 2-cells and 3-cells can be further developed to give coherence 1-cells and 2-cells in the indexed bicategories. We write here those coherence cells to simplify this exposition: for all $\alpha: f \to f^{\prime}:a\to b$, $\alpha^{\prime}: f^{\prime} \to f^{\prime\prime}:a\to b$, $\beta: g \to g^{\prime}:b \to c$, $h:c \to d$, $u_-: a_- \to a_-^{\prime}:Fa$, we have the coherence 1-cells,
+	\[(\chi_{g,f})_{a_-}: F(g)(F(f)(a_-)) \to F(gf)(a_-) \qquad \qquad (\iota_b)_{b_-} = ((\iota_b)_{\bullet})_{b_-}: b_- \to F(1_b)(b_-)\]
+	and coherence 2-cells,
+	\[(F^0_f)_{a_-}: 1_{F(f)(a_-)} \to F(1_f)_{a_-}\]
+	\[(F^2_{\beta, \alpha})_{a_-}: F(\beta)_{a_-} \circ F(\alpha)_{a_-} \to F(\beta \circ \alpha)_{a_-}\]
+	\[(\chi_{g,f})_{a_-}: F(g)(F(f)(a_-)) \to F(gf)(a_-)\]
+	\[(\chi_{g,f})_{u_-}: (\chi_{g,f})_{a_-^{\prime}} F(g)(F(f)(u_-)) \simeq F(gf)(u_-)\circ (\chi_{g,f})_{a_-}\]
+	\[(\chi_{\beta,\alpha})_{a_-}: (\chi_{g^{\prime}, f^{\prime}})_{a_-} \circ (F(\beta) \star F(\alpha))_{a_-} = (\chi_{g^{\prime}, f^{\prime}})_{a_-} \circ F(g^{\prime})(F(\alpha)_{a_-}) \circ F(\beta)_{F(f)(a_-)} \to F(\beta \star \alpha)_{a_-} \circ (\chi_{g, f})_{a_-}\]
+	\[(\iota_a)_{u_-} = ((\iota_a)_{\bullet})_{u_-}: F(1_a)(u_-) \circ (\iota_a)_{a_-} \simeq (\iota_a)_{a_-^{\prime}} \circ u_-\]
+	\[\xymatrix{
+		& F(h\circ g)(Ff(a_-)) \ar[r]^{(\chi_{h\circ g, f})_{a_-}} & F((h\circ g)\circ f)(a_-) \ar[dr]^{(Fa_{h,g,f})_{a_-}}\\
+		Fh(Fg(Ff(a_-))) \ar[ur]^{(\chi_{h,g})_{Ff(a_-)}} \ar[dr]_{1_{Fh(Fg(Ff(a_-)))}} \ar@{}[rrr]|{\wr\Uparrow (\omega_{h,g,f})_{a_-}} &&& F(h \circ (g\circ f))(a_-)\\
+		& Fh(Fg(Ff(a_-))) \ar[r]^{Fh((\chi_{g, f})_{a_-})} & Fh(F(g \circ f)(a_-)) \ar[ur]^{(\chi_{h,g\circ f})_{a_-}}\\
+	}\]
+	\[\xymatrix{
+		& F1_b(Ff(a_-)) \ar[r]^{(\chi_{1_b,f})_{a_-}} & F(1_b \circ f)(a_-) \ar[dr]^{(Fl_f)_{a_-}}\\
+		Ff(a_-) \ar[ur]^{(\iota_b)_{Ff(a_-)}} \ar@/_2pc/[rrr]_{1_{Ff(a_-)}} \ar@/^1pc/@{{}{ }{}}[rrr]|{\wr \Uparrow (\gamma_f)_{a_-}} &&& Ff(a_-)\\
+	}\]
+	\[\xymatrix{
+		& Ff(F1_a(a_-)) \ar[r]^{(\chi_{f,1_a})_{a_-}} & F(f \circ 1_a)(a_-) \ar[dr]^{(Fr_f)_{a_-}}\\
+		Ff(a_-) \ar[ur]^{Ff((\iota_a)_{a_-})} \ar@/_2pc/[rrr]_{1_{Ff(a_-)}} \ar@/^1pc/@{{}{ }{}}[rrr]|{\wr \Uparrow (\delta_f)_{a_-}} &&& Ff(a_-)\\
+	}\]
+\end{remark}
+
+\begin{definition}[Grothendieck's Construction of a Lax Functor] Let $\mathcal{B}$ be a bicategory and $F:\mathcal{B} \to \Bicat$ be a lax functor. We define the bicategory $\int F$ as follows:
+	\begin{enumerate}[label = $\bullet$]
+		\item \textbf{Objects:} Pairs $(x, x_-)$ with $x:\mathcal{B}$ and $x_-: Fx$
+		\item \textbf{Arrows:} Pairs $(f,f_-):(x, x_-) \to (y, y_-)$ with $f: x \to y$ and $f_-:y_- \to Ff(x_-)$
+		\item \textbf{2-cells:} Pairs $(\alpha, \alpha_-):(f,f_-) \to (g,g_-):(x, x_-) \to (y, y_-)$ with $\alpha: f \to g$ and
+		\[\xymatrix{
+			y_- \ar[dr]_{g_-} \ar[rr]^{f_-} \ar@{}[drr]|{\overset{\alpha_-}{\Rightarrow}} && Ff(x_-) \ar[dl]^{(F\alpha)_{x_-}}\\
+			& Fg(x_-)&
+		}\]
+		\item \textbf{Horizontal Composition of 1-cells:} For $(f,f_-):(x, x_-) \to (y, y_-)$ and $(g,g_-):(y, y_-) \to (z, z_-)$, using the fact that the functoriality constraint $\chi$ is \textbf{lax-oriented}, we define $(g,g_-)\circ (f,f_-) = (g\circ f, (\chi_{g,f})_{x_-} \circ (Fg(f_-) \circ g_-))$:
+		\[\xymatrix@C=4em{
+			z_- \ar[r]^{g_-} & Fg(y_-) \ar[r]^{Fg(f_-)} & Fg(Ff(x_-)) \ar[r]^{(\chi_{g,f})_{x_-}} & F(g\circ f)(x_-)
+		}\]
+		\item \textbf{Vertical Composition of 2-cells:} For $(f,f_-), (f^{\prime},f_-^{\prime}), (f^{\prime\prime},f_-^{\prime\prime}):(x, x_-) \to (y, y_-)$ and $(\alpha, \alpha_-): (f,f_-) \to (g,g_-)$, $(\alpha^{\prime}, \alpha^{\prime}_-): (g,g_-) \to (h,h_-)$, using the fact that the local functors $F_{-,-}$ are \textbf{lax-functorial}, we define $(\beta, \beta_-) \circ (\alpha, \alpha_-) = (\beta \circ \alpha, \square)$ where $\square$ is the pasting of:
+		\[\xymatrix{
+			y_- \ar[rrr]^{f_-} \ar@{}[drrr]|{\overset{\alpha_-}{\Rightarrow}} \ar[drr]|{f_-^{\prime}} \ar@{}[ddrr]|{\overset{\alpha_-^{\prime}}{\Rightarrow}} \ar[ddr]_{f_-^{\prime\prime}} &&& Ff(x_-) \ar[dl]|{(F\alpha)_{x_-}} \ar@/^4pc/[ddll]^{(F(\alpha^{\prime} \circ\alpha))_{x_-}} \ar@/^2pc/@{{}{ }{}}[ddll]|{\overset{(F_{\alpha^{\prime},\alpha}^2)_{x_-}}{\Rightarrow}}\\
+			&& Ff^{\prime}(x_-) \ar[dl]|{(F\alpha^{\prime})_{x_-}} &\\
+			& Ff^{\prime\prime}(x_-) &
+		}\]
+		\item \textbf{Horizontal Composition of 2-cells:} For $(\alpha, \alpha_-): (f,f_-) \to (f^{\prime},f^{\prime}_-):(x, x_-) \to (y, y_-)$ and $(\beta, \beta_-): (g,g_-) \to (g^{\prime},g^{\prime}_-):(y, y_-) \to (z, z_-)$, using the fact that the functoriality constraint $\chi$ is \textbf{lax-natural}, we define $(\beta, \beta_-) \star (\alpha, \alpha_-) = (\beta \star \alpha, \square)$ where $\square$ is the pasting of:
+		\[\xymatrix@C=7em@R=4em{
+			z_- \ar@{}[drr]|(0.3){\overset{\beta_-}{\Rightarrow}} \ar[r]^{g_-} \ar[dr]_{g^{\prime}_-} & Fg(y_-) \ar@{}[dr]|{\overset{(F\beta)_{f_-}}{\simeq}} \ar[d]|{(F\beta)_{y_-}} \ar[r]^{Fg(f_-)} & Fg(Ff(x_-)) \ar[d]|{(F\beta)_{Ff(x_-)}} \ar@{}[ddr]|{\overset{(\chi_{\beta,\alpha})_{x_-}}{\Rightarrow}} \ar[r]^{(\chi_{g,f})_{x_-}} & F(g\circ f)(x_-) \ar[dd]|{(F(\beta\star \alpha))_{x_-}}\\
+			& Fg^{\prime}(y_-) \ar@{}[drr]|(0.3){\overset{\alpha_-}{\Rightarrow}} \ar[r]^{Fg^{\prime}(f_-)} \ar[dr]_{Fg^{\prime}(f^{\prime}_-)} & Fg^{\prime}(Ff(x_-)) \ar[d]|{Fg^{\prime}((F\beta)_{x_-})}\\
+			&& Fg^{\prime}(Ff^{\prime}(x_-)) \ar[r]^{(\chi_{g^{\prime},f^{\prime}})_{x_-}} & F(g^{\prime}\circ f^{\prime})(x_-)
+		}\]
+		\item \textbf{Identity Arrow:} For $(x,x_-)$ object, using the fact that the unity constraint $\iota$ is \textbf{lax-oriented}, we define $1_{(x,x_-)} = (1_x, (\iota_x)_{x_-})$
+		\item \textbf{Identity 2-cell:} For $(f,f_-):(x, x_-) \to (y, y_-)$, using the fact that the local functors $F_{-,-}$ are \textbf{lax-functorial}, we define $1_{(f,f_-)} = (1_f, \square)$ where $\square$ is the pasting of:
+		\[\xymatrix{
+			y_- \ar[dr]_{f_-} \ar[rr]^{f_-} \ar@{}[drr]|{\overset{l^{-1}_{f_-}}{\simeq}} && Ff(x_-) \ar[dl]|{1_{Ff(x_-)}} \ar@{{}{ }{}}@/^2pc/[dl]|{\overset{(F^0_{f})_{x_-}}{\Rightarrow}} \ar@/^4pc/[dl]^{(F1_f)_{x_-}}\\
+			& Ff(x_-)&
+		}\]
+		\item \textbf{Associator:} For $(f,f_-):(x, x_-) \to (y, y_-)$, $(g,g_-):(y, y_-) \to (z, z_-)$ and $(h,h_-):(t, t_-) \to (t, t_-)$, using the fact that the associator $\omega$ is \textbf{invertible}, we define $a_{(h,h_-), (g,g_-), (f,f_-)} = (a_{h,g,f}, \square)$ where $\square$ is the pasting of:
+		\[\resizebox{6in}{!}{\xymatrix@C=4em@R=4em{
+				t_- \ar[r]^{h_-} & Fh(z_-) \ar[r]^{Fh(g_-)} & Fh(Fg(y_-)) \ar[dr]|{Fh(Fg(f_-))} \ar[r]^{(\chi_{h,g})_{y_-}} & F(h\circ g)(y_-) \ar@{}[d]|{\wr\Uparrow(\chi_{h,g})_{f_-}} \ar[r]^{F(h\circ g)(f_-)} & F(h \circ g)(F(f)(x_-)) \ar@{}[ddr]|{\wr\Uparrow (\omega_{h,g,f})_{x_-}} \ar[r]^{(\chi_{h\circ g,f})_{x_-}} & F((h\circ g) \circ f)(x_-) \ar[dr]^{(Fa_{h,g,f})_{x_-}}\\
+				&&& Fh(Fg(Ff(x_-))) \ar[ur]|{(\chi_{h,g})_{Ff(x_-)}} \ar[dr]|{1_{Fh(Fg(Ff(x_-)))}} &&& F(h\circ (g \circ f))(x_-)\\
+				&&&& Fh(Fg(Ff(x_-))) \ar[r]_{Fh((\chi_{g,f})_{x_-})} & Fh(F(g\circ f)(x_-)) \ar[ur]_{(\chi_{h,g\circ f})_{x_-}} &
+		}}\]
+		in which we omit some coherence 2-cells linked to the pseudo-functoriality of $Fh$
+		\item \textbf{Left Unitor:} For $(f,f_-):(x, x_-) \to (y, y_-)$, using the fact that the left unitor $\gamma$ is \textbf{invertible}, we define $l_{(f,f_-)} = (l_f, \square)$ where $\square$ is the pasting of:
+		\[\xymatrix@C=4em{
+			y_- \ar[r]^{(\iota_y)_{y_-}} \ar@/_1pc/[drr]_{f_-} \ar@{{}{ }{}}[drr]|{\wr\Downarrow (\iota_y)_{f_-}} \ar@/_4pc/[drrr]_{f_-} \ar@/_3pc/@{{}{ }{}}[drrr]|{\wr\Downarrow l_{f_-}} & F1_y(y_-) \ar[r]^{F1_y(f_-)} & F1_y(Ff(x_-)) \ar[r]^{(\chi_{1_y,f})_{x_-}} \ar@{}[dr]|{\wr\Downarrow (\gamma_f)_{x_-}} & F(1_y\circ f)(x_-) \ar[d]^{Fl_f(x_-)}\\
+			&& Ff(x_-) \ar[u]|{(\iota_y)_{Ff(x_-)}} \ar[r]_{1_{Ff(x_-)}} & Ff(x_-)
+		}\]
+		\item \textbf{Right Unitor:} For $(f,f_-):(x, x_-) \to (y, y_-)$, using the fact that the right unitor $\delta$ is \textbf{invertible}, we define $r_{(f,f_-)} = (r_f, \square)$ where $\square$ is the pasting of:
+		\[\xymatrix@C=4em{
+			y_- \ar[r]^{f_-} \ar@/_2pc/[drr]_{f_-} \ar@/_1pc/@{{}{ }{}}[drr]|{\wr\Uparrow l^{-1}_{f_-}} & Ff(x_-) \ar[dr]_{1_{Ff(x_-)}} \ar[r]^{Ff((\iota_x)_{x_-})} & Ff(F1_x(x_-)) \ar[r]^{(\chi_{f,1_x})_{x_-}} \ar@{}[d]|{\wr\Uparrow (\delta_f)_{x_-}} & F(f\circ 1_x)(x_-) \ar[dl]^{Fr_f(x_-)}\\
+			&& Ff(x_-)
+		}\]
+	\end{enumerate}
+\end{definition}
+
+\begin{remark}[Axioms of Bicategories] One can easily check that the compatibility axioms of the associator and unitors of the lax functor $F$ exactly correspond to the naturality of the associator and unitors of $\int F$. Similarly, the inversibility of the former gives the inversibility of the latter. One can also, with more efforts, see that the two axioms described in \cite{gordon1995coherence} and \cite{gurski_2013} that the data of the lax functor $F$ need to verify, exactly correspond to the unity and pentagon axiom of the bicategory $\int F$. With this approach, the Grothendieck's construction appears as a natural way to find a definition of lax functors.
+\end{remark}
+
+\subsection{Lax Natural Transformations}
+
+\begin{definition}[Lax Natural Transformation]  Let $\mathcal{B}, \mathcal{C}$ be tricategories and $F, G: \mathcal{B} \to \mathcal{C}$ be lax functors. A lax natural transformation $\theta: F \to G$ is the data of:
+	\begin{enumerate}[label = $\bullet$]
+		\item \textbf{Function on Objects:} For each $b:\mathcal{B}$, an arrow $\theta_b: F(b) \to G(b)$
+		\item \textbf{Lax-Oriented Function on Arrows:} For each $f:a \to b:\mathcal{B}$, a 2-cell $\theta_f: \theta_b \circ F(f) \to G(f) \circ \theta_a$
+		\[\xymatrix{
+			F(a) \ar[r]^{F(f)} \ar[d]_{\theta_a} \ar@{}[dr]|{\Downarrow \theta_f} & F(b) \ar[d]^{\theta_b}\\
+			G(a) \ar[r]_{G(f)} & G(b)
+		}\]
+		\item \textbf{Lax-Oriented Function on 2-cells:} For each 2-cell $\alpha: f \to f^{\prime}: a \to b: \mathcal{B}$, a 3-cell $\theta_\alpha: \theta_{f^{\prime}} \circ (\theta_b\star F(\alpha)) \to (G(\alpha)\star\theta_a)\circ \theta_f$
+		\[\vcenter{\xymatrix{
+				F(a) \ar@/^1pc/[r]|{F(f)} \ar@/_1pc/[r]|{F(f^{\prime})} \ar@{}[r]|{\Downarrow F(\alpha)} \ar[d]_{\theta_a} \ar@/_/@{{}{ }{}}[dr]|(0.6){\Downarrow \theta_{f^{\prime}}} & F(b) \ar[d]^{\theta_b}\\
+				G(a) \ar[r]_{G(f^{\prime})} & G(b)
+		}}
+		\qquad \overset{\theta_\alpha}{\Rrightarrow} \qquad
+		\vcenter{\xymatrix{
+				F(a) \ar[r]^{F(f)} \ar[d]_{\theta_a} \ar@/^/@{{}{ }{}}[dr]|(0.4){\Downarrow \theta_f} & F(b) \ar[d]^{\theta_b}\\
+				G(a) \ar@/^1pc/[r]|{G(f)} \ar@/_1pc/[r]|{G(f^{\prime})} \ar@{}[r]|{\Downarrow G(\alpha)} & G(b)
+		}}\]
+		\item \textbf{Lax-Oriented Local Lax-Naturality} For each $a,b:\mathcal{B}$, the data above forms a lax-natural transformation:
+		\[\xymatrix@C=4em@R=3em{
+			\mathcal{B}(a,b) \ar@{}[dr]|{\Downarrow \theta_{a,b}} \ar[r]^{F_{a,b}} \ar[d]_{G_{a,b}} & \mathcal{C}(F(a),F(b)) \ar[d]^{\mathcal{C}(F(a),\theta_b)}\\
+			\mathcal{C}(G(a),G(b)) \ar[r]_{\mathcal{C}(\theta_a,G(b))} & \mathcal{C}(F(a),G(b))
+		}\]
+		\item \textbf{Lax-Oriented Functoriality Constraint:} For $f: a \to b$, $g: b \to c$, we have coherence 3-cell,
+		\[\xymatrix@C=4em@R=3em{
+			(G(g)\circ \theta_b) \circ F(f) \ar[r]^{a_{G(g),\theta_b,F(f)}} & G(g)\circ (\theta_b \circ F(f)) \ar[r]^{G(g) \star \theta_f} & G(g)\circ (G(f)\circ \theta_a) \ar[r]^{a^\bullet_{G(g),G(f),\theta_a}} & (G(g)\circ G(f))\circ \theta_a \ar[d]^{\chi^G_{g,f}\star \theta_a}\\
+			(\theta_c \circ F(g)) \circ F(f) \ar@{}[urrr]|{\Uparrow\Pi_{g,f}} \ar[r]_{a_{\theta_c,F(g),F(f)}} \ar[u]^{\theta_g \star F(f)} & \theta_c \circ (F(g) \circ F(f)) \ar[r]_{\theta_c \star \chi^F_{g,f}} & \theta_c \circ F(g \circ f) \ar[r]_{\theta_{g\circ f}} & G(g\circ f)\theta_a
+		}\]
+		that forms a modification (2-cell) in $[\mathcal{B}(b,c)\times \mathcal{B}(a,c), \mathcal{C}(F(a),G(c))]_{l,l}$
+		\item \textbf{Lax-Oriented Unity Constraint:} For $a: \mathcal{B}$, we have an coherence 3-cell,
+		\[\xymatrix{
+			&& 1_{Ga} \circ \theta_a \ar[drr]^{\iota^G_a\star \theta_a}\\
+			\theta_a \ar[dr]_{r^{\bullet}_{\theta_a}} \ar[urr]^{l^{\bullet}_{\theta_a}} \ar@{}[rrrr]|{\Uparrow M_a} &&&& G(1_a) \circ \theta_a\\
+			& \theta_a \circ 1_{Fa} \ar[rr]_{\theta_a\star \iota^F_a} && \theta_a \circ F(1_a) \ar[ur]_{\theta_{1_a}}\\
+		}\]
+	\end{enumerate}
+	subject to three axioms, a left and right unity and an associativity axiom, as described in \cite{gordon1995coherence} and \cite{gurski_2013}. We say that $\theta$ is \textbf{pseudo-lax} if the functoriality constraint $\Pi$ and unity constraint $M$ are \textbf{invertible}. 
+\end{definition}
+
+\begin{remark}[Our case] In our case, we only need $\mathcal{B}$ a bicategory and $\mathcal{C} = \Bicat$. As the associator and unitors of $\Bicat$ have identities as 1-cells (the composition of pseudo-functors is strictly associative and unital), we can omit the associator when describing the coherence 3-cells. For $f: a \to b$, $g:b \to c$ and $a_-:Fa$, we then have,
+	
+	\[\resizebox{6in}{!}{\xymatrix{
+			& G(g)(\theta_b(Ff(a_-))) \ar[rr]^{Gg((\theta_f)_{a_-})} && Gg(Gf(\theta_a(a_-))) \ar[dr]^{(\chi^G_{g,f})_{\theta_a(a_-)}}\\ \theta_c(Fg(Ff(a_-))) \ar[ur]^{(\theta_g)_{Ff(a_-)}} \ar[drr]_{\theta_c((\chi^F_{g,f})_{a_-})} \ar@{}[rrrr]|{\Uparrow (\Pi_{g,f})_{a_-}} &&&& G(g\circ f)(\theta_a(a_-))\\ && \theta_c(F(g\circ f)(a_-)) \ar[urr]_{(\theta_{g\circ f})_{a_-}}\\
+	}}\]
+	
+	\[\xymatrix{
+		\theta_a(a_-) \ar@{}[drr]|{\Uparrow (M_a)_{a_-}} \ar[rr]^{(\iota^G_a)_{\theta_a(a_-)}} \ar[dr]_{\theta_a((\iota^F_a)_{a_-})} &&  G1_a(\theta_a(a_-))\\
+		& \theta_a(F1_a(a_-)) \ar[ur]_{(\theta_{1_a})_{a_-}} &
+	}\]
+	Similarly, the three axioms would take a simpler form.
+\end{remark}
+
+\begin{definition}[Grothendieck's Construction of a Lax Natural Transformation] Let $\mathcal{B}$ be a bicategory and $\theta: F \to G: \mathcal{B} \to \Bicat$ be a lax natural transformation between lax functors. We define a lax functor $\int \theta: \int F \to \int G$ as follows:
+	\begin{enumerate}
+		\item \textbf{Function on Objetcs:} For $(x,x_-):\int F$, we define $\int \theta(x, x_-) = (x, \theta_x(x_-))$
+		\item \textbf{Function on Arrows:} For $(f,f_-):(x, x_-) \to (y, y_-):\int F$, using the fact that the local natural transformation $\theta_{-,-}$ is \textbf{lax-oriented}, we define $\int \theta(f, f_-) = (f, (\theta_f)_{x_-} \circ \theta_y(f_-))$
+		\[\xymatrix{
+			\theta_y(y_-) \ar[r]^{\theta_y(f_-)} & \theta_y(Ff(x_-)) \ar[r]^{(\theta_f)_{x_-}} & Gf(\theta_x(x_-))
+		}\]
+		\item \textbf{Function on 2-cells:} For $(\alpha, \alpha_-):(f,f_-) \to (g,g_-):(x, x_-) \to (y, y_-): \int F$, using the fact that the local natural transformation $\theta_{-,-}$ is \textbf{lax-natural}, we define $\int \theta(\alpha, \alpha_-) = (\alpha, \square)$ where $\square$ is the pasting of:
+		\[\xymatrix{
+			\theta_y(y_-) \ar[dr]_{\theta_y(g_-)} \ar[rr]^{\theta_y(f_-)} \ar@{}[drr]|{\overset{\alpha_-}{\Rightarrow}} && \theta_y(Ff(x_-)) \ar@{}[dr]|{\overset{(\theta_\alpha)_{x_-}}{\Rightarrow}} \ar[dl]|{\theta_y((F\alpha)_{x_-})} \ar[rr]^{(\theta_f)_{x_-}} && Gf(\theta_x(x_-)) \ar[dl]^{(G\alpha)_{\theta_x(x_-)}}\\
+			& \theta_y(Fg(x_-)) \ar[rr]_{(\theta_g)_{x_-}} && Gg(\theta_x(x_-))
+		}\]
+		\item \textbf{Lax Functoriality Constraint:} For $(f,f_-):(x, x_-) \to (y, y_-): \int F$ and $(g,g_-):(y, y_-) \to (z, z_-): \int F$, using the fact that the functoriality constraint $\Pi$ is \textbf{invertible}, we define $(\int \theta)^2_{(g,g_-),(f,f_-)} =  (1_{g\circ f}, \square)$ where $\square$ is the pasting of:
+		\[\resizebox{6in}{!}{\xymatrix@C=3em{
+				\theta_z(z_-) \ar[r]^{\theta_z(g_-)} & \theta_z(Fg(y_-)) \ar[dr]_{\theta_z(Fg(f_-))} \ar@{}[drr]|{\overset{(\theta_g)_{f_-}}{\simeq}} \ar[r]^{(\theta_g)_{y_-}} & Gg(\theta_y(y_-)) \ar[r]^{Gg(\theta_y(f_-))} & Gg(\theta_y(Ff(x_-))) \ar[rr]^{Gg((\theta_f)_{x_-})} && Gg(Gf(\theta_x(x_-))) \ar[dr]^{(\chi^G_{g,f})_{\theta_x(x_-)}}\\
+				&& \theta_z(Fg(Ff(x_-))) \ar[ur]|{(\theta_g)_{Ff(x_-)}} \ar[drr]_{\theta_z((\chi^F_{g,f})_{x_-})} \ar@{}[rrrr]|{\Uparrow(\Pi_{g,f})_{x_-}} &&&& G(g\circ f)(\theta_x(x_-))\\
+				&&&&\theta_z(F(g\circ f)(x_-)) \ar[urr]_{(\theta_{g\circ f})_{x_-}}
+		}}\]
+		in which we omit some coherence 2-cells linked to the pseudo-functoriality of $\theta_z$, and we omit the coherence 2-cell $(G^0_{g\circ f})_{\theta_x(x_-)}$
+		\item  \textbf{Lax Unity Constraint:} For $(x,x_-):\int F$, using the fact that the unity constraint $M$ is \textbf{invertible}, we define $(\int \theta)^0_{(x,x_-)} =  (1_{1_x}, \square)$ where $\square$ is the pasting of:
+		\[\xymatrix{
+			\theta_x(x_-) \ar@{}[drr]|{\Uparrow (M_x)_{x_-}} \ar[rr]^{(\iota^G_x)_{\theta_x(x_-)}} \ar[dr]_{\theta_x((\iota^F_x)_{x_-})} && G1_x(\theta_X(x_-))\\
+			& \theta_x(F1_x(x_-)) \ar[ur]_{(\theta_{1_x})_{x_-}} &
+		}\]
+		in which we omit the coherence 2-cell $(G^0_{1_x})_{\theta_x(x_-)}$
+	\end{enumerate}
+	In particular, $\int \theta$ is \textbf{pseudo} whenever $\theta$ is \textbf{pseudo-lax}.
+\end{definition}
+
+\begin{remark}[Axioms of Pseudo-Functors] Similarly for the Grothendieck's construction of a lax functor, one can easily check that the axioms of pseudo-functors are satisfied by this data.
+\end{remark}
+
+\begin{definition}[Inverse Construction of a Pseudo-Functor] Let $\mathcal{B}$ be a bicategory, $F,G: \mathcal{B} \to \Bicat$ be lax functors such that $\iota^G$ is an equivalence and $G^0$ is invertible, and $\eta: \int F \to \int G$ be a pseudo-functor such that $P_G \circ \eta = P_F$. As $\eta$ is a pseudo-functor over $\mathcal{B}$, we can write:
+	\begin{enumerate}[label = $\bullet$]
+		\item $\eta(x,x_-) = (x,\eta_x(x_-))$
+		\item $\eta(f,f_-) = (f,\eta_f(f_-))$
+		\item $\eta(\alpha, \alpha_-) = (\alpha, \eta_{\alpha}(\alpha_-))$
+		\item $\eta^2_{(g,g_-),(f,f_-)} = (1_{g\circ f}, \eta^2_{(g,g_-),(f,f_-)})$
+		\item $\eta^0_{(x,x_-)} = (1_{1_x}, \eta^0_{(x,x_-)}): (1_x, (\iota^G_x)_{\eta_x(x_-)}) \to (1_x, \eta_{1_x}((\iota^F_x)_{\eta_x(x_-)})$, 
+	\end{enumerate}
+	
+	We then define $\theta: F \to G$ as follows:
+	\begin{enumerate}[label = $\bullet$]
+		\item \textbf{Function on Objects:} For each $x:\mathcal{B}$, we define a pseudo-functor $\theta_x: F(b) \to G(b)$ as:
+		\begin{enumerate}
+			\item \textbf{Function on Objects:} For $x_-:Fx$, we define $\theta_x(x_-) = \eta_x(x_-)$
+			\item \textbf{Function on Arrows:} For $f_-:x_- \to x_-^{\prime}:Fx$, we have an arrow $(1_x,(\iota^F_x)_{x_-^{\prime}}\circ f_-):(x,x_-^{\prime}) \to (x,x_-):\int F$
+			\[\vcenter{\xymatrix{
+					x_- \ar[r]^{f_-} & x_-^{\prime} \ar[r]^{(\iota^F_x)_{x_-^{\prime}}} & F1_x(x_-^{\prime})
+			}}
+			\qquad \leadsto \qquad
+			\vcenter{\xymatrix@C=4em{
+					\theta_x(x_-) \ar[r]^{\eta_{1_x}((\iota^F_x)_{x_-^{\prime}}\circ f_-)} & G1_x(\theta_x(x_-^{\prime}))
+			}}\]
+			which allows us to define $\theta_x(f_-) = (\iota^G_x)^{\bullet}_{\eta_x(x_-^{\prime})} \circ \eta_{1_x}((\iota^F_x)_{x_-^{\prime}}\circ f_-): \theta_x(x_-) \to \theta_x(x_-^{\prime})$
+			\[\xymatrix@C=4em{
+				\theta_x(x_-) \ar[r]^{\eta_{1_x}((\iota^F_x)_{x_-^{\prime}}\circ f_-)} & G1_x(\theta_x(x_-^{\prime})) \ar[r]^{(\iota^G_x)^{\bullet}_{\eta_x(x_-^{\prime})}} & \theta_x(x_-^{\prime})
+			}\]
+			
+			\item \textbf{Function on 2-cells:} For $\alpha_-: f_- \to f_-^{\prime}: x_- \to x_-^{\prime}$, we define the 2-cell $(1_{1_x},\square): (1_x,(\iota^F_x)_{x_-}\circ f_-^{\prime}) \to (1_x,(\iota^F_x)_{x_-}\circ f_-):(x,x_-^{\prime}) \to (x,x_-):\int F$ where $\square$ is the pasting of:
+			\[\vcenter{\xymatrix{
+					x_- \ar@/^1pc/[r]^{f_-^{\prime}} \ar@/_1pc/[r]_{f_-} \ar@{}[r]|{\Uparrow\alpha_-} & x_-^{\prime} \ar[dr]_{(\iota^F_x)_{x_-^{\prime}}} \ar[r]^{(\iota^F_x)_{x_-^{\prime}}} & F1_x(x_-^{\prime}) \ar[d]|{1_{F1_x(x_-^{\prime})}} \ar@/^2pc/@{{}{ }{}}[d]|{\overset{(F^0_x)_{x_-^{\prime}}}{\Rightarrow}} \ar@/^4pc/[d]^{(F1_{1_x})_{x_-^{\prime}}}\\
+					&& F1_x(x_-^{\prime})
+			}}
+			\qquad \leadsto \qquad
+			\vcenter{\xymatrix{
+					\eta_x(x_-) \ar[rr]^{\eta_{1_x}((\iota^F_x)_{x_-^{\prime}}\circ f_-^{\prime})} \ar[dr]_{\eta_{1_x}((\iota^F_x)_{x_-^{\prime}}\circ f_-)} \ar@{}[drr]|{\overset{\eta_{1_{1_x}}(\square)}{\Rightarrow}} && G1_x(\eta_x(x_-^{\prime})) \ar[dl]^{(G1_{1_x})_{\eta_x(x_-^{\prime})}}\\
+					& G1_x(\eta_x(x_-^{\prime}))& 
+			}}\]
+			which gives us a 2-cell:
+			\[\xymatrix{
+				\theta_x(x_-) \ar[rr]^{\eta_{1_x}((\iota^F_x)_{x_-^{\prime}}\circ f_-^{\prime})} \ar[dr]_{\eta_{1_x}((\iota^F_x)_{x_-^{\prime}}\circ f_-)} \ar@{}[drr]|(0.4){\overset{\eta_{1_{1_x}}(\square)}{\Rightarrow}} && G1_x(\eta_x(x_-^{\prime})) \ar[dl]|{(G1_{1_x})_{\theta_x(x_-^{\prime})}} \ar@/^2pc/@{{}{ }{}}[dl]|{\overset{(G^{-0}_x)_{\theta_x(x_-^{\prime})}}{\simeq}} \ar@/^4pc/[dl]|{1_{G1_x(\theta_x(x_-^{\prime}))}} \ar[ddr]^{(\iota^G_x)^{\bullet}_{\eta_x(x_-^{\prime})}} \\
+				& G1_x(\theta_x(x_-^{\prime})) \ar@/_3pc/[drr]_{(\iota^G_x)^{\bullet}_{\eta_x(x_-^{\prime})}} &\\
+				&&& \theta_x(x_-^{\prime}) \ar@{{}{ }{}}@/^1pc/[ull]|(0.3){\wr \Uparrow r_{(\iota^G_x)^{\bullet}_{\eta_x(x_-^{\prime})}}}
+			}\]
+		\end{enumerate}
+		
+		\item \textbf{Function on Arrows:} For each $f: x \to y:\mathcal{B}$, we define a pseudo-natural transformation $\theta_f: \theta_y \circ F(f) \to G(f) \circ \theta_x$ as:
+		\begin{enumerate}
+			\item \textbf{Function on Objects:} For $x_-:Fx$, we define an arrow $(f, 1_{Ff(x_-)}): (x,x_-) \to (y, Ff(x_-)): \int F$
+			\[\vcenter{\xymatrix{
+					Ff(x_-) \ar[r]^{1_{Ff(x_-)}} & Ff(x_-)
+			}}
+			\qquad \leadsto \qquad
+			\vcenter{\xymatrix@C=3em{
+					\theta_y(Ff(x_-)) \ar[r]^{\eta_f(1_{Ff(x_-)})} & Gf(\theta_x(x_-))
+			}}\]
+			which allows us to define $(\theta_f)_{x_-} = \eta_f(1_{Ff(x_-)}): \theta_y(Ff(x_-)) \to Gf(\theta_x(x_-))$
+			\item \textbf{Function on Arrows:} For $f_-:x_- \to x_-^{\prime}:Fx$, we have a diagram in $\int F$, commuting up to invertible 2-cell:
+			\[\resizebox{6in}{!}{\vcenter{\xymatrix@R=3em@C=6em{
+						(x,x_-^{\prime}) \ar@{}[dr]|{\simeq} \ar[d]_{(f, 1_{Ff(x_-^{\prime})})} \ar[r]^{(1_x,(\iota^F_x)_{x_-^{\prime}}\circ f_-)} & (x,x_-) \ar[d]^{(f, 1_{Ff(x_-)})}\\
+						(y, Ff(x_-^{\prime})) \ar[r]_{(1_y, (\iota^F_y)_{Ff(x_-^{\prime})}\circ Ff(f_-))} & (y, Ff(x_-))
+				}}
+				\qquad \leadsto \qquad
+				\vcenter{\xymatrix@R=3em@C=6em{
+						(x,\theta_x(x_-^{\prime})) \ar@{}[dr]|{\simeq} \ar[d]_{(f, (\theta_f)_{x_^{\prime}})} \ar[r]^{(1_x,\eta_{1_x}((\iota^F_x)_{x_-^{\prime}}\circ f_-))} & (x,\theta_x(x_-)) \ar[d]^{(f, (\theta_f)_{x_-})}\\
+						(y, \theta_y(Ff(x_-^{\prime}))) \ar[r]_{(1_y, \eta_{1_y}((\iota^F_y)_{Ff(x_-^{\prime})}\circ Ff(f_-)))} & (y, \theta_y(Ff(x_-)))
+			}}\]
+			Hence we can define $(\theta_f)_{f_-}$ as the pasting of:
+			\[\xymatrix{
+				\theta_y(Ff(x_-)) \ar[r]^{(\theta_f)_{x_-}} \ar[d]_{\eta_{1_y}((\iota^F_y)_{Ff(x_-^{\prime})}\circ Ff(f_-))} & Gf(\theta_x(x_-)) \ar[dr]^{Gf(\eta_{1_x}((\iota^F_x)_{x_-^{\prime}}\circ f_-))}\\
+				G1_y(\theta_y(Ff(x_-^{\prime}))) \ar[dr]_{G1_y(\theta_f(x_-))} && Gf(G1_x(\theta_x(x_-^{\prime}))) \ar[dr]^{(\chi_{f,1_x})_{\theta_x(x_-^{\prime})}}\\
+				& G1_y(Gf(\theta_x(x_-^{\prime}))) \ar[dr]_{(\chi_{1_y,f})_{\theta_x(x_-^{\prime})}} && G(f\circ 1_x)(\theta_x(x_-^{\prime})) \ar[dl]^{(G(l^{-1}_f\circ r_f))_{\theta_x(x_-^{\prime})}}\\
+				&& G(1_y\circ f)(\theta_x(x_-^{\prime}))
+			}\]
+			\bigpablo{To be completed}
+		\end{enumerate}
+		
+		\item \textbf{Function on 2-cells:} For each $\alpha:f \to f^{\prime}: x \to y:\mathcal{B}$, we define a modification $\theta_\alpha: (G(\alpha)\star\theta_x)\circ \theta_f \to \theta_{f^{\prime}} \circ (\theta_y\star F(\alpha))$ as:
+		\begin{enumerate}
+			\item \textbf{Function on Objects:} For $x_-:Fx$, we define a 2-cell
+			\[\xymatrix{
+				(x,x_-) \ar[r]^{(f,1_{Ff(x_-)})} \ar[dr]_{(f^{\prime},1_{Ff^{\prime}(x_-)})} \ar@{}[drr]|(0.3){\Downarrow} & (y, Ff(x_-)) \ar[d]^{(1_y, (\iota^F_y)_{Ff^{\prime}(x_-)} \circ (F\alpha)_{x_-})}\\
+				& (y, Ff^{\prime}(x_-)) &
+			}\]
+			having $\alpha$ as a first component.
+		\end{enumerate}
+		
+		\item \textbf{Invertible Functoriality Constraint:} 
+	\end{enumerate}
+\end{definition}
+
+\subsection{Lax Modifications}
+
+\begin{definition}[Lax Modification]  Let $\mathcal{B}, \mathcal{C}$ be tricategories and $F, G: \mathcal{B} \to \mathcal{C}$ be lax functors and let $\theta, \phi: F \to G$ be lax natural transformations. A lax modification $\Gamma: \theta \to \phi$ is the data of:
+	\begin{enumerate}[label = $\bullet$]
+		\item \textbf{Function on Objects:} For each $a:\mathcal{B}$, a 2-cell $\Gamma_a: \theta_a \to \phi_a$
+		\item \textbf{Lax-Oriented Function on Arrows:} For each $f:a \to b:\mathcal{B}$, a 3-cell $\Gamma_f: (G(f)\star \Gamma_a) \circ \theta_{f} \to \phi_f \circ (\Gamma_b\starF(f))$
+		\[\vcenter{\xymatrix{
+				F(a) \ar[r]^{F(f)} \ar@/_1pc/[d]|{\phi_a} \ar@{}[d]|{\overset{\Gamma_a}{\Leftarrow}} \ar@/^1pc/[d]|{\theta_a} \ar@/^/@{{}{ }{}}[dr]|(0.6){\Downarrow \theta_f} & F(b) \ar[d]^{\theta_b}\\
+				G(a) \ar[r]_{G(f)} & G(b)
+		}}
+		\qquad \overset{\Gamma_f}{\Rrightarrow} \qquad
+		\vcenter{\xymatrix{
+				F(a) \ar[d]_{\phi_a} \ar[r]^{F(f)} \ar@/_/@{{}{ }{}}[dr]|(0.4){\Downarrow \phi_f} & F(b) \ar@/_1pc/[d]|{\phi_b} \ar@{}[d]|{\overset{\Gamma_b}{\Leftarrow}} \ar@/^1pc/[d]|{\theta_b}\\
+				G(a) \ar[r]_{G(f)} & G(b)
+		}}
+		\]
+		\item \textbf{Lax-Oriented Local Modificationality:} For each $a,b:\mathcal{B}$, the data above forms a modification:
+		\[\vcenter{\xymatrix@C=4em@R=3em{
+				\mathcal{B}(a,b) \ar@/^/@{{}{ }{}}[dr]|(0.4){\Downarrow \theta_{a,b}} \ar[r]^{F_{a,b}} \ar[d]_{G_{a,b}} & \mathcal{C}(F(a),F(b)) \ar[d]^{\mathcal{C}(F(a),\theta_b)}\\
+				\mathcal{C}(G(a),G(b)) \ar@/^1pc/[r]^{\mathcal{C}(\theta_a,G(b))}
+				\ar@{{}{ }{}}[r]|{\Downarrow \mathcal{C}(\Gamma_a,G(b))}
+				\ar@/_1pc/[r]_{\mathcal{C}(\phi_a,G(b))} & \mathcal{C}(F(a),G(b))
+		}}
+		\qquad \overset{\Gamma_{a,b}}{\Rrightarrow} \qquad
+		\vcenter{\xymatrix@C=4em@R=3em{
+				\mathcal{B}(a,b) \ar@/_/@{{}{ }{}}[dr]|(0.4){\Downarrow \phi_{a,b}} \ar[r]^{F_{a,b}} \ar[d]_{G_{a,b}} & \mathcal{C}(F(a),F(b)) \ar@/^1.5pc/[d]^(0.3){\mathcal{C}(F(a),\theta_b)}
+				\ar@{{}{ }{}}[d]|{\overset{\mathcal{C}(F(a),\Gamma_b)}{\Leftarrow}}
+				\ar@/_1.5pc/[d]_(0.3){\mathcal{C}(F(a),\phi_b)}\\
+				\mathcal{C}(G(a),G(b)) \ar[r]_{\mathcal{C}(\theta_a,F(b))} & \mathcal{C}(F(a),G(b))
+		}}\]
+	\end{enumerate}
+	subject to two axioms, a unity and an naturality axiom, as described in \cite{gordon1995coherence} and \cite{gurski_2013}.
+\end{definition}
+
+\begin{definition}[Grothendieck's Construction of a Lax Modification] Let $\mathcal{B}$ be a bicategory and $\Gamma: \theta \to \phi: F \to G: \mathcal{B} \to \Bicat$ be a lax modification between lax natural transformations between lax functors. We define an oplax natural transformation $\int \Gamma: \int \phi \to \int \theta$ as follows:
+	\begin{enumerate}
+		\item \textbf{Function on Objects:} For $(x,x_-):\int F$, we define an arrow $(\int \Gamma)_{(x, x_-)} = (1_x, (\iota_x)_{\phi_x(x_-)} \circ (\Gamma_x)_{x_-}) : \int \phi(x,x_-) \to \int \theta (x,x_-)$
+		\item \textbf{Function on Arrows:} For $(f,f_-):(x, x_-) \to (y, y_-):\int F$, we define a 2-cell $(\int \Gamma)_{(f, f_-)} = (1_f,): \int \theta(f,f_-) \circ (\int \Gamma)_{(x, x_-)} \to (\int \Gamma)_{(y, y_-)} \circ \int \phi(f,f_-)$
+		\[\xymatrix@R=3em@C=6em{
+			(x,\phi_x(x_-)) \ar@{}[dr]|{\simeq} \ar[d]_{(1_x,(\iota_x)_{\phi_x(x_-)} \circ (\Gamma_x)_{x_-})} \ar[r]^{(f, (\phi_f)_{x_-} \circ \phi_y(f_-))} & (y,\phi_y(y_-)) \ar[d]^{(1_y,(\iota_y)_{\phi_y(y_-)} \circ (\Gamma_y)_{y_-})}\\
+			(x,\theta_x(x_-)) \ar[r]_{(f, (\theta_f)_{x_-} \circ \theta_y(f_-)} & (y,\theta_y(y_-))
+		}\]
+	\end{enumerate}
+\end{definition}
+
+\begin{remark}[Axioms of Oplax-Natural Transformation] Similarly for the Grothendieck's construction of a lax functor, one can easily check that the axioms of pseudo-functors are satisfied by this data.
+\end{remark}
+
+\begin{definition}[Inverse Construction of a Pseudo-Functor] Let $\mathcal{B}$ be a bicategory and $\theta,\phi: F \to G: \mathcal{B} \to \Bicat$ be lax natural transformations between lax functors, and $\Delta: \int\phi \to \int\theta: \int F \to \int G$ be a pseudo-natural transformation such that $P_G \star \Delta = 1_{P_F}$. As $\Delta$ is a pseudo-natural transformation over $\mathcal{B}$, we can write:
+	\begin{enumerate}[label = $\bullet$]
+		\item $\Delta_{(x,x_-)} = (1_x,(\Delta_x)_{x_-})$ where $(\Delta_x)_{x_-} : \theta_x(x_-) \to G1_x(\phi_x(x_-))$
+		\item $\Delta_{(f,f_-)} = (1_f,(\Delta_f)_{f_-})$ which fills the square
+		\[\xymatrix@R=3em@C=6em{
+			(x,\phi_x(x_-)) \ar@{}[dr]|{\simeq} \ar[d]_{(1_x,(\Delta_x)_{x_-})} \ar[r]^{(f, (\phi_f)_{x_-} \circ \phi_y(f_-))} & (y,\phi_y(y_-)) \ar[d]^{(1_y,(\Delta_y)_{y_-})}\\
+			(x,\theta_x(x_-)) \ar[r]_{(f, (\theta_f)_{x_-} \circ \theta_y(f_-)} & (y,\theta_y(y_-))
+		}\]
+	\end{enumerate}
+	
+	We then define $\Gamma: \theta \to \phi : F \to G$ as follows:
+	\begin{enumerate}[label = $\bullet$]
+		\item \textbf{Function on Objects:} For each $x: \mathcal{B}$, we define a pseudo-natural transformation $\Gamma_x: \theta_x \to \phi_x: F(x) \to G(x)$:
+		\begin{enumerate}
+			\item \textbf{Function on Objects:} For $x_-:Fx$, we define $(\Gamma_x)_{x_-} = (\iota^G_x)_{\phi_x(x_-)}^{\bullet} \circ \Delta_x(x_-)$
+			\item \textbf{Function on Arrows:} For $f_-:x_- \to x_-^{\prime}$, we define an arrow $(1_x, (\iota^F_x)_{x_-^{\prime}} \circ f_-): (x,x_-^{\prime}) \to (x,x_-)$ and we consider the naturality square above on this arrow.
+		\end{enumerate}
+		\item \textbf{Function on Arrows:} For $f: x \to y$ and $x_-:Fx$, we define
+	\end{enumerate}
+\end{definition}
+
+\subsection{Perturbations}
+
+\begin{definition}[Perturbations]  Let $\mathcal{B}, \mathcal{C}$ be tricategories and $F, G: \mathcal{B} \to \mathcal{C}$ be lax functors, let $\theta, \phi: F \to G$ be lax natural transformations and let $\Gamma, \Delta: \theta \to\phi$ be lax modifications. A perturbation $\zeta: \Gamma \to \Delta$ is the data of:
+	\begin{enumerate}[label = $\bullet$]
+		\item \textbf{Function on Objects:} For each $a:\mathcal{B}$, a 3-cell $\zeta_a: \Gamma_a \to \Delta_a$
+		\item \textbf{Perturbationality:} For each $f:a \to b:\mathcal{B}$, a 3-cell $\Gamma_f: (G(f)\star \Gamma_a) \circ \theta_{f} \to \phi_f \circ (\Gamma_b\starF(f))$
+		\[\begin{array}{ccc}
+			\vcenter{\xymatrix{
+					F(a) \ar[r]^{F(f)} \ar@/_1pc/[d]|{\phi_a} \ar@{}[d]|{\overset{\Gamma_a}{\Leftarrow}} \ar@/^1pc/[d]|{\theta_a} \ar@/^/@{{}{ }{}}[dr]|(0.6){\Downarrow \theta_f} & F(b) \ar[d]^{\theta_b}\\
+					G(a) \ar[r]_{G(f)} & G(b)
+			}} & \overset{\Gamma_f}{\Rrightarrow} &  \vcenter{\xymatrix{
+					F(a) \ar[d]_{\phi_a} \ar[r]^{F(f)} \ar@/_/@{{}{ }{}}[dr]|(0.4){\Downarrow \phi_f} & F(b) \ar@/_1pc/[d]|{\phi_b} \ar@{}[d]|{\overset{\Gamma_b}{\Leftarrow}} \ar@/^1pc/[d]|{\theta_b}\\
+					G(a) \ar[r]_{G(f)} & G(b)
+			}}\\
+			&&\\
+			(G(f)\circ_1 \zeta_a) \circ_2 \theta_{f}  \rotatebox[origin=c]{270}{\Rrightarrow} && \theta_{f} \to \phi_f \circ_2 (\zeta_b\circ_1 F(f)) \rotatebox[origin=c]{270}{\Rrightarrow}\\
+			&&\\
+			\vcenter{\xymatrix{
+					F(a) \ar[r]^{F(f)} \ar@/_1pc/[d]|{\phi_a} \ar@{}[d]|{\overset{\Delta_a}{\Leftarrow}} \ar@/^1pc/[d]|{\theta_a} \ar@/^/@{{}{ }{}}[dr]|(0.6){\Downarrow \theta_f} & F(b) \ar[d]^{\theta_b}\\
+					G(a) \ar[r]_{G(f)} & G(b)
+			}} & \overset{\Delta_f}{\Rrightarrow} &  \vcenter{\xymatrix{
+					F(a) \ar[d]_{\phi_a} \ar[r]^{F(f)} \ar@/_/@{{}{ }{}}[dr]|(0.4){\Downarrow \phi_f} & F(b) \ar@/_1pc/[d]|{\phi_b} \ar@{}[d]|{\overset{\Delta_b}{\Leftarrow}} \ar@/^1pc/[d]|{\theta_b}\\
+					G(a) \ar[r]_{G(f)} & G(b)
+			}}
+		\end{array}
+		\]
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}[Grothendieck's Construction of a Perturbation] Let $\mathcal{B}$ be a bicategory and $\zeta: \Gamma \to \Delta: \theta \to \phi: F \to G: \mathcal{B} \to \Bicat$ be a perturbation between lax modifications between lax natural transformations between lax functors. We define modification $\int \zeta: \int \Delta \to \int \Gamma$ as follows:
+	\begin{enumerate}
+		\item \textbf{Function on Objects:} For $(x,x_-):\int F$, we define an arrow $(\int \zeta)_{(x, x_-)} = (1_{1_x}, \square) : (\int \Delta)_{(x,x_-)} \to (\int \Gamma)_{(x,x_-)}$ where $\square$ is the pasting of:
+		\[\vcenter{\xymatrix{
+				\theta_x(x_-) \ar@/^1pc/[r]^{(\Gamma_x)_{x_-}} \ar@/_1pc/[r]_{(\Delta_x)_{x_-}} \ar@{}[r]|{\Uparrow(\zeta_x)_{x_-}} & \phi_x(x_-) \ar[dr]_{(\iota^G_x)_{\phi_x(x_-)}} \ar[r]^{(\iota^G_x)_{\phi_x(x_-)}} & G1_x(\phi_x(x_-)) \ar[d]|{1_{G1_x(\phi_x(x_-))}} \ar@/^2pc/@{{}{ }{}}[d]|{\overset{(G^0_x)_{\phi_x(x_-)}}{\Rightarrow}} \ar@/^4pc/[d]^{(G1_{1_x})_{\phi_x(x_-)}}\\
+				&& G1_x(\phi_x(x_-))
+		}}\]
+	\end{enumerate}
+\end{definition}
+
+\begin{remark}[Axioms of a Modification] Similarly for the Grothendieck's construction of a lax functor, one can easily check that the axioms of pseudo-functors are satisfied by this data.
+\end{remark}
+
+\begin{definition}[Inverse Construction of a Perturbation] Let $\mathcal{B}$ be a bicategory and $\Gamma, \Delta: \theta \to \phi: F \to G: \mathcal{B} \to \Bicat$ be lax modifications between lax natural transformations between lax functors, and $\Xi: \int \Delta \to \int \Gamma$ a modification. We define a perturbation $\zeta: \Gamma \to \Delta$ as follows:
+	\begin{enumerate}
+		\item \textbf{Function on Objects:} For $x: \mathcal{B}$ and $x_-: Fx$, we define a 2-cell $(\zeta_x)_{x_-}$ as the pasting of:
+		\[\xymatrix{
+			\theta_x(x_-) \ar[rr]^{(\iota^G_x)_{\phi_x(x_-)}\circ (\Gamma_x)_{x_-}} \ar[dr]_{(\iota^G_x)_{\phi_x(x_-)}\circ (\Delta_x)_{x_-}} \ar@{}[drr]|(0.4){\overset{(\Xi_x)(x_-)}{\Rightarrow}} && G1_x(\phi_x(x_-)) \ar[dl]|{(G1_{1_x})_{\phi_x(x_-)}} \ar@/^2pc/@{{}{ }{}}[dl]|{\overset{(G^{-0}_x)_{\phi_x(x_-)}}{\simeq}} \ar@/^4pc/[dl]|{1_{G1_x(\phi_x(x_-))}} \ar[ddr]^{(\iota^G_x)^{\bullet}_{\phi_x(x_-)}} \\
+			& G1_x(\phi_x(x_-)) \ar@/_3pc/[drr]_{(\iota^G_x)^{\bullet}_{\phi_x(x_-)}} &\\
+			&&& \phi_x(x_-) \ar@{{}{ }{}}@/^1pc/[ull]|(0.3){\wr \Uparrow r_{(\iota^G_x)^{\bullet}_{\phi_x(x_-)}}}
+		}\]
+	\end{enumerate}
+\end{definition}
+
+
+\subsection{Lax Equivalence of the Grothendieck's Construction}
+
+\begin{theorem}[Grothendieck's Construction] The data described in the previous subsections forms a trihomomorphisms:
+	\[\int: [\mathcal{B}, \Bicat]_{l} \longrightarrow \left(\Bicat/\mathcal{B}\right)^{co}\]
+	where $[\mathcal{B}, \Bicat]_{l}$ is the tricategory of lax functors, lax natural transformations, pseudo-modifications and perturbations, and $\Bicat/\mathcal{B}$ is the strict slice. Furthermore, if $F,G:[\mathcal{B}, \Bicat]_{l}$ are lax functors such that $\iota^G$ is an equivalence and $G^0$ is invertible, then
+	\[\int_{F,G}: [\mathcal{B}, \Bicat]_{l}(F,G) \longrightarrow \left(\Bicat/\mathcal{B}\right)^{co}\left(\int F, \int G\right)\]
+	is a biequivalence of bicategories.
+\end{theorem}
+
+\newpage
+\bibliographystyle{alpha}
+\bibliography{reference}
+\end{document}

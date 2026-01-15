@@ -1,0 +1,753 @@
+\documentclass{article}
+\input{mypreamble/a-preamble}
+\usepackage{mathdots}
+\usepackage{bookmark}
+
+%%%%% TITLE PAGE
+\title{Higher Morita Categories}
+\author{Pablo Bustillo Vazquez}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+\section{Goal and Ideas}
+
+For a given enrichment context $\mathcal{V}\in \EAlg{n}(\PrL)$, we have a sequence of symmetric-monoidal functors
+
+\begin{equation}
+    \EAlg{n} \longto \Mor_n^\alpha \longto \Mor_n^\beta \longto \PrL_n \longto \Cat{n}^{\Colim}
+\end{equation}
+The first category is $(\infty,1)$-$\mathcal{V}$-enriched, the others $(\infty,n+1)$-$\mathcal{V}$-enriched. The question of finding $k$-dualizable objects in these should be:
+\begin{enumerate}
+    \item (essentially) Kozsul duality in the first one (maybe more clear with augmented algebras?),
+    \item factorization homology in the Morita ones then smoothness/properness
+    \item higher condensation of previous ones
+    \item same
+\end{enumerate}
+
+Our goals are:
+
+\begin{enumerate}
+    \item Construct a most general higher morita category by successive enrchiment. Requirement: stable under factorization homology.
+
+    \item Embed such Morita category into nPr such that it controls all dualizable objects/cells.
+
+    \item Duals up to $n$ = adjoints, then duals at $n+1$ = finiteness, and duals at $> n+1$ = invertibility. Extend characterization to 1 $\beta$-level and recover \textbf{fusion} categories.
+
+    \item Link with Kozsul duality? Which objects are part of a Kozsul pair?
+
+    \item Link to K-theory?
+
+    \item Compute factorization homology of Mor (which is the natural domain for.. factorization homology). This corresponds to finding its full pasting calculus.
+
+    \item Compute Brauer spectrum for several enrichment context.
+\end{enumerate}
+
+\section{Notations and Assumptions}
+
+We assume a working theory of $(\infty,n)$-categories, for example the iterated enrichment model, in which we have:
+\begin{enumerate}
+    \item for each $n\geq 0$, an $(\infty, 1)$-category $\Cat{n}$,
+    \item for each $n\geq 0$ and each $\mathcal{C} \in \Cat{n}$, a hom-functor
+    \item $\mathcal{E}^k$-monoidal $(\infty,n)$-categories $\A$ have a $k$-delooping $\mathbb{B}^k\A$ which is an $(\infty,n+k)$-category,
+    \item the $(\infty, 1)$
+\end{enumerate}
+
+\section{Dualizable Objects}
+
+\subsection{Adjunctions}
+
+\[
+\begin{tikzcd}
+    \cdots \arrow[r] & C_{n+1} \arrow[r, "d_{n+1}"] & C_n \arrow[r, "d_n"] & C_{n-1} \arrow[r] & \cdots \arrow[r] & C_1 \arrow[r, "d_1"] & C_0 \arrow[r] & 0
+\end{tikzcd}
+\]
+
+\begin{definition}[Adjunction]
+    Let $\mathcal{C}$ be an $(\infty,2)$-category. 
+    A morphism $f\in a \to b \in \mathcal{C}$ is a left (resp. right) adjoint if it is a left (resp. right) adjoint in the bicategory $\tau_{\leq 2} \mathcal{C}$.
+    We then write $f \dashv g$ to denote that $f$ is a left adjoint of $g$.
+\end{definition}
+
+We have the following very powerful result by Riehl and Verity, essentially estabilishing that the higher homotopical uniqueness of the adjunction data:
+
+\begin{theorem}[Unicity of Adjoints]
+    There is a $2$-category $\Adj$ together with the data of two morphisms $L, R \in \Adj^\to$ such that, for any $\mathcal{C}$ $(\infty,2)$-category, the precompositions
+    % https://q.uiver.app/#q=WzAsMixbMCwwLCJbXFxBZGosXFxtYXRoY2Fse0N9XSJdLFsyLDAsIlxcbWF0aGNhbHtDfV5cXHRvIl0sWzAsMSwiTF4qIiwwLHsiY3VydmUiOi0xLCJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFswLDEsIlJeKiIsMix7ImN1cnZlIjoxLCJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6ImJvdHRvbSJ9fX1dXQ==
+    \[\begin{tikzcd}
+        {[\Adj,\mathcal{C}]} && {\mathcal{C}^\to}
+        \arrow["{L^*}", curve={height=-6pt}, hook, from=1-1, to=1-3]
+        \arrow["{R^*}"', curve={height=6pt}, hook', from=1-1, to=1-3]
+    \end{tikzcd}\]
+    induce \textbf{monomorphisms} of spaces selecting the connected components of left (resp. right) adjoint morphisms.
+\end{theorem}
+
+\textbf{Geometrically}, one can describe explicitly the $2$-category $\Adj$ geometrically as follows:
+\begin{enumerate}
+    \item \textbf{Objects:} the positively and negatively oriented point $\{\pm\}$,
+    \item \textbf{Morphisms:} finite $1$-stratification of the real line where orientation of each segment alternates (we get sink and escape points in between them),
+    \item \textbf{$2$-cells:} \textit{(up to isotopy)} finite $2$-stratification of the real plane where the oriented tangent vectors of the $1$-stratas is not allowed to be $(-1,0)$,
+\end{enumerate}
+\textbf{Combinatorially}, one can also describe explicitly the hom-categories as:
+\[\begin{cases}[rCl]
+    \Adj(+,+) &=& \Delta_+ = \textnormal{Free}^{\mathcal{E}^1}_{\mathcal{E}^1}(\{RL\})\\
+    \Adj(+,-) &=& \Delta_\infty \\
+    \Adj(-,-) &=& \Delta_+^\op = \textnormal{Free}^{\textnormal{co-}\mathcal{E}^1}_{\textnormal{co-}\mathcal{E}^1}(\{LR\})\\
+    \Adj(-,+) &=& \Delta_{-\infty}
+\end{cases}\]
+where $\Delta_\infty$ (resp. $\Delta_{-\infty}$) is the category of finite non-empty linear orders with top (resp. bottom) element preserving morphisms.
+
+Similarly, one can talk about $k$-morphisms in an $(\infty,n)$-category being adjoints.
+Explicitly, if we let $\Adj_1 = \Adj$, one can build by induction the following ``walking adjunct pair of $k$-morphisms'' as the representing object in $\Cat{k+1}$ of the functor sending $\mathcal{C}\in\Cat{k+1}$ to the fibration of spaces classifying
+% https://q.uiver.app/#q=WzAsNCxbMCwxLCJcXHRhdV8wXFxtYXRoY2Fse0N9XFx0aW1lcyBcXHRhdV8wXFxtYXRoY2Fse0N9Il0sWzEsMSwiXFxDYXR7a30iXSxbMCwwLCJcXENhdHtrKzF9KFxcQWRqX2ssIFxcbWF0aGNhbHtDfSkiXSxbNCwxLCJcXFNwYSJdLFswLDEsIlxcbWF0aGNhbHtDfSgtLC0pIiwyXSxbMiwwLCIiLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMSwzLCJcXENhdHtrfShcXEFkal97ay0xfSwtKSIsMl1d
+\[\begin{tikzcd}
+	{\Cat{k+1}(\Adj_k, \mathcal{C})} \\
+	{\tau_0\mathcal{C}\times \tau_0\mathcal{C}} & {\Cat{k}} &&& \Spa
+	\arrow[dashed, from=1-1, to=2-1]
+	\arrow["{\mathcal{C}(-,-)}"', from=2-1, to=2-2]
+	\arrow["{\Cat{k}(\Adj_{k-1},-)}"', from=2-2, to=2-5]
+\end{tikzcd}\]
+
+We can also easily deduce unicity statements.
+More explicitly, for $\Theta_k$ the $k$-globe, we have $L,R\in \Adj_k^{\Theta_k}$ $k$-cells, such that precomposition induces again monomorphisms
+\[\begin{tikzcd}
+    {[\Adj_k,\mathcal{C}]} && {\mathcal{C}^{\Theta_k}}
+    \arrow["{L^*}", curve={height=-6pt}, hook, from=1-1, to=1-3]
+    \arrow["{R^*}"', curve={height=6pt}, hook', from=1-1, to=1-3]
+\end{tikzcd}\]
+
+\subsection{Infinite Chain of Adjunctions}
+
+\begin{definition}[Fully-Adjoint]
+    Let $\mathcal{C}$ be an $(\infty,2)$-category and $f\in a\to b$ a morphism.
+    We say that $f$ is part of an infinite chain of adjunctions if there exists a sequence of morphisms $f^{\vee n}$ such that:
+    \[
+        \cdots \dashv f^{\vee-n} \dashv \cdots \dashv f^{\vee-1} \dashv f \dashv f^{\vee1} \dashv \cdots \dashv f^{\vee n} \dashv \cdots
+    \]
+    We say that $f$ is infinitely-adjoint.
+\end{definition}
+If we let $\mathcal{C}^{\infty\textnormal{-adj}}$ be the following infinite fiber product,
+% https://q.uiver.app/#q=WzAsMTAsWzQsMiwiW1xcQWRqLFxcbWF0aGNhbHtDfV0iXSxbMywzLCJcXG1hdGhjYWx7Q31eXFx0byJdLFsyLDIsIltcXEFkaixcXG1hdGhjYWx7Q31dIl0sWzYsMiwiW1xcQWRqLFxcbWF0aGNhbHtDfV0iXSxbMCwyLCJcXGNkb3RzIl0sWzgsMiwiXFxjZG90cyJdLFsxLDMsIlxcbWF0aGNhbHtDfV5cXHRvIl0sWzUsMywiXFxtYXRoY2Fse0N9XlxcdG8iXSxbNywzLCJcXG1hdGhjYWx7Q31eXFx0byJdLFs0LDAsIlxcbWF0aGNhbHtDfV57XFxpbmZ0eS1cXHRleHRub3JtYWx7YWRqfX0iXSxbMCwxLCJMIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMiwxLCJSIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJib3R0b20ifX19XSxbMCw3LCJSIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJib3R0b20ifX19XSxbNCw2LCJSIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJib3R0b20ifX19XSxbMiw2LCJMIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMyw3LCJMIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMyw4LCJSIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbNSw4LCJMIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbOSwyLCIiLDAseyJjdXJ2ZSI6MSwic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJib3R0b20ifX19XSxbOSwwLCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFs5LDMsIiIsMCx7ImN1cnZlIjotMSwic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbOSw0LCIiLDAseyJjdXJ2ZSI6Miwic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJib3R0b20ifX19XSxbOSw1LCIiLDIseyJjdXJ2ZSI6LTIsInN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV1d
+\[\begin{tikzcd}
+	&&&& {\mathcal{C}^{\infty\textnormal{-adj}}} \\
+	\\
+	\cdots && {[\Adj,\mathcal{C}]} && {[\Adj,\mathcal{C}]} && {[\Adj,\mathcal{C}]} && \cdots \\
+	& {\mathcal{C}^\to} && {\mathcal{C}^\to} && {\mathcal{C}^\to} && {\mathcal{C}^\to}
+	\arrow[curve={height=12pt}, hook', from=1-5, to=3-1]
+	\arrow[curve={height=6pt}, hook', from=1-5, to=3-3]
+	\arrow[hook, from=1-5, to=3-5]
+	\arrow[curve={height=-6pt}, hook, from=1-5, to=3-7]
+	\arrow[curve={height=-12pt}, hook, from=1-5, to=3-9]
+	\arrow["R", hook', from=3-1, to=4-2]
+	\arrow["L"', hook, from=3-3, to=4-2]
+	\arrow["R", hook', from=3-3, to=4-4]
+	\arrow["L"', hook, from=3-5, to=4-4]
+	\arrow["R", hook', from=3-5, to=4-6]
+	\arrow["L"', hook, from=3-7, to=4-6]
+	\arrow["R", hook, from=3-7, to=4-8]
+	\arrow["L"', hook, from=3-9, to=4-8]
+\end{tikzcd}\]
+we can see that the projections down to any $\mathcal{C}^\to$ are monomorphisms of spaces selecting the connected components of infinitely-adjoint morphisms.
+
+The functor $\mathcal{C} \mapsto \mathcal{C}^{\infty\textnormal{-adj}}$ should then be representable by some $2$-category that can be \textbf{geometrically} described as:
+\begin{enumerate}
+    \item \textbf{Objects:} the positively and negatively oriented point $\{\pm\}$,
+    \item \textbf{Morphisms:} \pablo{to be described}
+\end{enumerate}
+This is however beyond the scope of this document.
+
+Similarly to the previous subsection, one can describe the same notion for $k$-morphisms in an $(\infty,n)$-category of being infinitely-adjoint by taking the infinite fiber product
+% https://q.uiver.app/#q=WzAsMTAsWzQsMiwiW1xcQWRqX2ssXFxtYXRoY2Fse0N9XSJdLFszLDMsIlxcbWF0aGNhbHtDfV57XFxUaGV0YV9rfSJdLFsyLDIsIltcXEFkal9rLFxcbWF0aGNhbHtDfV0iXSxbNiwyLCJbXFxBZGpfayxcXG1hdGhjYWx7Q31dIl0sWzAsMiwiXFxjZG90cyJdLFs4LDIsIlxcY2RvdHMiXSxbMSwzLCJcXG1hdGhjYWx7Q31ee1xcVGhldGFfa30iXSxbNSwzLCJcXG1hdGhjYWx7Q31ee1xcVGhldGFfa30iXSxbNywzLCJcXG1hdGhjYWx7Q31ee1xcVGhldGFfa30iXSxbNCwwLCJcXG1hdGhjYWx7Q31ee1xcaW5mdHlcXHRleHRub3JtYWx7LWFkai19a1xcdGV4dG5vcm1hbHstY2VsbH19Il0sWzAsMSwiTCIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzIsMSwiUiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoiYm90dG9tIn19fV0sWzAsNywiUiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoiYm90dG9tIn19fV0sWzQsNiwiUiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoiYm90dG9tIn19fV0sWzIsNiwiTCIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzMsNywiTCIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzMsOCwiUiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzUsOCwiTCIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzksMiwiIiwwLHsiY3VydmUiOjEsInN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoiYm90dG9tIn19fV0sWzksMCwiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbOSwzLCIiLDAseyJjdXJ2ZSI6LTEsInN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzksNCwiIiwwLHsiY3VydmUiOjIsInN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoiYm90dG9tIn19fV0sWzksNSwiIiwyLHsiY3VydmUiOi0yLCJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dXQ==
+\[\begin{tikzcd}
+	&&&& {\mathcal{C}^{\infty\textnormal{-adj-}k\textnormal{-cell}}} \\
+	\\
+	\cdots && {[\Adj_k,\mathcal{C}]} && {[\Adj_k,\mathcal{C}]} && {[\Adj_k,\mathcal{C}]} && \cdots \\
+	& {\mathcal{C}^{\Theta_k}} && {\mathcal{C}^{\Theta_k}} && {\mathcal{C}^{\Theta_k}} && {\mathcal{C}^{\Theta_k}}
+	\arrow[curve={height=12pt}, hook', from=1-5, to=3-1]
+	\arrow[curve={height=6pt}, hook', from=1-5, to=3-3]
+	\arrow[hook, from=1-5, to=3-5]
+	\arrow[curve={height=-6pt}, hook, from=1-5, to=3-7]
+	\arrow[curve={height=-12pt}, hook, from=1-5, to=3-9]
+	\arrow["R", hook', from=3-1, to=4-2]
+	\arrow["L"', hook, from=3-3, to=4-2]
+	\arrow["R", hook', from=3-3, to=4-4]
+	\arrow["L"', hook, from=3-5, to=4-4]
+	\arrow["R", hook', from=3-5, to=4-6]
+	\arrow["L"', hook, from=3-7, to=4-6]
+	\arrow["R", hook, from=3-7, to=4-8]
+	\arrow["L"', hook, from=3-9, to=4-8]
+\end{tikzcd}\]
+where importantly, once again, all projections are monomorphisms.
+
+\subsection{Iterated Adjunctions and Duals}
+
+\begin{definition}[Fully-Adjoint]
+    Let $\A$ be an $(\infty,n)$-category. By induction on $1\leq l$, we define the following. For $1 \leq k$, a $k$-morphism $f\in a_{k-1}\to b_{k-1}\in \ldots \in a_0 \to b_0$ is $l$-adjoint if:
+\begin{enumerate}
+    \item $f$ is part of an infinite chain of adjunctions in $(\A(a_0,b_0)\ldots)(a_{k-2}, b_{k-2})$ (interpreted as $\A$ when $k=1$)
+    \[
+        \cdots \dashv f^{\vee-n} \dashv \cdots \dashv f^{\vee-1} \dashv f \dashv f^{\vee1} \dashv \cdots \dashv f^{\vee n} \dashv \cdots
+    \]
+    with (co)units $\epsilon(f^{\vee k})$, $\eta(f^{\vee k})$ of $f^{\vee k} \dashv f^{\vee k+1}$ for $k \inset \mathbb{Z}$,
+    \item (and if $l \leq 2$) for all $k \inset \mathbb{Z}$, $\epsilon(f^{\vee k})$ and $\eta(f^{\vee k})$ are $(l-1)$-adjoint.
+\end{enumerate}
+If $k+l = n$, we say that $f$ is fully-adjoint.
+\end{definition}
+
+\begin{remark}
+    For $n + 1\geq k+l$, we recover the notion of invertibility.
+\end{remark}
+
+\begin{definition}[Fully-Dualizable Object] Let $\A$ be an $\mathcal{E}^1$-monoïdal $(\infty,n)$-category. For $1 \leq l$, an object $a \in \A$ is $l$-dualizable if it is $l$-adjoint as a $1$-morphism of $\mathbb{B}\A$. If $l=n$, we say that $a$ is fully-dualizable.
+\end{definition}
+
+\begin{definition}[Has Adjoints or Duals]\leavevmode
+    \begin{enumerate}
+        \item Let $\A$ be an $(\infty,n)$-category. We say that $\A$ \textbf{has adjoints} if all $k$-morphisms have a left and right adjoint for $1 \leq k \leq n-1$, or equivalently, if all $k$-morphisms are fully-adjoints.
+        \item Let $\A$ be an $\mathcal{E}^1$-monoïdal $(\infty,n)$-category. We say that $\A$ \textbf{has duals} if $\mathbb{B}\A$ has adjoints.
+    \end{enumerate}
+\end{definition}
+
+\begin{remark} If $\A$ is $\mathcal{E}^k$-monoïdal for $k \geq 2$, then an object (seen as a morphism of $\mathbb{B}\A$) has a left adjoint if and only if it has a right adjoint if and only if it is part of an infinite chain of adjunctions. We get identifications $a^{\vee 2n} \simeq a$, which can be made canonical for $\A$ symmetric-monoïdal.
+\end{remark}
+
+\begin{example}\label{rem:pointdual} $\Bordfr$ is symmetric-monoïdal and has duals. In particular, the point $\{+\}$ is a fully-dualizable object. 
+\end{example}
+
+For the next result, we need to briefly define a notation for the data involved in a $l$-adjunction:
+
+\begin{definition}[Higher Adjunction Data]
+    An adjunction data is a word $\omega$ using the symbols $\epsilon$, $\eta$, $-^{\vee n}$ (for any $n \inset \mathbb{Z}$) applied to $f$. The depth of an adjunction data is the number $\textnormal{depth}(\omega)$ of times either of the letters $\eta$ or $\epsilon$ were used.
+\end{definition}
+
+For example $\eta(\eta(\epsilon(f^{\vee -5}))^{\vee 12})$ is an adjunction data of depth $3$.
+
+\begin{theorem}[Unicity]\label{thm:unicity}
+    Let $\A$ be an $(\infty,n)$-category, $1 \leq k, l$, $f\in a_{k-1}\to b_{k-1}\in \ldots \in a_0 \to b_0$ a $l$-adjoint $k$-morphism $l$-adjoint and $\omega$ be a word 
+    Let $\omega$ be any word using the symbols $\epsilon$, $\eta$, $-^{\vee n}$ (for any $n \inset \mathbb{Z}$) applied to $f$.
+\end{theorem}
+
+\subsection{Identifying Handlebodies}
+
+\subsubsection{Just $\epsilon$}
+
+Ok so we want $D^k \mono \mathbb{R}^k \times (0,1)$ with first coordinate canonical and second coordinate $\vec{x} \mapsto (1-r^2)/2$. 
+
+\subsection{General}
+
+Let $a + b \leq n$. We then have
+\[
+    \partial(D^a \times D^b) = S^a \times D^b \bigsqcup_{S^a \times S^b} D^a \times S^b
+\]
+Using a tubular neighbourhood $S^a \times S^b \times D^1 \mono D^a \times S^b$, we have
+\[
+    \partial(D^a \times D^b) = S^a \times D^b \bigsqcup_{S^a \times S^b} S^a \times S^b \times D^1 \bigsqcup_{S^a \times S^b} D^a \times S^b
+\]
+
+\subsection{Redundancy of Adjunction Data}
+
+\begin{theorem}[Redundancy]\label{thm:redundancy}
+    Let $\A$ be an $(\infty,n)$-category, $1 \leq k, l$, $f\in a_{k-1}\to b_{k-1}\in \ldots \in a_0 \to b_0$ a $l$-adjoint $k$-morphism.
+    Then $f$ is $(l+1)$-adjoint if and only if......
+\end{theorem}
+
+\subsection{Finding Fully-Dualizable Objects}
+
+\begin{remark} Recall that we have functors $\Bordfr_k \to \Bordfr_n$ given by extending the framing trivially. \textbf{Warning:} these functors are \textbf{not} truncations.
+\end{remark}
+
+\begin{lemma}[Constructing Full-Adjunctions]\label{lem:constr} Let $\A$ be a symmetric-monoïdal $(\infty,n+1)$-category together with a functor $F\in \Bordfr_n \to \A$ sending $\{+\}$ to some object $a$. Then $A$ is fully-dualizable if and only if, for every $n$-morphism
+    \[
+        f\in a_{n-1}\to b_{n-1}\in \ldots \in a_0 \to b_0\in \Bordfr_n
+    \]
+    $Ff$ is part of an infinite chain of adjunctions.
+\end{lemma}
+\begin{proof} For $n = 0$, $\Bordfr_0$ is the trivial category $\{\bullet\}$ and the statement is tautological. Now assume it true for $n \geq 0$. Clearly, $A$ (seen as a morphism in $\mathbb{B}\A$) is part of an infnite chain of adjunctions given by the image of $\Bordfr_1 \to \Bordfr_n \to \A$.
+\end{proof}
+
+\section{Alpha-Case: Objects}
+
+Recall that $\Mor_n$ is an $(\infty,n+1)$-category.
+
+\subsection{First Step: n-dualizability}
+
+It's well-known that every $k$-morphisms of $\Mor_n$ is $(n-k)$-adjoints (but not necessarily fully-adjoint). Using factorization homology, we can make the $n$-dualizability data of an object more explicit: 
+
+\begin{theorem}[Cite Claudia and John] Let $\mathcal{V}\in \EAlg{n}\left(\Cat{1}^{\textnormal{sifted}-\Colim}\right)$ . For $a \in \EAlg{n}(\mathcal{V})$, we have a functor
+\[
+    \int_{-} a\in \Bordfr_n \longto \Mor_n(\mathcal{V})
+\]
+from an $(\infty,n)$-category to an $(\infty,n+1)$-category.
+\end{theorem}
+
+By Lemma \ref{lem:constr}, we then have the following:
+
+\subsection{Second Step: (n+1)-cells}
+
+For $A$ to be $n+1$-dualizable, it suffices for the $n$-cells involved in its $n$-dualizable structure to have adjoints. A priori, the cobordism hypothesis's inductive proof relies on the claim that it's enough to check adjoints on some of these cells (the spheres). We can prove it formally in this context.
+
+The strategy is the following:
+\begin{enumerate}[label = (\roman*)]
+    \item Any arbitrarily complicated $n$-cell $x\in a_{n-1}\to b_{n-1}\in \ldots \in a_0 \to b_0$ in the image of our functor, can be seen (after smoothing) as the data of a $n$-manifold with boundary $M$ and where the action is given by the canonical map of $\mathcal{E}^1$-algebra
+    \[
+        \int_{\partial M \times \mathbb{R}} A \longto \End\left(\int_M A\right)
+    \]
+
+    \item To find a dual, we need to proceed by handle decomposition and show that each handle has a dual. TODO: link handles to the half-spheres.
+\end{enumerate}
+
+\section{Alpha-Case: Higher Cells}
+
+Lots of elements in the proof are based on the idea that we have an inductive definition of $\Mor_n$, which was proved formally by Rune Haugseng I believe (Thm $1.3$). For dualizability to be recognized as a finiteness condition, one simply need to find a type of $\infty$-categories left unchanged by this inductive process:
+
+\begin{definition}[Good Categories] A $n$-good category is a stable presentable $\Disk_n$-$\infty$-category, \emph{i.e.} a $n$-disk algebra in the $\infty$-category of stable presentable categories with its usual symmetric tensor product. 
+\end{definition}
+
+\begin{lemma}[Categories of Bimodules are Good] Let $\mathcal{S}$ be a $n$-good category and let $a, b\in \Disk_n(\mathcal{S})$ be $n$-disk algebra objects. Then ${}_a\Bimod_b(\mathcal{S})$ is a $(n-1)$-good category.
+\end{lemma}
+\begin{proof} Stability and presentability should probably be proven in [HA]. The $(n-1)$-disk operation should be clear to define. 
+\end{proof}
+
+
+I need [HA.4.6.2.13] to show that "being a left adjoint" only depends on the codomain algebra. Then general manipulations of disk-operads show it only depends on the bar construction. Then if $\mathcal{S}$ is spectra, or maybe R-mod, we know it means finite module. In more general setup it'd be some absolute colimits maybe? (using the link between being absolute and having a dual).
+
+We first need to identify which $n$-cells are dualizable. First, we need to define a higher notion of two-sided bar construction (arguably a ``stratified-$S^{n-1}$''-sided bar construction).
+
+\begin{definition}[Higher Bar Construction]
+Let us define a stratification of $\mathbb{R}^{n}$ as follows: for $0\leq k \leq n-1$, we have two strata of the form $\{0\}^k \times \mathbb{R}_{\epsilon} \times \mathbb{R}^{n-k-1}$ with respectively $\epsilon \inset \{>0, <0\}$ and they are respectively called $A_{k}$ and $B_{k}$, and we have the additional strata $\{0\}^{n}$ called $X$. We can this stratified space $\BarCon_n$. For any $x\in a_{n-1}\to b_{n-1}\in \ldots \in a_0 \to b_0$ in $\Mor_n(\mathcal{S})$, we can then define $\int_{\BarCon_n} x$ where the stratas are labelled in the obvious way.
+\end{definition}
+
+\begin{lemma}[Dualizability of the highest-level cells] A $n$-cell $x\in a_{n-1}\to b_{n-1}\in \ldots \in a_0 \to b_0$ is dualizable in $\Mor_n(\mathcal{S})$ if and only if $x$ is a finite $\int_{\BarCon_{n-1}} a_{n-1}$-left-module and a finite $\int_{\BarCon_{n-1}}b_{n-1}$-right-module in $\mathcal{S}$.
+\end{lemma}
+\begin{proof} By the iterative definition of $\Mor_n(\mathcal{S})$, we see that $x$ is dualizable whenever it is dualizable as a $1$-cell in $\Mor_1({}_{a_{n-2}}\Bimod_{b_{n-2}}(\ldots {}_{a_0}\Bimod_{b_0}(\mathcal{S})))$. By [Insert reference to HA], $x$ is then dualizable if and only if it is a finite $a_{n-1}$-left-module and a finite $b_{n-1}$-right-module in this iterated bimodule category. Equivalently, it has to be dualizable as a finite $\int_{\BarCon_{n-1}} a_{n-1}$-left-module and a finite $\int_{\BarCon_{n-1}}b_{n-1}$-right-module in $\mathcal{S}$ directly (the categories should be equivalent, would be interesting to prove carefully).
+\end{proof}
+
+\begin{theorem}[Dualizability in $\Mor_n$]\label{dual} A $k$-cell $x\in a_{k-1}\to b_{k-1}\in \ldots \in a_0 \to b_0$ is dualizable if and only if
+\begin{enumerate}
+    \item $x$ is a finite $\int_{\BarCon_{k-1}} a_{k-1}$-left-module and a finite $\int_{\BarCon_{k-1}}b_{k-1}$-right-module in $\mathcal{S}$,
+    \item for all $0\leq m \leq n-k-1$, $x$ is a finite $\int_{X_m} x$-module where $X_m$ is the stratified space $\mathbb{R}^{m+1} \times \BarCon_{k-1}$ with an additional strata $S^m \subset \mathbb{R}^{m+1}\times \{0\}^{k-1}$ with $x$ supported on the $m$-sphere, either $a_{k-1}$ or $b_{k-1}$ supported on the inside or outside (one can further multiply the space by $\mathbb{R}^{n-m-k}$ which is at least $1$-dimensional, hence it gives an algebra).
+\end{enumerate}
+\end{theorem}
+\begin{proof} Dualizability can be checked at the level of $1$-cells in $\Mor_{n-k+1}({}_{a_{k-2}}\Bimod_{b_{k-2}}(\ldots {}_{a_0}\Bimod_{b_0}(\mathcal{S})))$.
+\end{proof}
+
+What does the frame version look like? One has to use that $S^m\times \mathbb{R}$ is canonically $(m+1)$-framed.
+
+\section{Defining Morita Categories}
+
+For $\mathcal{V} \in \EAlg{a+1}(\Pr)$, we want
+\[
+    \Mor_{a+1}(\mathcal{V})(A, B) = \Mor_{(a-1)+1}([A^\op \times B, \mathcal{V}])
+\]
+
+For $\mathcal{V} \in \EAlg{2}(\Pr)$, we want
+\[
+    \Mor_{0+2}(\mathcal{V})(A, B) = \Mor_{0+1}((A^\op \times B)^{\textnormal{loc.}\Colim})
+\]
+
+For $\mathcal{W}$ a locally-cocomplete $(\infty,2)$-category, we have $\mathcal{W}\Pr = \left[\mathcal{W}, \Cat{1}^{\Colim}\right]^{\textnormal{compact}}$. If $\mathcal{W}$ is localy-presentable, we should have $\mathcal{W}\Pr = \left[\mathcal{W}, \Pr\right]$.
+
+Locally, $\Mor_{0+2}(\mathcal{V}) \to 2\Pr^\mathcal{V}$ should be given by some
+\[
+    \Mor_{0+1}((A^\op \times B)^{\textnormal{loc.}\Colim}) \longrightarrow \left[A^\op \times B, \Pr\right]
+\]
+
+Assuming the recognition of dualizable objects still work, one should find that dualizable endomorphism in $2\Pr^\mathcal{V}$ are retracts of one from the morita context. For this to work, one need to recover the monoidal structure... 
+
+\section{One Beta Level}
+
+\begin{conjecture}
+    Fully-dualizable $n$-monoidal rigid $(\infty,1)$-$\mathcal{V}$-categories are Morita-equivalent to a fully-dualizable $(n+1)$-monoidal algebra.
+\end{conjecture}
+
+Because $\cat{A}$ is a finite $\cat{A} \times \cat{A}^\op$-module, we have 
+
+\begin{conjecture}
+    Fully-dualizable $n$-monoidal rigid $(\infty,1)$-$\mathcal{V}$-categories are \textbf{pivotal}: there exists a natural maps $x \simeq x^{\vee 2}$. 
+\end{conjecture}
+
+
+
+Question: in what way is this compatible with the monoidal structure?
+
+Idea of proof: one can show they are morita equivalen to an alpha-version $A$. The biggest such is the ``category of finite one-sided modules''. There everything is an absolute colimit of $A$. The dual should be the corresponding absolute limit of $A$. Maybe this helps? Alternate between limit and colimit.
+
+\begin{conjecture}
+    One can construct a trace for any $n$-monoidal rigid pivotal $(\infty,1)$-$\mathcal{V}$-category.
+\end{conjecture}
+
+How would that construction work? Pivotal means we have a forgetful enriched-functor $\int_{S^1} \mathcal{C} \to \mathcal{V}$. In a way that means: one can almost define cyclic tensor product but only on underlying $\mathcal{V}$-objects.
+
+\begin{conjecture}
+    Fully-dualizable $n$-monoidal rigid $(\infty,1)$-$\mathcal{V}$-categories are \textbf{spherical}: the two possible traces coincide. 
+\end{conjecture}
+
+What other higher notions of the sort are true?
+
+These ideas don't seem to give a "smallness/finiteness" to the category. They're probably not sufficient to characterize fd. It might be a good first step in understanding them though.
+
+
+\section{Azumaya over Algebraically Closed Field}
+
+\begin{proposition}\label{p2'}
+Let $k$ be algebraically closed and $B$ a $n$-Azumaya $k$-algebra. Then $B$ is Morita equivalent to the trivial $k$-algebra $k$.
+\end{proposition}
+
+\textit{Proof:} The Künneth Theorem can be seen as a symmetric monoïdal functor $kMod \to kVect^{gr}$ from an $(\infty,1)$-category to a $1$-category.
+
+
+For this, we let $H^{*}(B)$ be the graded cohomology $k$-algebra of $B$. As we are working over a field, 
+we have natural identifications of graded $k$-vector spaces. 
+$$H^{*}(B\otimes_{k}B^{op})\simeq H^{*}(B)\otimes_{k}H^{*}(B)^{op}$$
+$$H^{*}(\mathbb{R}\underline{Hom}_{k}(B,B))\simeq Hom^{*}_{k}(H^{*}(B),H^{*}(B)).$$
+These identifications, and conditions $\mathbf{(Az-1)}$ and $\mathbf{(Az-2)}$ imply that 
+$H^{*}(B)$ is itself an Azumaya $k$-algebra, and more precisely that $H^{*}(B)$, considered as 
+a graded bi-$H^{*}(B)$-module, induces an equivalence between the categories
+of graded modules
+$$H^{*}(B)\otimes_{k}H^{*}(B)^{op}-Mod^{gr} \simeq  k-Mod^{gr}.$$
+This implies that in particular that $H^{*}(B)$ is a graded projective 
+$H^{*}(B)\otimes_{k}H^{*}(B)^{op}$-module, 
+and therefore that $H^{*}(B)$ is a semi-simple graded $k$-algebra (i.e. that 
+$H^{*}(B)-Mod^{gr}$ is semi-simple $k$-linear abelian category), and thus that any 
+graded $H^{*}(B)$-module is graded projective. 
+
+We have a graded functor 
+$$\phi : D(B) \longrightarrow H^{*}(B)-Mod^{gr}$$
+sending a $B$-dg-module $E$ to its cohomology $H^{*}(E)$. 
+
+\begin{lemma}\label{l2}
+The functor above $\phi$ is an equivalence of (graded) categories. 
+\end{lemma}
+
+\textit{Proof:} Let call an object $E\in D(B)$ \emph{graded free} if it is a (possibly infinite) 
+sum of shifts of $B$. An object of $D(B)$ will then be called \emph{graded projective} if it is a
+retract of a graded free object. It is clear by definition that the functor $\phi$ is fully faithful when 
+restricted to graded free objects, and thus also when restricted to graded projective objects. In order to 
+show that $\phi$ is fully faithful it is then enough to show that any object in $D(B)$ is graded projective. 
+
+Let $E \in D(B)$, and let $H^{*}(E)$ be the corresponding graded $H^{*}(B)$-module, which is graded projective 
+as we saw. Let $p$ be a projector on some graded free graded $H^{*}(B)$-module $P$ with image $H^{*}(E)$. 
+If we write 
+$$P=\bigoplus_{d}(H^{*}(B)[p]^{(I_{p})}),$$
+then $p$ defines a projector $q$ in $D(B)$ on the graded free object
+$$Q:=\bigoplus_{d}(B[p]^{(I_{p})}) \in D(B).$$
+As $D(B)$ is Karoubian complete (see for instance \cite[Sous-lemme 3]{to4}), we now that this projector splits
+$$q : \xymatrix{
+Q \ar[r]^-{k} & E' \ar[r]^-{j} & Q,}$$
+with $E' \in D(B)$. We claim that $E$ and $E'$ are isomorphic objects in $D(B)$. Indeed, by the choice of 
+$p$, there exists a factorisation in $H^{*}(B)-Mod^{gr}$
+$$p : \xymatrix{
+P \ar[r]^-{r} & H^{*}(E) \ar[r]^-{i} & P.}$$
+The images of $k$ and $j$ by $\phi$ provides another such factorisation
+$$\phi(q)=p : \xymatrix{
+P \ar[r]^-{\phi(k)} & H^{*}(E') \ar[r]^-{\phi(l)} & P.}$$
+By the uniqueness of such factorisation, we have that 
+the composite morphism 
+$$\xymatrix{
+H^{*}(E') \ar[r]^-{\phi(l)} & P \ar[r]^-{r} & H^{*}(E)}$$
+is an isomorphism.
+Now, from the definition of $\phi$, the morphism $r$ lifts uniquily to a morphism 
+$r' : Q \longrightarrow E$
+with $\phi(r')=r$. We thus get a morphism in $D(B)$
+$$\xymatrix{E' \ar[r]^-{j} & Q \ar[r]^-{r'} & E,}$$
+whose image by $\phi$ is $r\circ \phi(l)$, which we have seen to be an isomorphism. 
+As the functor $\phi$ is conservative we have $E \simeq E'$ in $D(B)$. 
+
+We thus have that all objects in $D(B)$ are graded projective, and therefore that 
+$\phi$ is fully faithful. All the objects $H^{*}(B)[p]$ belong to the essential image of $\phi$, and 
+therefore so do all graded free $H^{*}(B)$-module. As $\phi$ is fully faithful and as 
+$D(B)$ is  Karoubian closed, we deduce that any 
+graded projective $H^{*}(B)$-module also belongs to the essential image of $\phi$. But, as all
+graded $H^{*}(B)$-module are graded projective we have that $\phi$ is essentially surjective and thus an 
+equivalence of categories. 
+\hfill $\Box$ \\
+
+We use the previous lemma as follows. Let $E\in H^{*}(B)-Mod^{gr}$ be a simple object, which is
+automatically finite dimensional over $k$, as  $H^{*}(B)$ is so.  
+Because $k$ is algebraically closed we have 
+$$Hom^{0}_{H^{*}(B)-Mod^{gr}}(E,E) \simeq k.$$
+Moreover, for any $n\neq 0$, we have
+$$Hom^{n}_{H^{*}(B)-Mod^{gr}}(E,E)=Hom^{0}_{H^{*}(B)-Mod^{gr}}(E,E[n])=0,$$
+unless $E$ would be isomorphic to $E[n]$ which would a condradiction with the 
+finite dimensionality of $E$. Let now $E' \in D(B)$ be an object such that 
+$\phi(E')\simeq E$. As the graded functor $\phi$ is an equivalence, we have
+$$[E',E']\simeq k \qquad [E',E'[n]]=0 \; if \, n\neq 0.$$
+This implies that, the $k$-dg-algebra
+$\mathbb{R}\underline{Hom}_{k}(E',E')$ is quasi-isomorphic to $k$, and thus that the pair of adjoint 
+functors
+$$E \otimes_{k} - : D(k) \longrightarrow D(B) \qquad 
+\mathbb{R}\underline{Hom}_{k}(E,-) : D(B) \longrightarrow D(k)$$
+defines a full embedding $D(k) \hookrightarrow D(B)$. Therefore, when considered
+as a morphism $k \rightarrow B$ in $Hom_{k}$, the object $E$ exhibits $k$ as a retract of $B$. 
+By dualizing $B$ we get that $B^{op}$ is a retract of $k$ in $Hom_{k}$. The object 
+$B^{op}$ is then the image of a projector $p$ on $k$ in $Hom_{k}$, which corresponds to 
+a compact object $P \in D(k)$ with the property that $P\otimes_{k}P \simeq P$. The only possibility is
+$P\simeq k$, giving that the projector $p$ is in fact the identity. This implies that $B^{op}$ is isomorphic
+to $k$ in $Hom_{k}$, and by duality that $B$ is isomorphic to $k$.  \hfill $\Box$ \\
+\end{document}
+
+% % \bigpablo{We can define refinements as: embedding, open embedding or isomorphism of topological spaces. The first is better to define algebraic data, the last better to define $(\infty,n)$-categories with adjoints.}
+
+% % Recall the definitions of (conically smooth) stratified spaces.
+
+% % \begin{definition}[Refinement]
+% %     Let $f\in (X \to P) \to (Y \to Q)\in \Strat$.
+% %     We say that $f$ is an \textbf{open refinement} if it is an open embedding of underlying topological spaces, and for each $p  \inset P$ the restriction $f_{|p}: X_p \to Y_{f(p)}$ is an embedded submanifold.
+% % \end{definition}
+
+% % \begin{definition} We define the ordinary $1$-category $\Ran_{\mathbb{R}^n}$ whose
+% %     \begin{enumerate}
+% %         \item \textbf{objects} are open refinements $X \to K \times \mathbb{R}^n$ such that $X \to K$ is a constructible bundle whose fibers are finitary,
+% %         \item \textbf{morphisms} are stratified maps $X \to X'$ and $K \to K'$ inducing a pullback squares
+% %         % https://q.uiver.app/#q=WzAsNCxbMCwwLCJYIl0sWzEsMCwiWCciXSxbMCwxLCJLXFx0aW1lcyBcXG1hdGhiYntSfV5uIl0sWzEsMSwiSydcXHRpbWVzIFxcbWF0aGJie1J9Xm4iXSxbMiwzXSxbMCwyXSxbMSwzXSxbMCwxXSxbMCwzLCIiLDEseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XV0=
+% %         \[\begin{tikzcd}
+% %             X & {X'} \\
+% %             {K\times \mathbb{R}^n} & {K'\times \mathbb{R}^n}
+% %             \arrow[from=1-1, to=1-2]
+% %             \arrow[from=1-1, to=2-1]
+% %             \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+% %             \arrow[from=1-2, to=2-2]
+% %             \arrow[from=2-1, to=2-2]
+% %         \end{tikzcd}\]
+% %     \end{enumerate}
+% %     We have a forgetful functor $\ran_{\mathbb{R}^n} \to \strat$.
+% % \end{definition}
+
+% % \begin{proposition}
+% %     The forgetful $\ran_{\mathbb{R}^n} \to \strat$ is a transversality sheaf.
+% %     We denote by $\Ran_{\mathbb{R}^n}$ the associated $(\infty,1)$-category.
+% % \end{proposition}
+
+% % We define a sub-category $\Bsc_{\mathbb{R}^n} \mono \Disk_{\mathbb{R}^n} \mono \Snglr_{\mathbb{R}^n} \mono \Ran_{\mathbb{R}^n}$ on maps being open-embeddings (to add details).
+
+% % For $\B \to \Bsc_{/\mathbb{R}^n}$ a morphism of fibrations over $\Bsc$, we have $\textnormal{\textbf{Free}}_{\B} \in \EAlg{n}(\Cat{1})$ defined by the pullback
+% % % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXHRleHRub3JtYWx7XFx0ZXh0YmZ7RnJlZX19X3tcXEJ9Il0sWzEsMCwiXFxEaXNrKFxcQnNjKV97L1xcbWF0aGJie1J9Xm59Il0sWzAsMSwiXFxEaXNrKFxcQikiXSxbMSwxLCJcXERpc2soXFxCc2Nfey9cXG1hdGhiYntSfV5ufSkiXSxbMiwzXSxbMSwzXSxbMCwxXSxbMCwyXSxbMCwzLCIiLDEseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XV0=
+% % \[\begin{tikzcd}
+% % 	{\textnormal{\textbf{Free}}_{\B}} & {\Disk(\Bsc)_{/\mathbb{R}^n}} \\
+% % 	{\Disk(\B)} & {\Disk(\Bsc_{/\mathbb{R}^n})}
+% % 	\arrow[from=1-1, to=1-2]
+% % 	\arrow[from=1-1, to=2-1]
+% % 	\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+% % 	\arrow[from=1-2, to=2-2]
+% % 	\arrow[from=2-1, to=2-2]
+% % \end{tikzcd}\]
+% % And we also have $\textnormal{\textbf{Free}}^{\sifted}_{\B}\in \EAlg{n}(\Cat{1}^{\sifted})$.
+
+% % We now define what ought to be thought about as the category of ``free $(\infty,n)$-categories with adjoints''.
+
+% % \begin{definition}
+% %     Consider $\Past_n$ to be the $(\infty,1)$-category whose:
+% %     \begin{enumerate}
+% %         \item \textbf{objects} are basics $\B \to \Bsc_{/\mathbb{R}^n}$
+% %         \item \textbf{morphisms} from $\A \to \B$ are the data of:
+% %         for all $a \in \A$,
+% %         an object $X_a \in \Snglr_{\reln}$ together with a lift $\tau_a \to \B \to \Bsc_{\reln}$,
+% %         a map $X_a \to U_a \in \Bun_{\reln}$.
+% %     \end{enumerate}
+% % \end{definition}
+
+% % We have a map $\Theta_n \to \Past_n$ given by subdividing grids. And a map $\Past_n \to \EAlg{n}(\Cat{1}^{\sifted})$ given by $\textnormal{\textbf{Free}}^{\sifted}_{-}$
+
+% % \begin{theorem}
+% %     Every representable presheaf is a flagged $(\infty,n)$-category.
+% % \end{theorem}
+
+% \subsection{Codimension One Tangles}
+
+% We use the definitions of higher bordism categories from \cite{CS19,Sch14}.
+
+% \begin{definition}[{\cite[Section 4]{CS19}}] We define $\Int_k \in (\Delta^\op) \to \Top$ by
+%     \[\begin{cases}[rCl]
+%         (\Delta^\op) &\longto& \Top \\
+%         {[k]} &\longmapsto& \Int_k \coloneqq \{(a,b)\inset (\mathbb{R}^{k+1})^2 \mid \forall 0 \leq i \leq k, a_i < b_i \textnormal{ and }(\forall 0 \leq i \leq k-1, a_i \leq a_{i+1} \textnormal{ and }b_i \leq b_{i+1})\}\\
+%         (\iota\in [i] \to [j])^\op &\longmapsto& \begin{cases}[rCl]
+%             \Int_j &\to& \Int_i\\
+%             ((a_s)_{s=0}^j,(b_s)_{s=0}^j) &\mapsto& ((a_{\iota(s)})_{s=0}^i,(b_{\iota(s)})_{s=0}^i)
+%         \end{cases}
+%     \end{cases}\]
+%     where the subsets are endowed with subspace topologies.
+% \end{definition}
+
+% We now slightly modify the definiton of $\PBord$ from \cite{CS19} to define (what ought to be) the ``free $(\infty,n)$-category with adjoints generated by a single $1$-cell''.
+
+% \begin{definition} Let $([k_i])_{i = 1}^n \in (\Delta^\op)^n$. We define $\PAdj_{k_1, \ldots, k_n}^\infty$ to be the topological space whose points are the data of $(I, M, \rho, l)$ where:
+% \begin{enumerate}
+%     \item $I = ((a^i_s)_{s=0}^{k_i},(b^i_s)_{s=0}^{k_i})_{i=1}^n \inset \prod_{i=1}^n \Int_{k_i}$,
+%     \item $M \mono \prod_{i=1}^n (a_0, b_{k_i})$ is an embedded submanifold of codimension $1$ such that: for every subset $S \subseteq \{1, \ldots, n\}$ and every $s \inset \prod_{i \inset S} [k_i]$, the projection $M\cap\prod_{i \inset S} (a_{s_i}, b_{s_i}) \to \prod_{i \inset S} (a_{s_i}, b_{s_i})$ is fiber bundle.
+%     \item $\rho\in TM \oplus \underline{\mathbb{R}} \simeq \underline{\mathbb{R}}^n$ an $\mathbb{R}$-trivilization of the tangent bundle,
+%     \item $l \in \pi_0(\prod_{i=1}^n (a_0, b_{k_i}) \setminus M) \to \{\pm\}$
+% \end{enumerate}
+% endowed with the finest topology making the following maps continuous\dots
+% This data arranges into a $n$-fold simplicial space
+% \[\begin{cases}[rCl]
+%     (\Delta^\op)^n &\longto& \Spa \\
+%     ([k_i])_{i = 1}^n &\longmapsto& \PAdj_{k_1, \ldots, k_n}^\infty
+% \end{cases}\]
+% \end{definition}
+
+% \begin{proposition}
+%     The $n$-fold simplicial space $\PAdj_{-,\ldots,-}^\infty$ satisfies the Segal conditions.
+% \end{proposition}
+
+% We denote by $\Adj_{-,\ldots,-}^\infty$ its univalent completion.
+
+% \subsection{Sheaf Definition}
+
+% \begin{definition}
+%     Let $([k_i])_{i = 1}^n \in (\Delta^\op)^n$ and $X$ be a finitary manifold.
+%     We define $\PAdj_{k_1, \ldots, k_n}^\infty(X)$ to be the set of $(M, \rho)$ where:
+%     \begin{enumerate}
+%         \item $I = ((a^i_s)_{s=0}^{k_i},(b^i_s)_{s=0}^{k_i})_{i=1}^n \inset \prod_{i=1}^n\Int_{k_i}(X)$.
+%         \item $M \subseteq X \times \prod_{i=1}^n (a_0, b_{k_i})$ is an embedded submanifold of codimension $1$,
+%         \item $\rho\in M^c \to \{\pm\}$ a continuous map,
+%     \end{enumerate}
+%     such that:
+%     \begin{enumerate}
+%         \item $M \to X$ is a fiber bundle,
+%         \item for every subset $S \subseteq \{1, \ldots, n\}$ and every $s \inset \prod_{i \inset S} [k_i]$, the projection $M\cap\prod_{i \inset S} (a_{s_i}, b_{s_i}) \to \prod_{i \inset S} (a_{s_i}, b_{s_i})$ is fiber bundle.
+%         \item for every $x \inset M$, we have an open set $x \inset U$ such that (separate between $\pm$)
+%     \end{enumerate}
+% \end{definition}
+
+% \subsection{Truncated Definition}
+
+% \begin{definition}
+%     Let $([k_i])_{i = 1}^n \in (\Delta^\op)^n$.
+%     We define $\PAdj_{k_1, \ldots, k_n}^\infty(X)$ to be the quotient set whose elements are $(M, \rho)$ where:
+%     \begin{enumerate}
+%         \item $M \subseteq \mathbb{R}^n$ is an embedded submanifold of codimension $1$,
+%         \item $\rho\in \mathbb{R}^n\setminus M \to \{\pm\}$ a continuous map,
+%     \end{enumerate}
+%     such that:
+%     \begin{enumerate}
+%         \item for every subset $S \subseteq \{1, \ldots, n\}$ and every $s \inset \prod_{i \inset S} [k_i]$, the projection $M$ is transverse to $\prod_{i \inset S} {s}$,
+%         \item for every $x \inset M$, we have an open set $x \inset U$ such that (separate between $\pm$)
+%     \end{enumerate}
+% \end{definition}
+
+% \subsection{Excision}
+
+% \begin{definition}
+%     Write $S^0 = \{\pm\}$. Let $\Delta_{\leq 1}^\inj \to \Snglr$ be the diagram
+%     % https://q.uiver.app/#q=WzAsMixbMCwwLCJcXG1hdGhiYntSfSJdLFsxLDAsIkMoU14wKSJdLFswLDEsIkMoLSkiLDIseyJjdXJ2ZSI6Miwic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJib3R0b20ifX19XSxbMCwxLCJDKCspIiwwLHsiY3VydmUiOi0yfV1d
+% \[\begin{tikzcd}
+% 	{\mathbb{R}} & {C(S^0)}
+% 	\arrow["{C(-)}"', curve={height=12pt}, hook', from=1-1, to=1-2]
+% 	\arrow["{C(+)}", curve={height=-12pt}, from=1-1, to=1-2]
+% \end{tikzcd}\]
+%     Define a functor $\Delta^\inj \to \Snglr$  by left Kan extension:
+%     in other words, it maps $[k]$ to the stratified space whose underlying topological space is $\mathbb{R}$ with $k$ marked points over the canonical connected strata poset. 
+% \end{definition}
+
+% For $(M, \rho)$ and $X$, we want a map
+% \[
+%     X \times \Disk_{/I} \to \Mfld_{n}
+% \]
+
+% \subsection{Higher Morita Category}
+
+% \subsubsection{Scheimbauer}
+
+% We follow the definitions from \cite{Sch14}.
+
+% \begin{definition}
+%     A \textbf{relative category} $(\cat{C}, \cat{W})$ is the data of a $1$-category $\cat{C}$ together with a saturated class of arrows $\cat{W} \mono \cat{C}$.
+%     The associated $(\infty,1)$-category is the localization $\cat{C}[\cat{W}^{-1}]$.
+% \end{definition}
+
+% \begin{proposition}
+%     Any $(\infty,1)$-category can be obtained from a relative category.
+% \end{proposition}
+% \pablo{Ideally I want a symmetric monoidal version of this}
+
+% \begin{definition}
+%     A \textbf{symmetric monoïdal} relative category is the data of a relative category $(\cat{C}, \cat{W})$ together with a symmetric monoidal structure on $\cat{C}$ which preserves class $\cat{W}$ on each variable.
+% \end{definition}
+
+% I need some kind of result saying: algebra for an operad can be obtained as strict algebras.
+
+% This could be true only for model categories, that'd be okay.
+
+% \begin{definition}
+%     Let $(\cat{C}, \cat{W})$ be a symmetric monoidal relative category.
+%     Let $([k_i])_{i = 1}^n \in (\Delta^\op)^n$.
+%     We define $\Mor_{k_1, \ldots, k_n}(\cat{C}, \cat{W})$ to be the space of locally constant
+% \end{definition}
+
+
+% \subsubsection{Mine}
+
+% We pick a standard startificaton of $(0, k+1)$ given by $1,\ldots, k$.
+% For $\alpha\in [i] \to [j]$ we have
+% \[
+%     s < x < s+1 \longmapsto \alpha(s) + (x-s)(\alpha(s+1) - \alpha(s))
+% \]
+% For any length $l$ composition $\alpha_1 \circ \ldots \circ \alpha_l$, we find isotopies.
+
+% This gives a $\infty$-functor $\Delta^\op \to $ the category of refinements.
+
+% \begin{definition}
+%     Let $([k_i])_{i = 1}^n \in (\Delta^\op)^n$.
+%     We define $\Mor_{k_1, \ldots, k_n}^\infty(X)$ 
+%     \begin{enumerate}
+%         \item $((a_s^i)_{s=0}^{k_i})_{i=0}^n \in X \to \mathbb{R}$ with $a_s^i < a_{s+1}^i$,
+%         \item $\rho\in \mathbb{R}^n\setminus M \to \{\pm\}$ a continuous map,
+%     \end{enumerate}
+%     such that:
+%     \begin{enumerate}
+%         \item for every subset $S \subseteq \{1, \ldots, n\}$ and every $s \inset \prod_{i \inset S} [k_i]$, the projection $M$ is transverse to $\prod_{i \inset S} {s}$,
+%         \item for every $x \inset M$, we have an open set $x \inset U$ such that (separate between $\pm$)
+%     \end{enumerate}
+% \end{definition}
+
+% We work with Claudia Scheimbauer's definition of the bordism category, processed through the $(0,1) \simeq \mathbb{R}$ diffeomorphism.
+% A $k$-cell in $\Bord_n$ is an element of $\pi_0((\Bord_n)_{1,\ldots, 1, 0, \ldots, 0})$ with the first $k$-entries of the subscript being $1$.
+% Note that by definition, we have a morphism of $n$-fold segal spaces $\PBord_n \to \Bord_n$  and hence a function $\pi_0((\PBord_n)_{1,\ldots, 1, 0, \ldots, 0}) \to \pi_0((\PBord_n)_{1,\ldots, 1, 0, \ldots, 0})$ (note that this map is not surjective).
+
+% \begin{definition} A pre-$k$-cell in $\PBord_n$ is given by the choice of:
+%     \begin{enumerate}
+%         \item a finite dimensional vector subspace $V \subseteq \mathbb{R}^\infty$,
+%         \item a $k$-manifold $M$,
+%         \item an embedding $\iota \in M \mono V \times \mathbb{R}^k$ such that
+%         \begin{enumerate}
+%             \item $\pi \colon M \mono V \times \mathbb{R}^k \epi \mathbb{R}^k$ is proper,
+%             \item for all $1 \leq i \leq k$, and for all $x \inset M$ such that $|\pi(x)_i| > 1$, $(\pi_i, \ldots \pi_n)$ is submersive at $x$. 
+%         \end{enumerate}
+%     \end{enumerate}
+%     A sufficient condition for two pre-$k$-cells $(V_0, M_0, \iota_0)$ and $(V_1, M_1, \iota_1)$ to be equivalent is to have the data of:
+%     \begin{enumerate}
+%         \item a finite dimensional vector subspace $V \subseteq \mathbb{R}^\infty$ containing $V_1, V_2 \subseteq V$,
+%         \item a $n$-manifold diffeomorphism $\phi\in M_0 \simeq M_1$,
+%         \item a homotopy $\iota_{-}\in M_0 \times [0,1] \to V \times \mathbb{R}^k$ between $\iota_0$ and $\iota_1 \circ \phi$ (seen as maps to $V \times \mathbb{R}^k$) such that: for all $0 < t < 1$, the map $\iota_t \in M_1 \mono V \times \mathbb{R}^k$ is an embedding satisfying
+%         \begin{enumerate}
+%             \item $\pi \colon M_0 \mono V \times \mathbb{R}^k \epi \mathbb{R}^k$ is proper,
+%             \item for all $1 \leq i \leq k$, and for all $x \inset M$ such that $|\pi(x)_i| > 1$, $(\pi_i, \ldots \pi_k)$ is submersive at $x$. 
+%         \end{enumerate}
+%     \end{enumerate}
+% \end{definition}
+
+% \begin{lemma}
+%     Any pre-$k$-cell $(V, M, \iota)$ gives a point in $[(V\times \mathbb{R}^{n-k}, M\times \mathbb{R}^{n-k}, \iota \times \mathbbm{1}_{\mathbb{R}^{n-k}}, (-\infty, -1) \leq (1, \infty))] \inset \pi_0((\PBord_n)_{1,\ldots, 1, 0, \ldots, 0})$ and hence in $\pi_0((\Bord_n)_{1,\ldots, 1, 0, \ldots, 0})$.
+% \end{lemma}
+
+% \begin{definition}[$k$-handles]
+%     Let $1 \leq k \leq n$ and $\sigma \inset \{\epsilon, \eta\}^k$ be a sequence of letters.
+%     We define a pre-$k$-cell $\sigma(+)$ of $\Bord_n$ by $(\mathbb{R}^k, \mathbb{R}, \iota_\sigma)$ where
+%     \[\iota_\sigma \in \begin{cases}[rCl]
+%         \mathbb{R}^k & \longmono & \mathbb{R} \times \mathbb{R}^k \\
+%         (x_1, \ldots x_k) & \longmapsto & \left(x_1, \ldots x_k, \sum_{i=1}^k |\sigma_i| x_i^2 \right)
+%     \end{cases}\]
+%     where $|\epsilon| = -1$ and $|\eta| = 1$, with the canonical framing.
+% \end{definition}
+
+% \begin{lemma}[Handlebody Decomposition]
+%     Let $M$ be a pre-$k$-cell in $\PBord_n$.
+%     Suppose that the projection $\pi_k$ is a Morse function.
+%     Then one can see $M$ as a $k$-composition of handles. 
+% \end{lemma}
+% \begin{proof}
+%     Let $(x_k)_1, \ldots (x_k)_l$ be the critical values.
+%     By the Morse lemma, we have coordinate systems 
+% \end{proof}

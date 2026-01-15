@@ -19,7 +19,7 @@
 \newcommentator{pablo}
 
 %%%%% MY HYPERLINK AND REF/LABEL MACROS
-%\usepackage{mypreamble/linkref}
+% \usepackage{../mypreamble/linkref}
 
 %%%%% MATH PACKAGES
 \usepackage{amssymb,amsmath}     %math original package
@@ -30,15 +30,16 @@
     \mleftright     %redefines \left as \mleft and \right as \mright
 \usepackage{pgfcore}
 \usepackage{tikz-cd}     %advanced and rigorous diagrams
-    
+\usepackage{pgfplots}
+
 %%%%% MY SPECIAL PACKAGES
-\usepackage{mypreamble/mathenv}     %improves on AMSmath's equation
-\usepackage{mypreamble/thmenv}     %replaces the AMSthm package
+\usepackage{../mypreamble/mathenv}     %improves on AMSmath's equation (path resolvable from main document)
+\usepackage{../mypreamble/thmenv}     %replaces the AMSthm package (path resolvable from main document)
 
 %%%%% MATH MACROS AND FONT PACKAGES
 %\usepackage{fontspec}
-\usepackage{mypreamble/mathcro}
-\usepackage{mypreamble/catcro}
+\usepackage{../mypreamble/mathcro}
+\usepackage{../mypreamble/catcro}
 
 %%%%% HYPERREF PACKAGE
 %\makeatletter
@@ -90,7 +91,7 @@
 %\overfullrule=1pt   %creates 1pt wide black bars next to any overfull hbox
 
 %%%%% QUIVER SETUP
-\usetikzlibrary{calc,decorations.pathmorphing}
+\usetikzlibrary{calc,decorations.pathmorphing,spath3}
 % A TikZ style for curved arrows of a fixed height, due to AndréC.
 \tikzset{curve/.style={settings={#1},to path={(\tikztostart)
     .. controls ($(\tikztostart)!\pv{pos}!(\tikztotarget)!\pv{height}!270:(\tikztotarget)$)
@@ -99,6 +100,11 @@
     settings/.code={\tikzset{quiver/.cd,#1}
         \def\pv##1{\pgfkeysvalueof{/tikz/quiver/##1}}},
     quiver/.cd,pos/.initial=0.35,height/.initial=0}
+
+% A TikZ style for shortening paths without the poor behaviour of `shorten <' and `shorten >'.
+\tikzset{between/.style n args={2}{/tikz/spath/at end path construction={
+    \tikzset{spath/split at keep middle={current}{#1}{#2}}
+}}}
 
 % TikZ arrowhead/tail styles.
 \tikzset{tail reversed/.code={\pgfsetarrowsstart{tikzcd to}}}
