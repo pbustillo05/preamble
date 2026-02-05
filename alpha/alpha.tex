@@ -2,6 +2,7 @@
 \input{../mypreamble/a-preamble}
 \usepackage{mathdots}
 \usepackage{bookmark,bbm}
+\usepackage{float}
 
 %%%%% TITLE PAGE
 \title{Fully-Dualizable and Invertible $\mathcal{E}_n$-Algebras}
@@ -10,6 +11,10 @@
 \begin{document}
 
 \maketitle
+\begin{abstract}
+    We prove a conjecture of Lurie, Brochier, Jordan, Safronov and Snyder \cite{Lur09a, BJSS21} characterizing fully-dualizable and invertible $\mathcal{E}_n$-algebras seen as objects in the higher Morita category $\Mor_n(\V)$ \cite{Lur09a, Sch14, Hau17a, Hau23}.
+    In other words, we characterize those $\mathcal{E}_n$-algebras which give rise to $(n+1)$-dimensional topological quantum field theories (TQFT), and those which give rise to an invertible one.
+\end{abstract}
 \tableofcontents
 \newpage
 
@@ -17,20 +22,20 @@
 
 One of the central insights in the modern study of topological quantum field theory (TQFT) is that the structure of a field theory is governed by higher-categorical dualizability conditions.
 This idea originates in the pioneering work of Baez-Dolan \cite{BD95}, who formulated the Cobordism Hypothesis.
-They propose that an $n$-dimensional fully extended TQFT should be the data of: a symmetric monoïdal $(\infty,m)$-category $\cat{A}$, and a ``fully-$n$-dualizable'' object $a \inset \cat{A}$.
+They propose that an $n$-dimensional fully extended TQFT should be the data of: a symmetric monoidal $(\infty,m)$-category $\cat{A}$, and a ``fully-$n$-dualizable'' object $a \inset \cat{A}$.
 The initial such TQFT is then conjectured to be given by the $(\infty,n)$-category of framed bordisms. 
-Typically, the symmetric monoïdal $(\infty,m)$-categories $\cat{A}$ of interest arise from studying algebraic structures and the Cobordism Hypothesis can be seen as a duality between algebra and manifold topology.
+Typically, the symmetric monoidal $(\infty,m)$-categories $\cat{A}$ of interest arise from studying algebraic structures and the Cobordism Hypothesis can be seen as a duality between algebra and manifold topology.
 
-Lurie observed in \cite[Sec. $4.1$]{Lur09a} that the collection of $\mathcal{E}_n$-algebras, in some fixed symmetric monoïdal $(\infty, 1)$-category $\V$ with compatible colimits, can be arranged into such a symmetric monoïdal $(\infty, n+1)$-category $\Mor_n(\V)$ called the higher Morita category.
-This generalises the well-known classical Morita $(2,2)$-category whose objects are non-commutive rings and whose morphisms are bimodules.
+Lurie observed in \cite[Sec. $4.1$]{Lur09a} that the collection of $\mathcal{E}_n$-algebras, in some fixed symmetric monoidal $(\infty, 1)$-category $\V$ with compatible colimits, can be arranged into such a symmetric monoidal $(\infty, n+1)$-category $\Mor_n(\V)$ called the higher Morita category.
+This generalizes the well-known classical Morita $(2,2)$-category whose objects are non-commutative rings and whose morphisms are bimodules.
 The idea of this category was first sketched by Lurie in a \cite[Def. $4.1.11$]{Lur09a} and later formalized by Scheimbauer and Haugseng in \cite{Sch14, Hau17, Hau23}.
-It's clear from the construction that all $k$-morphisms in $\Mor_n(\V)$, for $1 \leq k < n$, have both left and right adjoints, implying that any $\mathcal{E}_n$-algebras $A$ automatically gives rise to a $n$-dimensional fully-extended TQFT.
+It follows from the construction that all $k$-morphisms in $\Mor_n(\V)$, for $1 \leq k < n$, have both left and right adjoints, implying that any $\mathcal{E}_n$-algebras $A$ automatically gives rise to a $n$-dimensional fully-extended TQFT.
 The computations of the partition function of this TQFT is exactly given by factorization homology with coefficients in $A$ as predicted by Lurie \cite[Thm. $4.1.24$]{Lur09a} and formalized in \cite{Sch14}.
 The $n$-morphisms of $\Mor_n(\V)$ do not however necessarily have adjoints, which invites the question of characterizing those $\mathcal{E}_n$-algebras $A$ for which the associated TQFT extends to $(n+1)$-dimensions, i.e., the fully-dualizable $\mathcal{E}_n$-algebras.
 The purpose of this paper is to answer this question, and further classify which $\mathcal{E}_n$-algebras form an invertible TQFT.
 
 Classically, the fully-dualizable objects of the classical Morita $(2,2)$-category are known as smooth and proper algebras, and the invertible objects are known as Azumaya algebras.
-These notions were generlized to the dg-setting by Toën \cite{Toe12}.
+These notions were generalized to the dg-setting by Toën \cite{Toe12}.
 More explicitly, an algebra $A$ in $_{k}\Mod$ is smooth if $A$ is perfect as an $A^{op} \otimes_k A$-module, and proper if $A$ is perfect as a $k$-module.
 A smooth and proper algebra $A$ is further Azumaya if the canonical
 \begin{equation*}
@@ -40,25 +45,28 @@ A smooth and proper algebra $A$ is further Azumaya if the canonical
 are equivalences.
 
 Lurie claimed in \cite[Rem. $4.1.27$]{Lur09a} that unwinding the proof of the Cobordism Hypothesis should give an explicit generalization of the above conditions for full-dualizability of $\mathcal{E}_n$-algebras, involving factorization homology.
-This criterion was later stated as a conjecture by Brochier, Jordan, Safronov, Snyder \cite[Conj. $1.8$]{BJSS21}, which we prove in more generality in \hyperref[thm:full_dualizability_criterion]{Theorem A} stated below.
+This criterion was later stated as a conjecture by Brochier, Jordan, Safronov, Snyder \cite[Conj. $1.8$]{BJSS21}, which we prove in more generality in \hyperref[thm:full_dualizability_criterion]{Theorem A} stated below using the language of factorization homology \cite{AFT17a,AFR18a,AFT17}.
+
 \begin{theorem}[{\hyperref[thm:full_dualizability_criterion]{Thm. A}}]
     Let $0 \leq k < n$ and $\cat{V} \inset \EAlg{\infty}(\Cat{1})$ whose tensor product commutes with sifted colimits in both variables.
     Let $M$ be a $k$-morphism in $\Mor_n(\cat{V})$.
     Then $M$ is fully-dualizable if and only if, for all $0 \leq i \leq n-k$, the canonical $\mathcal{E}_1$-actions
     \[
-        \int_{(D^i, S^{i-1})} (A,M) \curvearrowright M \curvearrowleft \int_{(D^i, S^{i-1})} (B,M)
+        \int_{(S^{i-1}, D^i)} (M, A) \curvearrowright M \curvearrowleft \int_{(S^{i-1}, D^i)} (M, B)
     \]
     both exhibit $M$ as a dualizable module, where $A$ (resp. $B$) are either the (co)domain of $M$ if $1 \leq k$, or the identity $\mathbbm{1}_\V$ if $k=0$.
 \end{theorem}
 
+One can interpret the factorizations $\int_{(S^{i-1}, D^i)} (M, A)$ as a higher version of Hochschild Homology of $M$ relative to $A$.
 Brochier \textit{et al.} also conjectured a generalization of the characterization of Azumaya algebras \cite[Conj. $1.9$]{BJSS21}, which we prove in in \hyperref[thm:invertibility_criterion]{Theorem B} stated below.
+
 \begin{theorem}[{\hyperref[thm:invertibility_criterion]{Thm. B}}]
     Let $0 \leq k < n$ and $\cat{V} \inset \EAlg{\infty}(\Cat{1}))$.
     Let $M$ be a $k$-morphism in $\Mor_n(\cat{V})$.
-    Then $M$ is invertible if and only if it is fully-dualizable and, for all $1 \leq i \leq n-k$, the universal maps
+    Then $M$ is invertible if and only if it is fully-dualizable and, for all $1 \leq i \leq n-k$, the universal $\mathcal{E}_{n-k-i+1}$-algebra maps
     \[
-        \int_{(D^i, S^{i-1})} (A,M) \longeq \HC{i-1}^B(M) \\
-        \int_{(D^i, S^{i-1})} (B,M) \longeq \HC{i-1}^A(M)
+        \int_{(S^{i-1}, D^i)} (M, A) \longeq \HC{n-k-i}^B(M) \\
+        \int_{(S^{i-1}, D^i)} (M, B) \longeq \HC{n-k-i}^A(M)
     \]
     are invertible, where $A$ (resp. $B$) are either the (co)domain of $M$ if $1 \leq k$, or the identity $\mathbbm{1}_\V$ if $k=0$.
 \end{theorem}
@@ -66,7 +74,7 @@ Brochier \textit{et al.} also conjectured a generalization of the characterizati
 \subsection{Overview}
 
 \paragraph{Section 2}
-In order to establish these results, we first need to prove a few preliminary results about $(\infty,n)$-categories with adjoints in \autoref{sec:adjoints}.
+To establish these results, we first need to prove a few preliminary results about $(\infty,n)$-categories with adjoints in \autoref{sec:adjoints}.
 Most of these results are well-known to experts, but lacking of any rigorous proof in the literature, so we include them here for completeness.
 All of the work of this section heavily relies on the seminal result of Riehl and Verity \cite[Thm. 4.4.11]{RV16} bringing adjunctions in $(\infty,2)$-categories into a powerful homotopy coherent framework.
 One of the most important of these folklore theorem is that the inclusion $\Cat{n}^{\textnormal{adj}} \mono \Cat{n}$ has left and right adjoints (see \autoref{prop:Free_Sub_exist}).
@@ -82,12 +90,12 @@ We choose here to construct this functor more formally, using the Adjoint Functo
 The argument relies on the explicit way in which colimits of $(\infty,n)$-categories are constructed.
 More explicitly, a $k$-morphism in some $\Colim_{i \inset \cat{I}} \cat{C}_i$ is always given by some intricate pasting of $k$-morphisms in the $\cat{C}_i$'s.
 This is an intrinsic consequence of the ``Segalification'' construction for $(\infty,n)$-categories described in \cite{BS24}.
-It's then well-known that composition of adjoints should have adjoints, which will in turn imply that $\Cat{n}^{\textnormal{adj}}$ is stable under colimits.
+It is then well-known that composition of adjoints should have adjoints, which will in turn imply that $\Cat{n}^{\textnormal{adj}}$ is stable under colimits.
 The main advantage of this approach is that it gives a general method for proving that some category, defined as a colimit, has adjoints.
-The author sees this as a powerful tool to show results of the type: ``to construct a fully-adjoint/dualizable thingy, one only needs to exhibit this and that (co)unit''.
+The author sees this as a powerful tool to show results of the type: ``to construct a fully-adjointable (resp. dualizable) morphism (resp. object), one only needs to exhibit this and that (co)unit''.
 A first statement of the type is given by the result bellow:
 \begin{proposition}[\autoref{prop:free_full_adj}]
-    We have a colimit diagram
+    The free $(\infty, k+1)$-category on a single fully-adjointable $k$-morphism $\Free^{\{k\}}(c_k)$ is the colimit of the diagram
 % https://q.uiver.app/#q=WzAsMTAsWzQsMiwiXFxBZGpfayJdLFszLDMsImNfayJdLFsyLDIsIlxcQWRqX2siXSxbNiwyLCJcXEFkal9rIl0sWzAsMiwiXFxjZG90cyJdLFs4LDIsIlxcY2RvdHMiXSxbMSwzLCJjX2siXSxbNSwzLCJjX2siXSxbNywzLCJjX2siXSxbNCwwLCJcXEFkal5cXGluZnR5X2siXSxbMSwwLCJMIiwwLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV0sWzEsMiwiUiIsMix7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6ImVwaSJ9fX1dLFs3LDAsIlIiLDIseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XSxbNiw0LCJSIiwyLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV0sWzYsMiwiTCIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6ImVwaSJ9fX1dLFs3LDMsIkwiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XSxbOCwzLCJSIiwyLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV0sWzgsNSwiTCIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6ImVwaSJ9fX1dLFsyLDksIiIsMix7ImN1cnZlIjotMSwic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn0sImhlYWQiOnsibmFtZSI6ImVwaSJ9fX1dLFswLDksIiIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9LCJoZWFkIjp7Im5hbWUiOiJlcGkifX19XSxbMyw5LCIiLDIseyJjdXJ2ZSI6MSwic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn0sImhlYWQiOnsibmFtZSI6ImVwaSJ9fX1dLFs0LDksIiIsMix7ImN1cnZlIjotMiwic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn0sImhlYWQiOnsibmFtZSI6ImVwaSJ9fX1dLFs1LDksIiIsMCx7ImN1cnZlIjoyLCJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifSwiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV1d
 \[\begin{tikzcd}
 	&&&& {\Free^{\{k\}}(c_k)} \\
@@ -108,7 +116,7 @@ A first statement of the type is given by the result bellow:
 	\arrow["R"', two heads, from=4-8, to=3-7]
 	\arrow["L", two heads, from=4-8, to=3-9]
 \end{tikzcd}\]
-where all projections are epimorphisms.
+where all projections are epimorphisms, and $\Adj_k = \sigma^{k-1}(\Adj)$ is the walking adjoint $k$-morphism.
 \end{proposition}
 In essence, this can be seen as formalizing the idea: ``to give a fully-adjoint $1$-morphism is equivalent to providing a sequence of candidates for the iterated adjoints and for the (co)units''.
 The proof of the main Theorem relies on a similar guiding principle: ``to show $f$ is fully-adjoint, it suffices to find adjoints for the iterated (co)units of the form $\eta(\epsilon(\epsilon(\ldots \eta(f)\ldots)))$'' (where we range over all words in $\epsilon$ and $\eta$ of some fixed length).
@@ -124,10 +132,10 @@ Their algebraic structure can be visualized as iteratively ``pinching'' these ha
 
 Finally, we prove a couple technical algebraic results.
 One of the main ingredient in our proof of \hyperref[thm:full_dualizability_criterion]{Theorem A} is a criterion (\autoref{prop:existence_dual}) for when $n$-morphisms in $\Mor_n(\V)$ have adjoints, essentially generalizing \cite[Prop. $4.6.2.13$]{Lur09a}.
-Finally, to complete our proof of \hyperref[thm:invertibility_criterion]{Theorem B}, we also need to understand how Hoschild cohomology appears as duality data in $\Mor_n(\V)$, which is done in \autoref{prop:identifying_units}.
+Finally, to complete our proof of \hyperref[thm:invertibility_criterion]{Theorem B}, we also need to understand how Hochschild cohomology appears as duality data in $\Mor_n(\V)$, which is done in \autoref{prop:identifying_units}.
 
 \paragraph{Section 4}
-This short section is the compiled proofs of both main Theorems.
+This short section is the compiled proofs of both our main Theorems.
 
 \subsection{Acknowledgments}
 
@@ -178,7 +186,7 @@ The author would like to thank his PhD supervisor John Francis for many helpful 
 
     \item We denote by $c_k$ the walking $k$-morphism, which we can see as an $(\infty, n)$-category for all $n \geq k$.
     We denote by $\partial c_k$ the boundary of the walking $k$-morphism, i.e., the walking pair of parallel $(k-1)$-morphisms, which can also be seen as an $(\infty,n)$-category for all $n \geq k-1$.
-    It's the colimit of the diagram
+    It is the colimit of the diagram
 % https://q.uiver.app/#q=WzAsOSxbMywyLCJjX3trLTF9Il0sWzEsMiwiY18xIl0sWzAsMCwiY18wIl0sWzAsMiwiY18wIl0sWzEsMCwiY18xIl0sWzMsMCwiY197ay0xfSJdLFsyLDAsIlxcY2RvdHMiXSxbMiwyLCJcXGNkb3RzIl0sWzQsMSwiXFxwYXJ0aWFsIGNfayJdLFsyLDFdLFszLDRdLFsyLDRdLFszLDFdLFs0LDZdLFs0LDddLFsxLDZdLFsxLDddLFs2LDVdLFs2LDBdLFs3LDVdLFs3LDBdLFs1LDgsIiIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFswLDgsIiIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFsxLDgsIiIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFs0LDgsIiIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFsyLDgsIiIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFszLDgsIiIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
 \[\begin{tikzcd}
 	{c_0} & {c_1} & \cdots & {c_{k-1}} \\
@@ -205,13 +213,42 @@ The author would like to thank his PhD supervisor John Francis for many helpful 
 \end{tikzcd}\]
     A $k$-morphism $f\in c_k \to \cat{C}$ is also denoted $f\in a_{k-1} \to b_{k-1} \in \ldots \in a_0 \to b_0 \in \cat{C}$ where $a_i, b_i \in c_i \to \cat{C}$ are the induced projections above. 
 
+    \item We let $\Cat{1}^\geom$ denote the symmetric monoidal $(\infty,1)$-category whose:
+    \begin{enumerate}
+        \item \textbf{objects} are $(\infty,1)$-categories admitting geometric realizations.
+        \item \textbf{morphisms} are functors preserving geometric realizations.
+    \end{enumerate}
+    The symmetric monoidal structure is given by \cite[Cor. $4.8.1.4$]{Lur09}.
+
     \item A refinement of stratified space will always be denoted by a dashed arrow $X \dashrightarrow Y$.
     A (weak) constructible bundle will always be denoted by a double-headed arrow $X \epi Y$.
-    An open embedding will always be denoted by a hooked arrow $X \mono Y$.
+    An open embedding will always be denoted by a hooked arrow $X \mono Y$ or by $X \longeq Y$ if it is an isotopy equivalence.
     A closed inclusion will always be denoted by a hooked arrow $X \xmono[\textnormal{cl}] Y$ with the label ``cl''.
+
+    \item We let $S^{-1} = \emptyset$ and $D^0 = \{\bullet\}$.
+    
+    \item Throughout most of the paper, we fix a symmetric monoidal $(\infty,1)$-category $\V$ which has sifted colimits and whose tensor product commutes with sifted colimits in both variables.
+    
+    \item We denote operads by $\operad{O} \to \Fin^*$ with an underline.
+    Their ``underlying category'', \textit{i.e.} the fiber $\operad{O}^{\{\bullet\}^+}$ over $\{\bullet\}^+$, is denoted by $\mathcal{O}$ without an underline.
 \end{enumerate}
 
 \section{Adjoints in $(\infty,n)$-categories}\label{sec:adjoints}
+
+Throughout this section, we establish a few ``folklore'' results about $(\infty,n)$-categories with adjoints, which are crucial for the proof of the main Theorems.
+However expected these results may seem, we could not find any rigorous proof of them in the literature, so we include them here for completeness.
+The reader can safely skip this section on a first reading, and come back to it when needed.
+
+For the interested reader, however, one can summerize our approach as follows.
+To work with robust homotopically-coherent notion, we define fully-adjointable morphism in a $(\infty,n+1)$-category $\cat{C}$ has the morphisms that appear in the image of $\Sub^{\{1, \ldots, n\}}(\cat{C}) \mono \cat{C}$, where $\Sub^{\{1, \ldots, n\}}(\cat{C})$ is the full sub-$(\infty,n+1)$-category with adjoints.
+To make sense of this definition, we then need to show that $\Sub^{\{1, \ldots, n\}}(\cat{C})$ is well-defined, and that the functor $\Sub^{\{1, \ldots, n\}}(\cat{C}) \mono \cat{C}$ is a monomorphism (see \autoref{prop:Free_Sub_exist}), which is the content of the second \autoref{subsec:Free_Sub}.
+One way to tackle this problem is to show that colimits of $(\infty,n)$-categories with adjoints have adjoints (see \autoref{prop:colim_adj}), which is the content of the first \autoref{subsec:colim_adj}.
+The advantage of this strategy is that it pushes us to develop tools to decide when a colimit of $(\infty,n)$-categories has adjoints in general.
+This becomes important to link our definition of fully-adjointable morphisms to the more classical one: has an adjoint, with (co)units having adjoints, with (co)units having adjoints, and so on.
+This is the content of \autoref{cor:lifting_once_fully_dualizable}, the main result of \autoref{subsec:lifting_adj}.
+Finally, we finish this section by proving that the classifying space of the free/walking full-adjunction is contractible, which is the content of \autoref{subsec:invertibility} and will be useful for our second criterion, the \autoref{thm:invertibility_criterion}
+
+Before heading into the content of this section, we first state the definition of an adjoint morphism and the celebrated Theorem of Riehl and Verity \cite[Thm. 4.4.11]{RV16}.
 
 \begin{definition}[Adjoint]
     Let $n > k \geq 1$ and $\cat{C}\in \Cat{n}$.
@@ -228,7 +265,7 @@ Recall that Schanuel and Street \cite{SS86} defined combinatorially the free $(2
 This category was later studied in depth by Riehl and Verity \cite{RV16}, in a higher categorical context.
 \end{construction}
 
-The results of this paper rely greatly on the celebrated result from \cite{RV16}, recalled bellow.
+The results of this paper rely greatly on the powerful Theorem bellow.
 
 \begin{theorem}[Homotopy Uniqueness of Adjunctions {\cite[Thm. 4.4.11]{RV16}}]\label{thm:riehl_verity}
    Let $\cat{C}\in \Cat{2}$.
@@ -242,7 +279,7 @@ The results of this paper rely greatly on the celebrated result from \cite{RV16}
     selecting the connected components of left (resp. right) adjoint morphisms.
 \end{theorem}
 
-\subsection{Colimits of $(\infty,n)$-categories with adjoints have adjoints}
+\subsection{Colimits of $(\infty,n)$-categories with adjoints have adjoints}\label{subsec:colim_adj}
 
 In this section, we prove that a colimit of a diagram of $(\infty,n)$-categories are given as compositions of $k$-cells in the categories in the diagram.
 For this purpose, we use the following equivalent definitions of of $(\infty,n)$-categories as:
@@ -286,7 +323,7 @@ Using these formulas and using that left adjoints preserves colimits, we can und
         \sigma^k X_{a_1, \ldots, a_{n+k}} = \left(\partial c_{k}\right)_{a_1, \ldots, a_{k-1}, 0, \ldots, 0} \bigsqcup \left( X_{a_{k+1}, \ldots, a_{n+k}} \times \prod_{i = 1}^{k} [a_i] \right)
     \]
     Note that $\sigma^k c_l = c_{l+k}$.
-    We also clearly have an adjunction
+    We also have an adjunction
     % https://q.uiver.app/#q=WzAsMixbMSwwLCJ7fV97XFxwYXJ0aWFsIGNfa1xcYmFja3NsYXNofVxcQ2F0e24ra30iXSxbMCwwLCJcXENhdHtufSJdLFsxLDAsIlxcc2lnbWFeayIsMix7ImN1cnZlIjoyLCJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFswLDEsIlxcaG9tIiwyLHsiY3VydmUiOjJ9XSxbMiwzLCIiLDIseyJsZXZlbCI6MSwic3R5bGUiOnsibmFtZSI6ImFkanVuY3Rpb24ifX1dXQ==
     \[\begin{tikzcd}
         {\Cat{n}} & {{}_{\partial c_k\backslash}\Cat{n+k}}
@@ -313,7 +350,7 @@ We have an immediate corollary of \autoref{thm:riehl_verity}.
 \end{corollary}
 \begin{proof}
     $\sigma^{k-1}$ is a left adjoint composed with a forgetful from a slice, so it preserves contractible colimits and thus epimorphisms.
-    Also, the notion of adjoint $k$-morphism is clearly a suspension of that of adjoint $1$-morphisms.
+    Additionally, the notion of adjoint $k$-morphism is a suspension of that of adjoint $1$-morphisms.
 \end{proof}
 
 To formulate the next few lemmas, we now extend the notion of ``having adjoints'' to $n$-fold simplicial spaces.
@@ -335,6 +372,8 @@ In other words, $c_k \to \Adj_k$ is not an epimorphism in $\Psh(\Delta^n)$ or $\
     where the downward functor is $L$ (resp. $R$).
 \end{definition}
 
+In the next three results, we describe how Segalification interacts with having adjoints.
+The first lemma bellow, and its immidiate corrolary, are the key to the inductive argument in \autoref{lem:adj_segalification}.
 Recall from \cite[Thm. D]{BS24} that, for $X$ reduced, the Segalification functor can be computed as $\mathbb{L}^\Delta_S = \mathbb{L}^\Delta_{S,n} \circ \ldots \circ \mathbb{L}^\Delta_{S,1}$.
 
 \begin{lemma}\label{lem:suspension_segal}
@@ -342,7 +381,7 @@ Recall from \cite[Thm. D]{BS24} that, for $X$ reduced, the Segalification functo
     Then $\mathbb{L}^\Delta_{S,i} \left(\sigma^{i}X \bigsqcup_{c_{i-1}}\sigma^{i}X\right)$ is an $(n+i+1)$-fold Segal space.
 \end{lemma}
 \begin{proof}
-    It suffices to prove the result for $i = 1$ as Segalification clearly commutes with suspension.
+    It suffices to prove the result for $i = 1$ as Segalification is seen to commute with suspension.
     By \autoref{const:suspension}, we have
     \[
         \left(\sigma X \bigsqcup_{c_{0}}\sigma X\right)_{a_1, \ldots, a_{n+1}} = \{\bullet_0\} \sqcup \bigsqcup_{i = 1}^{a_1} X_{a_2, \ldots, a_{n+1}} \sqcup \{\bullet_1\} \sqcup \bigsqcup_{i = 1}^{a_1} X_{a_2, \ldots, a_{n+1}} \sqcup \{\bullet_2\}
@@ -374,11 +413,13 @@ Recall from \cite[Thm. D]{BS24} that, for $X$ reduced, the Segalification functo
 \end{corollary}
 \begin{proof}
     By \autoref{lem:suspension_segal} above, $\mathbb{L}^\Delta_{S,i} \left(\Adj^k \bigsqcup_{c_{i-1}} \Adj^k\right)$ is Segal.
-    Note that $\mathbb{L}^\Delta_{S,k+1} \circ \mathbb{L}^\Delta_{S,k} \left(\Adj^k \bigsqcup_{c_{k-1}} \Adj^k\right)$ is also clearly Segal by \autoref{const:suspension}.
+    Note that $\mathbb{L}^\Delta_{S,k+1} \circ \mathbb{L}^\Delta_{S,k} \left(\Adj^k \bigsqcup_{c_{k-1}} \Adj^k\right)$ is also automatically Segal by \autoref{const:suspension}.
     The only equivalences in these $n$-fold simplicial sets are the identities, hence they are also complete.
     By \autoref{cor:riehl_verity}, it then suffices to show in classical (strict) $(n,n)$-category theory that an $i^\textnormal{th}$-composition of $k$-adjoints is an adjoint.
     This is a standard result from ordinary category theory.
 \end{proof}
+
+Using the two results above, we can now prove this key technical lemma bellow to handle adjoints in the Segalification of a reduced $n$-fold simplicial space.
 
 \begin{lemma}[Segalification Preserves Adjoints]\label{lem:adj_segalification}
     Let $X$ be a reduced $n$-fold simplicial space that has right (resp. left) adjoints for all $k$-cells.
@@ -386,7 +427,7 @@ Recall from \cite[Thm. D]{BS24} that, for $X$ reduced, the Segalification functo
 \end{lemma}
 \begin{proof}
     Using $\mathbb{L}^\Delta_S = \mathbb{L}^\Delta_{S,n} \circ \ldots \circ \mathbb{L}^\Delta_{S,1}$ for $X$ reduced, and using \cite[Lem. $2.15.a$]{BS24} which ensures $X$ remains reduced through these steps,
-    one can observe that it's sufficient to prove the result separately:
+    one can observe that it is sufficient to prove the result separately:
     for $\mathbb{L}^\Delta_{S,i}$ with $1 \leq i \leq k-1$,
     and for $\mathbb{L}^\Delta_{S,k+1} \circ \mathbb{L}^\Delta_{S,k}$.
 
@@ -426,7 +467,7 @@ Recall from \cite[Thm. D]{BS24} that, for $X$ reduced, the Segalification functo
 	\arrow[dashed, from=3-3, to=4-4]
 	\arrow["{\simeq_i}"', from=4-4, to=3-4]
 \end{tikzcd}\]
-    We want to show the top pentagone commutes.
+    We want to show the top pentagon commutes.
     Because every other polytope commutes in the diagram, we have the desired lift.
 
         \item \textbf{Case $i = k$:} Fix $c_k = \Delta_{1,\ldots, 1, 0, \ldots, 0} \to \mathbb{L}^\Delta_{S,k+1} \circ \mathbb{L}^\Delta_{S,k}(X)$.
@@ -435,6 +476,11 @@ Recall from \cite[Thm. D]{BS24} that, for $X$ reduced, the Segalification functo
     \end{enumerate}
 \end{proof}
 
+Sometimes, in situations such as \autoref{prop:free_full_adj}, one needs to show that the Segalification of a reduced $n$-fold simplicial space $X$ has adjoints even though $X$ itself does not strictly-speaking have adjoints according to \autoref{def:not_segat_adj}.
+Indeed, if any $k$-morphism of $X$ can be witnessed as a composition (or ``pasting'') of $k$-morphisms which do have adjoints, then the Segalification of $X$ will have adjoints for all $k$-morphisms.
+For technical reasons, proving this for a general $k$ is impractical as the notion of ``composition'' can become quite complicated, and the notion of $n$-fold simplicial space doesn't quite capture the stability of this notion: a composition of compositions is not easily seen as a composition itself.
+For the sake of this paper, it suffices to treat $k=1$, which is significantly more elementary.
+
 \begin{lemma}[Partial Adjoints in Segalification]\label{lem:partial_adj_segal}
     Let $X$ be a reduced $n$-fold simplicial space.
     Let $\cat{I} \subset \pi_0 X_{1, 0, \ldots, 0}$ be the minimal subset such that:
@@ -442,7 +488,7 @@ Recall from \cite[Thm. D]{BS24} that, for $X$ reduced, the Segalification functo
         \item if $f \in c_1 \to X$ has a right (resp. left) adjoint, as defined in \autoref{def:not_segat_adj}, $f$ in $\pi_0 X_{1,0, \ldots, 0}$ lies in $\cat{I}$,
         \item if $f \in c_1 \to X$ can be written as a composition of morphisms in $\cat{I}$, then $f$ lies in $\cat{I}$:
         in other words, if we have $\Delta_{r,0\ldots, 0} \epi c_1$ preserving end-points,
-        and, if for all consecutive inclusions $c_1 \mono \Delta_{r,0\ldots, 0}$, the composotion lies in $\cat{I}$,
+        and, if for all consecutive inclusions $c_1 \mono \Delta_{r,0\ldots, 0}$, the composition lies in $\cat{I}$,
         then $f$ lies in $\cat{I}$.
 % https://q.uiver.app/#q=WzAsNCxbMCwxLCJcXERlbHRhX3tyLDBcXGxkb3RzLCAwfSJdLFsxLDEsIlgiXSxbMCwyLCJjXzEiXSxbMCwwLCJjXzEiXSxbMCwxXSxbMCwyXSxbMiwxLCJmIiwyXSxbMywwLCJcXGZvcmFsbCIsMl0sWzMsMSwiXFxpbnNldCBcXGNhdHtJfSJdXQ==
 \[\begin{tikzcd}
@@ -464,54 +510,8 @@ Recall from \cite[Thm. D]{BS24} that, for $X$ reduced, the Segalification functo
     One can simply observe with the same diagram that any $1$-cell in $\cat{I}$ has an adjoint in the Segalification. 
 \end{proof}
 
-% \begin{definition}[Covering]
-%     A covering map in $\Delta^n$ is a map $([a_1],\ldots, [a_n]) \to ([b_1], \ldots, [b_n])$ such that each component $[a_i] \to [b_i]$ preserves the minimum and maximum elements.
-% \end{definition}\pablo{is that a standard definition? what's the standard name for that?}
-
-% \begin{lemma}
-%     Let $X$ be an $n$-fold simplicial space and $m_1, \ldots, m_n \geq 0$.
-%     Let $x \inset \mathbb{L}_S(X)_{m_1, \ldots, m_n}$.
-%     There exists a covering $([m_1],\ldots, [m_n]) \to ([c_1], \ldots, [c_n])$ such that $x$ lies in the image of
-%     \[
-%         X_{c_1, \ldots, c_n} \to \mathbb{L}_S(X)_{c_1, \ldots, c_n} \to \mathbb{L}_S(X)_{m_1, \ldots, m_n}
-%     \]
-% \end{lemma}
-% \begin{proof}
-%     Note that by \cite[Thm. D]{BS24}, the Segalification is obtained by successfully ``segalify'' the $k^\textnormal{th}$-coordinate, starting from the bottom up: $\mathbb{L}_S \simeq \mathbb{L}^n_S \circ \cdots \circ \mathbb{L}^1_S$.
-%     Obvserve \cite[Obv. $1.16$]{BS24} that $\mathbb{L}^i_S(X)_{m_1, \ldots, m_{i-1}, 0, m_{i+1}, \ldots, m_n} \simeq X_{m_1, \ldots, m_{j-1}, 0, m_{j+1}, \ldots, m_n}$ for all $1 \leq i \leq n$.
-%     We are trying to compute $\mathbb{L}^n_S \circ \cdots \circ \mathbb{L}^1_S (X)_{1, \ldots, 1, 0, \ldots, 0}$ with $k$ $1$'s, so we can ignore all $\mathbb{L}^i_S$ with $i > k$.
-% \end{proof}
-
-% \begin{lemma}
-%     Let $1 \leq k < n$.
-%     Then $\Psh(\Delta^n)^{k-\adj} \mono \Psh(\Delta^n)$ is stable under limits and colimits.
-% \end{lemma}
-
-% \begin{lemma}
-%     Let $1 \leq k < n$.
-%     Let $X$ be an $n$-fold simplicial space that has right (resp. left) adjoints for all $k$-cells.
-%     Then its Segalification $\mathbb{L}_S(X)$ has right (resp. left) adjoints for all $k$-cells.
-% \end{lemma}
-% \begin{proof}
-%     We proceed by induction on $k$.
-%     \begin{enumerate}
-%         \item \textbf{Base case:} Suppose $k = 1$.
-%         We have $\mathbb{L}_S(X)_{1,0, \ldots, 0} \simeq (\mathbb{L}_S^n \circ \mathbb{L}_S^1 (X))_{1,0, \ldots, 0} \simeq \mathbb{L}_S^1 (X)_{1,0, \ldots, 0}$ by \cite[Thm. D]{BS24} and \cite[Obv. $1.16$]{BS24}.
-%         Let $x \inset \mathbb{L}_S^1 (X)_{1,0, \ldots, 0}$.
-%         Using the explicit necklace formula \cite[Thm. A]{BS24}, we can find $n_1, \ldots, n_r$ such that $x$ lies in the image of 
-%         \[
-%             X_{n_1,0, \ldots, 0} \times_{X_{0, \ldots, 0}}  X_{n_2,0, \ldots, 0} \times_{X_{0, \ldots, 0}} \cdots \times_{X_{0, \ldots, 0}}  X_{n_r,0, \ldots, 0} \longto \mathbb{L}_S^1 (X)_{1,0, \ldots, 0}
-%         \]
-%         Every element in $X_{n,0, \ldots, 0}$ has an adjoint by assumption, and adjoints are stable under composition \pablo{prove this for non-segal spaces}, so $x$ has an adjoint.
-
-%         \item \textbf{Inductive step:} Suppose that $2 \leq k$ and that the result true for $k-1$.
-%         Let $m_1 \geq 0$.
-%         The necklace formula gives $\mathbb{L}_S^1 (X)_{m_1, \bullet, \ldots, \bullet}$ in terms of the $X_{k, \bullet, \ldots, \bullet}$ using some limits and colimits.
-%         By assumption, each $X_{k, \bullet, \ldots, \bullet} \inset \Psh(\Delta^{(n-1)})^{(k-1)-\adj}$ and hence $\mathbb{L}_S^1 (X)_{m_1, \bullet, \ldots, \bullet} \inset \inset \Psh(\Delta^{(n-1)})^{(k-1)-\adj}$.
-%         This exactly means that $\mathbb{L}_S^1 (X)$ has adjoints for all $k$-cells.
-%         By the 
-%     \end{enumerate}
-% \end{proof}
+Recall that our goal here is to show that a colimit of $(\infty, n)$-categories with adjoints also has adjoints.
+As explained in the beginning of the section, this require both to show a compatibility with Segalification (as done in the results above) and with completion, which is done bellow.
 
 \begin{lemma}[Completion Preserves Adjoints]\label{lem:completion_lifts}
     Let $X$ be an $n$-fold Segal space.
@@ -539,7 +539,7 @@ Recall from \cite[Thm. D]{BS24} that, for $X$ reduced, the Segalification functo
 \end{tikzcd}\]
 \end{proof}
 
-We can now state the main result of this subsection:
+We can now finally prove the main result of this subsection:
 
 \begin{proposition}[Colimits have Adjoints]\label{prop:colim_adj}
     Let $F \in I \to \Cat{n}$ be a diagram of $(\infty,n)$-categories which all admit right (resp. left) adjoints for all $k$-morphisms.
@@ -547,25 +547,16 @@ We can now state the main result of this subsection:
 \end{proposition}
 \begin{proof}
     By \eqref{diag:theta_delta}, one can compute the colimit as $\mathbb{L}_C \circ \mathbb{L}_S^\Delta \left(\Colim F\right)$ where the colimit is computed in $\Psh(\Delta^n)$.
-    Clearly, the collection of simplicial spaces with right (resp. left) adjoints for all $k$-morphisms is closed under colimits in $\Psh(\Delta^n)$ by definition.
+    By definition, the collection of simplicial spaces with right (resp. left) adjoints for all $k$-morphisms is closed under colimits in $\Psh(\Delta^n)$.
     By \autoref{lem:adj_segalification}, $\mathbb{L}_S^\Delta \left(\Colim F\right)$ has right (resp. left) adjoints for all $k$-morphisms.
     Fix $c_k \to \mathbb{L}_C \circ \mathbb{L}_S^\Delta \left(\Colim F\right)$ a $k$-morphism.
     By \autoref{lem:completion_lifts}, we have a factorization through $c_k \to \mathbb{L}_S^\Delta \left(\Colim F\right)$ which then has an adjoint.
 \end{proof}
 
-\subsection{Freely Adding Adjoints and Subcategories with Adjoints}
+\subsection{Freely Adding Adjoints and Subcategories with Adjoints}\label{subsec:Free_Sub}
 
-Using the results of the previous subsection, we now establish some basic constructions of the $(\infty, n)$-categories with adjoints.
-First, note that by \autoref{cor:riehl_verity}, we find:
-
-\begin{corollary}\label{cor:adj_fin_colim}
-    Let $k \geq 0$.
-    One can write $\Adj_k$ a finite colimit diagram of the $c_i$'s.
-\end{corollary}
-\begin{proof}
-    Existence of $L, R, \eta, \epsilon$ and the commutativity of the triangle identities can easily be encoded by some finite diagram.
-    The Theorem above shows that the canonical cocone on $\Adj_k$ that one gets is colimiting.
-\end{proof}
+Using the results of the previous subsection, we now establish some basic ``folklore'' results about the $(\infty, n)$-categories with adjoints, which we define bellow. 
+The most important result of this section is \autoref{prop:Free_Sub_exist}.
 
 \begin{definition}[Categories with Adjoints]
     Let $S \subset \{1,\ldots , n\}$ and $\A \in \Cat{n+1}$.
@@ -584,7 +575,18 @@ First, note that by \autoref{cor:riehl_verity}, we find:
     Denote $\Cat{n+1}^{S\textnormal{-adj}} \mono \Cat{n+1}$ the full subcategory of $(\infty,n+1)$-categories with $S$-adjoints.
 \end{definition}
 
-Note that by the Theorem above, these lifts are unique if they exists.
+Note that by the \autoref{cor:riehl_verity}, these lifts are unique if they exists.
+Before we head into the proof of \autoref{prop:Free_Sub_exist}, we observe a couple small results.
+Note that by \autoref{cor:riehl_verity}, we find:
+
+\begin{corollary}\label{cor:adj_fin_colim}
+    Let $k \geq 0$.
+    One can write $\Adj_k$ as a finite colimit diagram of the $c_i$'s.
+\end{corollary}
+\begin{proof}
+    Existence of $L, R, \eta, \epsilon$ and the commutativity of the triangle identities can easily be encoded by some finite diagram.
+    The Theorem above shows that the canonical cocone on $\Adj_k$ that one gets is colimiting.
+\end{proof}
 
 \begin{lemma}[Stability under Limits]\label{lem:lim_colim_exists}
     Let $S \subset K \subset \{1,\ldots , n\}$.
@@ -607,6 +609,8 @@ Note that by the Theorem above, these lifts are unique if they exists.
     This means that $\Lim F$ has $S$-adjoints.
 \end{proof}
 
+Using the two results above, and our main result of the previous subsection (\autoref{prop:colim_adj}), we can then show the existence of the full-subcategories with adjoints.
+
 \begin{proposition}[Free and Sub-Categories with Adjoints]\label{prop:Free_Sub_exist}
     Let $n \geq 0$ and $S \subset \{1,\ldots , n\}$.
     The inclusion $\Cat{n+1}^{S\textnormal{-adj}} \mono \Cat{n+1}$ fits into a bireflection between locally finitely-presentable categories:
@@ -623,12 +627,12 @@ Note that by the Theorem above, these lifts are unique if they exists.
 \end{proposition}
 \begin{proof}
     $\Cat{n+1}$ has small colimits and is locally small.
-    Clearly, $\Cat{n+1}^{S\textnormal{-adj}}$ is the category of $\cat{W}$-weakly local objects \cite[\href{https://kerodon.net/tag/04LH}{Def. 04LH}]{kerodon} for the small collection $\cat{W} = \{c_k \xepi[L] \Adj_k \mid k \inset S\} \cup \{c_k \xepi[R] \Adj_k \mid k \inset S\}$.
+    Note that $\Cat{n+1}^{S\textnormal{-adj}}$ is the category of $\cat{W}$-weakly local objects \cite[\href{https://kerodon.net/tag/04LH}{Def. 04LH}]{kerodon} for the small collection $\cat{W} = \{c_k \xepi[L] \Adj_k \mid k \inset S\} \cup \{c_k \xepi[R] \Adj_k \mid k \inset S\}$.
     The domain of these maps of $\cat{W}$ are all $c_k$ and hence compact. 
-    The codomain of these maps are all $\Adj_k$'s and hence compact by \autoref{cor:adj_fin_colim}.
+    The codomains of these maps are all $\Adj_k$'s and hence compact by \autoref{cor:adj_fin_colim}.
     By the Small Object Argument \cite[\href{https://kerodon.net/tag/04MD}{Cor. 04MD}]{kerodon}, the inclusion $\Cat{n+1}^{S\textnormal{-adj}} \mono \Cat{n+1}$ has a left adjoint $\Free^{S}$.
     
-    Note that this imply $\Cat{n+1}^{S\textnormal{-adj}}$ has all colimits and that they're preserved by $\Free^{S}$.
+    Note that this implies $\Cat{n+1}^{S\textnormal{-adj}}$ has all colimits and that they are preserved by $\Free^{S}$.
     Explicitly, these colimits are computed by taking the diagram in $\Cat{n+1}$ via the inclusion, taking its colimit there, and then applying $\Free^{S}$.
     By \autoref{prop:colim_adj}, the last step is not necessary: the colimit taken in $\Cat{n+1}$ already has $S$-adjoints.
     Hence, the inclusion preserves all small colimits and thus is accessible.
@@ -638,6 +642,8 @@ Note that by the Theorem above, these lifts are unique if they exists.
     Because epimorphisms are stable under pushout and transfinite composition, the unit $\cat{C} \epi \Free^{S}(\cat{C})$ is an epimorphism by construction.
     For $\A, \B \inset \Cat{n+1}$, we then have $[\A, \SubAdj^{S}(\B)] \simeq [\Free^{S}(\A),\SubAdj^{S}(\B)] \simeq [\Free^{S}(\A), \B] \mono [\A, \B]$, showing that the counit $\SubAdj^{S}(\B) \mono \B$ is a monomorphism.
 \end{proof}
+
+One can easily build upon this and find a \textit{relative} version of the result above.
 
 \begin{corollary}\label{cor:partial_Free_Sub_exists}
     Let $S \subset K \subset \{1,\ldots , n\}$.
@@ -658,6 +664,8 @@ Note that by the Theorem above, these lifts are unique if they exists.
     We can identify $\Cat{n+1}^{K\textnormal{-adj}} \mono \Cat{n+1}^{S\textnormal{-adj}}$ with the full subcategory of $\cat{W}$-weakly local objects for the small collection $\cat{W} = \{\Free^{S}(c_k \xepi[L] \Adj_k) \mid k \inset K\} \cup \{\Free^{S}(c_k \xepi[R] \Adj_k) \mid k \inset K\}$.
     The functor $\Free^{S}$ preserves compact objects (its right adjoint preserves filtered colimit) and epimorphisms (as it preserves pushouts), so we can apply the same argument as above.
 \end{proof}
+
+We now focus on a couple results which are curcial to the inductive formulation of the main theorems of this paper. 
 
 \begin{lemma}[$\Free$ preserves (some) Ajoints]\label{lem:Free_pres_adj}
     Let $S \subset \{2,\ldots , n\}$ and $m < \min(S)$.
@@ -683,10 +691,10 @@ Note that by the Theorem above, these lifts are unique if they exists.
             \arrow["\lrcorner"{anchor=center, pos=0.125, rotate=180}, draw=none, from=2-2, to=1-1]
         \end{tikzcd}\]
         By \autoref{lem:completion_lifts}, it suffices to show the $m$-morphisms $c_m \to \mathbb{L}_{S}^\Delta(\cat{C}_{\alpha} \sqcup_{c_k} \Adj_k)$ have adjoints.
-        It's clear that for $a_1, \ldots, a_m \geq 0$, we have $(c_k)_{a_1, \ldots, a_m, 0, \ldots, 0} \simeq (\Adj_k)_{a_1, \ldots, a_m, 0, \ldots, 0}$.
+        It is immediate that for $a_1, \ldots, a_m \geq 0$, we have $(c_k)_{a_1, \ldots, a_m, 0, \ldots, 0} \simeq (\Adj_k)_{a_1, \ldots, a_m, 0, \ldots, 0}$.
         Hence, we have an equivalence $(\cat{C}_{\alpha})_{a_1, \ldots, a_m, 0, \ldots, 0} \simeq (\cat{C}_{\alpha} \sqcup_{c_k} \Adj_k)_{a_1, \ldots, a_m, 0, \ldots, 0}$.
         So the pushout is already Segal in the first $m$-directions and in the iterative Necklace formula \cite[Thm. D]{BS24}, the first $m$ steps do nothing.
-        The last steps don't affect the space of $m$-morphisms either, so we have $(\cat{C}_{\alpha})_{a_1, \ldots, a_m, 0, \ldots, 0} \simeq (\mathbb{L}_{S}^\Delta(\cat{C}_{\alpha} \sqcup_{c_k} \Adj_k))_{a_1, \ldots, a_m, 0, \ldots, 0}$.
+        The last steps do not affect the space of $m$-morphisms either, so we have $(\cat{C}_{\alpha})_{a_1, \ldots, a_m, 0, \ldots, 0} \simeq (\mathbb{L}_{S}^\Delta(\cat{C}_{\alpha} \sqcup_{c_k} \Adj_k))_{a_1, \ldots, a_m, 0, \ldots, 0}$.
         By assumption, every $m$-morphism in $\cat{C}_{\alpha}$ has an adjoint, which concludes the successor step.
 
         \item \textbf{Limit step:} Let $\lambda \leq \kappa$ be a limit ordinal.
@@ -706,7 +714,10 @@ Note that by the Theorem above, these lifts are unique if they exists.
     The prove the first clim, it suffices to see that it satifies the correct universal property.
 \end{proof}
 
-\subsection{Lifting Once-Fully-Adjoint Morphisms}
+\subsection{Lifting Once-Fully-Adjoint Morphisms}\label{subsec:lifting_adj}
+
+In this subsection, we finalize the categorical prerequisites for the inductive argument at the core of the proof of the main theorem of this paper (\autoref{thm:full_dualizability_criterion}).
+The result bellow formalizes the idea that ``constucting a full-$\{1\}$-adjoints is equivalent to finding a sequence of adjunctions''
 
 \begin{proposition}[Free Full Adjunction]\label{prop:free_full_adj}
     Denote $\mathbb{Z}^{\to\leftarrow}$ the poset whose objects are the integers and which has morphisms $2n \to 2n\pm 1$ for all $n \in \mathbb{Z}$.
@@ -751,11 +762,11 @@ We denote by $f^{\vee n}\in c_k \to \Free^{\{k\}}(c_k)$ the $n$-th cocone projec
     By picking the point in the zero-th space corresponding to the universal functor $c_ 1 \to \Free^{\{1\}-\adj}(c_1)$, we get a canonical cocone diagram.
 
     Secondly, we build a functor $\Free^{\{1\}-\adj}(c_1) \to \Colim (\mathbb{Z}^{\to\leftarrow} \to \Cat{2})$.
-    By universal property of $\Free^{\{1\}-\adj}(c_1)$, it's sufficient to show that $\Colim (\mathbb{Z}^{\to\leftarrow} \to \Cat{2})$ has $\{1\}$-adjoints and to pick a $1$-morphism $c_1 \to \Colim (\mathbb{Z}^{\to\leftarrow} \to \Cat{2})$.
-    The first part is a consequence of \autoref{lem:partial_segal_adj} and \autoref{lem:completion_lifts}, as any morphism coming from a copy of $\Adj$ is given by composition of $L$'s and $R$'s, which have adjoints.
+    By universal property of $\Free^{\{1\}-\adj}(c_1)$, it is sufficient to show that $\Colim (\mathbb{Z}^{\to\leftarrow} \to \Cat{2})$ has $\{1\}$-adjoints and to pick a $1$-morphism $c_1 \to \Colim (\mathbb{Z}^{\to\leftarrow} \to \Cat{2})$.
+    The first part is a consequence of \autoref{lem:partial_adj_segal} and \autoref{lem:completion_lifts}, as any morphism coming from a copy of $\Adj$ is given by composition of $L$'s and $R$'s, which have adjoints.
     The second part follows by choosing the $1$-cell $c_1 \to \Colim (\mathbb{Z}^{\to\leftarrow} \to \Cat{2})$ given by the universal cocone projection on the zero-th copy of $c_1$.
     
-    It's now clear that the two functors $\Free^{\{1\}-\adj}(c_1) \to \Colim (\mathbb{Z}^{\to\leftarrow} \to \Cat{2})$ and $\Colim (\mathbb{Z}^{\to\leftarrow} \to \Cat{2}) \to \Free^{\{1\}-\adj}(c_1)$ are inverses to each other by examining the universal properties.
+    It is now easy to see that the two functors $\Free^{\{1\}-\adj}(c_1) \to \Colim (\mathbb{Z}^{\to\leftarrow} \to \Cat{2})$ and $\Colim (\mathbb{Z}^{\to\leftarrow} \to \Cat{2}) \to \Free^{\{1\}-\adj}(c_1)$ are inverses to each other by examining the universal properties.
 \end{proof}
 
 \begin{remark}
@@ -763,6 +774,8 @@ We denote by $f^{\vee n}\in c_k \to \Free^{\{k\}}(c_k)$ the $n$-th cocone projec
     This however requires a more careful generalization of \autoref{prop:colim_adj}.
     One can even proof that for $k < n$, the colimit diagrams can be chosen finite, by carefully looking at the notion of redundancy of adjunction data (see \autoref{lem:redundancy} for an example of such a result).
 \end{remark}
+
+We get the following corollary, which will be used in the proof of the main theorem of this paper (\autoref{thm:full_dualizability_criterion}).
 
 \begin{corollary}[Lifting Once-Fully-Dualizable Morphisms]\label{cor:lifting_once_fully_dualizable}
     Let $1 \leq k < n$.
@@ -787,7 +800,10 @@ We denote by $f^{\vee n}\in c_k \to \Free^{\{k\}}(c_k)$ the $n$-th cocone projec
     In other words: the fully-$\{k\}$-dualizable morphism lift if all of its units and counits lift.  
 \end{corollary}
 
-\subsection{Invertibility}
+\subsection{Invertibility}\label{subsec:invertibility}
+
+In this final subsection, we compute the clssifying spaces of free/walking adjunctions.
+Contractibility of these spaces exactly correspond to showing that any invertible morphisms is fully-adjointable, which is part of the statement of \autoref{thm:invertibility_criterion}.
 
 \begin{lemma}[Classifying Space of $\Adj$]\label{lem:adj_contractible}
     The localization of $\Adj$ by freely inverting $\eta$ and $\epsilon$ is the contractible category.
@@ -800,7 +816,7 @@ We denote by $f^{\vee n}\in c_k \to \Free^{\{k\}}(c_k)$ the $n$-th cocone projec
     \[
         {[c_1, \cat{C}]_{\simeq} \mono [\Adj[\eta^{-1}, \epsilon^{-1}], \cat{C}] \mono [\Adj, \cat{C}] \mono [c_1, \cat{C}]}
     \]
-    To show that $\Adj[\eta^{-1}, \epsilon^{-1}] \epi \{\bullet\}$ is an equivalence, it's sufficient to show that: given any adjunction $L \in \begin{tikzcd}
+    To show that $\Adj[\eta^{-1}, \epsilon^{-1}] \epi \{\bullet\}$ is an equivalence, it is sufficient to show that: given any adjunction $L \in \begin{tikzcd}
         a & b
         \arrow[""{name=0, anchor=center, inner sep=0}, curve={height=-6pt}, from=1-1, to=1-2]
         \arrow[""{name=1, anchor=center, inner sep=0}, curve={height=-6pt}, from=1-2, to=1-1]
@@ -808,6 +824,8 @@ We denote by $f^{\vee n}\in c_k \to \Free^{\{k\}}(c_k)$ the $n$-th cocone projec
     \end{tikzcd} \in R \in \cat{C}$, if $\eta$ and $\epsilon$ are invertible, then $L$ is invertible.
     Invertibility is a property detected by truncation to the homotopy $1$-category, where this is a classical result of ordinary category theory.
 \end{proof}
+
+Similarly, we get the following:
 
 \begin{lemma}[Classifying Space of Higher Walking Adjoints]\label{lem:free_contractible}
     Let $1 \leq k < n$ and $S \subset \{k, \ldots, n-1\}$.
@@ -830,101 +848,327 @@ We denote by $f^{\vee n}\in c_k \to \Free^{\{k\}}(c_k)$ the $n$-th cocone projec
 
 \section{Dualizability Data as Factorization Homology}\label{sec:factorization_homology}
 
-Throughout the rest of this paper, we fixe a symmetric monoidal $(\infty,1)$-category $\V$ whose tensor product commutes with sifted colimits in both variables.
+The goal of this section is to establish the algebraic and geometric elements of the proof of our criteria.
+In \autoref{subsec:homological} and \autoref{subsec:handlebodies}, we use factorization homology \cite{AFT17a,AFR18a,AFT17} to construct the iterated ``(co)units of (co)units of (co)units of \ldots'', which we call adjunction data.
+In \autoref{subsec:dual}, we prove a criterion for existence of adjoints of top-level morphisms in the higher Morita categories (see \cite{Lur09,Sch14, Hau17a, Hau23} for its definition).
+Finally in \autoref{subsec:deligne}, we identify some units in the dualizability data with universal algebra-map to some higher Hochschild Cohomology.
 
-\begin{remark}[Potential Generalizations]
-    All the results of this section hold more generally for $\mathcal{E}_n$-monoidal $(\infty,1)$-categories $\V$ whose monoïdal structure commutes with geometric realizations in each variable.
-    We opted to treat only these $\V$ to simplify the exposition.
-\end{remark}
+Throughout the rest of this paper, we fix $\V \inset \EAlg{\infty}\left(\Cat{1}^\geom\right)$, a symmetric monoidal $(\infty,1)$-category with geometric realizations and whose monoidal structure distributes over geometric realizations.
 
-\subsection{Factorization Homology of Stratified Spaces}
+\subsection{Homological Commutative Diagrams}\label{subsec:homological}
 
-This section follows the theory of factorization homology of conically smooth stratified spaces developed by Ayala, Francis, Rozenblyum and Tanaka in \cite{AFT17a,AFR18a,AFT17}.
-Conical smoothness will be implicit throughout this section, and we will simply refer to the spaces as stratified spaces. 
+This first subsection establishes a key technical tool to \textit{transfer} algebraic structures ``carried'' by different stratified spaces, which is stated in the form of \autoref{lem:commutative_diagrams}.
+We start with quick overview of the formalism of factorization homology of conically smooth stratified spaces developed by Ayala, Francis, Rozenblyum and Tanaka in \cite{AFT17, AFT17a}.
+All the stratified spaces we will consider will be conically smooth \cite[Subsec. $4.1$]{AFT17a} and finitary \cite[Def. $8.3.6$]{AFT17a}, so we decide to omit these adjectives in the rest of this paper.
+We slightly modify the original notations of \cite{AFT17a} as follows:
+\begin{enumerate}
+    \item $\disk$ will denote the symmetric monoidal $(1,1)$-category of ``disks'' with open embeddings: finite disjoint unions of basic stratified spaces, see \cite[Subsec. $3.2.$]{AFT17a} for their inductive definition,
+    \item $\mfld$ will denote the symmetric monoidal $(1,1)$-category of stratified spaces with open embeddings,
+    \item $\Disk$ will denote the symmetric monoidal $(\infty,1)$-category obtained of disks with open embedding spaces see \cite[Subsec. $4.1$]{AFT17a} (denoted $\Snglr$ in the original text),
+    \item $\Mfld$ will denote the symmetric monoidal $(\infty,1)$-category obtained of stratified spaces with open embedding spaces (denoted $\Snglr$ in the original text).
+\end{enumerate}
 
-\begin{construction}
-    Recall from \cite[Const. $2.4$]{AFT17} that for any stratified space $X$ with a $\B$-structure, we have an operad $\Disk(\B)_{/X} \to \Fin_*$ together with a morphism of operads $\Disk(\B)_{/X} \to \Disk(\B)$ and a notion of ``pre-coCartesian'' morphisms.
-    We denote $\Disk_{/X} \coloneqq \Disk(\Bsc)_{/X}$.
-    In \cite[Obv. $2.7$]{AFT17}, it is observed that if $X$ is endowed with a $\B$-structure, then we have an equivalence of operads $\Disk(\B)_{/X} \simeq \Disk_{/X}$ induced by the right fibration $\B \to \Bsc$, which also preserves the notion of pre-coCartesian morphisms.
-    Informally, this operad can be described as follows:
+We now briefly recall the operadic notions required to talk about factorization homology of stratified spaces.
+Once again, we slightly modify the original notations of \cite{AFT17} to fit our exposition.
+
+\begin{definition}[Marked Operad]
+    An operad $\operad{O} \to \Fin_*$ is said to be \emph{marked} if it is endowed with a collection of coCartesian morphisms called \emph{pre-coCartesian} which contains all inert morphisms.
+    For two marked operads $\operad{A}, \operad{B} \to \Fin_*$, the category of algebras $\Alg{\operad{A}/\operad{B}} \mono [\operad{A}, \operad{B}]_{/\Fin^*}$ is the full-$(infty,1)$-subcategory of functors above $\Fin^*$ on these functors which sends pre-coCartesian morphisms to pre-coCartesian morphisms.
+\end{definition}
+
+Note that usual operads can be seen as marked operads by declaring only inert morphisms to be pre-coCartesian,
+and symmetric monoidal $(\infty,1)$-categories can be seen as marked operads by declaring all coCartesian morphisms to be pre-coCartesian.
+Recall from \cite[Subsubsection $2.4.3$]{Lur17} that given a category $\mathcal{O}$, we can form an operad $\mathcal{O}^\sqcup \to \Fin_*$ whose objects over $\mathbf{n}^+$ are $n$-uples of objects of $\mathcal{O}$.
+We can then directly adapt the following result from \cite{AFT17}.
+
+\begin{lemma}[Pullback of Marked Operads along Right Fibrations, {\cite[Cor. $1.20$]{AFT17}}]
+    Let $\operad{O} \to \Fin_*$ be a marked operad and $\mathcal{E} \to \mathcal{O}$ be a right fibration.
+    The pullback
+    % https://q.uiver.app/#q=WzAsNSxbMCwwLCJcXHVuZGVybGluZXtcXG1hdGhjYWx7RX19Il0sWzAsMSwiXFx1bmRlcmxpbmV7XFxtYXRoY2Fse099fSJdLFsxLDIsIlxcRmluXioiXSxbMSwxLCJcXG1hdGhjYWx7T31eXFxzcWN1cCJdLFsxLDAsIlxcbWF0aGNhbHtFfV5cXHNxY3VwIl0sWzAsMSwiIiwwLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzEsM10sWzAsNCwiIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzQsM10sWzMsMl0sWzEsMl0sWzAsMywiIiwyLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV1d
+    \[\begin{tikzcd}
+        {\operad{E}} & {\mathcal{E}^\sqcup} \\
+        {\operad{O}} & {\mathcal{O}^\sqcup} \\
+        & {\Fin^*}
+        \arrow[dashed, from=1-1, to=1-2]
+        \arrow[dashed, from=1-1, to=2-1]
+        \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+        \arrow[from=1-2, to=2-2]
+        \arrow[from=2-1, to=2-2]
+        \arrow[from=2-1, to=3-2]
+        \arrow[from=2-2, to=3-2]
+    \end{tikzcd}\]
+    exhibit $\operad{E}$ as a marked operad with pre-coCartesian morphisms those mapping to pre-coCartesian morphisms in $\operad{O}$.
+\end{lemma}
+
+\begin{definition}[{\cite[Const. $2.4$]{AFT17}}]\label{def:operads}
+    Using the lemma above, for $X$ a stratified space, we define
     \begin{enumerate}
-        \item its objects are pairs $(n, (\bigsqcup_{1 \leq i \leq k_j} B_{i,j} \mono X)_{1 \leq j \leq n})$ where $n \geq 0$ and $\bigsqcup_{1 \leq i \leq k_j} B_{i,j} \mono X$ is some embedding of a finite disjoint union of basics into $X$,
-        \item the space of morphisms from $a = (n, (\bigsqcup_{1 \leq i \leq k_j} B_{i,j} \mono X)_{1 \leq j \leq n})$ to $b = (m, (\bigsqcup_{1 \leq i \leq l_j} B'_{i,j} \mono X)_{1 \leq j \leq m})$ is disjoint union over all maps $\phi \in \Fin_*(\mathbf{n}^+, \mathbf{m}^+)$ of the limit in spaces 
-        % https://q.uiver.app/#q=WzAsNCxbMCwxLCJcXEVtYihcXGJpZ3NxY3VwX3tqIFxcaW5zZXQgXFxwaGleey0xfShqJyl9XFxiaWdzcWN1cF97MSBcXGxlcSBpIFxcbGVxIGtfan0gQl97aSxqfSwgXFxiaWdzcWN1cF97MSBcXGxlcSBpIFxcbGVxIGxfe2onfX0gQidfe2ksaid9KSJdLFsxLDEsIlxccHJvZF97aiBcXGluc2V0IFxccGhpXnstMX0oaicpfVxcRW1iKFxcYmlnc3FjdXBfezEgXFxsZXEgaSBcXGxlcSBrX2p9IEJfe2ksan0sIFgpIl0sWzEsMCwiXFx7XFxidWxsZXRcXH0iXSxbMCwwLCJcXERpc2soXFxCKV97L1h9KGEsYikiXSxbMiwxXSxbMCwxXSxbMywyLCIiLDAseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMywwLCIiLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMywxLCIiLDEseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XV0=
-        \[\begin{tikzcd}
-            {\Disk(\B)_{/X}(a,b)} & {\{\bullet\}} \\
-            {\Emb(\bigsqcup_{j \inset \phi^{-1}(j')}\bigsqcup_{1 \leq i \leq k_j} B_{i,j}, \bigsqcup_{1 \leq i \leq l_{j'}} B'_{i,j'})} & {\prod_{j \inset \phi^{-1}(j')}\Emb(\bigsqcup_{1 \leq i \leq k_j} B_{i,j}, X)}
-            \arrow[dashed, from=1-1, to=1-2]
-            \arrow[dashed, from=1-1, to=2-1]
-            \arrow["\lrcorner"{anchor=center, pos=0.125, rotate=45}, draw=none, from=1-1, to=2-2]
-            \arrow[from=1-2, to=2-2]
-            \arrow[from=2-1, to=2-2]
-        \end{tikzcd}\]
-        \item a morphism is pre-coCartesian if and only if for each $1 \leq j \leq m$, the induced map $\bigsqcup_{j \inset \phi^{-1}(j')} \bigsqcup_{1 \leq i \leq k_{j}} B_{i,j} \to \bigsqcup_{1 \leq i \leq l_{j'}} B'_{i,j'}$ is an equivalence in $\Disk$.
+        \item $\udisk_{/X}$ as the marked $(1,1)$-operad obtained from the slice right fibration $\underline{\disk_{/X}} \to \disk$ and the symmetric monoidal structure on $\disk$,
+        \item $\umfld_{/X}$ as the marked $(1,1)$-operad obtained from the slice right fibration $\underline{\mfld_{/X}} \to \mfld$ and the symmetric monoidal structure on $\mfld$,
+        \item $\udisk_{/X}$ as the marked $(\infty,1)$-operad obtained from the slice right fibration $\underline{\disk_{/X}} \to \disk$ and the symmetric monoidal structure on $\Disk$,
+        \item $\umfld_{/X}$ as the marked $(\infty,1)$-operad obtained from the slice right fibration $\underline{\mfld_{/X}} \to \mfld$ and the symmetric monoidal structure on $\Mfld$,
     \end{enumerate}
-    For $\V$ a symmetric monoidal $(\infty,1)$-category, seen as a coCartesian fibration $\V^\otimes \to \Fin$, we denote $\Alg{X}(\V) \mono {\Cat{1}}_{/{\Fin_*}}(\Disk_{/X}, \V^\otimes)$ the full subcategory on the the functors which send pre-coCartesian morphisms to coCartesian ones.
-    % Recall from \cite[Ex. $5.2.2$]{AFT17a} that for any stratified space $X$, we have a canonical category of basics $\Entr(X) \to \Bsc$, and that $X$ itself is canonically an $\Entr(X)$-stratified space.
-    % We thus have a morphism of operads
-    % \[
-    %     \Disk_{/X} \simeq \Disk(\Entr(X))_{/X} \to \Disk(\Entr(X))
-    % \]
-    Note that this construction is functorial in $X$ with respect to open embeddings, as it comes from the functorial slice construction.
-    In particular, $\Aut(X)$ acts on the operad $\Disk_{/X}$ by equivalences.
-    Similarly, we get an operad $\Mfld_{/X}$ by removing the condition that the $B_{i,j}$ are basics.
-    In some good sense, the inclusion $\Disk_{/X} \mono \Mfld_{/X}$ generates $\Mfld_{/X}$ under specific sifted colimits, which are called factorization homology.
-\end{construction}
-
-\begin{remark}[Closed Strata Inclusions]\label{rem:closed_inclusions}
-    For $C \mono X$ the inclusion of a closed union of strata, we have a canonical morphism of operads $\Disk_{/X} \to \Disk_{/C}$ which ``forgets'' the algebraic data corresponding to the other strata.
-\end{remark}
-
-We recall two different ways to transfer algebraic structures between stratified spaces.
-
-\begin{proposition}[Pushforward {\cite[Lem. $2.24$ and Thm. $2.25$]{AFT17}}]\label{prop:pushforward}
-    For $\pi \in X \epi Y$ be a weak constructible bundle of stratified spaces, we have a map of operads $\Disk_{/Y} \to \Mfld_{/X}$ which induces a commutative diagram
-% https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXEFsZ3tYfShcXFYpIl0sWzEsMSwiXFxBbGd7WX0oXFxWKSJdLFsyLDAsIlxcViJdLFswLDEsIlxccGlfKiIsMl0sWzAsMiwiXFxpbnRfWCJdLFsxLDIsIlxcaW50X1kiLDJdXQ==
-\[\begin{tikzcd}
-	{\Alg{X}(\V)} && \V \\
-	& {\Alg{Y}(\V)}
-	\arrow["{\int_X}", from=1-1, to=1-3]
-	\arrow["{\pi_*}"', from=1-1, to=2-2]
-	\arrow["{\int_Y}"', from=2-2, to=1-3]
-\end{tikzcd}\]
-\end{proposition}
-
-\begin{proposition}[Refinement {\cite[Lem. $2.23$]{AFT17}}]\label{prop:refinement}
-    For $r \in X \dashrightarrow Y$ be a refinement of stratified spaces, we have a localization of operads $\Disk_{/X} \to \Disk_{/Y}$ which induces a commutative diagram
-% https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXEFsZ3tZfShcXFYpIl0sWzEsMSwiXFxBbGd7WH0oXFxWKSJdLFsyLDAsIlxcViJdLFswLDEsInJeKiIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzAsMiwiXFxpbnRfWCJdLFsxLDIsIlxcaW50X1kiLDJdXQ==
-\[\begin{tikzcd}
-	{\Alg{Y}(\V)} && \V \\
-	& {\Alg{X}(\V)}
-	\arrow["{\int_X}", from=1-1, to=1-3]
-	\arrow["{r^*}"', hook, from=1-1, to=2-2]
-	\arrow["{\int_Y}"', from=2-2, to=1-3]
-\end{tikzcd}\]
-where the bottom left functor is fully-faithful.
-\end{proposition}
-
-\begin{remark}[Commutative Diagrams]\label{rem:commutative_diagrams}
-    We have seen that one can transfer algebraic structures using either:
+    To simplify notations, we let $\Alg{/X}(\V)$ denote $\Alg{\uDisk_{/X}/\operad{O}}$ for $\operad{O}$ a marked operad.
+    More explicitly, the operad $\Disk_{/X}$ is given as follows:
     \begin{enumerate}
-        \item open embeddings (by functoriality of the slice construction),
-        \item closed strata inclusions (\autoref{rem:closed_inclusions}),
-        \item weak constructible bundles (\autoref{prop:pushforward}),
-        \item refinements (\autoref{prop:refinement}).
+        \item its objects lying over $\mathbf{n}^+$ are collections $(\bigsqcup_{1 \leq i \leq k_j} B_{i,j} \mono X)_{1 \leq j \leq n}$ of embeddings of a finite disjoint union of basics into $X$,
+        \item the space of morphisms from $a = (\bigsqcup_{1 \leq i \leq k_j} B_{i,j} \mono X)_{1 \leq j \leq n}$ to $b = (\bigsqcup_{1 \leq i \leq l_j} B'_{i,j} \mono X)_{1 \leq j \leq m}$ over $\phi \in \mathbf{n}^+ \to \mathbf{m}^+ \in  \Fin_*$ of the pullback in spaces 
+% https://q.uiver.app/#q=WzAsNCxbMCwxLCJcXHByb2RfezEgXFxsZXEgaicgXFxsZXEgbX0gXFxFbWIoXFxiaWdzcWN1cF97aiBcXGluc2V0IFxccGhpXnstMX0oaicpfVxcYmlnc3FjdXBfezEgXFxsZXEgaSBcXGxlcSBrX2p9IEJfe2ksan0sIFxcYmlnc3FjdXBfezEgXFxsZXEgaSBcXGxlcSBsX3tqJ319IEInX3tpLGonfSkiXSxbMSwxLCJcXHByb2Rfe2ogXFxpbnNldCBcXHBoaV57LTF9KFxcbWF0aGJme219KX1cXEVtYihcXGJpZ3NxY3VwX3sxIFxcbGVxIGkgXFxsZXEga19qfSBCX3tpLGp9LCBYKSJdLFsxLDAsIlxce1xcYnVsbGV0XFx9Il0sWzAsMCwiXFxEaXNrKFxcQilfey9YfShhLGIpIl0sWzIsMV0sWzMsMiwiIiwwLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzMsMCwiIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzAsMV0sWzMsNywiIiwxLHsibGV2ZWwiOjEsInN0eWxlIjp7Im5hbWUiOiJjb3JuZXIifX1dXQ==
+\[\begin{tikzcd}
+	{\Disk(\B)_{/X}(a,b)} & {\{\bullet\}} \\
+	{\prod_{1 \leq j' \leq m} \Emb(\bigsqcup_{j \inset \phi^{-1}(j')}\bigsqcup_{1 \leq i \leq k_j} B_{i,j}, \bigsqcup_{1 \leq i \leq l_{j'}} B'_{i,j'})} & {\prod_{j \inset \phi^{-1}(\mathbf{m})}\Emb(\bigsqcup_{1 \leq i \leq k_j} B_{i,j}, X)}
+	\arrow[dashed, from=1-1, to=1-2]
+	\arrow[dashed, from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow[""{name=0, anchor=center, inner sep=0}, from=2-1, to=2-2]
+	\arrow["\lrcorner"{anchor=center, pos=0.125, rotate=45}, draw=none, from=1-1, to=0]
+\end{tikzcd}\]
+        \item a morphism above is pre-coCartesian if each of the maps $\bigsqcup_{j \inset \phi^{-1}(j')}\bigsqcup_{1 \leq i \leq k_j} B_{i,j} \mono \bigsqcup_{1 \leq i \leq l_{j'}} B'_{i,j'})$ in the bottom left space are isotopy equivalences.
     \end{enumerate}
-    All of these functors are first defined on a $1$-categorical level ``on-the-nose'', then extended to the corresponding $\infty$-operads using \cite[Prop. $2.22$]{AFT17a}.
-    As a consequence, any commutative diagram of such stratified maps will automatically induce a commutative diagram of the corresponding functors between $(\infty,1)$-categories of algebras.
-    This will be used extensively in the rest of this section.
-\end{remark}
 
-\begin{remark}[Retractions]\label{rem:retractions}
-    Suppose we have a ``retraction'' $X \mono Y \xepi[\pi] X$ where the first map is a closed inclusion of strata and the second map is a constructible bundle, and where for all $x \inset X$, $\pi\in Y_x \to \{x\}$ is the projection onto a cone point.
-    Then, it's clear by construction that we have an equivalence between categories of algebras $\Alg{X}(\V) \simeq \Alg{Y}(\V)$ induced by the pushforward and the restriction.
-\end{remark}
+    Note that these constructions are functorial in $X$ with respect to open embeddings, as it directly follows from the slice construction which is itself functorial.
+    In particular, we have an action $\Aut(X) \curvearrowright \Disk_{/X}$ by equivalences of marked operads.
+\end{definition}
 
-\subsection{Handlebodies as Duality Datum}
+Using the equivalence of \cite[Thm. $2.43$]{AFT17}, one can define homology theories as follows.
 
+\begin{definition}[Homology Theories {\cite[Def. $2.37$]{AFT17}}]\label{def:homology_theory}
+    For $X$ a stratified space, the category of \emph{homology theories} $\cat{H}(\uMfld_{/X}, \V)$ is the full-$(\infty,1)$-subcategory
+    \[
+        \cat{H}(\uMfld_{/X}, \V) \mono \Alg{\uMfld_{/X}}(\V)
+    \]
+    on these morphisms of operads $\cat{H}$ such that the following equivalent conditions are satisfied:
+    \begin{enumerate}
+        \item for all $Z \inset \Mfld_{/X}$, the canonical morphism
+        \[
+            \Colim\left( \Disk_{/Z} \to \Mfld_{/X} \to \V \right) \longeq \cat{H}(Z)
+        \]
+        is an equivalence.
+        \item for all $Z \cong Z_- \cup_{\mathbb{R} \times Z_0} Z_+$ collar-glueing over $X$, the canonical morphism
+        \[
+            \left| \cat{H}(Z_-) \otimes \cat{H}(\mathbb{R} \times Z_0)^{\otimes \bullet} \otimes \cat{H}(Z_+) \right|_\bullet \longeq \cat{H}(Z)
+        \]
+        is an equivalence.
+    \end{enumerate}
+\end{definition}
+
+In the original text of \cite{AFT17}, this definition is given for $\V$ a symmetric monoidal $(\infty,1)$-category with sifted colimits and whose monoidal structure distributes over sifted colimits.
+It's a harmless generalization to replace sifted colimits by geometric realizations, as long as we only consider \textit{finitary} stratified spaces, meaning these obtained from basics via a sequence of collar-glueing \cite[Def. $8.3.6$]{AFT17a}, which is our case.
+Indeed, it is proven in \cite[Cor. $2.38$]{AFT17} that for a collar-glueing $X \cong X_- \cup_{\mathbb{R} \times X_0} X_+$, we have a geometric realization
+\[
+    \left| \Disk_{/X_-} \times \Disk_{/\mathbb{R} \times X_0}^\bullet \times \Disk_{/X_+ } \right|_\bullet \longeq \Disk_{/X}
+\]
+so that the collection of $\Disk_{/-}$-indexed colimits is generated by geometric realizations, and thus also the collection of $\disk_{/-}$-indexed colimits, as $\disk_{/X} \to \Disk_{/X}$ is a localization \cite[Prop. $2.22$]{AFT17} and hence final.
+
+\begin{corollary}[Disk-Algebras are the coefficients of Homology Theories]\label{cor:algebra_homology}
+    Let $X$ be a stratified space.
+    By left Kan extension along the inclusion $\disk_{/X} \mono \Mfld_{/X}$, we have an equivalence $\Alg{X}(\V) \simeq \cat{H}(\uMfld_{/X}, \V)$ fitting in the commutative diagram
+% https://q.uiver.app/#q=WzAsNSxbMSwwLCJcXGNhdHtIfShcXHVNZmxkX3svWH0sIFxcVikiXSxbMCwwLCJcXEFsZ3tYfShcXFYpIl0sWzEsMSwiXFxBbGd7XFx1TWZsZF97L1h9fShcXFYpIl0sWzEsMiwiXFxBbGd7XFx1bWZsZF97L1h9fShcXFYpIl0sWzAsMiwiXFxBbGd7XFx1ZGlza197L1h9fShcXFYpIl0sWzEsMCwiXFxzaW0iLDNdLFswLDIsIiIsMSx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzIsM10sWzEsNF0sWzQsM11d
+\[\begin{tikzcd}
+	{\Alg{X}(\V)} & {\cat{H}(\uMfld_{/X}, \V)} \\
+	& {\Alg{\uMfld_{/X}}(\V)} \\
+	{\Alg{\udisk_{/X}}(\V)} & {\Alg{\umfld_{/X}}(\V)}
+	\arrow["\sim"{marking, allow upside down}, from=1-1, to=1-2]
+	\arrow[from=1-1, to=3-1]
+	\arrow[hook, from=1-2, to=2-2]
+	\arrow[from=2-2, to=3-2]
+	\arrow[from=3-1, to=3-2]
+\end{tikzcd}\]
+\end{corollary}
+\begin{proof}[ Sketch]
+    This is a direct consequence of \cite[Thm. $2.43$]{AFT17}.
+    The details of how the left Kan extension behaves in the context of marked operads can be found in \cite[Lem. $2.16$ and $2.17$]{AFT17}.
+\end{proof}
+
+We can then define a convenient way to transfer between homology theories.
+This definition is a small abstraction from the behavior of constructible bundles in \cite[Subsec. $2.5$]{AFT17}.
+
+\begin{definition}[Homological Morphisms]
+    Let $X,Y$ be stratified spaces together with a marked operad morphism $\alpha\in \umfld_{/Y} \to \umfld_{/X}$.
+    We say that this morphism is \emph{homological} if
+    \begin{enumerate}[label=(\roman*)]
+        \item the functor $\disk_{/Y} \xto[\Disk_{/\alpha(-)}] \Cat{1}$ sends isotopy equivalences to equivalences and,
+        \item the following equivalent conditions hold:
+        \begin{enumerate}
+            \item for all $V \inset \mfld_{/Y}$, the canonical functor bellow is an equivalence
+                \[
+                    \Colim \left( \disk_{/V} \xto[\Disk_{/\alpha(-)}] \Cat{1} \right) \longeq \Disk_{/\alpha(V)}
+                \]
+            \item for all $V \inset \disk_{/Y}$, the canonical projection $X_{V,\alpha} \xto[(\star)] \disk_{/\alpha(V)}$ from the \textit{comma} $(1,1)$-category bellow is $(\infty,1)$-final
+                % https://q.uiver.app/#q=WzAsNCxbMSwxLCJcXGRpc2tfey9cXGFscGhhKFYpfSJdLFsxLDAsIlxcbWZsZF97L1xcYWxwaGEoVil9Il0sWzAsMCwiXFxkaXNrX3svVn0iXSxbMCwxLCJYX3tWLFxcYWxwaGF9Il0sWzAsMSwiIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJib3R0b20ifX19XSxbMywwLCIoXFxzdGFyKSIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFszLDIsIiIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFsyLDEsIlxcYWxwaGEiXSxbMCwyLCIiLDEseyJzaG9ydGVuIjp7InNvdXJjZSI6MzAsInRhcmdldCI6MzB9LCJsZXZlbCI6Mn1dXQ==
+                \[\begin{tikzcd}
+                    {\disk_{/V}} & {\mfld_{/\alpha(V)}} \\
+                    {X_{V,\alpha}} & {\disk_{/\alpha(V)}}
+                    \arrow["\alpha", from=1-1, to=1-2]
+                    \arrow[dashed, from=2-1, to=1-1]
+                    \arrow["{(\star)}"', dashed, from=2-1, to=2-2]
+                    \arrow[between={0.3}{0.7}, Rightarrow, from=2-2, to=1-1]
+                    \arrow[hook', from=2-2, to=1-2]
+                \end{tikzcd}\]
+        \end{enumerate}
+    \end{enumerate}
+\end{definition}
+In the notations of \cite[Subsec. $2.5$]{AFT17}, the comma category $X_{V,\alpha}$ would be described as the limit of the diagram bellow.
+% https://q.uiver.app/#q=WzAsNixbMCwyLCJcXGRpc2tfey9cXGFscGhhKFYpfSJdLFsxLDMsIlxcbWZsZF97L1xcYWxwaGEoVil9Il0sWzIsMiwiW2NfMSwgXFxtZmxkX3svXFxhbHBoYShWKX1dIl0sWzMsMywiXFxtZmxkX3svXFxhbHBoYShWKX0iXSxbNCwyLCJcXGRpc2tfey9WfSJdLFsyLDAsIlhfe1YsXFxhbHBoYX0iXSxbMiwxLCJcXGRvbSJdLFsyLDMsIlxcY29kIiwyXSxbMCwxLCIiLDIseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6ImJvdHRvbSJ9fX1dLFs0LDNdLFs1LDAsIihcXHN0YXIpIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzUsMiwiIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzUsNCwiIiwwLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV1d
+\[\begin{tikzcd}
+	&& {X_{V,\alpha}} \\
+	\\
+	{\disk_{/\alpha(V)}} && {[c_1, \mfld_{/\alpha(V)}]} && {\disk_{/V}} \\
+	& {\mfld_{/\alpha(V)}} && {\mfld_{/\alpha(V)}}
+	\arrow["{(\star)}"', dashed, from=1-3, to=3-1]
+	\arrow[dashed, from=1-3, to=3-3]
+	\arrow[dashed, from=1-3, to=3-5]
+	\arrow[hook', from=3-1, to=4-2]
+	\arrow["\dom", from=3-3, to=4-2]
+	\arrow["\cod"', from=3-3, to=4-4]
+	\arrow[from=3-5, to=4-4]
+\end{tikzcd}\]
+\begin{proof}[of the Equivalence of Conditions]
+    The proof follow from Joyal's $(\infty,1)$-categorical version of Quillen's Theorem A \cite[\href{https://kerodon.net/tag/02NY}{Thm. 02NY}]{kerodon}.
+    Details can be found in the proof of \cite[Lem. $2.27$]{AFT17}, whose statement is essentially identical.
+\end{proof}
+
+The proof of \cite[Thm. $2.25$]{AFT17} can be adapted in our context to show the following, by using the ``universal'' algebra $A = \Disk_{/-}$ \cite[Cor. $2.38$]{AFT17}.
+
+\begin{lemma}[Composition stays Homological]\label{lem:homological_composition}
+    Homological morphisms are closed under composition.
+\end{lemma}
+\begin{proof}
+    Let $X,Y,Z$ be stratified spaces and $\umfld_{/Z} \xto[\beta] \umfld_{/Y} \xto[\alpha] \umfld_{/X}$ be composable homological morphisms.  
+    Let $W \inset \mfld_{/Z}$.
+    Consider the diagram bellow.
+   % https://q.uiver.app/#q=WzAsNSxbMSwxLCJcXGRpc2tfey9cXGJldGEoVyl9Il0sWzEsMCwiXFxtZmxkX3svXFxiZXRhKFcpfSJdLFswLDAsIlxcZGlza197L1d9Il0sWzAsMSwiWF97VyxcXGJldGF9Il0sWzIsMSwiXFxDYXR7MX0iXSxbMCwxLCIiLDIseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6ImJvdHRvbSJ9fX1dLFszLDAsIihcXHN0YXIpIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzMsMiwiIiwwLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzIsMSwiXFxiZXRhIl0sWzAsMiwiIiwxLHsic2hvcnRlbiI6eyJzb3VyY2UiOjMwLCJ0YXJnZXQiOjMwfSwibGV2ZWwiOjJ9XSxbMSw0LCJcXERpc2tfey8tfSJdLFswLDQsIlxcRGlza197Ly19IiwyXSxbMTEsMSwiIiwyLHsic2hvcnRlbiI6eyJzb3VyY2UiOjMwLCJ0YXJnZXQiOjMwfX1dXQ==
+\[\begin{tikzcd}
+	{\disk_{/W}} & {\mfld_{/\beta(W)}} \\
+	{X_{W,\beta}} & {\disk_{/\beta(W)}} & {\Cat{1}}
+	\arrow["\beta", from=1-1, to=1-2]
+	\arrow["{\Disk_{/-}}", from=1-2, to=2-3]
+	\arrow[dashed, from=2-1, to=1-1]
+	\arrow["{(\star)}"', dashed, from=2-1, to=2-2]
+	\arrow[between={0.3}{0.7}, Rightarrow, from=2-2, to=1-1]
+	\arrow[hook', from=2-2, to=1-2]
+	\arrow[""{name=0, anchor=center, inner sep=0}, "{\Disk_{/-}}"', from=2-2, to=2-3]
+	\arrow[between={0.3}{0.7}, Rightarrow, from=0, to=1-2]
+\end{tikzcd}\]
+    As in the proof of \cite[Thm. $2.25$]{AFT17}, we note that the right square is a comma and the left triangle is a left Kan extension, implying that the outer triangle is also a left Kan extension.
+    In particular, we have
+    \[
+        \Colim \left( \disk_{/W} \xto[\Disk_{/\beta(-)}] \Cat{1}\right) \longeq \Colim \left(X_{W,\beta} \to \disk_{/\beta(W)} \xto[\Disk_{/-}] \Cat{1}\right) \longeq \Colim\left(\disk_{/\beta(W)} \xto[\Disk_{/-}] \Cat{1}\right)
+    \] 
+    This gives the commutative diagram bellow, written with subscript notations to lighten the expressions.
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXENvbGltX3tXJyBcXHN1YnNldGVxIFd9XFxsZWZ0KFxcQ29saW1fe1YgXFxzdWJzZXRlcSBcXGJldGEoVycpfSBcXERpc2tfey9cXGFscGhhKFYpfVxccmlnaHQpIl0sWzEsMCwiXFxDb2xpbV97VycgXFxzdWJzZXRlcSBXfSBcXERpc2tfey9cXGFscGhhXFxjaXJjIFxcYmV0YShXJyl9Il0sWzEsMSwiXFxEaXNrX3svXFxhbHBoYSBcXGNpcmMgXFxiZXRhKFcpfSJdLFswLDEsIlxcQ29saW1fe1YgXFxzdWJzZXQgXFxiZXRhKFcpfSBcXERpc2tfey9cXGFscGhhKFYpfSJdLFswLDEsIlxcc2ltZXEiXSxbMSwyXSxbMCwzLCJcXHNpbWVxIiwyXSxbMywyLCJcXHNpbWVxIiwyXV0=
+    \[\begin{tikzcd}
+        {\Colim_{W' \subseteq W}\left(\Colim_{V \subseteq \beta(W')} \Disk_{/\alpha(V)}\right)} & {\Colim_{W' \subseteq W} \Disk_{/\alpha\circ \beta(W')}} \\
+        {\Colim_{V \subset \beta(W)} \Disk_{/\alpha(V)}} & {\Disk_{/\alpha \circ \beta(W)}}
+        \arrow["\simeq", "{\alpha \textnormal{ hom.}}"', from=1-1, to=1-2]
+        \arrow["\simeq"', "{\beta \textnormal{ hom.}}", from=1-1, to=2-1]
+        \arrow[from=1-2, to=2-2]
+        \arrow["\simeq", "{\alpha \textnormal{ hom.}}"', from=2-1, to=2-2]
+    \end{tikzcd}\]
+    where the horizontal functors are equivalences by property $(ii.a)$ for $\alpha$.
+    Thus the right vertical functor is an equivalence as well.
+    We are left to prove that $\disk_{/Z} \xto[\Disk_{/\alpha\circ\beta(-)}] \Cat{1}$ sends isotopy equivalences to equivalences.
+    If $W \mono W' \in \disk_{/Z}$ is an isotopy equivalence, then by property $(i)$ for $\beta$ the induced functor $\Disk_{/\beta(W)} \to \Disk_{/\beta(W')}$ is an equivalence.
+    By property $(i)$ for $\alpha$, the colimits computed in the bottom left of the square above for $W$ (resp. $W'$) fit in the following diagram
+    % https://q.uiver.app/#q=WzAsNSxbMCwwLCJcXGRpc2tfey9cXGJldGEoVyl9Il0sWzAsMSwiXFxkaXNrX3svXFxiZXRhKFcnKX0iXSxbMSwwLCJcXERpc2tfey9cXGJldGEoVyl9Il0sWzEsMSwiXFxEaXNrX3svXFxiZXRhKFcpfSJdLFsyLDEsIlxcQ2F0ezF9Il0sWzAsMiwiKFxcc3RhcikiXSxbMSwzLCIoXFxzdGFyKSIsMl0sWzIsMywiXFxzaW0iLDNdLFswLDFdLFsyLDQsIlxcRGlza197L1xcYWxwaGEoLSl9Il0sWzMsNCwiXFxEaXNrX3svXFxhbHBoYSgtKX0iLDJdXQ==
+    \[\begin{tikzcd}
+        {\disk_{/\beta(W)}} & {\Disk_{/\beta(W)}} \\
+        {\disk_{/\beta(W')}} & {\Disk_{/\beta(W)}} & {\Cat{1}}
+        \arrow["{(\star)}", from=1-1, to=1-2]
+        \arrow[from=1-1, to=2-1]
+        \arrow["\sim"{marking, allow upside down}, from=1-2, to=2-2]
+        \arrow["{\Disk_{/\alpha(-)}}", from=1-2, to=2-3]
+        \arrow["{(\star)}"', from=2-1, to=2-2]
+        \arrow["{\Disk_{/\alpha(-)}}"', from=2-2, to=2-3]
+    \end{tikzcd}\]
+    where thhe functors marked by $(\star)$ are final and the one marked by $\sim$ is an equivalence.
+    Thus the induced morphism of colimits is an equivalence as well, and $\alpha \circ \beta$ is indeed homological.
+\end{proof}
+
+The following result justifies our naming convention for ``homological'' morphisms.
+
+\begin{lemma}[Lifting Homology Theories]
+    Let $X, Y$ be stratified spaces and $\alpha\in \umfld_{/Y} \to \umfld_{/X}$ be homological.
+    Then, we have a unique lift
+% https://q.uiver.app/#q=WzAsNCxbMCwxLCJcXEFsZ3tcXHVtZmxkX3svWH19KFxcVikiXSxbMSwxLCJcXEFsZ3tcXHVtZmxkX3svWX19KFxcVikiXSxbMCwwLCJcXGNhdHtIfShcXHVNZmxkX3svWH0sIFxcVikiXSxbMSwwLCJcXGNhdHtIfShcXHVNZmxkX3svWX0sIFxcVikiXSxbMiwzLCIiLDAseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMCwxXSxbMiwwXSxbMywxXV0=
+\[\begin{tikzcd}
+	{\cat{H}(\uMfld_{/X}, \V)} & {\cat{H}(\uMfld_{/Y}, \V)} \\
+	{\Alg{\umfld_{/X}}(\V)} & {\Alg{\umfld_{/Y}}(\V)}
+	\arrow[dashed, from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}\]
+\end{lemma}
+\begin{proof}
+    If such a lift exists, it is necessarily unique as we have a commutative diagram
+% https://q.uiver.app/#q=WzAsNixbMCwxLCJcXEFsZ3tcXHVtZmxkX3svWH19KFxcVikiXSxbMSwxLCJcXEFsZ3tcXHVtZmxkX3svWX19KFxcVikiXSxbMCwwLCJcXGNhdHtIfShcXHVNZmxkX3svWH0sIFxcVikiXSxbMSwwLCJcXGNhdHtIfShcXHVNZmxkX3svWX0sIFxcVikiXSxbMiwwLCJcXEFsZ3svWX0oXFxWKSJdLFsyLDEsIlxcQWxne1xcdWRpc2tfey9ZfX0oXFxWKSJdLFsyLDMsIiIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFswLDFdLFsyLDBdLFszLDFdLFs0LDMsIlxcc2ltZXEiLDIseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzQsNSwiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMSw1XV0=
+\[\begin{tikzcd}
+	{\cat{H}(\uMfld_{/X}, \V)} & {\cat{H}(\uMfld_{/Y}, \V)} & {\Alg{/Y}(\V)} \\
+	{\Alg{\umfld_{/X}}(\V)} & {\Alg{\umfld_{/Y}}(\V)} & {\Alg{\udisk_{/Y}}(\V)}
+	\arrow[dashed, from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow["\simeq"', no head, from=1-3, to=1-2]
+	\arrow[hook, from=1-3, to=2-3]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+\end{tikzcd}\]
+    where the left vertical functor is fully-faithful by \cite[Prop. $2.22$]{AFT17}.
+    Thus it suffices to prove that the induced $\udisk_{/Y}$-algebra sends isotopy equivalences to equivalences in $\V$.
+    Let $V \mono V' \inset \disk_{/Y}$ be an isotopy equivalence.
+    From property $(i)$ of being homological, we have an equivalence $\Disk_{/\alpha(V)} \simeq \Disk_{/\alpha(V')}$.
+    For $A \inset \Alg{X}(\V)$, this induces a canonical equivalence $H(\alpha(V)) \simeq H(\alpha(V'))$ in $\V$, proving the result.
+\end{proof}
+
+We now describe four different classes of maps between stratified spaces which induce homological morphisms, and hence allow us to transfer algebraic structures between them.
+We will denote these \textbf{homological maps}.
+\begin{enumerate}
+    \item \textbf{Open Embeddings:} As explained at the end of \autoref{def:operads}, open embeddings induce morphisms of marked operads and in particular, we get an action $\Aut(X) \curvearrowright \Disk_{/X}$.
+    On $\pi_0$, this can be seen as acting through homological marked morphisms.
+
+    \item \textbf{Refinements:} As explained in \cite[Lem. $2.23$]{AFT17}, refinements of stratified spaces induce morphisms of marked operads, which are immidiately seen to be homological.
+    
+    \item \textbf{Weak Constructible Bundles:} Recall that a stratified map $\pi \in X \to Y$ is a \textit{weak constructible bundle} if for each stratum $Y_q \subset Y$, the corestriction $\pi_{| \pi^{-1}(Y_q)}: \pi^{-1}(Y_q) \to Y_q$ is a fiber bundle (see \cite[Def. $3.6.1$]{AFT17a}).
+    As explained in \cite[Lem. $2.24$ and Thm. $2.25$]{AFT17}, weak constructible bundles of stratified spaces induce homological morphisms of marked operads by taking preimages.
+    
+    \item \textbf{Closed Strata Inclusions:} For $Y \mono X$ the inclusion of a closed union of strata, we have a canonical morphism of operads $\Disk_{/X} \to \Disk_{/Y}$ which ``forgets'' the algebraic data corresponding to the other strata.
+    We can define this functor as follows.
+    From \cite[Prop. $8.2.5$]{AFT17a}, we get a natural proper constructible bundle $\Link_Y(X) \xto[\pi] X$ inducing a cone construction
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJZIl0sWzEsMCwiQyhcXHBpKSJdLFszLDAsIlgiXSxbMiwwLCJDKFxccGkpX3tcXHRleHRub3JtYWx7dW5yZWYufX0iXSxbMSwwLCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XSxbMSwzLCIiLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMywyLCIiLDIseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dXQ==
+    \[\begin{tikzcd}
+        Y & {C(\pi)} & {C(\pi)_{\textnormal{unref.}}} & X
+        \arrow[two heads, from=1-2, to=1-1]
+        \arrow[dashed, from=1-2, to=1-3]
+        \arrow[hook, from=1-3, to=1-4]
+    \end{tikzcd}\]
+    where the left map is a constructilble bundle, the center one is a refinement and the right one is a open embedding.
+    The construction of the right map can be seen as a stratified notion of a tubular neighborhood of $Y$ in $X$.
+    Note that the preimage of a basic in $Y$ is basic in $C(\pi)$.
+    Thus, one gets a homological marked morphism induced by $\udisk_{/Y} \to \udisk_{/C(\pi)} \to \udisk_{/X}$.
+
+    Note that the choice of tubular neighborhood is contractible here.
+    More precisely, the neighbourhoods are given by considering the functorial ``unzipping'' construction (see \cite[Sec. $7.2$]{AFT17a}) and picking an inward vector field which is non-vanishing on the link (the boundary of the unzipping procedure).
+    The space of such vector fields is contractible.
+    The construction can be seen as this space of vector field mapping to $\Emb(C(\pi)_{\textnormal{unref.}}, Y)$ which itself maps to the space of operads morphisms of the type $\uDisk_{/C(\pi)_{\textnormal{unref.}}} \to \uDisk_{/X}$.
+    Thus any two choices of tubular neighborhoods will give rise to naturally equivalent functors $\cat{H}(\uMfld_{/X}, \V) \to \cat{H}(\uMfld_{/Y}, \V)$.
+\end{enumerate}
+
+The following result is the key technical tool of this paper on the factorization homology side.
+
+\begin{lemma}[Commutative Diagrams]\label{lem:commutative_diagrams}
+    Let $\V \inset \EAlg{\infty}(\Cat{1}^\geom)$.
+    Any commutative diagram of homological maps which induces a commutative diagram of homological morphisms between the corresponding $\umfld_{/-}$ will also induce a commutative diagram of functors between the corresponding $\Alg{/-}(\V) \simeq \cat{H}(\uMfld_{/-}, \V)$.
+\end{lemma}
+\begin{proof}
+    As homologicality is closed under composition (\autoref{lem:homological_composition}), the total composition is homological as well.
+    This implies that there is a unique lift at the level of homology theories, and hence categories of algebras.
+    The unicity of the lift precisely gives the commutativity of the diagram.
+\end{proof}
+
+\subsection{Handlebodies as Duality Datum}\label{subsec:handlebodies}
+
+The goal of this subsection is to construct the stratified spaces which allow us to describe the ``duality datum'' of a $k$-morphism.
 We fix $n\geq 1$ throughout this section.
 We consider various stratifications of $\mathbb{R}^n$ which will "carry" the algebraic structure of the duality data, through factorization homology's pushforward (\ref{prop:pushforward}) and refinement (\ref{prop:refinement}) constructions.
 We denote the coordinates of a point $x \inset \mathbb{R}^n$ by $(x_1, \ldots, x_n)$.
@@ -954,7 +1198,7 @@ For the rest of the exposition, we fix:
 
     \item an increasing diffeomorphism $\phi \in \mathbb{R} \to \mathbb{R}_{>0}$.
 \end{enumerate} 
-It is important to note that the choice of these functions does not matter (there's a contractible choice), although a precise statement of this fact is not necessary for our purposes.
+It is important to note that the choice of these functions does not matter (there is a contractible choice), although a precise statement of this fact is not necessary for our purposes.
 
 \begin{definition}[(Co)Domain]\label{def:(co)domain}
     For $1 \leq k \leq n$, we have an open embedding $\dom \in \mathbb{R}^{n}_{\overline{k-1}} \mono \mathbb{R}^{n}_{\overline{k}}$ which sends
@@ -1006,7 +1250,7 @@ In particular, algebras over $\mathbb{R}^{n}_{\overline{k},\sigma}$ are also (po
 
 Finally, the third stratification is to be thought of as the stratification which ``carries'' the understanding that $\sigma$-duality data of an arbitrary $k$-morphism is a $(k+d)$-morphism.
 Strangely enough, the author encourages the reader to skip this definition on a first reading, and to come back to it after \autoref{def:full_pinch}.
-Indeed, the stratification might seem quite complicated but it's simply the minimal one which makes the ``full-pinch'' map into a stratified one.
+Indeed, the stratification might seem quite complicated but it is simply the minimal one which makes the ``full-pinch'' map into a stratified one.
 
 \begin{definition}[Fully-Barred Handlebody-Stratification]\label{def:bar_handlebody_strata}
     Let $1 + d \leq k + d \leq n$ and $\sigma = \sigma_{k+d-1} \ldots \sigma_{k} \inset \{\epsilon, \eta\}^d$ be a $d$-duality data.
@@ -1045,7 +1289,7 @@ We now define some "pinch maps" which will help formalize the idea that the $\si
     \end{enumerate}
 \end{definition}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \begin{tikzpicture}
     % Define scaling parameters (adjust these values as needed)
@@ -1064,8 +1308,7 @@ We now define some "pinch maps" which will help formalize the idea that the $\si
 \caption{
     Pinching $\mathbb{R}^{3}_{\overline{1},\overline{-1,1}} \xepi[\pi_1] \mathbb{R}^{3}_{\overline{1},\overline{1}}$.
     The small arrows indicate the collapsing that occurs ``inside'' the handle.
-}  % Add a caption if needed
-\label{fig:handle_images}  % Add a label if needed
+}
 \end{figure}
 
 While we only need the easer notion of weak constructible bundle for our purposes, one can easily see that these maps are constructible bundle.
@@ -1084,7 +1327,7 @@ While we only need the easer notion of weak constructible bundle for our purpose
     To simplify notations, we write $\overline{x}_k$ for the new $k^{\textnormal{th}}$-coordinate after applying the pinch map.
     We denote the strata using a ``path'' notation indcating the order of the choices.
     \begin{enumerate}
-        \item \textbf{Bar-strata:} Clearly the bar-strata given by $i.\pm$ are unchanged for $i \leq k-1$.
+        \item \textbf{Bar-strata:} The bar-strata given by $i.\pm$ are unchanged for $i \leq k-1$.
         The preimage of the bar-strata $k.\pm$ are given by the handlebody-bar-strata $k.a.\pm$.
         For both these cases, the pinch map is diffeomorphic.
 
@@ -1093,9 +1336,11 @@ While we only need the easer notion of weak constructible bundle for our purpose
         On these strata, one can check that the pinch is a fiber bundle.
         For $k+1 \leq i \leq j$, the preimage of the handlebody-bar-strata $j.i.\_$ are given by the corresponding handlebody-bar-strata $j.i.\_$, where the pinch is diffeomorphic.
 
-        \item \textbf{Bottom-Bar-Stratum:} Corestricted to the stratum given by $x_1 = \ldots = x_{k+d} = 0$, the pinch map is clearly the identity, and hence a fiber bundle.
+        \item \textbf{Bottom-Bar-Stratum:} Corestricted to the stratum given by $x_1 = \ldots = x_{k+d} = 0$, the pinch map is the identity, and hence a fiber bundle.
     \end{enumerate}
 \end{proof}
+
+In particular, we can compose these pinch maps to get the corollary bellow.
 
 \begin{definition}[Full Pinch]\label{def:full_pinch}
     As above, let $1 + d \leq k + d \leq n$ and $\sigma = \sigma_{k+d-1} \ldots \sigma_{k} \inset \{\epsilon, \eta\}^d$ be a $d$-duality data.
@@ -1103,7 +1348,7 @@ While we only need the easer notion of weak constructible bundle for our purpose
     \[
         \mathbb{R}^{n}_{\overline{k},\overline{\sigma}} \epi \mathbb{R}^{n}_{\overline{k+1},\overline{\sigma_{k+d-1} \ldots \sigma_{k+1}}} \epi \ldots \epi \mathbb{R}^{n}_{\overline{k+d-1},\overline{\sigma_{k+d-1}}} \epi \mathbb{R}^{n}_{\overline{k+d},\overline{\emptyset}} = \mathbb{R}^{n}_{\overline{k+d}}
     \]
-    We define $\sigma \in \Alg{/\mathbb{R}_{\overline{k}}^n}(\V) \to \Alg{/\mathbb{R}_{\overline{k+d}}^n}(\V) $ to be the composition of the functors induced by:
+    We define $\sigma \in \Alg{/\mathbb{R}_{\overline{k}}^n}(\V) \to \Alg{/\mathbb{R}_{\overline{k+d}}^n}(\V) $ to be the composition of the functors induced by the homological maps (see \autoref{subsec:homological})
     \[
         \mathbb{R}_{\overline{k}}^n \longeq \mathbb{R}^{n}_{\overline{k},\sigma} \dashleftarrow \mathbb{R}^{n}_{\overline{k},\overline{\sigma}} \longepi \mathbb{R}^{n}_{\overline{k+d}}
     \]
@@ -1138,49 +1383,8 @@ We then have a direct corollary of \autoref{prop:free_full_adj}.
     We have a lift $c_k \epi \Free^{\{k\}}(c_k) \to \Mor_n(\V)$ where the all induced (co)units are given by either of the following four algebras: $\eta(f)$, $\epsilon(f)$, $\eta(f^{\circ})$, $\epsilon(f^{\circ})$.
 \end{corollary}
 
-% \begin{lemma}
-%     As above, let $k + d \leq n$ and $\sigma = \sigma_{k+d-1} \ldots \sigma_{k} \inset \{\epsilon, \eta\}^d$ be a $d$-duality data.
-%     \begin{enumerate}
-%         \item If $\sigma_{k+d-1} = \epsilon$, then the ``domain'' weak constructible bundle $\left(\mathbb{R}^{n}_{\overline{k},\overline{\sigma}} \right)_{x_{k+d} < 0} \to \left(\mathbb{R}^{n}_{\overline{k+d-1},\overline{\sigma_{k+d-1}}}\right)_{x_{k+d} < 0} \to \left(\mathbb{R}^{n}_{\overline{k+d}}\right)_{x_{k+d} < 0}$ is isomorphic to a composition
-%         \[
-%             X \to  \mathbb{R}^{n}_{\overline{k+d} \circ \overline{k+d}} \to \mathbb{R}^{n}_{\overline{k+d}}
-%         \]
-%         where the first w.c. bundle, restricted to each of $x_{k+d-1} < 1$ and  $x_{k+d-1} > -1$, is isomorphic to $\mathbb{R}^{n}_{\overline{k},\overline{\sigma_{k+d-2}\ldots\sigma_k}} \to \mathbb{R}^{n}_{\overline{k+d-1}}$.
-%         \item Similarly for $\sigma_{k+d-1} = \eta$ with the ``codomain'' $x_{k+d} > 0$.
-%         \item If $\sigma_{k+d-1} = \epsilon$, then the ``domain'' weak constructible bundle $\left(\mathbb{R}^{n}_{\overline{k},\overline{\sigma}} \right)_{x_{k+d} < 0} \to \left(\mathbb{R}^{n}_{\overline{k+d}}\right)_{x_{k+d} < 0}$ is isomorphic to
-%         \[
-%             \mathbb{R}^{n}_{\overline{k},\overline{\sigma_{k+d-2}\ldots\sigma_k}} \to \mathbb{R}^{n}_{\overline{k+d-1}}
-%         \]
-%     \end{enumerate}
-% \end{lemma}
-% \begin{proof}
-%     Note that, because the $x_{k+d}$-coordinate never changes, we have a commutative diagram where the downward maps are fiber bundles:
-%     % https://q.uiver.app/#q=WzAsNSxbMCwwLCJcXGxlZnQoXFxtYXRoYmJ7Un1ee259X3tcXG92ZXJsaW5le2t9LFxcb3ZlcmxpbmV7XFxzaWdtYX19XFxyaWdodClfe3hfe2srZH0gPCAwfSJdLFsyLDAsIlxcbGVmdChcXG1hdGhiYntSfV57bn1fe1xcb3ZlcmxpbmV7aytkLTF9LFxcb3ZlcmxpbmV7XFxzaWdtYV97aytkLTF9fX1cXHJpZ2h0KV97eF97aytkfSA8IDB9Il0sWzMsMCwiXFxsZWZ0KFxcbWF0aGJie1J9XntufV97XFxvdmVybGluZXtrK2R9fVxccmlnaHQpX3t4X3trK2R9IDwgMH0iXSxbMSwwLCJcXGNkb3RzIl0sWzMsMSwiXFxtYXRoYmJ7Un1fezwwfSJdLFsxLDJdLFswLDNdLFszLDFdLFsyLDQsInhfe2srZH0iXSxbMSw0LCJ4X3trK2R9IiwxXSxbMCw0LCJ4X3trK2R9IiwyLHsiY3VydmUiOjJ9XSxbOSwxMCwiXFxjZG90cyIsMyx7InNob3J0ZW4iOnsic291cmNlIjoyMCwidGFyZ2V0IjoyMH0sInN0eWxlIjp7ImJvZHkiOnsibmFtZSI6Im5vbmUifSwiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dXQ==
-% \[\begin{tikzcd}
-% 	{\left(\mathbb{R}^{n}_{\overline{k},\overline{\sigma}}\right)_{x_{k+d} < 0}} & \cdots & {\left(\mathbb{R}^{n}_{\overline{k+d-1},\overline{\sigma_{k+d-1}}}\right)_{x_{k+d} < 0}} & {\left(\mathbb{R}^{n}_{\overline{k+d}}\right)_{x_{k+d} < 0}} \\
-% 	&&& {\mathbb{R}_{<0}}
-% 	\arrow[from=1-1, to=1-2]
-% 	\arrow[""{name=0, anchor=center, inner sep=0}, "{x_{k+d}}"', curve={height=12pt}, from=1-1, to=2-4]
-% 	\arrow[from=1-2, to=1-3]
-% 	\arrow[from=1-3, to=1-4]
-% 	\arrow[""{name=1, anchor=center, inner sep=0}, "{x_{k+d}}"{description}, from=1-3, to=2-4]
-% 	\arrow["{x_{k+d}}", from=1-4, to=2-4]
-% 	\arrow["\cdots"{marking, allow upside down}, draw=none, from=1, to=0]
-% \end{tikzcd}\]
-%     By \cite[Lem. $6.1.5$]{AFR18a}\pablo{almost it}, we get an identification of the horizontal pinch maps with a product of $\mathbb{R}$ (in $k+d$-position) and
-%     % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXGxlZnQoXFxtYXRoYmJ7Un1ee259X3tcXG92ZXJsaW5le2t9LFxcb3ZlcmxpbmV7XFxzaWdtYX19XFxyaWdodClfe3hfe2srZH0gPSAtMX0iXSxbMiwwLCJcXGxlZnQoXFxtYXRoYmJ7Un1ee259X3tcXG92ZXJsaW5le2srZC0xfSxcXG92ZXJsaW5le1xcc2lnbWFfe2srZC0xfX19XFxyaWdodClfe3hfe2srZH0gPSAtMX0iXSxbMywwLCJcXGxlZnQoXFxtYXRoYmJ7Un1ee259X3tcXG92ZXJsaW5le2srZH19XFxyaWdodClfe3hfe2srZH0gPSAtMX0iXSxbMSwwLCJcXGNkb3RzIl0sWzEsMl0sWzAsM10sWzMsMV1d
-% \[\begin{tikzcd}
-% 	{\left(\mathbb{R}^{n}_{\overline{k},\overline{\sigma}}\right)_{x_{k+d} = -1}} & \cdots & {\left(\mathbb{R}^{n}_{\overline{k+d-1},\overline{\sigma_{k+d-1}}}\right)_{x_{k+d} = -1}} & {\left(\mathbb{R}^{n}_{\overline{k+d}}\right)_{x_{k+d} = -1}}
-% 	\arrow[from=1-1, to=1-2]
-% 	\arrow[from=1-2, to=1-3]
-% 	\arrow[from=1-3, to=1-4]
-% \end{tikzcd}\]
-%     Note that the last map, once multiplied with $\mathbb{R}$ as described, is precisely the composition pinch map $\mathbb{R}^{n}_{\overline{k+d} \circ \overline{k+d}} \to \mathbb{R}^{n}_{\overline{k+d}}$.
-%     Now it suffices to show that $\left(\mathbb{R}^{n}_{\overline{k},\overline{\sigma}}\right)_{x_{k+d} = -1, x_{k+d-1} > -1} \to \left(\mathbb{R}^{n}_{\overline{k+d-1},\overline{\sigma_{k+d-1}}}\right)_{x_{k+d} = -1, x_{k+d-1} > -1}$ is isomorphic to $\mathbb{R}^{n}_{\overline{k},\overline{\sigma_{k+d-2}\ldots\sigma_k}} \to \mathbb{R}^{n}_{\overline{k+d-1}}$.
-%     \pablo{Write explicit rescaling}
-% \end{proof}
-
 We now prove an associativity lemma that can be understood as ``$\sigma(\eta(M)) \simeq \sigma\eta(M)$'' (resp. for $\epsilon$).
+This lemma is key to our inductive process in the proof of \autoref{thm:full_dualizability_criterion}.
 
 \begin{lemma}[Left Associativity]\label{lem:associativity}
     Let $1 + d \leq k + d \leq n$ with $d \geq 2$ and let $\sigma = \sigma_{k+d-1} \ldots \sigma_{k} \inset \{\epsilon, \eta\}^d$ be a $d$-duality data.
@@ -1197,7 +1401,7 @@ We now prove an associativity lemma that can be understood as ``$\sigma(\eta(M))
 \end{lemma}
 \begin{proof}
     One can define a ``partially-bar'' handlebody stratification $\mathbb{R}^{n}_{\overline{k},\overline{\sigma_k},\sigma'}$, refining $\mathbb{R}^{n}_{\overline{k},\sigma}$ and minimal such that the pinch map $\mathbb{R}^{n}_{\overline{k},\overline{\sigma_k},\sigma'} \xto[\pi_k] \mathbb{R}^{n}_{\overline{k+1},\sigma'}$ is a map of stratified spaces.
-    We then have a commutative diagram of stratified spaces
+    We then have a commutative diagram of homological maps between stratified spaces
     % https://q.uiver.app/#q=WzAsNSxbMSwwLCJ
     % https://q.uiver.app/#q=WzAsMTAsWzAsMCwiXFxtYXRoYmJ7Un1ebl97XFxvdmVybGluZXtrfX0iXSxbMSwwLCJcXG1hdGhiYntSfV5uX3tcXG92ZXJsaW5le2t9LCBcXHNpZ21hX3trKzF9fSJdLFsyLDAsIlxcbWF0aGJie1J9Xm5fe1xcb3ZlcmxpbmV7a30sIFxcb3ZlcmxpbmV7XFxzaWdtYV97aysxfX19Il0sWzMsMCwiXFxtYXRoYmJ7Un1ebl97XFxvdmVybGluZXtrKzF9fSJdLFswLDEsIlxcbWF0aGJie1J9Xm5fe1xcb3ZlcmxpbmV7a30sIFxcc2lnbWF9Il0sWzIsMSwiXFxtYXRoYmJ7Un1ebl97XFxvdmVybGluZXtrfSwgXFxvdmVybGluZXtcXHNpZ21hX3trKzF9fSwgXFxzaWdtYSd9Il0sWzMsMSwiXFxtYXRoYmJ7Un1ebl97XFxvdmVybGluZXtrKzF9LCBcXHNpZ21hJ30iXSxbMCwyLCJcXG1hdGhiYntSfV5uX3tcXG92ZXJsaW5le2t9LCBcXG92ZXJsaW5le1xcc2lnbWF9fSJdLFszLDIsIlxcbWF0aGJie1J9Xm5fe1xcb3ZlcmxpbmV7aysxfSwgXFxvdmVybGluZXtcXHNpZ21hJ319Il0sWzQsMiwiXFxtYXRoYmJ7Un1ebl97XFxvdmVybGluZXtrK2R9fSJdLFswLDEsIlxcc2ltIiwzLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFsyLDEsIiIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFsyLDMsIiIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6ImVwaSJ9fX1dLFswLDQsIlxcc2ltIiwzLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFs1LDQsIiIsMyx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFsyLDUsIlxcc2ltIiwzLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFs1LDYsIiIsMyx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6ImVwaSJ9fX1dLFszLDYsIlxcc2ltIiwzLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFs3LDQsIiIsMyx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFs3LDUsIiIsMyx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFs3LDgsIiIsMyx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6ImVwaSJ9fX1dLFs4LDYsIiIsMyx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFs4LDksIiIsMyx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6ImVwaSJ9fX1dXQ==
 \[\begin{tikzcd}
@@ -1218,40 +1422,13 @@ We now prove an associativity lemma that can be understood as ``$\sigma(\eta(M))
 	\arrow[dashed, from=3-4, to=2-4]
 	\arrow[two heads, from=3-4, to=3-5]
 \end{tikzcd}\]
-    where the dashed arrows are refinements, the wavy ones are stratified equivalences and the $\epi$ are (weak) constructible bundles given by the pinching.
+    Clearly, this diagram satisifes the condition of \autoref{lem:commutative_diagrams} and hence induces a commutative diagram of functors between the corresponding categories of algebras.
     The outer top composition induces $\sigma' \circ \sigma_{k+1}$, while the outer bottom composition induces $\sigma$.
 \end{proof}
 
-% Finally, we identify the full $n$-duality datum as actions from higher spherical versions of Hoschild Homology.
-% Note that we have a canonical closed inclusion of strata $\mathbb{R}_{\geq 0} \mono \mathbb{R}^n_{\overline{n}}$ and $\mathbb{R}_{\leq 0} \mono \mathbb{R}^n_{\overline{n}}$ on the last coordinate.
-% When $M$ is a $\mathbb{R}^n_{\overline{n}}$-algebra in $\V$, we will often talk about the 
+\subsection{Dualizability of Iterated Bimodules}\label{subsec:dual}
 
-% \begin{lemma}[Action by Spherical Hochschild Homology]\label{lem:hosschild-action}
-%     Let $k + d \leq n$ and $\sigma = \sigma_{k+d-1} \ldots \sigma_{k} \inset \{\epsilon, \eta\}^d$ be a $d$-duality data.
-%     Let $a = |\{ k \leq i < k+d \mid \sigma_i = \epsilon\}|$ and $b = d - a$.
-%     There is a commutative diagram
-    
-% \end{lemma}
-% \begin{proof}
-%     % https://q.uiver.app/#q=WzAsOCxbMiwwLCJcXGxlZnQoXFxtYXRoYmJ7Un1ebl97XFxvdmVybGluZXtrfSwgXFxvdmVybGluZXtcXHNpZ21hfX1cXHJpZ2h0KV97eF97aytkfSBcXGdlcSAwfSJdLFszLDAsIlxcbGVmdChcXG1hdGhiYntSfV5uX3tcXG92ZXJsaW5le2srZH19XFxyaWdodClfe3hfe2srZH0gXFxnZXEgMH0iXSxbMywxLCJDKFxcYnVsbGV0KSJdLFsyLDEsIlgiXSxbMSwwLCJcXGxlZnQoXFx7MFxcfSBcXGluc2V0IFxcbWF0aGJie1J9Xm5fe1xcb3ZlcmxpbmV7a30sIFxcc2lnbWF9XFxyaWdodClfe3hfe2srZH0gXFxnZXEgMH0iXSxbMSwxLCJcXHswXFx9IFxcaW5zZXQgXFxtYXRoYmJ7Un1eYSBcXHRpbWVzIFxcbGVmdChcXG1hdGhiYntSfV5uX3tcXG92ZXJsaW5le2t9LCAxXFxsZG90czF9XFxyaWdodClfe3hfe2srZC1hfSBcXGdlcSAwfSJdLFswLDEsIlxcezBcXH0gXFxpbnNldCBcXG1hdGhiYntSfV5hIFxcdGltZXMgXFxtYXRoYmJ7Un1fe1xcZ2VxIDB9Il0sWzAsMCwiXFx7MFxcfSBcXGluc2V0IFxcbWF0aGJie1J9XmEgXFx0aW1lcyBcXG1hdGhiYntSfV97XFxnZXEgMH0iXSxbMSwyLCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XSxbMCwzLCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XSxbMywyLCIiLDEseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XSxbMCwxLCIiLDEseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XSxbMCw0LCIiLDAseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkb3R0ZWQifX19XSxbNCw1LCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XSxbMyw1LCIiLDAseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkb3R0ZWQifX19XSxbNSw2LCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XSxbNyw2LCIiLDIseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFs0LDcsIiIsMix7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6ImVwaSJ9fX1dXQ==
-% \[\begin{tikzcd}
-% 	{\{0\} \inset \mathbb{R}^a \times \mathbb{R}_{\geq 0}} & {\left(\{0\} \inset \mathbb{R}^n_{\overline{k}, \sigma}\right)_{x_{k+d} \geq 0}} & {\left(\mathbb{R}^n_{\overline{k}, \overline{\sigma}}\right)_{x_{k+d} \geq 0}} & {\left(\mathbb{R}^n_{\overline{k+d}}\right)_{x_{k+d} \geq 0}} \\
-% 	{\{0\} \inset \mathbb{R}^a \times \mathbb{R}_{\geq 0}} & {\{0\} \inset \mathbb{R}^a \times \left(\mathbb{R}^n_{\overline{k}, 1\ldots1}\right)_{x_{k+d-a} \geq 0}} & X & {C(\bullet)}
-% 	\arrow[equals, from=1-1, to=2-1]
-% 	\arrow[two heads, from=1-2, to=1-1]
-% 	\arrow[two heads, from=1-2, to=2-2]
-% 	\arrow[dotted, from=1-3, to=1-2]
-% 	\arrow[two heads, from=1-3, to=1-4]
-% 	\arrow[two heads, from=1-3, to=2-3]
-% 	\arrow[two heads, from=1-4, to=2-4]
-% 	\arrow[two heads, from=2-2, to=2-1]
-% 	\arrow[dotted, from=2-3, to=2-2]
-% 	\arrow[two heads, from=2-3, to=2-4]
-% \end{tikzcd}\]
-% \end{proof}
-
-\subsection{Dualizability of Iterated Bimodules}
-
+This subsection is solely devoted to the result bellow.
 We mimick here an argument from \cite[Prop. $4.6.2.13$]{Lur17} to identify dualizable iterated bimodules, using a similar idea to \cite[Cor. $3.8$]{Ram24a}.
 
 \begin{proposition}[Dualizability for Iterated Bimodules]\label{prop:existence_dual}
@@ -1263,7 +1440,7 @@ We mimick here an argument from \cite[Prop. $4.6.2.13$]{Lur17} to identify duali
     \end{enumerate}
 \end{proposition}
 \begin{proof}
-    The second statement clearly follows from the first by the ``$n$-op'' operation $x_{n} \mapsto - x_{n}$.
+    The second statement follows from the first by the ``$n$-op'' operation $x_{n} \mapsto - x_{n}$.
     Consider the following composition of constructible bundles $\mathbb{R}^n_{\overline{n}} \epi \left(\mathbb{R}^2_{\overline{2}}\right)_{r \geq 0} \epi \mathbb{R}^1_{\overline{1}}$, where the coordinates of the middle copy of $\mathbb{R}^2$ are denoted $(x_n, r)$, defined by
     \[
         (x_1, \ldots, x_n) \longmapsto \left(x_n, \sqrt{\sum_{i=1}^{n-1} x_i^2} \right) \longmapsto x_n
@@ -1271,11 +1448,11 @@ We mimick here an argument from \cite[Prop. $4.6.2.13$]{Lur17} to identify duali
     Using the iterated construction of the Morita category \cite[Cor. $7.6$]{Hau23}, or the factorization homology construction of composition in $\Mor_n(\V)$, we see that $M$ is a left adjoint in $\Mor_n(\V)$ if and only if it is a left adjoint as a $1$-morphism in $\Mor_1(\Mod_W(\V))$ where $W$ is the $\mathcal{E}_2$-algebra supported on $r > 0$ in the pushforward $(x_n, r)^*(M)$.
     By \cite[Prop. $4.6.2.13$]{Lur17}, this is equivalent to the induced $\mathbb{R}_{\geq 0}$-algebra being a left adjoint in $\Mor_1(\Mod_W(\V))$.
     It remains to show that this is equivalent to being a left adjoint in $\Mor_1(\V)$.
-    One direction is clear by composition of adjunctions, so it suffices to show that being a left adjoint in $\Mor_1(\V)$ implies being a left adjoint in $\Mor_1(\Mod_W(\V))$.
+    One direction comes from stability of adjunctions under composition, so it suffices to show that being a left adjoint in $\Mor_1(\V)$ implies being a left adjoint in $\Mor_1(\Mod_W(\V))$.
     The first part of the argument relies on a similar idea that the proof of \cite[Prop. $4.6.2.13$]{Lur17}, while the second part is a consequence of (a harmless generalization) of the argument in \cite[Cor. $3.8$]{Ram24a}.
 
     Let $\cat{W} = \Mod_W(\V)$ and let $B$ denote the induced $\mathbb{R}_{\geq 0}$-algebra.
-    Note that $\Mod_B(\V) \simeq \Mod_B(\cat{W})$ by \autoref{rem:retractions}, so we can abuse notation and denote both categories by $\Mod_B$.
+    Note that $\Mod_B(\V) \simeq \Mod_B(\cat{W})$ by \pablo{to detail}, so we can abuse notation and denote both categories by $\Mod_B$.
     Consider the following lifitng problem:
     % https://q.uiver.app/#q=WzAsMyxbMCwyLCJcXFYiXSxbMiwwLCJcXGNhdHtXfSJdLFs0LDIsIlxcTW9kX0IiXSxbMSwwLCIiLDIseyJjdXJ2ZSI6MX1dLFswLDEsIlcgXFxvdGltZXMgLSIsMix7ImN1cnZlIjoxfV0sWzIsMCwiQiBcXG90aW1lcyAtIiwwLHsiY3VydmUiOi0xfV0sWzAsMiwiQl57XFx2ZWV9XFxvdGltZXMgLSIsMCx7ImN1cnZlIjotMX1dLFsyLDEsIkIgXFxvdGltZXMgLSIsMCx7ImN1cnZlIjotMX1dLFsyLDEsIiIsMyx7ImN1cnZlIjoxLCJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbNCwzLCIiLDIseyJsZXZlbCI6MSwic3R5bGUiOnsibmFtZSI6ImFkanVuY3Rpb24ifX1dLFs2LDUsIiIsMix7ImxldmVsIjoxLCJzdHlsZSI6eyJuYW1lIjoiYWRqdW5jdGlvbiJ9fV0sWzgsNywiIiwwLHsibGV2ZWwiOjEsInN0eWxlIjp7Im5hbWUiOiJhZGp1bmN0aW9uIn19XV0=
 \begin{equation}\label{eq:W_lift}
@@ -1307,6 +1484,8 @@ We mimick here an argument from \cite[Prop. $4.6.2.13$]{Lur17} to identify duali
     The ``trace map'' construction of \cite[Prop. $3.4$]{Ram24a} then shows that the oplax structure maps are equivalences.
 \end{proof}
 
+In particular, we immidiately get the following corollary in the category of spectra.
+
 \begin{corollary}[Dualizability for Iterated Bimodules in Spectra]\label{cor:existence_dual_spectra}
     Suppose $\V = \Spe$.
     Let $M$ be a $\mathbb{R}^n_{\overline{n}}$-algebra in $\V$, seen as an $n$-morphism in $\Mor_n(\V)$.
@@ -1320,7 +1499,7 @@ We mimick here an argument from \cite[Prop. $4.6.2.13$]{Lur17} to identify duali
     This is a direct consequence of \cite[$7.2.4.4$]{Lur17}.
 \end{proof}
 
-\subsection{Centers for Dualizable Algebras}
+\subsection{Centers for Dualizable Algebras}\label{subsec:deligne}
 
 We recall here the content of \cite[Sec. $5.3.1$]{Lur17} and detail how it applies to our setting.
 
@@ -1347,12 +1526,12 @@ We recall here the content of \cite[Sec. $5.3.1$]{Lur17} and detail how it appli
 \end{lemma}
 
 Note that we only need and make this claim when seeing the map $A \to \hom_{\cat{M}}(M,M)$ as a map in $\cat{A}$.
-It's also true as a map in $\EAlg{1}(\cat{A})$, using the induced $\mathcal{E}_1$-algebra structure on the map of monads, but we won't need this fact here.
+It is also true as a map in $\EAlg{1}(\cat{A})$, using the induced $\mathcal{E}_1$-algebra structure on the map of monads, but we will not need this fact here.
 
 \begin{proof}
-    Clearly, $\hom(M,M)$ is an endormorphism object for $M$ \cite[Def. $4.2.1.28$]{Lur17}, and hence a center for $M$ \cite[Lem. $5.3.1.11$]{Lur17}.
+    By definition, $\hom(M,M)$ is an endormorphism object for $M$ \cite[Def. $4.2.1.28$]{Lur17}, and hence a center for $M$ \cite[Lem. $5.3.1.11$]{Lur17}.
     By the universal property of morphism objects, to identify maps $A \to \hom_{\cat{M}}(M,M)$, it suffices to identify the induced maps $A \otimes M \to M$.
-    It's then clear by construction that the map of monads induces the correct action map on $M$.
+    It is then given by construction that the map of monads induces the correct action map on $M$.
 \end{proof}
 
 \begin{remark}[Lift of the Action of $A$ on the Dual]
@@ -1367,7 +1546,7 @@ It's also true as a map in $\EAlg{1}(\cat{A})$, using the induced $\mathcal{E}_1
 To complete the picture, we propose the following approach to re-prove the results of \cite[Sec. $5.3.1$]{Lur17}.
 Now suppose $(\cat{A},\cat{M}) \inset \Alg{\mathbb{R}_{\leq 0} \times \mathbb{R}^n}(\Cat{1}^{\geom})$ and $(A,M)$ a $\Disk_{/\mathbb{R}_{\leq 0} \times \mathbb{R}^n}$-algebra in $(\cat{A},\cat{M})$.
 Consider a similar diagram, but replacing $\cat{M}$ with $\Mod^{\multisided}_M(\cat{M})$, and assume again the existence of the dashed right adjoints.
-It's clear that all the left adjoint functors are $\mathcal{E}_n$-monoidal.
+All the left adjoint functors are $\mathcal{E}_n$-monoidal.
 Then, as can also be seen by \cite[Cor. $C$]{HHLN24}, all the right adjoint functors are canoncially lax-$\mathcal{E}_n$-monoidal and the diagram induces
 % https://q.uiver.app/#q=WzAsNCxbMCwzLCJcXEVBbGd7bn0oXFxjYXR7QX0pIl0sWzQsMywiXFxFQWxne259KFxcTW9kXntcXG11bHRpc2lkZWR9X00oXFxjYXR7TX0pKSJdLFsyLDAsIlxcRUFsZ3tufShcXE1vZF9BKFxcY2F0e0F9KSkiXSxbNSwzLCJcXEVBbGd7bn0oXFxjYXR7TX0pX3tNIFxcYmFja3NsYXNofSJdLFswLDEsIi1cXG90aW1lcyBNIiwwLHsiY3VydmUiOi0xfV0sWzEsMCwiXFxob21fe019XntcXG11bHRpc2lkZWR9KE0sLSkiLDAseyJjdXJ2ZSI6LTF9XSxbMCwyLCItXFxvdGltZXMgQSIsMCx7ImN1cnZlIjotMX1dLFsyLDAsIiIsMCx7ImN1cnZlIjotMX1dLFsyLDEsIi1cXG90aW1lc19BIE0iLDAseyJjdXJ2ZSI6LTF9XSxbMSwyLCJcXGhvbV97TX1ee1xcbXVsdGlzaWRlZH0oTSwtKSIsMCx7ImN1cnZlIjotMSwic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzEsMywiXFxzaW0iLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzQsNSwiIiwwLHsibGV2ZWwiOjEsInN0eWxlIjp7Im5hbWUiOiJhZGp1bmN0aW9uIn19XSxbNiw3LCIiLDAseyJsZXZlbCI6MSwic3R5bGUiOnsibmFtZSI6ImFkanVuY3Rpb24ifX1dLFs4LDksIiIsMCx7ImxldmVsIjoxLCJzdHlsZSI6eyJuYW1lIjoiYWRqdW5jdGlvbiJ9fV1d
 \[\begin{tikzcd}
@@ -1388,7 +1567,7 @@ Then, as can also be seen by \cite[Cor. $C$]{HHLN24}, all the right adjoint func
 \end{tikzcd}\]
 Informally, the induced monad of the bottom adjunction, evaluated at the identity $\mathbbm{1}_{\cat{A}}$, upgrades to $\EAlg{1}(\EAlg{n}(\cat{A})) \simeq \EAlg{n+1}(\cat{A})$ and can be identified with the $\mathcal{E}_n$-center of $M$.
 The induced map of monad, evalutated at the identity $\mathbbm{1}_{\cat{A}}$, can be identified with the universal $\mathcal{E}_{n+1}$-map to the center $A \to \hom^{\multisided}_M(M,M)$.
-Thankfully, we don't need here to access any of the $\mathcal{E}_{n+1}$-monoïdal structures of these maps, so the following result suffices for our purposes.
+Thankfully, we do not need here to access any of the $\mathcal{E}_{n+1}$-monoidal structures of these maps, so the following result suffices for our purposes.
 
 \begin{lemma}[Units as Maps to $\mathcal{E}_n$-Centers]\label{lem:unit_En_center}
     As above, let $(\cat{A},\cat{M}) \inset \Alg{\mathbb{R}_{\leq 0} \times \mathbb{R}^n}(\Cat{1}^{\geom})$ and $(A,M)$ a $\Disk_{/\mathbb{R}_{\leq 0} \times \mathbb{R}^n}$-algebra in $(\cat{A},\cat{M})$.
@@ -1440,10 +1619,10 @@ Using this, we can now prove the following:
     Suppose that $\sigma(M)$, seen as a $n$-morphism in $\Mor_n(\V)$, has a right adjoint $\sigma(M)^{\vee}$.
     Then, the unit of the adjunction can be identified with the image in $\V$ of the canonical $\mathcal{E}_{b+1}$-map
     \[
-        \int_{S^{a-1} \subset D^a} (A, M) \longto \HC{b}^B(M)
+        \int_{(S^{a-1}, D^a)} (M, A) \longto \HC{b}^B(M)
     \]
     where $\HC{b}^B(M)$ is the $\mathcal{E}_b$-center with $(\cat{A}, \cat{M}) =(\V, \Mod_B(\V))$ above,
-    and where the action is induced by
+    and where the action is induced by the homological maps (see \autoref{subsec:homological})
 % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXG1hdGhiYntSfV57bn1fe1xcb3ZlcmxpbmV7a319Il0sWzAsMSwiKFxcezBcXH1ee2ErMX0gXFx0aW1lcyBcXG1hdGhiYntSfV5iIFxcc3Vic2V0IFxcezBcXH0gXFx0aW1lcyBcXG1hdGhiYntSfV5kIFxcc3Vic2V0IFxcbWF0aGJie1J9X3tcXGdlcSAwfSBcXHRpbWVzIFxcbWF0aGJie1J9XmQpIFxcYmlnc3FjdXBfe1xcezBcXH1ee2ErMX0gXFx0aW1lcyBcXG1hdGhiYntSfV5ifSAoXFxtYXRoYmJ7Un1fe1xcbGVxIDB9IFxcdGltZXMgXFx7MFxcfV5hIFxcdGltZXMgXFxtYXRoYmJ7Un1eYikiXSxbMSwxLCJcXG1hdGhiYntSfV57YisxfV97XFxvdmVybGluZXsxfX0iXSxbMSwyLCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XSxbMSwwLCJcXHRleHRub3JtYWx7Y2x9IiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJib3R0b20ifX19XV0=
 \[\begin{tikzcd}
 	{\mathbb{R}^{n}_{\overline{k}}} \\
@@ -1481,7 +1660,7 @@ Using this, we can now prove the following:
 	\arrow["\dashv"{anchor=center}, draw=none, from=8, to=4]
 	\arrow["\dashv"{anchor=center, rotate=-49}, draw=none, from=9, to=7]
 \end{tikzcd}\]
-    Under the downward forgetful functor $\cat{W} \to \V$, the unit of the top adjunction evaluated at $\overline{A}$ is clearly equivalent to the induced map of monad of the top triangle, evaluated at $\mathbbm{1}_{\cat{W}}$, which in turn is clearly equivalent to the induced map of monad of the outer triangle, evaluated at $\mathbbm{1}_{\cat{V}}$.
+    Under the downward forgetful functor $\cat{W} \to \V$, the unit of the top adjunction evaluated at $\overline{A}$ is equivalent to the induced map of monad of the top triangle, evaluated at $\mathbbm{1}_{\cat{W}}$, which in turn is equivalent to the induced map of monad of the outer triangle, evaluated at $\mathbbm{1}_{\cat{V}}$.
     By the above discussion, this unit can be identified with the canonical map to some center.
     
     It now suffices to identify the functor $\Mod_{\overline{A}} \xto[- \otimes_{\overline{A}} M] \Mod_{\overline{B}}$ with the one induced by the action described in \autoref{rem:multi_action} (where the ``$n$'' there is our ``$b$'').
@@ -1524,13 +1703,14 @@ Using this, we can now prove the following:
 	\arrow["{\textnormal{ref}}"', from=4-3, to=4-2]
 	\arrow[two heads, from=4-3, to=4-4]
 \end{tikzcd}\end{equation}
-where $Y = (\{0\}^{a+1} \times \mathbb{R}^b \subset \{0\} \times \mathbb{R}^d \subset \mathbb{R}_{\geq 0} \times \mathbb{R}^d) \bigsqcup_{\{0\}^{a+1} \times \mathbb{R}^b} (\mathbb{R}_{\leq 0} \times \{0\}^a \times \mathbb{R}^b)$ is the intermediate space in the statement of the result.
+    where $Y = (\{0\}^{a+1} \times \mathbb{R}^b \subset \{0\} \times \mathbb{R}^d \subset \mathbb{R}_{\geq 0} \times \mathbb{R}^d) \bigsqcup_{\{0\}^{a+1} \times \mathbb{R}^b} (\mathbb{R}_{\leq 0} \times \{0\}^a \times \mathbb{R}^b)$ is the intermediate space in the statement of the result.
+    By pulling back vector fields along the various weak constructible bundles, the diagram can be seen to satisfy the condition of \autoref{lem:commutative_diagrams}, resulting in a commutative diagram of functors between categories of algebra.
     The left/top side corresponds to the action described in the statement.
     The right side corresponds to the construction of \autoref{rem:multi_action}.
     The bottom corresponds to the original description coming from \autoref{def:bar_handlebody_strata}. 
 \end{proof}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \begin{tikzpicture}
     % Define scaling parameters (adjust these values as needed)
@@ -1557,16 +1737,20 @@ where $Y = (\{0\}^{a+1} \times \mathbb{R}^b \subset \{0\} \times \mathbb{R}^d \s
 \end{tikzpicture}
 \caption{
     Visualization of the diagram \eqref{eq:XY}.
-}  % Add a caption if needed
-\label{fig:handle_images}  % Add a label if needed
+}
 \end{figure}
 
 \section{Proof of the Criteria}\label{sec:proofs}
 
-\subsection{Theorem A}
+In this final section, we prove our main Theorems (\autoref{thm:full_dualizability_criterion} and \autoref{thm:invertibility_criterion}).
+The core of the argument is inductive: as proved in \autoref{sec:adjoints}, to show that some object is fully-dualizable (resp. invertible), knowing that it already is dualizable, it suffices to show its (co)units are fully-dualizable (resp. invertible).
+The tools developped in \autoref{sec:factorization_homology} then allow to precisely descibe what happens when one iterates the ``$f \mapsto \textnormal{ (co)units of } f$'' construction in the higher Morita categories.
+Combining both elements, we immidiately get our criteria.
 
-The data exhibiting morphisms as higher full-adjoints is highly redundant.
-We show here an easy example of such redundancy that will be useful in the proof of the main theorem.
+\subsection{Theorem A}\label{subsec:thm_A}
+
+Before heading into the proof, we establish a small well-known lemma.
+The idea behind this lemma is that the data exhibiting morphisms as higher full-adjoints is highly redundant.
 This property is sometimes known as ambidexterity in the literature.
 
 \begin{lemma}[Redundancy of Duality]\label{lem:redundancy}
@@ -1585,26 +1769,48 @@ This property is sometimes known as ambidexterity in the literature.
     By uniqueness of adjoints, we get $\epsilon^l \simeq \epsilon^r$ and $\eta^l \simeq \eta^r$, which then implies the result.
 \end{proof}
 
+We can now prove our main Theorem.
+
 \begin{theorem}[Full-Dualizability Criterion]\label{thm:full_dualizability_criterion}
     Let $\V \in \EAlg{\infty}(\Cat{1})$ such that its tensor product commutes with sifted colimits in both variables.
     Let $0 \leq k < n$ and $M$ be a $k$-morphism in $\Mor_n(\cat{V})$.
-    We let $A$ (resp. $B$) be the (co)domain of $M$ if $1 < k$, or otherwise be the identity $\mathbbm{1}_\V$ if $k=0$.  
-    Then $M$ is fully-dualizable if and only if, for all $1 \leq i \leq n-k$, the canonical $\mathcal{E}_1$-actions
-    \[
-        \int_{(D^i, S^{i-1})} (A,M) \curvearrowright M \curvearrowleft \int_{(D^i, S^{i-1})} (B,M)
-    \]
-    given by $\mathbb{R}^n_{\overline{k}} \hookleftarrow \{0\}^{k-1} \times \mathbb{R}_{\geq 0} \times \mathbb{R}^i \times \{0\}^{n-k-i} \epi \mathbb{R}_{\geq 0}$ where the second map is the radius (resp. with $\leq$) (see \autoref{rem:commutative_diagrams} for details on this construction), both exhibit $M$ as a dualizable module.
+    We let $A$ (resp. $B$) be the (co)domain of $M$ if $1 \leq k$, or otherwise be the identity $\mathbbm{1}_\V$ if $k=0$.  
+    Then $M$ is fully-dualizable if and only if, for all $0 \leq i \leq n-k$, the canonical $\mathcal{E}_1$-actions
+    \begin{equation}\label{eq:action}
+        \int_{(S^{i-1}, D^i)} (M, A) \curvearrowright M \curvearrowleft \int_{(S^{i-1}, D^i)} (M, B)
+    \end{equation}
+    induced by the homological maps (see \autoref{subsec:homological}) $\mathbb{R}^n_{\overline{k}} \hookleftarrow \{0\}^{k-1} \times \mathbb{R}_{\geq 0} \times \mathbb{R}^i \times \{0\}^{n-k-i} \epi \mathbb{R}_{\geq 0}$ and $\mathbb{R}^n_{\overline{k}} \hookleftarrow \{0\}^{k-1} \times \mathbb{R}_{\leq 0} \times \mathbb{R}^i \times \{0\}^{n-k-i} \epi \mathbb{R}_{\geq 0}$  where the second map is the radius (resp. with $\leq$) (see \autoref{rem:commutative_diagrams} for details on this construction), both exhibit $M$ as a dualizable module.
 \end{theorem}
 
+Recall that by convention, we let $S^{-1} = \emptyset$.
 Note that when $k = 0$, we recover the usual criterion first stated by Lurie \cite[Rem. $4.1.27$]{Lur09a}:
 \[
-    \forall i = 1, \ldots, n, \qquad M \text{ is a dualizable } \int_{S^{i-1}} M\text{-module}.
+    \forall 0 \leq i \leq n, \qquad M \text{ is a dualizable } \int_{S^{i-1}} M\text{-module}.
 \]
+
+For general $k$, one can illustrate these $\mathcal{E}_1$-actions as follows: 
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+    % Define scaling parameters (adjust these values as needed)
+    \def\scaleFactor{0.4}  % Scale factor for images; increase for larger images, decrease for smaller
+
+    % Image 
+    \node (img1) at (0, 0) {\includegraphics[scale=\scaleFactor]{../images/action.png}};
+\end{tikzpicture}
+\caption{
+    Visualization of the $\mathcal{E}_1$-action on the left-hand side of \eqref{eq:action} for $i = 2$.
+    The background space is $\mathbb{R}^2 \times \mathbb{R}_{\geq 0}$ with $A$ supported on the $3$-dimensional strata (hence seen as a $\mathcal{E}_3$-algebra) and $M$ supported on the $2$-dimensional strata (hence seen as a $\mathcal{E}_3$-algebra acted on in a $\mathcal{E}_1$-one-sided-way by $A$).
+    The $\mathcal{E}_1$-algebra of interest is then the factorization homology of an upper-half dome, with the $\mathcal{E}_1$-structure given by the radial symmetry, and it acts on $M$ pictured at the center of the bottom plane.
+    This factorization homology can be interpreted as a relative form of Hochschild Homology.
+}
+\end{figure}
 
 \begin{proof}
     Let $d = n-k$.
-    First, note that the actions described in the statement correspond precisely to all the actions involved in \autoref{prop:existence_dual} applied to all of the $\sigma(M)$ and $\sigma(M^\circ)$ for $\sigma \inset \{\epsilon, \delta\}^d$ a $d$-duality data. 
-    Indeed, one has a commutative diagram
+    First, note that the actions described in the statement correspond precisely to all the actions involved in \autoref{prop:existence_dual} applied to all of the $\sigma(M)$ and $\sigma(M^\circ)$ for $\sigma \inset \{\epsilon, \eta\}^d$ a $d$-duality data. 
+    Indeed, one has a commutative diagram of homological maps
     % https://q.uiver.app/#q=WzAsNyxbMCwxLCJcXG1hdGhiYntSfV5uX3tcXG92ZXJsaW5le2t9fSJdLFsxLDEsIlxcbWF0aGJie1J9Xm5fe1xcb3ZlcmxpbmV7a30sIFxcc2lnbWF9Il0sWzIsMSwiXFxtYXRoYmJ7Un1ebl97XFxvdmVybGluZXtrfSwgXFxvdmVybGluZXtcXHNpZ21hfX0iXSxbMywxLCJcXG1hdGhiYntSfV5uX3tcXG92ZXJsaW5le259fSJdLFszLDAsIlxcbWF0aGJie1J9X3tcXGdlcSAwfSJdLFsxLDAsIlxcbWF0aGJie1J9X3tcXGdlcSAwfSBcXHRpbWVzIFxcbWF0aGJie1J9XmkiXSxbMCwwLCJcXG1hdGhiYntSfV5uX3tcXG92ZXJsaW5le2t9fSJdLFsxLDAsIlxcc2ltIiwzLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFsyLDEsIiIsMyx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFsyLDMsIiIsMyx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6ImVwaSJ9fX1dLFs0LDMsIiIsMyx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzUsNCwiXFx0ZXh0bm9ybWFse3J9IiwwLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV0sWzUsMSwiKGEpIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbNiwwLCJcXHNpbSIsMyx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbNSw2LCIiLDMseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6ImJvdHRvbSJ9fX1dXQ==
 \[\begin{tikzcd}
 	{\mathbb{R}^n_{\overline{k}}} & {\mathbb{R}_{\geq 0} \times \mathbb{R}^i} && {\mathbb{R}_{\geq 0}} \\
@@ -1620,7 +1826,7 @@ Note that when $k = 0$, we recover the usual criterion first stated by Lurie \ci
 \end{tikzcd}\]
     where $a = |\{\sigma = \eta\}|$, $(ii)$ is the inclusion of the coordinates $\{\sigma = \eta\} \subset \{k, \ldots, k+d-1\}$ and $(i)$ is the obvious permutation of coordinates.
     One can pick $(ii)$ such that the sign of the permutation is $1$, showing that $(i)$ is isotopic to the identity, which in turn exhibits the equivalence claimed between the module structures.
-    Hence, it suffices to show by downward induction on $k$ the following result: $M$ is fully-dualizable if and only if, for all $\sigma \inset \{\epsilon, \delta\}^d$ a $d$-duality data, $\sigma(M)$ and $\sigma(M^\circ)$ have both left and right adjoint, when seen as $n$-morphisms in $\Mor_n(\cat{V})$.
+    Hence, it suffices to show by downward induction on $k$ the following result: $M$ is fully-dualizable if and only if, for all $\sigma \inset \{\epsilon, \eta\}^d$ a $d$-duality data, $\sigma(M)$ and $\sigma(M^\circ)$ have both left and right adjoint, when seen as $n$-morphisms in $\Mor_n(\cat{V})$.
 
     \begin{enumerate}
         \item \textbf{Case $k = n-1$:} By \autoref{lem:redundancy}, the condition above is equivalent to having both left and right adjoints for each of the units and counits of the full-$\{n-1\}$-adjunction.
@@ -1646,28 +1852,30 @@ Note that when $k = 0$, we recover the usual criterion first stated by Lurie \ci
     In other words, $M$ is fully dualizable if and only if all the units and counits involved in the full-$\{k\}$-adjunction are themselves fully-dualizable.
     As above, by \autoref{cor:units_in_morita}, these units and counits are described by the algebras $\eta(M)$, $\epsilon(M)$, $\eta(M^\circ)$, $\epsilon(M^\circ)$.
     By the inductive hypothesis, duality is then equivalent to:
-    for all $\sigma \inset \{\epsilon, \delta\}^{d-1}$ a $(d-1)$-duality data, $\sigma(\eta(M))$, $\sigma(\epsilon(M))$, $\sigma(\eta(M^\circ))$, $\sigma(\epsilon(M^\circ))$, $\sigma(\eta(M)^\circ)$, $\sigma(\epsilon(M)^\circ)$, $\sigma(\eta(M^\circ)^\circ)$ and $\sigma(\epsilon(M^\circ)^\circ)$ all have left and right adjoint, when seen as $n$-morphisms in $\Mor_n(\cat{V})$.
+    for all $\sigma \inset \{\epsilon, \eta\}^{d-1}$ a $(d-1)$-duality data, $\sigma(\eta(M))$, $\sigma(\epsilon(M))$, $\sigma(\eta(M^\circ))$, $\sigma(\epsilon(M^\circ))$, $\sigma(\eta(M)^\circ)$, $\sigma(\epsilon(M)^\circ)$, $\sigma(\eta(M^\circ)^\circ)$ and $\sigma(\epsilon(M^\circ)^\circ)$ all have left and right adjoint, when seen as $n$-morphisms in $\Mor_n(\cat{V})$.
     Using \autoref{lem:associativity} and the exchange property of $\circ$ with $\eta \leftrightarrow \epsilon$, we can conclude the proof.
     \end{enumerate}
 \end{proof}
+
+In particular, dualizable module $\mathcal{E}_1$-actions are well-understood in the category $\Spe$ of spectra and we get this immidiate corrolary.
 
 \begin{corollary}[Full-Dualizability of Ring Spectra]
     Let $0 \leq k < n$ and $M$ be a $k$-morphism in $\Mor_n(\cat{V})$.
     Then $M$ is fully-dualizable if and only if, for all $1 \leq i \leq n-k$, the canonical $\mathcal{E}_1$-actions
     \[
-        \int_{(D^i, S^{i-1})} (A,M) \curvearrowright M \curvearrowleft \int_{(D^i, S^{i-1})} (B,M)
+        \int_{(S^{i-1}, D^i)} (M, A) \curvearrowright M \curvearrowleft \int_{(S^{i-1}, D^i)} (M, B)
     \]
-    given by $\mathbb{R}^n_{\overline{k}} \hookleftarrow \{0\}^{k-1} \times \mathbb{R}_{\geq 0} \times \mathbb{R}^i \times \{0\}^{n-k-i} \epi \mathbb{R}_{\geq 0}$ where the second map is the radius (resp. with $\leq$), both exhibit $M$ as a perfect or compact module.
+    induced by the homological maps (see \autoref{subsec:homological}) $\mathbb{R}^n_{\overline{k}} \hookleftarrow \{0\}^{k-1} \times \mathbb{R}_{\geq 0} \times \mathbb{R}^i \times \{0\}^{n-k-i} \epi \mathbb{R}_{\geq 0}$ where the second map is the radius (resp. with $\leq$), both exhibit $M$ as a perfect/compact module.
 \end{corollary}
 \begin{proof}
     This is a direct consequence of \autoref{thm:full_dualizability_criterion} and \cite[Prop. $7.2.4.4$]{Lur17}.
 \end{proof}
 
 \begin{remark}[Characterizing Full-Dualizability in Other Higher Categories]
-    Implicitly, the proof uses that: if $f$ is a fully-$\{k, \ldots, l\}$-dualizable $k$-morphism for $k \leq l$, full-$\{k, \ldots, l+1\}$-dualizability is equivalent to all $\sigma(f)$ having left adjoints for $\sigma \inset \{\epsilon, \delta\}^{l-k+1}$ a $(l-k+1)$-duality data.
-    This can be proven independently in any higher category with the tools of \autoref{sec:adjoints} following the same argument.
-    One just has to prove a bit more ``redudancy'' lemmas.
-    We avoid this because, in our case, redundancy is baked into the Morita-cake using the actions $\Aut(X) \curvearrowright \Alg{/X}$ given naturally by factorization homology.
+    Implicitly, the proof uses that: if $f$ is a fully-$\{k, \ldots, l\}$-dualizable $k$-morphism for $k \leq l$, full-$\{k, \ldots, l+1\}$-dualizability is equivalent to all $\sigma(f)$ having left adjoints for $\sigma \inset \{\epsilon, \eta\}^{l-k+1}$ a $(l-k+1)$-duality data.
+    This can be proved independently in any higher category with the tools of \autoref{sec:adjoints} following the same argument.
+    It would simply remain to show a few more ``redundancy'' lemmas.
+    We avoid this argument here because, in our case, the Morita category is built with a natural symmetry $\Aut(X) \curvearrowright \Alg{/X}$, which is explicit with factorization homology (see \autoref{def:operads}).
 \end{remark}
 
 \begin{remark}[Other Proof Strategies]
@@ -1687,9 +1895,10 @@ Note that when $k = 0$, we recover the usual criterion first stated by Lurie \ci
     \end{enumerate}
 \end{remark}
 
-\subsection{Theorem B}
+\subsection{Theorem B}\label{subsec:thm_B}
 
-By analogy to the proof of Theorem $A$, we start with a redundancy lemma.
+Similarly to the proof of Theorem $A$, we start with a redundancy lemma.
+Only this time, we are interested in the redundancy of invertibility properties.
 
 \begin{lemma}[Redundancy of Invertibility]\label{lem:redundancy_invertibility}
     Let $\cat{C} \inset \Cat{2}$ and suppose we have two parallel adjunctions
@@ -1713,16 +1922,26 @@ By analogy to the proof of Theorem $A$, we start with a redundancy lemma.
     Hence, the top adjunction exhibits $f$ as an (adjoint) equivalence.
 \end{proof}
 
+Using the above lemma, we can then prove our second criterion.
+
 \begin{theorem}[Invertibility Criterion]\label{thm:invertibility_criterion}
     Let $0 \leq k < n$ and $\cat{V} \inset \EAlg{\infty}(\Cat{1})$.
     Let $M$ be a $k$-morphism in $\Mor_n(\cat{V})$.
-    Then $M$ is invertible if and only if it is fully-dualizable and, for all $1 \leq i \leq n-k$, the universal maps
+    Then $M$ is invertible if and only if it is fully-dualizable and, for all $1 \leq i \leq n-k$, the universal $\mathcal{E}_{n-k-i+1}$-algebra maps
     \[
-        \int_{(D^i, S^{i-1})} (A,M) \longeq \HC{i-1}^B(M) \\
-        \int_{(D^i, S^{i-1})} (B,M) \longeq \HC{i-1}^A(M)
+        \int_{(S^{i-1}, D^i)} (M, A) \longeq \HC{n-k-i}^B(M) \\
+        \int_{(S^{i-1}, D^i)} (M, B) \longeq \HC{n-k-i}^A(M)
     \]
-    are invertible.
+    defined in \autoref{prop:identifying_units} are equivalences.
 \end{theorem}
+
+Fundamentally, one can interpret invertibility of these maps as saying: $(i-1)^\textnormal{th}$-higher Hochschild Homology of $M$ relative to $A$ computes the universal $\mathcal{E}_{k-n-i+1}$-algebra acting on $M$ in a $B$-linear way (and vice-versa).
+Note that once again, we recover Lurie's criterion for $k=0$, and more familiarly, we recover the usual conditions for an Azumaya algebras when $n=1$ and $k=0$: $M$ is dualizable and 
+\begin{equation*}
+    k \longeq \HC{1}(M) \\
+    M^{\textnormal{op}} \otimes_k M \longeq \End_k(M)
+\end{equation*}
+
 \begin{proof}
     By \autoref{lem:free_contractible}, the functor $\Free^{\{k, \ldots, n\}}(c_k) \epi c_{k-1}$ is epimorphic and correspond under precomposition to some $[c_k, \Mor_n(\cat{V})]_{\simeq} \mono [\Free^{\{k, \ldots, n\}}(c_k), \Mor_n(\cat{V})]$.
     Hence, any invertible $k$-morphism is automatically fully-dualizable.
@@ -1730,7 +1949,7 @@ By analogy to the proof of Theorem $A$, we start with a redundancy lemma.
     
     Let $d = n - k$ (which can be zero).
     Similarly to Theorem A, now using \autoref{prop:identifying_units}, we first observe that invertibility of all these maps is precisely equivalent to the statement:
-    for all $\sigma \inset \{\epsilon, \delta\}^d$ a $d$-duality data, the unit of $\sigma(M) \dashv \sigma(M)^\vee$ and of $\sigma(M)^\circ \dashv (\sigma(M)^\circ)^\vee$ are invertible.
+    for all $\sigma \inset \{\epsilon, \eta\}^d$ a $d$-duality data, the unit of $\sigma(M) \dashv \sigma(M)^\vee$ and of $\sigma(M)^\circ \dashv (\sigma(M)^\circ)^\vee$ are invertible.
     As a consequence, it suffices to show by downward induction on $k$ the equivalence between invertibility of $M$ and this condition.
     \begin{enumerate}
         \item \textbf{Base Case $k = n$:} this is an immediate of consequence of the lemma above.
@@ -1743,599 +1962,3 @@ By analogy to the proof of Theorem $A$, we start with a redundancy lemma.
 \bibliography{../mypreamble/jabref}
 
 \end{document}
-
-
-% \subsection{Enriched Absolute Colimits}
-
-% Let $\V \in \EAlg{1}(\Cat{1}^{\Colim})$.
-% In \cite{Hau16}, Haugseng defines a \textit{beta}-version of the $1$-Morita category as a double $\infty$-category.
-% In \cite{Lou25}, Loubaton proves that double $\infty$-categories are equivalent to flagged $(\infty,2)$-categories.
-% Using this identification, we unpack Haugseng's definition bellow
-
-% \begin{definition}[\cite{Hau16}]
-%     We have $\Cat{1}^{\V} \to \Mor_{1}^\beta(\V) \in \fCat{2}$ whose
-%     \begin{enumerate}
-%         \item \textbf{objects} are $\V$-categories,
-%         \item \textbf{hom-categories} from $\A$ to $\B$ are given by the $\V$-enriched bifunctor category $[\A^\op \otimes \B, \V]_{\V}$.
-%     \end{enumerate}
-% \end{definition}
-
-% In this section, we study its univalent completion and the notion of $\V$-absolute colimits.
-% First, let's recall some facts about enriched ordinary category theory.
-
-% \begin{proposition}
-%     Suppose we have $\A, \B, \cat{C} \in \Cat{1}$, $U\in \A \to \B$, $L \in \begin{tikzcd}
-%         \B & {\cat{C}}
-%         \arrow[""{name=0, anchor=center, inner sep=0}, curve={height=-6pt}, from=1-1, to=1-2]
-%         \arrow[""{name=1, anchor=center, inner sep=0}, curve={height=-6pt}, from=1-2, to=1-1]
-%         \arrow["\dashv"{anchor=center, rotate=-90}, draw=none, from=0, to=1]
-%     \end{tikzcd} \in R $, and $X$ a right adjoint to $LU$.
-%     % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXEEiXSxbMiwwLCJcXEIiXSxbMSwxLCJcXEMiXSxbMSwwLCJVIiwyLHsiY3VydmUiOjF9XSxbMiwxLCJMIiwwLHsiY3VydmUiOi0xfV0sWzEsMiwiUiIsMCx7ImN1cnZlIjotMX1dLFswLDIsIlgiLDJdLFs0LDUsIiIsMSx7ImxldmVsIjoxLCJzdHlsZSI6eyJuYW1lIjoiYWRqdW5jdGlvbiJ9fV0sWzMsNiwiIiwwLHsibGV2ZWwiOjEsInN0eWxlIjp7Im5hbWUiOiJhZGp1bmN0aW9uIn19XV0=
-% \[\begin{tikzcd}
-% 	\A && \B \\
-% 	& \cat{C}
-% 	\arrow[""{name=0, anchor=center, inner sep=0}, "X"', from=1-1, to=2-2]
-% 	\arrow[""{name=1, anchor=center, inner sep=0}, "U"', curve={height=6pt}, from=1-3, to=1-1]
-% 	\arrow[""{name=2, anchor=center, inner sep=0}, "R", curve={height=-6pt}, from=1-3, to=2-2]
-% 	\arrow[""{name=3, anchor=center, inner sep=0}, "L", curve={height=-6pt}, from=2-2, to=1-3]
-% 	\arrow["\dashv"{anchor=center, rotate=-126}, draw=none, from=1, to=0]
-% 	\arrow["\dashv"{anchor=center, rotate=-45}, draw=none, from=3, to=2]
-% \end{tikzcd}\]
-%     Then the following are equivalent we have a canonical $W_-$-weighted limit diagram of $X$ on the functor $B\Delta_+ \to \Cat{1}$ generated by the monad $RL$.
-% \end{proposition}
-
-% \begin{corollary}
-%     Suppose that the adjunction $R \vdash L$ above was monadic.
-%     Then we have a canonical lift $\bar{X}$ of $X$ through $R$.
-%     Furthermore, one can write $\bar{X} = \Colim (LR)^{\circ k} \circ L \circ X$.
-%     Because $U$ preserves colimit, we have $U\bar{X} = \Colim U(LR)^{\circ k} \circ L \circ X \to 1_{\A}$ canonical.
-% \end{corollary}
-% \begin{proof}
-%     Cite Emily.
-% \end{proof}
-
-% \begin{proposition}
-%     We have
-%     % https://q.uiver.app/#q=WzAsMyxbMCwwLCJ7fV9BXFxNb2QoXFxWKSJdLFsyLDAsInt9X0JcXE1vZChcXFYpIl0sWzEsMSwiXFxWIl0sWzEsMCwiTSBcXG90aW1lc19CIC0iLDIseyJjdXJ2ZSI6MX1dLFsyLDEsIkIgXFxvdGltZXMgLSIsMCx7ImN1cnZlIjotMX1dLFsxLDIsIiIsMCx7ImN1cnZlIjotMX1dLFswLDIsIlt7fV9BTSwgLV0iLDJdLFs0LDUsIiIsMSx7ImxldmVsIjoxLCJzdHlsZSI6eyJuYW1lIjoiYWRqdW5jdGlvbiJ9fV0sWzMsNiwiIiwwLHsibGV2ZWwiOjEsInN0eWxlIjp7Im5hbWUiOiJhZGp1bmN0aW9uIn19XV0=
-% \[\begin{tikzcd}
-% 	{{}_A\Mod(\V)} && {{}_B\Mod(\V)} \\
-% 	& \V
-% 	\arrow[""{name=0, anchor=center, inner sep=0}, "{[M, -]}"', from=1-1, to=2-2]
-% 	\arrow[""{name=1, anchor=center, inner sep=0}, "{M \otimes_B -}"', curve={height=6pt}, from=1-3, to=1-1]
-% 	\arrow[""{name=2, anchor=center, inner sep=0}, curve={height=-6pt}, from=1-3, to=2-2]
-% 	\arrow[""{name=3, anchor=center, inner sep=0}, "{B \otimes -}", curve={height=-6pt}, from=2-2, to=1-3]
-% 	\arrow["\dashv"{anchor=center, rotate=-131}, draw=none, from=1, to=0]
-% 	\arrow["\dashv"{anchor=center, rotate=-30}, draw=none, from=3, to=2]
-% \end{tikzcd}\]
-%     Then the following are equivalent we have a canonical $W_-$-weighted limit diagram of $X$ on the functor $B\Delta_+ \to \Cat{1}$ generated by the monad $RL$.
-% \end{proposition}
-
-% \subsection{Conventions on Higher Categories}
-
-% \subsubsection{Many possible definitions}
-
-% \autoref+
-% There are many different appraoches to define higher categories, including:
-% \begin{enumerate}
-%     \item Rezk's complete Segal $\Theta_n$-spaces \cite{Rez10}, inspired by Joyal's unpublished ideas \cite{Joy97},
-%         %functors out of "Joyal's cell or disk category" (parathensized pastings) to spaces,
-%     \item Barwick's $n$-fold complete Segal spaces, inspired by Rezk's complete segal spaces (for $n=1$),
-%         %functors out of grids to spaces,
-%     \item Pellissier's categories Segal-enriched in any model category of $(\infty,n-1)$-categories,
-%     \item Hirschowitz and Simpson's Segal $n$-categories inspired by the work of Tamsamani \cite{Tam96}, which are iterated versions of Pellisier's Segal-enrichment,
-%         %functors out of grids (one more level) to sets,
-%     \item Rezk-Kan's $n$-relative categories,
-%     \item when $n=1$, Boardman-Vogt's quasicategories with the Joyal model structure,
-%     \item when $n=1$, Lurie's marked simplicial sets,
-%     \item when $n=1$, simplicial categories with Bergner's model structure,
-%     \item when $n=1$, Ayala-Francis-Rozenblyum's striation sheaves,
-%     \item when $n=2$, Lurie's scaled simplicial sets,
-%     \item Gepner-Haugseng's $(\infty,1)$-categories enriched in any $(\infty,1)$-category of $(\infty,n-1)$-categories,
-% \end{enumerate}
-
-% There's also been many attempts at proving that all these definitions are equivalent:
-% \begin{enumerate}
-%     \item 
-%     \item Haugseng \cite{Hau15} proves that the notion of enriched $(\infty,1)$-categories and Segal-enriched categories coïncide when the enrichment context is the $(\infty,1)$-category associated to a ``nice'' Cartesian model category.
-%     This proves that 
-% \end{enumerate}
-% which all give equivalent $(\infty,1)$-categories by \cite{BS20}. Using this result, we will work with higher categories in a model-independent way.
-
-% \subsubsection{Model-Independent Approach}
-
-% We have a sequence of reflective and coreflective localizations of presentable $(\infty,1)$-categories
-
-% % https://q.uiver.app/#q=WzAsNixbMSwwLCJcXENhdHsxfSJdLFsyLDAsIlxcQ2F0ezJ9Il0sWzMsMCwiXFxsZG90cyJdLFs0LDAsIlxcQ2F0e259Il0sWzUsMCwiXFxsZG90cyJdLFswLDAsIlxcU3BhIl0sWzEsMCwiIiwyLHsiY3VydmUiOjN9XSxbMSwwLCJ7LX1fe1xcbGVxIDF9IiwwLHsiY3VydmUiOi0zfV0sWzIsMSwiIiwyLHsiY3VydmUiOjN9XSxbMiwzLCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFszLDQsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzIsMSwiey19X3tcXGxlcSAyfSIsMCx7ImN1cnZlIjotM31dLFszLDIsInstfV97XFxsZXEgbi0xfSIsMCx7ImN1cnZlIjotM31dLFs0LDMsInstfV97XFxsZXEgMH0iLDAseyJjdXJ2ZSI6LTN9XSxbNSwwLCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFswLDUsInstfV97XFxsZXEgMH0iLDAseyJjdXJ2ZSI6LTN9XSxbMCw1LCIiLDAseyJjdXJ2ZSI6M31dLFswLDEsIiIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzEsMiwiIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMywyLCIiLDAseyJjdXJ2ZSI6M31dLFs0LDMsIiIsMCx7ImN1cnZlIjozfV0sWzEwLDEzLCIiLDIseyJsZXZlbCI6MSwic3R5bGUiOnsibmFtZSI6ImFkanVuY3Rpb24ifX1dLFs5LDEyLCIiLDIseyJsZXZlbCI6MSwic3R5bGUiOnsibmFtZSI6ImFkanVuY3Rpb24ifX1dLFsxNCwxNSwiIiwwLHsibGV2ZWwiOjEsInN0eWxlIjp7Im5hbWUiOiJhZGp1bmN0aW9uIn19XSxbNiwxNywiIiwyLHsibGV2ZWwiOjEsInN0eWxlIjp7Im5hbWUiOiJhZGp1bmN0aW9uIn19XSxbMTYsMTQsIiIsMCx7ImxldmVsIjoxLCJzdHlsZSI6eyJuYW1lIjoiYWRqdW5jdGlvbiJ9fV0sWzgsMTgsIiIsMix7ImxldmVsIjoxLCJzdHlsZSI6eyJuYW1lIjoiYWRqdW5jdGlvbiJ9fV0sWzE3LDcsIiIsMix7ImxldmVsIjoxLCJzdHlsZSI6eyJuYW1lIjoiYWRqdW5jdGlvbiJ9fV0sWzE5LDksIiIsMix7ImxldmVsIjoxLCJzdHlsZSI6eyJuYW1lIjoiYWRqdW5jdGlvbiJ9fV0sWzE4LDExLCIiLDIseyJsZXZlbCI6MSwic3R5bGUiOnsibmFtZSI6ImFkanVuY3Rpb24ifX1dLFsyMCwxMCwiIiwyLHsibGV2ZWwiOjEsInN0eWxlIjp7Im5hbWUiOiJhZGp1bmN0aW9uIn19XV0=
-% \[\begin{tikzcd}
-% 	\Spa & {\Cat{1}} & {\Cat{2}} & \ldots & {\Cat{n}} & \ldots
-% 	\arrow[""{name=0, anchor=center, inner sep=0}, hook, from=1-1, to=1-2]
-% 	\arrow[""{name=1, anchor=center, inner sep=0}, "{{-}_{\leq 0}}", curve={height=-18pt}, from=1-2, to=1-1]
-% 	\arrow[""{name=2, anchor=center, inner sep=0}, curve={height=18pt}, from=1-2, to=1-1]
-% 	\arrow[""{name=3, anchor=center, inner sep=0}, hook, from=1-2, to=1-3]
-% 	\arrow[""{name=4, anchor=center, inner sep=0}, curve={height=18pt}, from=1-3, to=1-2]
-% 	\arrow[""{name=5, anchor=center, inner sep=0}, "{{-}_{\leq 1}}", curve={height=-18pt}, from=1-3, to=1-2]
-% 	\arrow[""{name=6, anchor=center, inner sep=0}, hook, from=1-3, to=1-4]
-% 	\arrow[""{name=7, anchor=center, inner sep=0}, curve={height=18pt}, from=1-4, to=1-3]
-% 	\arrow[""{name=8, anchor=center, inner sep=0}, "{{-}_{\leq 2}}", curve={height=-18pt}, from=1-4, to=1-3]
-% 	\arrow[""{name=9, anchor=center, inner sep=0}, hook, from=1-4, to=1-5]
-% 	\arrow[""{name=10, anchor=center, inner sep=0}, "{{-}_{\leq n-1}}", curve={height=-18pt}, from=1-5, to=1-4]
-% 	\arrow[""{name=11, anchor=center, inner sep=0}, curve={height=18pt}, from=1-5, to=1-4]
-% 	\arrow[""{name=12, anchor=center, inner sep=0}, hook, from=1-5, to=1-6]
-% 	\arrow[""{name=13, anchor=center, inner sep=0}, "{{-}_{\leq 0}}", curve={height=-18pt}, from=1-6, to=1-5]
-% 	\arrow[""{name=14, anchor=center, inner sep=0}, curve={height=18pt}, from=1-6, to=1-5]
-% 	\arrow["\dashv"{anchor=center, rotate=-87}, draw=none, from=0, to=1]
-% 	\arrow["\dashv"{anchor=center, rotate=-93}, draw=none, from=2, to=0]
-% 	\arrow["\dashv"{anchor=center, rotate=-90}, draw=none, from=3, to=5]
-% 	\arrow["\dashv"{anchor=center, rotate=-90}, draw=none, from=4, to=3]
-% 	\arrow["\dashv"{anchor=center, rotate=-97}, draw=none, from=6, to=8]
-% 	\arrow["\dashv"{anchor=center, rotate=-83}, draw=none, from=9, to=10]
-% 	\arrow["\dashv"{anchor=center, rotate=-83}, draw=none, from=7, to=6]
-% 	\arrow["\dashv"{anchor=center, rotate=-97}, draw=none, from=12, to=13]
-% 	\arrow["\dashv"{anchor=center, rotate=-97}, draw=none, from=11, to=9]
-% 	\arrow["\dashv"{anchor=center, rotate=-83}, draw=none, from=14, to=12]
-% \end{tikzcd}\]
-
-% By abuse of notations, we don't distinguish an $(\infty,k)$-category $\cat{C} \in \Cat{k}$ from its image in $\Cat{n}$ for $n \geq k$.
-% We let $\{\bullet\}$ be the terminal space, seen as the free category on a single object: it is the terminal object of $\Cat{n}$ for all $n$.
-% We let $\emptyset$ denote the empty space: it's the initial object of $\Cat{n}$ for all $n$.
-% By ``$c \in \cat{C}$'' we mean $c \in \{\bullet\} \to \cat{C}$.
-% For $\cat{C} \in \Cat{n}$, the hom-categories can be seen as
-% \[
-%     \cat{C}_{\leq 0} \times \cat{C}_{\leq 0} \xto[\cat{C}(-,-)] \Cat{n-1}
-% \]
-% as is straightforward from the iterated-enrichment definition. We have a suspension functor $\sigma \in \Cat{n-1} \to \Cat{n}$ which sends an $(\infty, n-1)$-category $\cat{C}$ to the unique $(\infty, n)$-category with two objects $\{-,+\}$ and   
-% \[\begin{cases}[rCl]
-%     \sigma\cat{C}(+,+) &=& \{\bullet\}\\
-%     \sigma\cat{C}(+,-) &=& \emptyset \\
-%     \sigma\cat{C}(-,-) &=& \{\bullet\}\\
-%     \sigma\cat{C}(-,+) &=& \cat{C}
-% \end{cases}\]
-% Equivalently, $\sigma\cat{C}$ is the object corepresenting the copresheaf
-% \[\begin{cases}[rCl]
-%     \Cat{n} &\longto& \Spa \\
-%     \A &\longmapsto& \Lim \left(\A_{\leq 0} \times \A_{\leq 0} \xto[\A(-,-)] \Cat{n-1} \xto[{[\cat{C},-]}] \Spa \right)
-% \end{cases}\]
-% We let $c_0 = \{\bullet\}$ and for $n \geq 1$, let $c_n = \sigma^{n}c_0$ be the free category on a single $n$-cell.
-% For all $n \geq 0$, we have an reflective localization
-% % https://q.uiver.app/#q=WzAsMixbMSwwLCJcXENhdHtufSJdLFswLDAsIlxcdGV4dG5vcm1hbHtcXHRleHRiZntDYXR9fV97KG4sbil9Il0sWzEsMCwiIiwyLHsiY3VydmUiOjIsInN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzAsMSwiXFxob19uIiwyLHsiY3VydmUiOjJ9XSxbMywyLCIiLDIseyJsZXZlbCI6MSwic3R5bGUiOnsibmFtZSI6ImFkanVuY3Rpb24ifX1dXQ==
-% \[\begin{tikzcd}
-% 	{\textnormal{\textbf{Cat}}_{(n,n)}} & {\Cat{n}}
-% 	\arrow[""{name=0, anchor=center, inner sep=0}, curve={height=12pt}, hook, from=1-1, to=1-2]
-% 	\arrow[""{name=1, anchor=center, inner sep=0}, "{\ho_n}"', curve={height=12pt}, from=1-2, to=1-1]
-% 	\arrow["\dashv"{anchor=center, rotate=-90}, draw=none, from=1, to=0]
-% \end{tikzcd}\]
-% where $\textnormal{\textbf{Cat}}_{(n,n)}$ is the full subcategory on the $n$-truncated objects.
-% In particular, $\textnormal{\textbf{Cat}}_{(1,1)}$ is the usual $(2,1)$-category of ordinary categories and $\textnormal{\textbf{Cat}}_{(2,2)}$ is the usual $(3,1)$-category of bicategories.
-
-% For $\cat{C}\in \Cat{n}$, we write $f\in a_{k-1} \to b_{k-1} \in \ldots \in a_0 \to b_0 \in \cat{C}$ to mean we have a diagram
-% % https://q.uiver.app/#q=WzAsNixbNCwwLCJjX2siXSxbMywwLCJjX3trLTF9Il0sWzIsMCwiXFxsZG90cyJdLFsxLDAsImNfMSJdLFswLDAsIlxcYnVsbGV0Il0sWzYsMCwiXFxjYXR7Q30iXSxbNCwzLCJcXGRvbSIsMCx7ImN1cnZlIjotMX1dLFs0LDMsIlxcY29kIiwyLHsiY3VydmUiOjF9XSxbMywyLCJcXGRvbSIsMCx7ImN1cnZlIjotMX1dLFszLDIsIlxcY29kIiwyLHsiY3VydmUiOjF9XSxbMiwxLCJcXGRvbSIsMCx7ImN1cnZlIjotMX1dLFsyLDEsIlxcY29kIiwyLHsiY3VydmUiOjF9XSxbMSwwLCJcXGRvbSIsMCx7ImN1cnZlIjotMX1dLFsxLDAsIlxcY29kIiwyLHsiY3VydmUiOjF9XSxbMCw1LCJmIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzEsNSwiYl97ay0xfSIsMix7ImN1cnZlIjoyLCJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkb3R0ZWQifX19XSxbMSw1LCJhX3trLTF9IiwwLHsiY3VydmUiOi0yLCJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkb3R0ZWQifX19XSxbMyw1LCJiXzEiLDIseyJjdXJ2ZSI6Mywic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzMsNSwiYV8xIiwwLHsiY3VydmUiOi0zLCJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkb3R0ZWQifX19XSxbNCw1LCJiXzAiLDIseyJjdXJ2ZSI6NSwic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZG90dGVkIn19fV0sWzQsNSwiYV8wIiwwLHsiY3VydmUiOi01LCJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkb3R0ZWQifX19XV0=
-% \[\begin{tikzcd}
-% 	\bullet & {c_1} & \ldots & {c_{k-1}} & {c_k} && {\cat{C}}
-% 	\arrow["\dom", curve={height=-6pt}, from=1-1, to=1-2]
-% 	\arrow["\cod"', curve={height=6pt}, from=1-1, to=1-2]
-% 	\arrow["{b_0}"', curve={height=30pt}, dotted, from=1-1, to=1-7]
-% 	\arrow["{a_0}", curve={height=-30pt}, dotted, from=1-1, to=1-7]
-% 	\arrow["\dom", curve={height=-6pt}, from=1-2, to=1-3]
-% 	\arrow["\cod"', curve={height=6pt}, from=1-2, to=1-3]
-% 	\arrow["{b_1}"', curve={height=18pt}, dashed, from=1-2, to=1-7]
-% 	\arrow["{a_1}", curve={height=-18pt}, dotted, from=1-2, to=1-7]
-% 	\arrow["\dom", curve={height=-6pt}, from=1-3, to=1-4]
-% 	\arrow["\cod"', curve={height=6pt}, from=1-3, to=1-4]
-% 	\arrow["\dom", curve={height=-6pt}, from=1-4, to=1-5]
-% 	\arrow["\cod"', curve={height=6pt}, from=1-4, to=1-5]
-% 	\arrow["{b_{k-1}}"', curve={height=12pt}, dotted, from=1-4, to=1-7]
-% 	\arrow["{a_{k-1}}", curve={height=-12pt}, dotted, from=1-4, to=1-7]
-% 	\arrow["f"', dashed, from=1-5, to=1-7]
-% \end{tikzcd}\]
-
-
-% \section{Higher Walking Adjunctions}
-
-% \subsection{Preliminaries}
-
-% \begin{definition}[Adjoint]
-%     Let $n \geq 2$ and $\cat{C}\in \Cat{n}$.
-%     We say that $l\in a \to b \in \cat{C}$ is a left adjoint if its equivalence class in $\ho_2(\cat{C})$ is a left adjoint.
-%     For $k \geq 2$, say that $l\in a_{k-1} \to b_{k-1} \in \ldots \in a_0 \to b_0 \in \cat{C}$ is a left adjoint if its equivalence class in $\ho_2(\cat{C}(a_0,b_0)(a_1,b_1)\ldots(a_{k-2}, b_{k-2}))$ is a left adjoint.
-% \end{definition}
-
-% \begin{remark}[Being Adjoint is a Property]
-%     In a bicategory $\B$, being an adjoint is a property of equivalence classes of elements in $[c_1,\B]$. 
-%     As a consquence, in any $(\infty,n)$-category $\cat{C}$, the space of adjoint morphisms form a union of connected components of $[c_1, \cat{C}]$.
-% \end{remark}
-
-% Schanuel and Street \cite{SS86} defined combinatorially the free $(2,2)$-category $\Adj$ containing an adjunction $L \in \begin{tikzcd}
-%         + & -
-%         \arrow[""{name=0, anchor=center, inner sep=0}, curve={height=-6pt}, from=1-1, to=1-2]
-%         \arrow[""{name=1, anchor=center, inner sep=0}, curve={height=-6pt}, from=1-2, to=1-1]
-%         \arrow["\dashv"{anchor=center, rotate=-90}, draw=none, from=0, to=1]
-%     \end{tikzcd} \in R $. We cite here two results fromn \cite{RV16} that we will use throughout this section.
-
-% \begin{theorem}[Homotopy Uniqueness of Adjunctions {\cite[Thm. 4.4.11]{RV16}}]\label{them:riehl-verity}
-%    Let $\cat{C}\in \Cat{2}$.
-%    Precomposition by $L,R \in c_1 \to \Adj$ gives monomorphisms
-%     % https://q.uiver.app/#q=WzAsMixbMCwwLCJbXFxBZGosXFxtYXRoY2Fse0N9XSJdLFsyLDAsIlxcbWF0aGNhbHtDfV5cXHRvIl0sWzAsMSwiTF4qIiwwLHsiY3VydmUiOi0xLCJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFswLDEsIlJeKiIsMix7ImN1cnZlIjoxLCJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6ImJvdHRvbSJ9fX1dXQ==
-%     \[\begin{tikzcd}
-%         {[\Adj,\mathcal{C}]} && {[c_1, \mathcal{C}]}
-%         \arrow["{L^*}", curve={height=-6pt}, hook, from=1-1, to=1-3]
-%         \arrow["{R^*}"', curve={height=6pt}, hook', from=1-1, to=1-3]
-%     \end{tikzcd}\]
-%     selecting the connected components of left (resp. right) adjoint morphisms.
-% \end{theorem}
-
-% \begin{corollary}
-%     Let $n\geq 2$, $k\geq 1$ and $\cat{C}\in \Cat{n}$.
-%     Precomposition by $\sigma^{k-1}L,\sigma^{k-1}R \in c_k \to \sigma^{k-1}\Adj$ gives monomorphisms
-%      % https://q.uiver.app/#q=WzAsMixbMCwwLCJbXFxBZGosXFxtYXRoY2Fse0N9XSJdLFsyLDAsIlxcbWF0aGNhbHtDfV5cXHRvIl0sWzAsMSwiTF4qIiwwLHsiY3VydmUiOi0xLCJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFswLDEsIlJeKiIsMix7ImN1cnZlIjoxLCJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6ImJvdHRvbSJ9fX1dXQ==
-%      \[\begin{tikzcd}
-%          {[\sigma^{k-1}\Adj,\mathcal{C}]} && {[c_k, \mathcal{C}]}
-%          \arrow["{\sigma^{k-1}L^*}", curve={height=-6pt}, hook, from=1-1, to=1-3]
-%          \arrow["{\sigma^{k-1}R^*}"', curve={height=6pt}, hook', from=1-1, to=1-3]
-%      \end{tikzcd}\]
-%      selecting the connected components of left (resp. right) adjoint $k$-cells.
-% \end{corollary}
-
-% \begin{theorem}[Homotopy Coherent Lifting of Adjunctions {\cite[Thm. 4.3.11]{RV16}}]
-%     Let $\cat{C}\in \Cat{2}$.
-%     Suppose we have $(L, R, \eta, \epsilon)$ forming an adjunction in $\ho_2(\cat{C})$.
-%     Then we have $\Adj \to \cat{C}$ lifting $(L, R, \eta, \epsilon)$.
-% \end{theorem}
-
-% \begin{corollary}
-%     Let $\cat{C}\in \Cat{2}$.
-%     Suppose we have $(L, R, \eta, \epsilon)$ forming an adjunction in ...
-%     Then we have $\sigma^{k-1}\Adj \to \cat{C}$ lifting $(L, R, \eta, \epsilon)$.
-% \end{corollary}\pablo{annoying to write}
-
-% \begin{definition}
-%     Let $n\geq 2$, $S \subset \{1,\ldots, n-1\}$ and $\cat{C} \in \Cat{n}$.
-%     We say that $\cat{C}$ is \textbf{$S$-fully-adjoint} if for all $k \inset S$, the monomorphisms
-%     % https://q.uiver.app/#q=WzAsMixbMCwwLCJbXFxBZGosXFxtYXRoY2Fse0N9XSJdLFsyLDAsIlxcbWF0aGNhbHtDfV5cXHRvIl0sWzAsMSwiTF4qIiwwLHsiY3VydmUiOi0xLCJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFswLDEsIlJeKiIsMix7ImN1cnZlIjoxLCJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6ImJvdHRvbSJ9fX1dXQ==
-%     \[\begin{tikzcd}
-%         {[\sigma^{k-1}\Adj,\mathcal{C}]} && {[c_k, \mathcal{C}]}
-%         \arrow["{\sigma^{k-1}L^*}", curve={height=-6pt}, hook, from=1-1, to=1-3]
-%         \arrow["{\sigma^{k-1}R^*}"', curve={height=6pt}, hook', from=1-1, to=1-3]
-%     \end{tikzcd}\]
-%     are equivalences.
-%     We write $\Cat{n}^{S-\adj}$ for the full subcategory of $\Cat{n}$ on the $S$-fully-adjoint categories.
-%     For $S = \{1,\ldots, n-1\}$, we write $\Cat{n}^{\adj} = \Cat{n}^{S-\adj}$.
-% \end{definition}
-
-% \begin{proposition}
-%     Let $n\geq 2$ and $S \subset \{1,\ldots, n-1\}$. The category $\Cat{n}^{S-\adj}$ is locally finitely presentable and we have a (co)reflection
-%     % https://q.uiver.app/#q=WzAsMixbMCwwLCJcXENhdHtufV57Uy1cXGFkan0iXSxbMiwwLCJcXENhdHtufSJdLFswLDEsIiIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzEsMCwiIiwyLHsiY3VydmUiOi00fV0sWzEsMCwiXFxhZGpuIiwyLHsiY3VydmUiOjR9XSxbMiwzLCIiLDIseyJsZXZlbCI6MSwic3R5bGUiOnsibmFtZSI6ImFkanVuY3Rpb24ifX1dLFs0LDIsIiIsMCx7ImxldmVsIjoxLCJzdHlsZSI6eyJuYW1lIjoiYWRqdW5jdGlvbiJ9fV1d
-% \[\begin{tikzcd}
-% 	{\Cat{n}^{S-\adj}} && {\Cat{n}}
-% 	\arrow[""{name=0, anchor=center, inner sep=0}, hook, from=1-1, to=1-3]
-% 	\arrow[""{name=1, anchor=center, inner sep=0}, curve={height=-24pt}, from=1-3, to=1-1]
-% 	\arrow[""{name=2, anchor=center, inner sep=0}, "S-\adj"', curve={height=24pt}, from=1-3, to=1-1]
-% 	\arrow["\dashv"{anchor=center, rotate=-101}, draw=none, from=0, to=1]
-% 	\arrow["\dashv"{anchor=center, rotate=-79}, draw=none, from=2, to=0]
-% \end{tikzcd}\]
-%     For $S = \{1,\ldots, n-1\}$, we denote the reflection $n-\adj\in \Cat{n} \to \Cat{n}^{\adj}$.
-% \end{proposition}
-% \begin{proof}
-%     Idea: use the complete segal space representation and explicitly build the adjoint. Then presentability follows.
-% \end{proof}
-
-% \begin{proposition}[Colimits have Adjoints]\label{prop:colim-adj}
-%     Let $F \in \cat{I} \to \Cat{n}$ be a diagram.
-%     We have that $\Colim F$ is $S$-fully-adjoint if and only if for all $i \in cat{I}$ and all $c_k \to Fi$ $k$-cell, the induced $k$-cell $c_k \to Fi \to \Colim F$ is $S$-fully-adjoint.
-% \end{proposition}
-% \begin{proof}
-%     Idea: a $k$-cell in the colimit can always be written as a composition of $k$-cells in the diagram (and invertible data).
-%     This is clear in the Grothendieck construction of the colimit, but hopefully also is clear via explicit definitions of higher categories (maybe some model category argument).
-% \end{proof}
-
-% \subsection{Higher Walking Adjunctions as Colimits}
-
-% \subsubsection{Case $n = 2$}
-
-% \begin{proposition}[Free Full Adjunction]
-%     Denote $\mathbb{Z}^{\to\leftarrow}$ the poset whose objects are the integers and which has morphisms $2n \to 2n\pm 1$ for all $n \in \mathbb{Z}$.
-%     We have a colimit diagram
-%      % https://q.uiver.app/#q=WzAsMTAsWzQsMiwiXFxBZGoiXSxbMywzLCJjXzEiXSxbMiwyLCJcXEFkaiJdLFs2LDIsIlxcQWRqIl0sWzAsMiwiXFxjZG90cyJdLFs4LDIsIlxcY2RvdHMiXSxbMSwzLCJjXzEiXSxbNSwzLCJjXzEiXSxbNywzLCJjXzEiXSxbNCwwLCJcXEFkal5cXGluZnR5Il0sWzEsMCwiTCJdLFsxLDIsIlIiLDJdLFs3LDAsIlIiLDJdLFs2LDQsIlIiLDJdLFs2LDIsIkwiXSxbNywzLCJMIl0sWzgsMywiUiIsMl0sWzgsNSwiTCJdLFsyLDksIiIsMix7ImN1cnZlIjotMSwic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzAsOSwiIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzMsOSwiIiwyLHsiY3VydmUiOjEsInN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFs0LDksIiIsMix7ImN1cnZlIjotMiwic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzUsOSwiIiwwLHsiY3VydmUiOjIsInN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
-% \[\begin{tikzcd}
-% 	&&&& {c_1^{2-\adj}} \\
-% 	\\
-% 	\cdots && \Adj && \Adj && \Adj && \cdots \\
-% 	& {c_1} && {c_1} && {c_1} && {c_1}
-% 	\arrow[curve={height=-12pt}, dashed, from=3-1, to=1-5]
-% 	\arrow[curve={height=-6pt}, dashed, from=3-3, to=1-5]
-% 	\arrow[dashed, from=3-5, to=1-5]
-% 	\arrow[curve={height=6pt}, dashed, from=3-7, to=1-5]
-% 	\arrow[curve={height=12pt}, dashed, from=3-9, to=1-5]
-% 	\arrow["R"', from=4-2, to=3-1]
-% 	\arrow["L", from=4-2, to=3-3]
-% 	\arrow["R"', from=4-4, to=3-3]
-% 	\arrow["L", from=4-4, to=3-5]
-% 	\arrow["R"', from=4-6, to=3-5]
-% 	\arrow["L", from=4-6, to=3-7]
-% 	\arrow["R"', from=4-8, to=3-7]
-% 	\arrow["L", from=4-8, to=3-9]
-% \end{tikzcd}\]
-% We denote this diagram as $C_1^{2-\adj}\in \mathbb{Z}^{\to\leftarrow} \to \Cat{2}$.
-% \end{proposition}
-% \begin{proof}
-%    Firstly, we build the cocone diagram.
-%    By definition, we know that $c_1^{2-\adj}$ is fully-adjoint and receives a universal functor $c_ 1 \to c_1^{2-\adj}$.
-%    The space of cocones is the limit of the diagram $\mathbb{Z}^{\to\leftarrow} \to \Spa$ bellow.
-%     % https://q.uiver.app/#q=WzAsNSxbMCwwLCJcXGxkb3RzIl0sWzIsMCwiW1xcQWRqLCBjXzFeezItXFxhZGp9XSJdLFs0LDAsIlxcY2RvdHMiXSxbMSwxLCJbY18xLCBjXzFeezItXFxhZGp9XSJdLFszLDEsIltjXzEsIGNfMV57Mi1cXGFkan1dIl0sWzAsMywiUl4qIl0sWzEsMywiTF4qIiwyXSxbMSw0LCJSXioiXSxbMiw0LCJMXioiLDJdXQ==
-%     \[\begin{tikzcd}
-%         \ldots && {[\Adj, c_1^{2-\adj}]} && \cdots \\
-%         & {[c_1, c_1^{2-\adj}]} && {[c_1, c_1^{2-\adj}]}
-%         \arrow["{R^*}", from=1-1, to=2-2]
-%         \arrow["{L^*}"', from=1-3, to=2-2]
-%         \arrow["{R^*}", from=1-3, to=2-4]
-%         \arrow["{L^*}"', from=1-5, to=2-4]
-%     \end{tikzcd}\]
-%     By Theorem \ref{them:riehl-verity}, this is an infinite zig-zag of weak homotopy equivalences.
-%     By picking the point in the zero-th space corresponding to the universal functor $c_ 1 \to c_1^{2-\adj}$, we get a canonical cocone diagram.
-
-%     Secondly, we build a functor $c_1^{2-\adj} \to \Colim C_1^{2-\adj}$.
-%     By universal property of $c_1^{2-\adj}$, it's sufficient to show that $\Colim C_1^{2-\adj} \inset \Cat{2}^{\adj}$ and to pick a $1$-cell $c_1 \to \Colim C_1^{2-\adj}$.
-%     By Proposition \ref{prop:colim-adj}, it suffices to show that all $1$-cells in the diagram $C_1^{2-\adj}\in \mathbb{Z}^{\to\leftarrow} \to \Cat{2}$ are fully $1$-adjoint.
-%     Note that each $1$-cell of each copy of $\Adj$ is a composition of the corresponding copies of $L$ and $R$, which in turn factors through one of the copies of $c_1$ in the diagram.
-%     Hence, it is sufficient to show that each of the $c_1$ in the diagram are fully $1$-adjoint, which is clear by construction.
-%     We now get a functor $c_1^{2-\adj} \to \Colim C_1^{2-\adj}$ by choosing the $1$-cell $c_1 \to \Colim C_1^{2-\adj}$ given by the universal cocone projection on the zero-th copy of $c_1$.
-    
-%     It's now clear that the two functors $c_1^{2-\adj} \to \Colim C_1^{2-\adj}$ and $\Colim C_1^{2-\adj} \to c_1^{2-\adj}$ are inverses to each other by examining the universal properties.
-    
-% \end{proof}
-
-% Note that the diagram above is contractible.
-
-% \subsubsection{Higher Cases}
-
-% % \begin{definition}
-% %     Let $n \geq 3$.
-% %     Let $\mathcal{I} \subset \mathcal{P}(\{1,\ldots, n-1\})$.
-% %     We say that $\mathcal{I}$ is \textbf{covering} if:
-% %     \begin{enumerate}
-% %         \item for all $I \inset \mathcal{I}$ and $J \subset I$, we have $J \inset \mathcal{I}$,
-% %         \item for all $k \inset \{1,\ldots, n-1\}$, there exists $I \inset \mathcal{I}$ such that $k \inset I$.
-% %     \end{enumerate}
-% %     We denote by $\partial \mathcal{I}$ the set of maximal elements of $\mathcal{I}$.
-% % \end{definition}
-
-% % \begin{definition}
-% %     Let $n \geq 3$ and $\mathcal{I} \subset \mathcal{P}(\{1,\ldots, n-1\})$ covering.
-% %     We define a poset $\bar{\mathcal{I}}$ as follows:
-% %     \begin{enumerate}
-% %         \item
-% %     \end{enumerate}
-% % \end{definition}
-
-% % \begin{theorem}
-% %     Let $n \geq 3$ and $\mathcal{I} \subset \mathcal{P}(\{1,\ldots, n-1\})$ covering.
-% %     We have $c_1^{n-\adj} = \Colim (\bar{\mathcal{I}} \to \Cat{n})$.
-% % \end{theorem}
-% % \begin{proof}
-% %     We want to show that $\Colim (\bar{\mathcal{I}} \to \Cat{n})$ is fully-adjoint.
-% %     By induction, the previous one is.
-% %     We need to check the highest $\epsilon$ and $\eta$-cells we added are fully-adjoint.
-% %     We check that they have two sided adjoints.
-% % \end{proof}
-
-% % \begin{definition}[Duality Datum]
-% %     A $k$-duality data is a word of length $k$ using letters $\epsilon$ and $\eta$, with or without an overline bar.
-% % \end{definition}
-
-% % \begin{corollary}
-% %     Let $n\geq 3$ and $\cat{C}$ be a higher category. The canonical
-% %     \[\begin{tikzcd}
-% %          {[c_1^{n-\adj} ,\mathcal{C}]} && {[c_1, \mathcal{C}]}
-% %          \arrow[hook, from=1-1, to=1-3]
-% %      \end{tikzcd}\]
-% %     is a monomorphism. To show that some morphism $f$ is in the image connected components, it suffices to:
-% %     \begin{enumerate}
-% %         \item pick $\mathcal{I} \subset \mathcal{P}(\{1,\ldots, n-1\})$ covering,
-% %         \item \ldots
-% %     \end{enumerate}
-% % \end{corollary}
-
-% Fix $n \geq 3$.
-
-% \begin{definition}[Poset of Duality Data]
-%     We define a poset $\mathcal{P}_n$ of $2^{2n-2}-1$ elements as follows:
-%     \begin{enumerate}
-%         \item \textbf{Objects:} words of length at most $n$ with letters alternating between $\{\epsilon, \eta\}$ and $\{L, R\}$. If non-empty, the word is required to start with either $L$ or $R$.
-%         \item \textbf{Inequalities:} we have $w \leq w'$ whenever $w$ ends $\epsilon$ or $\eta$ and $w'$ is obtained from $w$ by adding one letter.
-%     \end{enumerate} 
-% \end{definition}
-
-% For example, for $n=3$, we get
-% % https://q.uiver.app/#q=WzAsMTUsWzQsMywiXFxlbXB0eXNldCJdLFsyLDIsIkwiXSxbNiwyLCJSIl0sWzEsMSwiXFxlcHNpbG9uIEwiXSxbMywxLCJcXGV0YSBMIl0sWzUsMSwiXFxlcHNpbG9uIFIiXSxbNywxLCJcXGV0YSBSIl0sWzAsMCwiTCBcXGVwc2lsb24gTCJdLFsxLDAsIiBSXFxlcHNpbG9uIEwiXSxbMiwwLCJMIFxcZXRhIEwiXSxbMywwLCJSIFxcZXRhIEwiXSxbNSwwLCJMIFxcZXBzaWxvbiBSIl0sWzYsMCwiUiBcXGVwc2lsb24gUiJdLFs3LDAsIkwgXFxldGEgUiJdLFs4LDAsIlIgXFxldGEgUiJdLFswLDFdLFswLDJdLFs0LDFdLFszLDFdLFs1LDJdLFs2LDJdLFszLDddLFszLDhdLFs0LDldLFs0LDEwXSxbNSwxMV0sWzUsMTJdLFs2LDEzXSxbNiwxNF1d
-% \[\begin{tikzcd}
-% 	{L \epsilon L} & { R\epsilon L} & {L \eta L} & {R \eta L} && {L \epsilon R} & {R \epsilon R} & {L \eta R} & {R \eta R} \\
-% 	& {\epsilon L} && {\eta L} && {\epsilon R} && {\eta R} \\
-% 	&& L &&&& R \\
-% 	&&&& \emptyset
-% 	\arrow[from=2-2, to=1-1]
-% 	\arrow[from=2-2, to=1-2]
-% 	\arrow[from=2-2, to=3-3]
-% 	\arrow[from=2-4, to=1-3]
-% 	\arrow[from=2-4, to=1-4]
-% 	\arrow[from=2-4, to=3-3]
-% 	\arrow[from=2-6, to=1-6]
-% 	\arrow[from=2-6, to=1-7]
-% 	\arrow[from=2-6, to=3-7]
-% 	\arrow[from=2-8, to=1-8]
-% 	\arrow[from=2-8, to=1-9]
-% 	\arrow[from=2-8, to=3-7]
-% 	\arrow[from=4-5, to=3-3]
-% 	\arrow[from=4-5, to=3-7]
-% \end{tikzcd}\]
-
-% \begin{definition}[Diagram $C_1^{n-\adj}$]
-%     We define a diagram $C_1^{n-\adj} \in \mathcal{P}_n \to \Cat{n}$ as follows:
-%     \begin{enumerate}
-%         \item \textbf{Objects:} words ending in $\{L, R\}$ are sent to $\sigma^k \Adj$ where $2k+1$ is the length of the word; other words are sent to $c_k$ where again $2k+1$ is the length.
-%         \item \textbf{Morphisms:} morphisms are labelled by the letter added to the word.
-%     \end{enumerate}
-% \end{definition}
-
-% For example, for $n=3$, we get the following diagram in $\Cat{3}$:
-% % https://q.uiver.app/#q=WzAsMTUsWzQsMywiY18xIl0sWzIsMiwiXFxBZGoiXSxbNiwyLCJcXEFkaiJdLFsxLDEsImNfMiJdLFszLDEsImNfMiJdLFs1LDEsImNfMiJdLFs3LDEsImNfMiJdLFswLDAsIlxcc2lnbWFcXEFkaiJdLFsxLDAsIlxcc2lnbWFcXEFkaiJdLFsyLDAsIlxcc2lnbWFcXEFkaiJdLFszLDAsIlxcc2lnbWFcXEFkaiJdLFs1LDAsIlxcc2lnbWFcXEFkaiJdLFs2LDAsIlxcc2lnbWFcXEFkaiJdLFs3LDAsIlxcc2lnbWFcXEFkaiJdLFs4LDAsIlxcc2lnbWFcXEFkaiJdLFswLDEsIkwiXSxbMCwyLCJSIiwyXSxbNCwxLCJcXGV0YSJdLFszLDEsIlxcZXBzaWxvbiIsMl0sWzUsMiwiXFxlcHNpbG9uIiwyXSxbNiwyLCJcXGV0YSJdLFszLDcsIkwiXSxbMyw4LCJSIiwyXSxbNCw5LCJMIl0sWzQsMTAsIlIiLDJdLFs1LDExLCJMIl0sWzUsMTIsIlIiLDJdLFs2LDEzLCJMIl0sWzYsMTQsIlIiLDJdXQ==
-% \[\begin{tikzcd}
-% 	{\sigma\Adj} & {\sigma\Adj} & {\sigma\Adj} & {\sigma\Adj} && {\sigma\Adj} & {\sigma\Adj} & {\sigma\Adj} & {\sigma\Adj} \\
-% 	& {c_2} && {c_2} && {c_2} && {c_2} \\
-% 	&& \Adj &&&& \Adj \\
-% 	&&&& {c_1}
-% 	\arrow["L", from=2-2, to=1-1]
-% 	\arrow["R"', from=2-2, to=1-2]
-% 	\arrow["\epsilon"', from=2-2, to=3-3]
-% 	\arrow["L", from=2-4, to=1-3]
-% 	\arrow["R"', from=2-4, to=1-4]
-% 	\arrow["\eta", from=2-4, to=3-3]
-% 	\arrow["L", from=2-6, to=1-6]
-% 	\arrow["R"', from=2-6, to=1-7]
-% 	\arrow["\epsilon"', from=2-6, to=3-7]
-% 	\arrow["L", from=2-8, to=1-8]
-% 	\arrow["R"', from=2-8, to=1-9]
-% 	\arrow["\eta", from=2-8, to=3-7]
-% 	\arrow["L", from=4-5, to=3-3]
-% 	\arrow["R"', from=4-5, to=3-7]
-% \end{tikzcd}\]
-
-% \begin{proposition}
-%     We have $c_1^{n-\adj} = \Colim C_1^{n-\adj}$
-% \end{proposition}
-% \begin{proof}
-%     \bigpablo{First step: construct cocone (should be easy).
-%     MAIN step: show the colimit is fully-adjunct (should come from colimits-have-adjoints and some non-trivial work on duality data).
-%     Final step: inverse of one-another (should be easy too).
-%     I'll do the second step first to get it out of the way.}
-    
-% \end{proof}
-
-% \subsubsection{Redundancy of Duality Data}
-% \bigpablo{Optional}
-
-% \section{The Morita Category}
-
-% % Finish facto in E_n section: should be easy to generalize Thm 2.25 (pushforward) from AFT17 to this setup
-% % Don't lose time defining Mor_n: just use Haugseng's definition and result identifying the hom
-% % Define the relevant stratified spaces (handle) and use pushforward to build them by tensoring
-% % Finish the "center" section which identify some internal hom with some tensoring operation
-
-
-% \subsection{Factorization Homology in $\mathcal{E}_n$-Monoïdal Categories}          
-
-% \begin{proposition}
-%     Let $\B \to \Bsc$ be a category of basics.
-%     The functor $\Entr(-)=\Disk_{/-} \in \Mfld(\B) \to \Cat{1}$ is a homology theory.
-% \end{proposition}
-% \begin{proof}
-%     By \cite[Thm. 1.1.(ii)]{GHN15}, we can identify the functor above with
-%     % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXE1mbGQoXFxCKSJdLFsxLDAsIlxcUHNoKFxcRGlzayhcXEIpKSJdLFszLDAsIlxcQ2F0ezF9Il0sWzAsMSwiXFx5byJdLFsxLDIsIlxcbWF0aHNme2xheC19XFxDb2xpbSJdXQ==
-% \[\begin{tikzcd}
-% 	{\Mfld(\B)} & {\Psh(\Disk(\B))} && {\Cat{1}}
-% 	\arrow["\yo", from=1-1, to=1-2]
-% 	\arrow["{\mathsf{lax-}\Colim}", from=1-2, to=1-4]
-% \end{tikzcd}\]
-% From \cite[Cor. 2.28]{AFT17}, we know that the first functor - the restricted Yoneda functor of the inclusion $\Disk(\B) \mono \Mfld(\B)$ - is a homology theory, when $\Psh(\Disk(\B))$ is endowed with the Day convolution.
-% Note that $\Disk_{/-} \in \Disk(\B) \to \Cat{1}$ is symmetric monoïdal.
-% The second functor is obtained from it by the universal property of Day convolution, and hence preserves colimits and is symmetric monoïdal. 
-% \end{proof}
-
-% Recall from \cite[Constr. 2.4]{AFT17} that each stratified space $X$ defines an operad $\Disk_{/X}$.
-% For $\V \in \EAlg{\infty}(\Cat)$, we denote $\Alg{X}(\V) = \Alg{{\Disk_{/X}}}(\V)$ the category of $\Disk_{/X}$-algebras in $\V$.
-% Note that the operad $\Disk_{/\mathbb{R}^n}$ is the $\mathcal{E}_n$-operad.
-
-% \begin{definition}
-%     Let $\bar{X} \to X$ be a refinement of stratified spaces.
-%     Let $\V \in \Alg{X}(\Cat{1})$.
-%     We define an $\bar{X}$-algebra in $\V$ to be a symmetric monoïdal natural transformation
-%     % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXERpc2tfey9cXGJhcntYfX0iXSxbMSwxLCJcXERpc2tfey9YfSJdLFsyLDAsIlxcQ2F0ezF9Il0sWzEsMiwiXFxWIiwyXSxbMCwyLCJcXEVudHIoLSkiLDAseyJjdXJ2ZSI6LTR9XSxbMCwxLCJcXHRleHRub3JtYWx7bG9jfSIsMl0sWzQsMSwiQSIsMCx7InNob3J0ZW4iOnsic291cmNlIjozMCwidGFyZ2V0IjozMH19XV0=
-%     \[\begin{tikzcd}
-%         {\Disk_{/\bar{X}}} && {\Cat{1}} \\
-%         & {\Disk_{/X}}
-%         \arrow[""{name=0, anchor=center, inner sep=0}, "{\Entr(-)}", curve={height=-24pt}, from=1-1, to=1-3]
-%         \arrow["{\textnormal{loc}}"', from=1-1, to=2-2]
-%         \arrow["\V"', from=2-2, to=1-3]
-%         \arrow["A", between={0.3}{0.7}, Rightarrow, from=0, to=2-2]
-%     \end{tikzcd}\]
-% \end{definition}
-
-% \bigpablo{Old version bellow}
-
-% Recall that $\mathsf{D}^\fr_n \to \Bsc$ is defined to be the tangent classifyer $\tau_{\mathbb{R}^n}$.
-% It can also be identified with the functor $\{\bullet\} \xto[\mathbb{R}^n] \Bsc$.
-
-% \begin{definition}
-%     We define $\Bim_n \to \Bsc$ to be the tangent classifyer $\tau_{\mathbb{R}^{n-1} \times C(S^0)}$.
-% \end{definition}
-
-% By \cite[Prop. 1.2.13]{AFT17a}, we have a localization functor $\Bim_n \to \mathsf{D}^\fr_n$.
-% This induces a localization functor $\Disk(\Bim_n) \to \Disk(\mathsf{D}^\fr_n)$.
-% This allows us to see any $\Disk(\mathsf{D}^\fr_n)$-algebra as a $\Disk(\Bim_n)$-algebra.
-
-% One can also define $\Bim_n$ as follows.
-% \bigpablo{Add definition of the category of framed $n$-manufolds with codim 1 normally framed submanifolds}
-% \begin{definition}
-%     Let \ldots
-% \end{definition}
-
-% \begin{definition}
-%     Let $\V \in \EAlg{n}(\Cat{1})$.
-%     We define a $\Disk(\Bim_n)$-algebra in $\V$ to be a symmetric monoïdal natural transformation
-%     % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXERpc2soXFxCKSJdLFsxLDEsIlxcRGlzayhcXG1hdGhzZntEfV5cXGZyX24pIl0sWzIsMCwiXFxDYXR7MX0iXSxbMCwxXSxbMSwyLCJcXFYiXSxbMCwyLCJcXEVudHIoLSkiLDAseyJjdXJ2ZSI6LTR9XSxbNSwxLCJBIiwwLHsic2hvcnRlbiI6eyJzb3VyY2UiOjMwLCJ0YXJnZXQiOjMwfX1dXQ==
-% \[\begin{tikzcd}
-% 	{\Disk(\Bim_n)} && {\Cat{1}} \\
-% 	& {\Disk(\mathsf{D}^\fr_n)}
-% 	\arrow[""{name=0, anchor=center, inner sep=0}, "{\Entr(-)}", curve={height=-24pt}, from=1-1, to=1-3]
-% 	\arrow[from=1-1, to=2-2]
-% 	\arrow["\V", from=2-2, to=1-3]
-% 	\arrow["A", shorten <=10pt, shorten >=10pt, Rightarrow, from=0, to=2-2]
-% \end{tikzcd}\]
-% \end{definition}
-
-% Note that, by a similar reasonning to \cite[Prop. 4.8]{AFT17}, the data of such a $\Disk(\Bim_n)$-algebra is equivalent to the data of two $\mathcal{E}_n$-algebras $X$ and $Y$, and of a $\mathcal{E}_{n-1}$-algebra in $_{X}\Bim_Y$.
-
-% By \cite[Thm. 2.43]{AFT17}, we can extend any such natural transformation to a morphism of homology theories
-% \[
-%     \Entr(-) \xto[A_*] \int_{-} \V
-% \]
-
-% Suppose additionally that we have $M^\mathsf{strat} \in \Mfld(\B)$.
-% The functor of basics $\B \to \mathsf{D}^\fr_n$ \pablo{not true} gives $M$ a smoothing $M^\mathsf{man} \in \Mfld(\mathsf{D}^\fr_n)$ which is a smooth framed $n$-manifold.
-% This smoothing also comes with a refinement map $M^\mathsf{strat} \to M^\mathsf{man}$ which induces an isomorphism
-% \[
-%     \int_{M^\mathsf{strat}} \V \simeq \int_{M^\mathsf{man}} \V 
-% \]
-
-% \begin{definition}
-%     Using the notations above, suppose additionally that:
-%     \begin{enumerate}
-%         \item we have an embedding of framed manifold $\iota \in M^\mathsf{man} \mono \mathbb{R}^n$,
-%         \item $\V$ has factors through $\Cat{1}^\sifted$, or in other words its $\mathcal{E}_n$-monoïdal tensor product $\otimes$ commutes with sifted colimits in each variables.
-%     \end{enumerate}
-%     We define the \textbf{factorization homology} of $M$ with coefficients in $A$ to be the colimit of the functor
-%     \[
-%         \Entr(M^\mathsf{strat}) \xto[A_*] \int_{M^\mathsf{strat}} \V \simeq \int_{M^\mathsf{man}} \V \xto[\iota_*] \int_{\mathbb{R}^n} \V \simeq \V
-%     \]
-%     where we identify $\V$ with the image of $\mathbb{R}^n$ under $\Disk(\mathsf{D}^\fr_n) \xto[\V] \Cat{1}$ by a slight abuse of notations.
-% \end{definition}
-
-% Clearly, we have a naturality in the choice of $\iota \in \Emb^\fr(M^\mathsf{man}, \mathbb{R}^n)$.
-
-% This definition of factorization homology is functorial to some extent, but doesn't exhibit the full functoriality.
-% Ideally, $M^\mathsf{strat}$ should be a point in some classifying space of stratifications of $\mathbb{R}^n$.
-% The construction of such a space is given in \cite{AFR18} as ${}_{\mathbb{R}^n\backslash}\Mfld^{\sfr_n}$ in order to study the cobordism hypothesis.
-% We will not need this construction here, as we only require some limited functoriality, which we spell out in the next few lemmas.
-
-% \bigpablo{Add some excision lemma: I want $\int_{M^\mathsf{strat} \times \mathbb{R}^k} A$ to be $\mathcal{E}_k$}
-
-% \begin{lemma}
-%     We have a functor of basics $\Bim_n \to \mathsf{D}^\fr_n$.
-% \end{lemma}
-
-% \subsection{Inductive Definition}
-
-% In \cite{Hau23}, Haugseng builds an inductive model for higher Morita categories, which we use here.
-% He builds a functor
-% \[
-%     \Mor \in \EAlg{1}(\Cat{1}^\sifted) \to \fCat{2}
-% \]
-

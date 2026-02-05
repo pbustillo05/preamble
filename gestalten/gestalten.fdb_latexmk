@@ -1,19 +1,19 @@
 # Fdb version 4
-["bibtex gestalten"] 1768250334.28548 "gestalten.aux" "gestalten.bbl" "gestalten" 1768250383.89454 0
+["bibtex gestalten"] 1768596304.31724 "gestalten.aux" "gestalten.bbl" "gestalten" 1768596305.98748 0
   "../mypreamble/jabref.bib" 1764864510.50363 118564 5f1620f68b53909f6bc1faba7b8bfa53 ""
   "/usr/local/texlive/2024/texmf-dist/bibtex/bst/base/alpha.bst" 1292289607 23907 a5f93555796fb564b924339521f10a7c ""
-  "gestalten.aux" 1768250383.59235 2046 483fedf4bae4797d0a79fa91c380399a "pdflatex"
+  "gestalten.aux" 1768596305.67496 2315 da0e973a24de10e666641f4180ac1d31 "pdflatex"
   (generated)
   "gestalten.bbl"
   "gestalten.blg"
   (rewritten before read)
-["pdflatex"] 1768250382.4215 "/Users/pablo/Documents/Mathematics/Current Work/65ee057abd468e08845c1349/gestalten/gestalten.tex" "gestalten.pdf" "gestalten" 1768250383.89482 0
-  "../mypreamble/a-preamble.tex" 1768067823.36724 4849 363bd8ad912f173f9fe2d70b9daa9910 ""
-  "../mypreamble/catcro.sty" 1768236514.96748 4378 c14bca773bdb88948401c169fe846c89 ""
+["pdflatex"] 1768596304.44191 "/Users/pablo/Documents/Mathematics/Current Work/65ee057abd468e08845c1349/gestalten/gestalten.tex" "gestalten.pdf" "gestalten" 1768596305.98774 0
+  "../mypreamble/a-preamble.tex" 1768522977.28712 4739 49425870b77735d504b5d9588bdac8fa ""
+  "../mypreamble/catcro.sty" 1768595155.58293 4378 5322062b322da37217ccb32fcd10cd74 ""
   "../mypreamble/mathcro.sty" 1741466965.6306 10519 f3b926ae50da9253c598909b25ba84f7 ""
   "../mypreamble/mathenv.sty" 1712186310.01491 4234 0ace1a625e05e32438731ae6c9a5419f ""
   "../mypreamble/thmenv.sty" 1759418137.70352 3987 413db68e4e2ed5fb929a7c4bedf62777 ""
-  "/Users/pablo/Documents/Mathematics/Current Work/65ee057abd468e08845c1349/gestalten/gestalten.tex" 1768250382.21511 6577 3efb9cf44ff6dc690be988fd3028c55c ""
+  "/Users/pablo/Documents/Mathematics/Current Work/65ee057abd468e08845c1349/gestalten/gestalten.tex" 1768596302.33212 6735 3538503fbbef0e932d57c9894dc9dd55 ""
   "/Users/pablo/Library/texlive/2024/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.600pk" 1741709414.30975 6964 02dbca291a645cb6d6f4b887db5e2ec3 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -298,10 +298,10 @@
   "/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1717875923 5483212 72bb095103e470c3fea3a37d602f6865 ""
   "/usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1717875975 8238354 bcf4b91483e869a97566fa27937bfb97 ""
   "/usr/local/texlive/2024/texmf.cnf" 1710266656 577 e590dabc9e28c5b61546e15f63eebcdf ""
-  "gestalten.aux" 1768250383.59235 2046 483fedf4bae4797d0a79fa91c380399a "pdflatex"
-  "gestalten.bbl" 1768250334.38978 160 f63de6a417d245ffee9eaa7a6264fe9f "bibtex gestalten"
-  "gestalten.tex" 1768250382.21511 6577 3efb9cf44ff6dc690be988fd3028c55c ""
-  "gestalten.toc" 1768250383.59357 355 6b71e4a1e332eb589d9f18a1542f979b "pdflatex"
+  "gestalten.aux" 1768596305.67496 2315 da0e973a24de10e666641f4180ac1d31 "pdflatex"
+  "gestalten.bbl" 1768596304.43753 160 f63de6a417d245ffee9eaa7a6264fe9f "bibtex gestalten"
+  "gestalten.tex" 1768596302.33212 6735 3538503fbbef0e932d57c9894dc9dd55 ""
+  "gestalten.toc" 1768596305.67645 444 9c423af5e82769f709dd2e0c5676360c "pdflatex"
   (generated)
   "gestalten.aux"
   "gestalten.log"

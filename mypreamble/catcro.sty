@@ -1,5 +1,6 @@
 % GENERIC CATEGORIES
 \newcommand{\cat}[1]{\mathcal{#1}}
+\newcommand{\operad}[1]{\underline{\mathcal{#1}}}
 \newcommand{\dom}{\mathsf{dom}}
 \newcommand{\cod}{\mathsf{cod}}
 \newcommand{\ho}{\mathcal{H}o}
@@ -47,12 +48,12 @@
     }
 
 % SPECIFIC CATEGORIES
-\newcommand{\Fin}{\mathbf{Fin}}
+\newcommand{\Fin}{\mathbf{FinSet}}
 \newcommand{\Set}{\mathbf{Set}}
 \newcommand{\Top}{\mathbf{Top}}
 \newcommand{\Spa}{\mathcal{S}}
 \newcommand{\Spe}{\mathcal{S}p}
-
+\DeclareMathOperator{\Psh}{\mathcal{P}sh}
 \newcommand{\Cat}[1]{\mathbf{Cat}_{(\infty,#1)}}
 \newcommand{\fCat}[1]{\mathbf{fCat}_{(\infty,#1)}}
 \newcommand{\PrL}{\mathbf{Pr}^{L}}
@@ -63,48 +64,30 @@
 \DeclareMathOperator{\SubAdj}{\mathsf{Sub}}
 \DeclareMathOperator{\Mor}{\mathbf{Mor}}
 \DeclareMathOperator{\Mod}{\mathbf{Mod}}
-\newcommand{\Bim}{\mathcal{B}\mathsf{imod}}
-\newcommand{\Act}{\mathbf{Act}}
 
 \DeclareMathOperator{\End}{\mathbf{End}}
 \DeclareMathOperator{\Aut}{\mathbf{Aut}}
-\newcommand{\EAlg}[1]{\mathbf{Alg}_{\mathcal{E}^{#1}}}
+\newcommand{\EAlg}[1]{\mathbf{Alg}_{\mathcal{E}_{#1}}}
 \newcommand{\Alg}[1]{\mathbf{Alg}_{{#1}}}
-\newcommand{\HC}[1]{\mathbf{HC}_{\mathcal{E}^{#1}}}
+\newcommand{\HC}[1]{\mathbf{HC}_{\mathcal{E}_{#1}}}
 
 %Stratified Spaces
 \DeclareMathOperator{\Emb}{\mathsf{Emb}}
-\DeclareMathOperator{\Entr}{\mathsf{Entr}}
-
-% \newcommand{\sfr}{\mathsf{sfr}}
-% \DeclareMathOperator{\Conf}{Conf}
-\DeclareMathOperator{\Unzip}{Unzip}
-\DeclareMathOperator{\Link}{Link}
-% \DeclareMathOperator{\unzip}{unzip}
-% \DeclareMathOperator{\intor}{int}
-% \newcommand{\BarStrat}{\mathsf{Bar}}
-
-\DeclareMathOperator{\Bsc}{\mathcal{B}\mathsf{sc}}
-\DeclareMathOperator{\Ran}{\mathcal{R}an}
-\DeclareMathOperator{\ZBsc}{\mathcal{ZB}sc}
-\DeclareMathOperator{\Mfld}{\mathcal{M}fld}
-\DeclareMathOperator{\Snglr}{\mathcal{S}nglr}
-\DeclareMathOperator{\Strat}{\mathcal{S}trat}
-\DeclareMathOperator{\snglr}{Snglr}
-\DeclareMathOperator{\sttop}{StTop}
+\DeclareMathOperator{\Unzip}{\mathsf{Unzip}}
+\DeclareMathOperator{\Link}{\mathsf{Link}}
+\DeclareMathOperator{\Snglr}{\mathcal{S}\mathsf{nglr}}
+\DeclareMathOperator{\snglr}{\mathsf{Snglr}}
+\DeclareMathOperator{\Mfld}{\mathcal{M}\mathsf{fld}}
+\DeclareMathOperator{\mfld}{\mathsf{Mfld}}
 \DeclareMathOperator{\disk}{\mathsf{Disk}}
 \DeclareMathOperator{\Disk}{\mathcal{D}\mathsf{isk}}
-\DeclareMathOperator{\Psh}{\mathcal{P}sh}
-\DeclareMathOperator{\Core}{Core}
-\DeclareMathOperator{\OK}{Open^{\mathcal{K}}}
+\DeclareMathOperator{\uMfld}{\underline{\mathcal{M}\mathsf{fld}}}
+\DeclareMathOperator{\umfld}{\underline{\mathsf{Mfld}}}
+\DeclareMathOperator{\udisk}{\underline{\mathsf{Disk}}}
+\DeclareMathOperator{\uDisk}{\underline{\mathcal{D}\mathsf{isk}}}
 
-\DeclareMathOperator{\ran}{\mathsf{Ran}}
-\DeclareMathOperator{\strat}{\mathsf{Strat}}
 
-\DeclareMathOperator{\reln}{/\mathbb{R}^n}
-\DeclareMathOperator{\Refi}{\mathcal{R}ef}
-\DeclareMathOperator{\Bun}{\mathcal{B}\mathsf{un}}
-
+%%%%%%%%%%%%%% OTHER PROJECTS %%%%%%%%%%%%%%
 %% BORD
 \DeclareMathOperator{\PBord}{\mathcal{P}Bord}
 \DeclareMathOperator{\Bord}{\mathcal{B}ord}
@@ -114,14 +97,10 @@
 \newcommand{\dRing}{\mathcal{E}^{\infty}\textnormal{Ring}^{\geq 0}}
 \newcommand{\qcoh}{\textnormal{QCoh}}
 \DeclareMathOperator{\st}{\mathcal{S}t}
-\DeclareMathOperator{\pst}{\mathcal{P}st}
-\newcommand{\amod}{\textnormal{Mod}}
+\DeclareMathOperator{\pst}{\mathcal{P}st} 
 \newcommand{\aff}{\textnormal{Aff}}
 \DeclareMathOperator{\Spec}{Spec}
-
-%
 \newcommand{\Int}{\mathsf{Int}}
-
 %%% QUAL
 \newcommand{\Norm}{\mathsf{Norm}}
 \newcommand{\Thom}{\mathsf{Thom}}
@@ -132,12 +111,9 @@
 \newcommand{\ob}{\mathsf{ob}}
 \newcommand{\mor}{\mathsf{mor}}
 \newcommand{\fib}{\mathsf{fib}}
-
 %%% INVERTIBLE COB - COMPLETE BORD
 \newcommand{\RDiff}{\mathsf{Diff}^{\mathbb{R}}}
 \newcommand{\Diff}{\mathsf{Diff}}
 \newcommand{\InvCob}{\mathsf{InvCob}}
-
-
 %%% GENERAL
 \newcommand{\sgn}{\mathsf{sign}}

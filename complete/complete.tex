@@ -1,10 +1,10 @@
 \documentclass{article}
-\input{mypreamble/a-preamble}
+\input{../mypreamble/a-preamble}
 \usepackage{mathdots}
 \usepackage{bookmark}
 
 %%%%% TITLE PAGE
-\title{Complete Bordism Categories}
+\title{Univalent Bordism Categories are Controlled}
 \author{Pablo Bustillo Vazquez}
 
 \begin{document}
@@ -13,94 +13,168 @@
 \tableofcontents
 \newpage
 
-\section{Preliminaries}
+\section{Definitions}
 
-I need to understand the completion of a flagged higher category.
-This will depend on the underlying model.
-What model do I want for higher bordism categories?
-As far as I understand, in the literature no one ever constructed a "completion" functor explictly except Rezk for bisimplial sets.
-Maybe this means I should use bisimplicial sets as my model.
-It might also make the arguments easier to follow.
-
-\begin{lemma}
-    The completion of a 
-\end{lemma}
-
-\section{One Cobordism Level}
-
-Let $\RDiff(M, N) \subset \Diff(M \times \mathbb{R}, N \times \mathbb{R})$ be the subset on the diffeomorphisms that preserves neighbourhoods of $\pm \infty$.
-More specifically, we require that $\phi \inset \RDiff(M, N)$ if it satisfies:
-\[
-\begin{cases}[l]
-    \forall a \inset \mathbb{R}, \exists b \inset \mathbb{R}, \qquad \phi(M \times (-\infty, b]) \subset N \times (-\infty, a] \\
-    \forall a \inset \mathbb{R}, \exists b \inset \mathbb{R}, \qquad \phi(M \times [b, \infty)) \subset N \times [a, \infty)
-\end{cases}
-\]
-
-We let $\InvCob(M, N)$ be the space whose objects are \ldots
-
-\begin{lemma}
-    Let $M,N$ be compact.
-    The canonical map $\InvCob(M, N) \to \RDiff(M, N)$ is a weak equivalence.
-\end{lemma}
-\begin{proof}
+\begin{definition}[Pre-Bordism Category]
+    We define an $(n+1)$-fold simplicial set $\PBord^n$ as follows.
+    The set $\PBord^n_{\mathbf{i},j}$ is given by the set of
     \begin{enumerate}
-        \item \textbf{Surjectivity pn $\pi_n$:}  Let us consider $(S^n, \bullet) \to \RDiff(M, N)$ seen as an $\mathbb{R}^n$-family of diffeomorphisms $(M \times \mathbb{R}) \times \mathbb{R}^n \xto[f] (N \times \mathbb{R}) \times \mathbb{R}^n$, which is the identity on $|v| \geq 1$ for $v$ the second (vector) parameter.
-        We can find $a < b < c$ such that $\mathbf{u}(M \times \{b\} \times \mathbb{R}^n) \subset (a, c)$ where $f = (g, \mathbf{u}, \mathbf{v})$.
-        We can now "cut" and consider the intersection $f(M \times (-\infty, b] \times \mathbb{R}^n) \bigcap N \times [a, \infty) \times \mathbb{R}^n$.
-        We need to show the canonical projection to $\mathbb{R}^n$ is a submersion, and hence a fiber bundle, and that this is actually an inverse and that this is independent of the choices made.\pablo{left for later}
-
-        \item \textbf{Injectivity on $\pi_n$:} Suppose we have $H \in (S^n, \bullet)\times [0,1] \to \RDiff(M, M)$. 
-        We show that the two preimages from the construction above are equivalent.
-        We pick once again $a < b < c$.
-        The $S^n\times[0,1]$ family of embeddings of $M \times \{b\}$ can be extended into diffeomorphisms by isotopy extensions.
-
-    \end{enumerate}
-\end{proof}
-
-\subsection{Completion}
-
-Fix $d \geq 0$. We let $\Bord$ be the collection of:
-\begin{enumerate}
-    \item a fiber bundle $W \to \Delta^j$ with $d$-dimensional fibers,
-    \item $i+1$ sub-fiber bundles $W_0, \ldots, W_i$,
-    \item an element in $\pi_0(\textnormal{proper embeddings of }\mathbb{R}\mono W_0)$.
-\end{enumerate}
-such that at each fiber above $x \inset \Delta^j$, we can identify (non-canonically, this is not part of the data) this as a composition of $j$ cobordisms, with the $-\infty$ direction of the proper embedding corresponding to the domain of the composition.
-
-In particular, in the case $i = 0$, we obtain a single fiber bundle $W = W_0 \to \Delta^j$ where each fiber above some $x$ can be (non-canonically) identified with $K_x \times \mathbb{R}$ for some compact manifold $K_x$ with proper embedding $[\{\bullet\}\times 1_\mathbb{R}]$.
-
-
-\begin{definition}
-    We define a bisimplicial set $\PBord^i_j$ as follows:
-    \begin{enumerate}
-        \item Smooth maps $(a_k, b_k \inset \Delta^j_e \to \mathbb{R})_{0 \leq k \leq i}$ such that
+        \item Smooth maps $\left((a^l_k, b^l_k \inset \Delta^j_e \to \mathbb{R})_{0 \leq k \leq i_l}\right)_{1 \leq l \leq n}$ such that
         \[
             \begin{cases}
-                a_k < b_k \\
-                a_{k-1} \leq a_k \\
-                b_{k-1} \leq b_k 
+                a^l_k < b^l_k \\
+                a^l_{k-1} \leq a^l_k \\
+                b^l_{k-1} \leq b^l_k 
             \end{cases}
         \]
-        \item $M$ compact $(i+j)$-dimensional submanifold of $\mathbb{R}^\infty \times (a_0, b_k) \underline{\times} \Delta^j_e$ such that:
+        \item $M$ compact $(n+j)$-dimensional submanifold of $\mathbb{R}^\infty \times \left(\prod_{1 \leq l \leq n} (a^l_0, b^l_{i_l})\right) \underline{\times} \Delta^j_e$ such that:
         \begin{enumerate}
-            \item the composition $\pi \in M \mono V \times (a_0, b_i) \underline{\times} \Delta^j_e \epi (a_0, b_k) \underline{\times} \Delta^j_e$ is proper,
-            \item its composition with the projection onto $\Delta^j_e$ is a submersion which is trivial on the extended part of the simplex,
-            \item $\pi$ is a submersion on the preimage of $\cup_{0 \leq k \leq i} (a_k, b_k) \underline{\times} \Delta^j_e$.
+            \item \textbf{Family:} the composition $\pi \in M \mono \mathbb{R}^\infty \times \left(\prod_{1 \leq l \leq n} (a^l_0, b^l_{i_l})\right) \underline{\times} \Delta^j_e \epi \left(\prod_{1 \leq l \leq n} (a^l_0, b^l_{i_l})\right) \underline{\times} \Delta^j_e$ is proper,
+                and the further projection to $\Delta^j_e$ is a submersion which is trivial on the extended part of the simplex,
+            \item \textbf{Reducedness:} for every $1 \leq d\leq n$ and every $0 \leq k \leq i_d$, $M_{\mid} \epi \left( (a^d_k, b^d_k) \times \prod_{d \leq l \leq n} (a^l_0, b^l_{i_l}) \right) \underline{\times} \Delta^j_e$ is a submersion,
         \end{enumerate}
     \end{enumerate}
 \end{definition}
 
-\section{Space of Objects}
+\subsection{Tameness}
 
-Take the fully-extended $(\infty, d)$-version of $\Bord$.
-What is the space of objects?
+\begin{definition}[End Space]
+    Let $W$ be a topologial space.
+    The \textbf{end space} $e(W)$ of $W$ is the space of \textbf{proper paths} $[0, \infty) \to W$.
+\end{definition}
 
-It should be roughly $B\Diff^{\mathbb{R}^n}(\bullet)$ of diffeomorphisms of the form $x + O(1)$.
-What is the homotopy type of this space?
+\begin{definition}[Ends]
+    Let $W$ be a topologial space.
+    A neighbourhood of infinity in $W$ is an open subset $U \subset W$ that contains the complenent of a compact.
+    An \textbf{end} is an equivalence class of decreasing sequences of neighbourhood of infinity $\ldots \subset U_n \subset \ldots \subset U_1 \subset W$ such that $\bigcap_{n \geq 1} \overline{U_n} = \emptyset$.
+    They're subject to the obvious equivalence relation.
+\end{definition}
 
-\begin{conjecture}
-    In the PL-case, this space is contractible.
-\end{conjecture}
+\begin{definition}[Tame Ends]
+    And end is \textbf{tame} if the inclusions $U_i \mono U_j$ are homotopy equivalences for all $i < j$.
+\end{definition}
 
+\subsection{Control Topology in Families}
+
+\begin{definition}[Controlled Famillies, I]
+    Let $X$ be a smooth manifold and $I$ a compact manifold with boundary.
+    Let $W \subset \mathbb{R}^\infty \times I^o \times X$ be a submanifold such that
+    \begin{enumerate}
+        \item $W \to X$ is a smooth fiber bundle,
+        \item for all $t \inset X$, $W_t \epi I$ is a proper submersion,
+    \end{enumerate}
+    We say that $W \to I \times X$ is \textbf{controlled} in the $I$-direction if
+        it extends to a topological subspace $\overline{W} \subset \mathbb{R}^\infty \times I \times X$ such that
+            $\overline{W}^o = W$ and
+            for all $t \inset X$, the projection $\partial \overline{W}_t \simeq \partial I$ is a homeomorphism.
+\end{definition}
+
+I think controlled topology should give ways to re-write this.
+Firslty, it should be equivalent to $O(1)$-variance. \pablo{formulate a precise result}
+Secondly, for sufficiently high dimensions, this should become an algebraic condition.
+This second aspect might help proving that the space of objects of $\Bord^n$ is contractible in the PL-case.
+
+\begin{definition}[Controlled Famillies, II]
+    Some definition using $O(1)$-variance.
+\end{definition}
+
+\subsection{Univalence is Control}
+
+\begin{definition}
+    We define an $(n+1)$-fold simplicial set $\Bord^n$ as follows.
+    The set $\Bord^n_{\mathbf{i},j}$ is given by the set of
+    \begin{enumerate}
+        \item Continuous maps $\left((a^l_k, b^l_k \inset \Delta^j_e \to \mathbb{R})_{0 \leq k \leq i_l}\right)_{1 \leq l \leq n}$ such that
+        \[
+            \begin{cases}
+                a^l_k < b^l_k \\
+                a^l_{k-1} \leq a^l_k \\
+                b^l_{k-1} \leq b^l_k 
+            \end{cases}
+        \]
+        \item $M$ compact $(n+j)$-dimensional submanifold of $\mathbb{R}^\infty \times \left(\prod_{1 \leq l \leq n} (a^l_0, b^l_{i_l})\right) \underline{\times} \Delta^j_e$ such that:
+        \begin{enumerate}
+            \item \textbf{Family:} the composition $\pi \in M \mono \mathbb{R}^\infty \times \left(\prod_{1 \leq l \leq n} (a^l_0, b^l_{i_l})\right) \underline{\times} \Delta^j_e \epi \Delta^j_e$ is a smooth fiber bundle,
+            \item \textbf{Reducedness:} for every $t \inset \Delta^j_e$, $1 \leq d\leq n$ and every $0 \leq k \leq i_d$, $M_t \epi (a^d_k(t), b^d_k(t)) \times \prod_{d \leq l \leq n} (a^l_0(t), b^l_{i_l}(t))$ is a proper submersion of codimension $d-1$,
+            \item \textbf{Control:} the $t$-families above of proper submersions are controlled in the categorical directions.
+        \end{enumerate}
+    \end{enumerate}
+\end{definition}
+
+\begin{remark}[Inner Control is Guaranteed]
+    The control property should only be necessary for $k = 0$ and $k = i_d$.
+    For an ``inner'' $k$, I expect that one can quotient out the rest of $W$ to obtain the control extension. \pablo{to be formalized}
+    More precisely, suppose one has $a_0 < a_k$ and $b_k < b_{i_d}$.
+    Then one can consider the quotient of $\mathbb{R}^\infty \times \left(\prod_{1 \leq l \leq n} (a^l_0, b^l_{i_l})\right) \underline{\times} \Delta^j_e$ by \ldots
+\end{remark}
+
+\begin{remark}[Continuity vs Smoothness]
+    It seems to me like the $a,b$ maps only need to be continuous.
+    It would be interesting to see if more regularity arises in my constructions.
+\end{remark}
+
+\begin{remark}[Looping]
+    One can replace $(b)$ by ``proper submersion of codimension $d$'' and this becomes $\Omega^d \Bord^n$ where objects are compact $d$ dimensional manifolds.
+    It's sufficient to treat the $d=0$ case as it contains all other cases through this observation.
+\end{remark}
+
+\begin{theorem}
+    $\Bord^n$ is the univalent completion of $\PBord^n$.
+\end{theorem}
+
+\subsection{Quinn's Theorem}
+
+I think Quinn's theorem should show how to compute the homotopy type of the object space of $\Bord^n$ in terms of controlled topology.
+In particular, existence of PL-manifold structures on mapping cylinders is eactly what is needed to then use Alexander's trick and show contractibility.
+
+\section{Univalence}
+
+\begin{proposition}\label{prop:univalent_equivalence}
+    Let $X \to Y$ be a morphism of $n$-fold Segal spaces.
+    Then it is a univalent equivalence if and only if:
+    \begin{enumerate}
+        \item $X^\simeq \to Y^\simeq$ is a weak homotopy equivalence of spaces
+        \item for $1 \leq k \leq n$, we have homotopy pullbacks
+        \begin{equation}\label{eq:k-morphism-spaces}
+            % https://q.uiver.app/#q=WzAsNCxbMCwxLCJbXFxwYXJ0aWFsIGNfaywgWF0iXSxbMSwxLCJbXFxwYXJ0aWFsIGNfaywgWV0iXSxbMSwwLCJZX2siXSxbMCwwLCJYX2siXSxbMCwxXSxbMiwxXSxbMywwXSxbMywyXSxbMywxLCIiLDEseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XV0=
+            \begin{tikzcd}
+                {X_k} & {Y_k} \\
+                {[\partial c_k, X]} & {[\partial c_k, Y]}
+                \arrow[from=1-1, to=1-2]
+                \arrow[from=1-1, to=2-1]
+                \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+                \arrow[from=1-2, to=2-2]
+                \arrow[from=2-1, to=2-2]
+            \end{tikzcd}
+        \end{equation}
+    \end{enumerate}
+\end{proposition}
+
+This should follow from "ITERATED SPANS AND CLASSICAL TOPOLOGICAL FIELD THEORIES" by Haugseng (section 7) and from Lurie's work on "distributors" in "$(\infty,2)$-Categories and the Goodwillie Calculus I".
+Easy inductive argument.
+
+\textbf{Note}: one also has John's formula for the completion with $\Theta$-spaces, if necessary (which generalizes the OG formula from Rezk).
+The advantage of this formula is that (maybe) it makes it so one only has to do the zig-zag thing once.
+But could be very difficult to actually work out the homotopy colimits.
+
+\section{Proof of the Main Theorem}
+
+\begin{remark}[Proof Strategy]
+    The proof will be divided in two main steps:
+    \begin{enumerate}
+    \item Show Univalence: this should involve construction the zig-zag with the invertible data, and show this already appears as a controlled object.
+    \item use \autoref{prop:univalent_equivalence} to show it's a completion. This involves:
+    \begin{enumerate}
+        \item tbd
+        \item second part should be easier?
+    \end{enumerate}
+\end{enumerate}
+
+\begin{proof}[of the equivalences of homs]
+    
+\end{proof}
+\end{remark}
+
+\bibliographystyle{alpha}
+\bibliography{../mypreamble/jabref}
 \end{document}

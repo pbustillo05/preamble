@@ -12,45 +12,45 @@ Warning--empty journal in HHLN24
 Warning--empty note in Joy97
 Warning--empty journal in Lur09a
 Warning--empty journal in Ram24a
-You've used 28 entries,
+You've used 29 entries,
             2543 wiz_defined-function locations,
-            739 strings with 8144 characters,
-and the built_in function-call counts, 10111 in all, are:
-= -- 1024
-> -- 437
-< -- 13
-+ -- 149
-- -- 140
-* -- 748
-:= -- 1699
-add.period$ -- 86
-call.type$ -- 28
-change.case$ -- 161
+            743 strings with 8215 characters,
+and the built_in function-call counts, 10381 in all, are:
+= -- 1047
+> -- 445
+< -- 14
++ -- 152
+- -- 142
+* -- 761
+:= -- 1746
+add.period$ -- 89
+call.type$ -- 29
+change.case$ -- 165
 chr.to.int$ -- 25
-cite$ -- 37
-duplicate$ -- 382
-empty$ -- 727
-format.name$ -- 181
-if$ -- 1996
-int.to.chr$ -- 4
+cite$ -- 38
+duplicate$ -- 398
+empty$ -- 752
+format.name$ -- 185
+if$ -- 2051
+int.to.chr$ -- 5
 int.to.str$ -- 0
-missing$ -- 24
-newline$ -- 145
-num.names$ -- 84
-pop$ -- 138
+missing$ -- 26
+newline$ -- 150
+num.names$ -- 87
+pop$ -- 147
 preamble$ -- 1
-purify$ -- 191
+purify$ -- 197
 quote$ -- 0
-skip$ -- 322
+skip$ -- 330
 stack$ -- 0
-substring$ -- 613
-swap$ -- 20
-text.length$ -- 13
-text.prefix$ -- 13
+substring$ -- 620
+swap$ -- 21
+text.length$ -- 14
+text.prefix$ -- 14
 top$ -- 0
-type$ -- 220
+type$ -- 224
 warning$ -- 9
-while$ -- 98
-width$ -- 31
-write$ -- 352
+while$ -- 100
+width$ -- 33
+write$ -- 364
 (There were 9 warnings)

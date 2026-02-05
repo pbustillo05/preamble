@@ -31,6 +31,7 @@
 \usepackage{pgfcore}
 \usepackage{tikz-cd}     %advanced and rigorous diagrams
 \usepackage{pgfplots}
+\usepackage{aliascnt}    %to have correct referencing of theorems in thmenv.sty 
 
 %%%%% MY SPECIAL PACKAGES
 \usepackage{../mypreamble/mathenv}     %improves on AMSmath's equation (path resolvable from main document)
@@ -53,19 +54,20 @@
         linktoc=all,   %both section and page numbers are links
         hidelinks   %links (color+border) are hidden
     }
-\providecommand*{\definitionautorefname}{Definition}
-\providecommand*{\notationautorefname}{Notation}
-\providecommand*{\conventionautorefname}{Convention}
-\providecommand*{\conjectureautorefname}{Conjecture}
-\providecommand*{\assumptionautorefname}{Assumption}
-\providecommand*{\remarkautorefname}{Remark}
-\providecommand*{\observationautorefname}{Observation}
-\providecommand*{\lemmaautorefname}{Lemma}
-\providecommand*{\propositionautorefname}{Proposition}
-\providecommand*{\corollaryautorefname}{Corollary}
-\providecommand*{\exampleautorefname}{Example}
-\providecommand*{\exerciseautorefname}{Exercise}
-\providecommand*{\openquestionautorefname}{Open Question}
+
+\def\definitionautorefname{Definition}
+\def\notationautorefname{Notation}
+\def\conventionautorefname{Convention}
+\def\conjectureautorefname{Conjecture}
+\def\assumptionautorefname{Assumption}
+\def\remarkautorefname{Remark}
+\def\observationautorefname{Observation}
+\def\lemmaautorefname{Lemma}
+\def\propositionautorefname{Proposition}
+\def\corollaryautorefname{Corollary}
+\def\exampleautorefname{Example}
+\def\exerciseautorefname{Exercise}
+\def\openquestionautorefname{Open Question}
 
 %%%%% OUTPUT LAYOUT PACKAGES
 \usepackage{geometry}     %to set margins
@@ -78,7 +80,7 @@
 }
 %% Clearpage before sections but not before TOC
 \let\oldsection\section
-\renewcommand\section{\clearpage\oldsection}
+% \renewcommand\section{\clearpage\oldsection}
 \makeatletter
 \renewcommand\tableofcontents{%
     \oldsection*{\contentsname\@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}}\@starttoc{toc}%

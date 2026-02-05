@@ -79,9 +79,12 @@
 %PROBLEMS: systematic "Underfull \hbox (badness 10000) detected" when "enumerate" inside such a theorem environment => doesn't look bad so it's probably fine
 
 \newtheorem{lemma}{\noindent Lemma}[section]
-\newtheorem{proposition}[lemma]{\noindent Proposition}
-\newtheorem{theorem}[lemma]{\noindent Theorem}
-\newtheorem{corollary}{\noindent Corollary}[lemma]
+\newaliascnt{proposition}{lemma}
+\newtheorem{proposition}[proposition]{\noindent Proposition}
+\newaliascnt{theorem}{lemma}
+\newtheorem{theorem}[theorem]{\noindent Theorem}
+\newaliascnt{corollary}{lemma}
+\newtheorem{corollary}[corollary]{\noindent Corollary}
 
 \def\exercise{}
 \@ifundefined{exercisename}{\def\exercisename{Exercise}}{}
