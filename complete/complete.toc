@@ -5,3 +5,4 @@
 \contentsline {subsection}{\numberline {1.4}Quinn's Theorem}{3}{subsection.1.4}%
 \contentsline {section}{\numberline {2}Univalence}{3}{section.2}%
 \contentsline {section}{\numberline {3}Proof of the Main Theorem}{3}{section.3}%
+\contentsline {section}{\numberline {4}The Space of Objects}{4}{section.4}%

@@ -145,6 +145,27 @@
       }%
       \copy0 %
     }
+\newcommand*{\revlongeq}{\mathrel{\rev@isomorphism}}
+    \newcommand*{\rev@isomorphism}{%
+      % Calculate the amount of moving \sim up as in \simeq
+      \sbox0{$\simeq$}%
+      \sbox1{$\sim$}%
+      \dimen@=\ht0 %
+      \advance\dimen@ by -\ht1 %
+      %
+      % Compose the two symbols
+      \sbox0{%
+        \lower1.9\dimen@\hbox{%
+          $\longleftarrow$%
+        }%
+      }%
+      \rlap{%
+        \hbox to \wd0{%
+          \hfill\raise\dimen@\hbox{$\sim$}\hfill
+        }%
+      }%
+      \copy0 %
+    }
 \newcommand{\longmono}{%
     \mkern-1mu \DOTSB \lhook \joinrel \longrightarrow \mkern-1mu}
 \newcommand{\longepi}{%

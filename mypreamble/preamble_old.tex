@@ -35,10 +35,8 @@
 
 %%%%% MY SPECIAL PACKAGES
 \usepackage{../mypreamble/mathenv}     %improves on AMSmath's equation (path resolvable from main document)
-\usepackage{../mypreamble/thmenv}     %replaces the AMSthm package (path resolvable from main document)
 
 %%%%% MATH MACROS AND FONT PACKAGES
-%\usepackage{fontspec}
 \usepackage{../mypreamble/mathcro}
 \usepackage{../mypreamble/catcro}
 
@@ -54,20 +52,7 @@
         linktoc=all,   %both section and page numbers are links
         hidelinks   %links (color+border) are hidden
     }
-
-\def\definitionautorefname{Definition}
-\def\notationautorefname{Notation}
-\def\conventionautorefname{Convention}
-\def\conjectureautorefname{Conjecture}
-\def\assumptionautorefname{Assumption}
-\def\remarkautorefname{Remark}
-\def\observationautorefname{Observation}
-\def\lemmaautorefname{Lemma}
-\def\propositionautorefname{Proposition}
-\def\corollaryautorefname{Corollary}
-\def\exampleautorefname{Example}
-\def\exerciseautorefname{Exercise}
-\def\openquestionautorefname{Open Question}
+\usepackage{../mypreamble/thmenv}     %replaces the AMSthm package (path resolvable from main document)
 
 %%%%% OUTPUT LAYOUT PACKAGES
 \usepackage{geometry}     %to set margins

@@ -3,6 +3,9 @@
 \usepackage{mathdots}
 \usepackage{bookmark}
 
+\newcommand{\PL}{\mathrm{PL}}
+\renewcommand{\O}{\mathrm{O}}
+
 %%%%% TITLE PAGE
 \title{Univalent Bordism Categories are Controlled}
 \author{Pablo Bustillo Vazquez}
@@ -118,7 +121,7 @@ This second aspect might help proving that the space of objects of $\Bord^n$ is 
     It's sufficient to treat the $d=0$ case as it contains all other cases through this observation.
 \end{remark}
 
-\begin{theorem}
+\begin{theorem}\label{thm:main}
     $\Bord^n$ is the univalent completion of $\PBord^n$.
 \end{theorem}
 
@@ -174,6 +177,24 @@ But could be very difficult to actually work out the homotopy colimits.
     
 \end{proof}
 \end{remark}
+
+\section{The Space of Objects}
+
+\begin{theorem}
+    Assuming the Cobordism Hypothesis and the $\PL$-Schoenflies Conjecture (in dimension $4$),, 
+\end{theorem}
+
+\begin{lemma}
+    Assuming the $\PL$-Schoenflies Conjecture (in dimension $4$), the space of objects of $\Bord^n$ is $\PL(n)/\O(n)$.
+\end{lemma}
+
+\begin{lemma}
+    Assuming the $\PL$-Schoenflies Conjecture (in dimension $4$), the space of objects of $\Bord^n_\PL$ is contractible.
+\end{lemma}
+\begin{proof}
+    We can identify the space of objects with the space of controlled PL-homeomorphisms of $\mathbb{R}^n$, which we denote $X$.
+    We show that the map $\PL_\partial(D^n) \to X$ is a trivial Kan fibration.
+\end{proof}
 
 \bibliographystyle{alpha}
 \bibliography{../mypreamble/jabref}

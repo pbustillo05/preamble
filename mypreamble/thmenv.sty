@@ -1,7 +1,9 @@
-%%%%% DEFINITION AND REMARK ENVIRONMENTS LAYOUT (using amsthm)
-\usepackage{amsthm}   %theorem environments
+\ProvidesPackage{../mypreamble/thmenv}
 
-\usepackage[framemethod=tikz]{mdframed}     %bars left to def/rem, from Quiangru but has bad break yellow warning problem
+%%%%% PACKAGES
+\usepackage{amsthm}
+\usepackage{aliascnt}
+\usepackage[framemethod=tikz]{mdframed}    %bars left to def/rem, from Quiangru but has bad break yellow warning problem
     \mdfdefinestyle{leftbar}{
       linewidth=1.5pt,
       linecolor=gray,
@@ -14,41 +16,65 @@
       innerbottommargin=0pt
     }
 
+%%%%% DEFINITION ENVIRONMENTS
+% Usage: \NewDefinitionAliased{environment_name}{Display Name}
+\newcommand{\NewDefinitionAliased}[2]{%
+    \newaliascnt{#1}{definition}           % Create alias counter
+    \newtheorem{#1}[#1]{#2}             % Define theorem using alias
+    \aliascntresetthe{#1}               % Reset logic
+    \expandafter\def\csname #1autorefname\endcsname{#2} % Set autoref name
+    \surroundwithmdframed[style=leftbar]{#1}    % Apply mdframed style
+}
+
 \theoremstyle{definition}
-\begingroup
+    %% Initialization
     \newtheorem{definition}{Definition}[section]
-    \newtheorem{convention}{Convention}[section]
-    \newtheorem{notation}[convention]{Notation}
-    \newtheorem{conjecture}{Conjecture}[section]
-    \newtheorem{assumption}{Assumption}[section]
-\endgroup
-\surroundwithmdframed[style=leftbar]{definition}
-\surroundwithmdframed[style=leftbar]{convention}
-\surroundwithmdframed[style=leftbar]{conjecture}
-\surroundwithmdframed[style=leftbar]{assumption}
-\surroundwithmdframed[style=leftbar]{notation}
+        \def\definitionautorefname{Definition}
+        \surroundwithmdframed[style=leftbar]{definition}
+    %% Aliases
+    \NewDefinitionAliased{convention}{Convention}
+    \NewDefinitionAliased{notation}{Notation}
+    \NewDefinitionAliased{conjecture}{Conjecture}
+    \NewDefinitionAliased{assumption}{Assumption}
 
+%%%%% REMARK ENVIRONMENTS
+% Usage: \NewRemarkAliased{environment_name}{Display Name}
+\newcommand{\NewRemarkAliased}[2]{%
+    \newaliascnt{#1}{remark}           % Create alias counter
+    \newtheorem{#1}[#1]{#2}             % Define theorem using alias
+    \aliascntresetthe{#1}               % Reset logic
+    \expandafter\def\csname #1autorefname\endcsname{#2} % Set autoref name
+}
 \theoremstyle{remark}
-\begingroup
     \newtheorem{remark}{Remark}[section]
-    \newtheorem{construction}[remark]{Construction}
-    \newtheorem{observation}[remark]{Observation}
-\endgroup
+        \def\remarkautorefname{Remark}
+    \NewRemarkAliased{construction}{Construction}
+    \NewRemarkAliased{observation}{Observation}
 
-%%%% THEOREM ENVIRONMENTS LAYOUT (using thmbox,boites) => could be worth it to just copy what I want from the package
+%%%% THEOREM ENVIRONMENTS
+%% Custom Style for Theorem Environments
 \usepackage{calc}
 \usepackage{thmbox}
-\thmboxoptions{headstyle={\bfseries#1 #2~},thickness=0.6pt, cut=false}
+    \thmboxoptions{headstyle={\bfseries#1 #2~},thickness=0.6pt, cut=false}
 \usepackage{boites}
 
 \renewcommand\thmbox@titlestyle[1]{(#1)}
 \newlength{\temp@thmbox@emul}
+\def\thmbox@blankname{blank}
+\def\@gobbleparen(#1)#2\@nil{#1}
 
 \def\thmbox@begin#1#2#3{%
     \ifhmode\unskip\unskip\par\fi
     \vskip\topsep
     \refstepcounter{#2}%
-    \thmbox{\thmbox@headstyle{#1}{\csname the#2\endcsname}#3}%
+    \def\thmbox@countername{#2}%
+    \ifx\thmbox@countername\thmbox@blankname
+        % ---- BLANK ENVIRONMENT ----
+        \thmbox{\bfseries #3}%
+    \else
+        % ---- NORMAL ENVIRONMENTS ----
+        \thmbox{\thmbox@headstyle{#1}{\csname the#2\endcsname}#3}%
+    \fi
     \thmbox@bodystyle\ignorespaces}     %correct top space
     
 \def\thmbox#1{%
@@ -66,6 +92,17 @@
     
 \def\endthmbox{\endbreakbox}
 
+\def\thmbox@beginA#1#2[#3]{%
+    \def\thmbox@countername{#2}%
+    \ifx\thmbox@countername\thmbox@blankname
+        % ---- BLANK ENVIRONMENT ----
+        \thmbox@begin{#1}{#2}{#3}%
+    \else
+        % ---- NORMAL ENVIRONMENTS ----
+        \thmbox@begin{#1}{#2}{\thmbox@titlestyle{#3}}%
+    \fi
+}
+
 \def\thmbox@new#1#2#3#4{%
     \expandafter\def\csname#2\endcsname{%
         \setkeys{thmbox}{#1}%
@@ -77,15 +114,25 @@
     }%
 }
 %PROBLEMS: systematic "Underfull \hbox (badness 10000) detected" when "enumerate" inside such a theorem environment => doesn't look bad so it's probably fine
+% Usage: \NewTheoremAliased{environment_name}{Display Name}
+\newcommand{\NewTheoremAliased}[2]{%
+    \newaliascnt{#1}{theorem}           % Create alias counter
+    \newtheorem{#1}[#1]{\noindent #2}             % Define theorem using alias
+    \aliascntresetthe{#1}               % Reset logic
+    \expandafter\def\csname #1autorefname\endcsname{#2} % Set autoref name
+}
 
-\newtheorem{lemma}{\noindent Lemma}[section]
-\newaliascnt{proposition}{lemma}
-\newtheorem{proposition}[proposition]{\noindent Proposition}
-\newaliascnt{theorem}{lemma}
-\newtheorem{theorem}[theorem]{\noindent Theorem}
-\newaliascnt{corollary}{lemma}
-\newtheorem{corollary}[corollary]{\noindent Corollary}
+%% Initialization
+\newtheorem{theorem}{\noindent Theorem}[section]
+    \def\theoremautorefname{Theorem}
+%% Aliases
+\NewTheoremAliased{lemma}{Lemma}
+\NewTheoremAliased{proposition}{Proposition}
+\NewTheoremAliased{corollary}{Corollary}
+%% Blank Theorem Environment
+\NewTheoremAliased{blank}{}
 
+%%%%% EXERCISE ENVIRONMENTS
 \def\exercise{}
 \@ifundefined{exercisename}{\def\exercisename{Exercise}}{}
 \renewenvironment{exercise}[1][\exercisename]{%
@@ -104,3 +151,7 @@
     \labelwidth=\parindent}%
   \item\relax}{%
   \endlist}
+
+%%% Hyperref Anchor Names
+\def\exerciseautorefname{Exercise}
+\def\openquestionautorefname{Open Question}

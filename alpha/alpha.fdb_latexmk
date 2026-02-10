@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex alpha"] 1770317910.87115 "alpha.aux" "alpha.bbl" "alpha" 1770318082.39275 0
+["bibtex alpha"] 1770744383.45978 "alpha.aux" "alpha.bbl" "alpha" 1770744711.63879 0
   "../mypreamble/jabref.bib" 1764864510.50363 118564 5f1620f68b53909f6bc1faba7b8bfa53 ""
   "/usr/local/texlive/2024/texmf-dist/bibtex/bst/base/alpha.bst" 1292289607 23907 a5f93555796fb564b924339521f10a7c ""
-  "alpha.aux" 1770318081.97518 16201 75861eb191fd813611d4e67f05626243 "pdflatex"
+  "alpha.aux" 1770744711.19428 16773 917593abe10fc7ba1d5e15f8d19f991d "pdflatex"
   (generated)
   "alpha.bbl"
   "alpha.blg"
   (rewritten before read)
-["pdflatex"] 1770318078.13622 "/Users/pablo/Documents/Mathematics/Current Work/65ee057abd468e08845c1349/alpha/alpha.tex" "alpha.pdf" "alpha" 1770318082.39323 0
+["pdflatex"] 1770744706.28266 "/Users/pablo/Documents/Mathematics/Current Work/65ee057abd468e08845c1349/alpha/alpha.tex" "alpha.pdf" "alpha" 1770744711.63931 0
   "../images/R_1.png" 1767216076.13736 2877 58c11f60a8517f96be9700ba68b2b9b9 ""
   "../images/R_2_1.png" 1767215336.97278 14692 299988dd1c6bb11f68e2f9cd1cad84c9 ""
   "../images/X.png" 1767215293.27477 27553 73237641bee572328f59e79138d1df56 ""
@@ -16,12 +16,12 @@
   "../images/handle_3_2.png" 1767201718.92234 25144 a01368b8f1b23e1328105147648bcf21 ""
   "../images/handle_3_3.png" 1767201578.53907 30307 3fb63f4a6a1d687ca466917b10a34fa1 ""
   "../images/intermediate.png" 1767215353.56928 11417 d343ca2e1d88de40a00f7b2cf364a6a5 ""
-  "../mypreamble/a-preamble.tex" 1769613254.20856 4751 24f408fa04181a9de3bd51f7dc3e5002 ""
   "../mypreamble/catcro.sty" 1770053797.61114 3937 8f2e4becc90df9b8d400d7ef4e540af2 ""
-  "../mypreamble/mathcro.sty" 1741466965.6306 10519 f3b926ae50da9253c598909b25ba84f7 ""
+  "../mypreamble/mathcro.sty" 1770741514.61305 11032 b181c240d5fc178dcab6cbf52e26e3e9 ""
   "../mypreamble/mathenv.sty" 1712186310.01491 4234 0ace1a625e05e32438731ae6c9a5419f ""
-  "../mypreamble/thmenv.sty" 1769613251.84801 4092 f54c4f500fa40580d377cc4aedf3b1bc ""
-  "/Users/pablo/Documents/Mathematics/Current Work/65ee057abd468e08845c1349/alpha/alpha.tex" 1770318077.88602 167160 2f02623e701f5df582f0ef73a7c574ea ""
+  "../mypreamble/preamble.tex" 1770489742.6048 3139 50b513fa9a20ad32c356f9481a809d7a ""
+  "../mypreamble/thmenv.sty" 1770741884.63727 5836 e79b08c4f28869707f1e9aa1856dcdcf ""
+  "/Users/pablo/Documents/Mathematics/Current Work/65ee057abd468e08845c1349/alpha/alpha.tex" 1770744706.01632 171904 f0a543e4547b5bc3db4c1a6d75cc659c ""
   "/Users/pablo/Library/texlive/2024/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.600pk" 1741709414.30975 6964 02dbca291a645cb6d6f4b887db5e2ec3 ""
   "/Users/pablo/Library/texlive/2024/texmf-var/fonts/pk/ljfour/public/bbm/bbm9.600pk" 1730487672.95925 6160 928ba23f5b483165bdb35b4ccc1536db ""
   "/usr/local/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -255,6 +255,7 @@
   "/usr/local/texlive/2024/texmf-dist/tex/latex/bookmark/bkm-pdftex.def" 1702241854 8818 aa5157b46368efebf023abff55611467 ""
   "/usr/local/texlive/2024/texmf-dist/tex/latex/bookmark/bookmark.sty" 1702241854 18245 97e6be180cf07bb6f7008cfdaaecfce5 ""
   "/usr/local/texlive/2024/texmf-dist/tex/latex/collectbox/collectbox.sty" 1666037909 9124 59c3b56f1a073de66e3eea35f9c173c8 ""
+  "/usr/local/texlive/2024/texmf-dist/tex/latex/colortbl/colortbl.sty" 1716838196 12345 7bca4ad292ae2b62fed1766b543d04d5 ""
   "/usr/local/texlive/2024/texmf-dist/tex/latex/enumitem/enumitem.sty" 1561238569 51697 f8f08183cd2080d9d18a41432d651dfb ""
   "/usr/local/texlive/2024/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty" 1579991033 13886 d1306dcf79a944f6988e688c1785f9ce ""
   "/usr/local/texlive/2024/texmf-dist/tex/latex/etoolbox/etoolbox.sty" 1601931149 46845 3b58f70c6e861a13d927bff09d35ecbc ""
@@ -264,6 +265,7 @@
   "/usr/local/texlive/2024/texmf-dist/tex/latex/graphics-cfg/graphics.cfg" 1465944070 1224 978390e9c2234eab29404bc21b268d1e ""
   "/usr/local/texlive/2024/texmf-dist/tex/latex/graphics-def/pdftex.def" 1713382759 19440 9da9dcbb27470349a580fca7372d454b ""
   "/usr/local/texlive/2024/texmf-dist/tex/latex/graphics/color.sty" 1717359999 7233 b3e7845a2bdbf185cb9b9798e7df4dc4 ""
+  "/usr/local/texlive/2024/texmf-dist/tex/latex/graphics/dvipsnam.def" 1717359999 5009 1ca6c92de20f17acac654d4e0598c200 ""
   "/usr/local/texlive/2024/texmf-dist/tex/latex/graphics/graphics.sty" 1717359999 18363 b79c83eab17bf475b508f05e9807e605 ""
   "/usr/local/texlive/2024/texmf-dist/tex/latex/graphics/graphicx.sty" 1717359999 8010 6f2ad8c2b2ffbd607af6475441c7b5e4 ""
   "/usr/local/texlive/2024/texmf-dist/tex/latex/graphics/keyval.sty" 1717359999 2671 70891d50dac933918b827d326687c6e8 ""
@@ -311,6 +313,7 @@
   "/usr/local/texlive/2024/texmf-dist/tex/latex/thmbox/thmbox.sty" 1237847902 7313 2a9a3a8b44947d3cda7ae2a9bcb6acfc ""
   "/usr/local/texlive/2024/texmf-dist/tex/latex/tikz-cd/tikz-cd.sty" 1620507957 823 2375f30bf77af9357d3b4834b054bf52 ""
   "/usr/local/texlive/2024/texmf-dist/tex/latex/todonotes/todonotes.sty" 1704576842 21404 916e19cbd009b6d289c8194b313d3895 ""
+  "/usr/local/texlive/2024/texmf-dist/tex/latex/tools/array.sty" 1717359999 14110 8e92bf6e8832fa6c90864527ccf8134d ""
   "/usr/local/texlive/2024/texmf-dist/tex/latex/tools/calc.sty" 1717359999 10214 61188260d324e94bc2f66825d7d3fdf4 ""
   "/usr/local/texlive/2024/texmf-dist/tex/latex/url/url.sty" 1388531844 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "/usr/local/texlive/2024/texmf-dist/tex/latex/varwidth/varwidth.sty" 1238697683 10894 d359a13923460b2a73d4312d613554c8 ""
@@ -322,10 +325,10 @@
   "/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1717875923 5483212 72bb095103e470c3fea3a37d602f6865 ""
   "/usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1717875975 8238354 bcf4b91483e869a97566fa27937bfb97 ""
   "/usr/local/texlive/2024/texmf.cnf" 1710266656 577 e590dabc9e28c5b61546e15f63eebcdf ""
-  "alpha.aux" 1770318081.97518 16201 75861eb191fd813611d4e67f05626243 "pdflatex"
-  "alpha.bbl" 1770317910.98474 5315 925c5717aa245b2cbe30fa18a86a76d1 "bibtex alpha"
-  "alpha.tex" 1770318077.88602 167160 2f02623e701f5df582f0ef73a7c574ea ""
-  "alpha.toc" 1770318081.9779 1708 89350b4d573f8e71b6ef3254b17dff2f "pdflatex"
+  "alpha.aux" 1770744711.19428 16773 917593abe10fc7ba1d5e15f8d19f991d "pdflatex"
+  "alpha.bbl" 1770744383.59309 5315 925c5717aa245b2cbe30fa18a86a76d1 "bibtex alpha"
+  "alpha.tex" 1770744706.01632 171904 f0a543e4547b5bc3db4c1a6d75cc659c ""
+  "alpha.toc" 1770744711.19818 1633 7783036d2d4bfa6011c5943a94863e90 "pdflatex"
   (generated)
   "alpha.aux"
   "alpha.log"
