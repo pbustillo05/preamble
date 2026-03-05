@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.6.8)  10 FEB 2026 11:58
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.6.8)  4 MAR 2026 14:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -926,4 +926,300 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 
 
-(/us
+(/usr/local/texlive/2024/texmf-dist/tex/generic/stringenc/se-pdfdoc.def
+File: se-pdfdoc.def 2019/11/29 v1.12 stringenc: PDFDocEncoding
+) [1
+
+{/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+
+[2]
+
+[3]
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 143.
+Package mdframed Info: Box was splittet wrong
+ starting loop to iterate the splitting point
+(mdframed)              on input line 234.
+
+
+[4]
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 257.
+
+
+[5]
+Overfull \hbox (24.5016pt too wide) in paragraph at lines 339--341
+ \OT1/cmr/m/n/10 where for $\OML/cmm/m/it/10 a[]; b[] [] []  []  [] [] a[] \OMS/cmsy/m/n/10 ! \OML/cmm/m/it/10 b[] [] [] \OMS/cmsy/m/n/10 C$\OT1/cmr/m/n/10 , we de-note the cor-re-spond-ing $[](\OML/cmm/m/it/10 @c[] \OMS/cmsy/m/n/10 ! C\OT1/cmr/m/n/10 ) = \OMS/cmsy/m/n/10 C\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 a[]; b[]\OT1/cmr/m/n/10 )(\OML/cmm/m/it/10 a[]; b[]\OT1/cmr/m/n/10 ) [] (\OML/cmm/m/it/10 a[]; b[]\OT1/cmr/m/n/10 )$. 
+ []
+
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 366.
+
+
+[6]
+Overfull \hbox (3.8664pt too wide) in alignment at lines 407--418
+ [] [][]
+ []
+
+
+
+[7]
+Underfull \hbox (badness 10000) detected at line 513
+ |[] []
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 513
+ |[] []
+ []
+
+
+
+[8]
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 567.
+
+
+[9]
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 633.
+
+
+[10]
+Overfull \hbox (11.06311pt too wide) in paragraph at lines 762--766
+[]\OT1/cmr/m/n/9 Secondly, we build a func-tor $[][](\OML/cmm/m/it/9 c[]\OT1/cmr/m/n/9 ) \OMS/cmsy/m/n/9 ! []\OT1/cmr/m/n/9 (\U/msb/m/n/9 Z[] \OMS/cmsy/m/n/9 ! [][]\OT1/cmr/m/n/9 )$. By uni-ver-sal prop-erty of $[][](\OML/cmm/m/it/9 c[]\OT1/cmr/m/n/9 )$,
+ []
+
+
+Overfull \hbox (4.21701pt too wide) in paragraph at lines 762--766
+\OT1/cmr/m/n/9 it is suf-fi-cient to show that $[](\U/msb/m/n/9 Z[] \OMS/cmsy/m/n/9 ! [][]\OT1/cmr/m/n/9 )$ has $\OMS/cmsy/m/n/9 f\OT1/cmr/m/n/9 1\OMS/cmsy/m/n/9 g$\OT1/cmr/m/n/9 -adjoints and to pick a $1$-morphism $\OML/cmm/m/it/9 c[] \OMS/cmsy/m/n/9 ! []\OT1/cmr/m/n/9 (\U/msb/m/n/9 Z[] \OMS/cmsy/m/n/9 !
+ []
+
+
+
+[11]
+
+[12]
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 855.
+
+Overfull \hbox (2.32344pt too wide) in paragraph at lines 868--869
+[]$[]$ \OT1/cmr/m/n/10 will de-note the sym-met-ric monoidal $(\OMS/cmsy/m/n/10 1\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 1)$-category of disks with open em-bed-ding spaces see [[],
+ []
+
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 875.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 904.
+Package mdframed Info: Not enough space on this page on input line 932.
+
+
+[13]
+Package mdframed Info: Not enough space on this page on input line 932.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 936.
+
+
+[14]
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 989.
+
+
+[15]
+Overfull \hbox (70.64798pt too wide) in alignment at lines 1058--1059
+ [] [][]
+ []
+
+
+Overfull \hbox (12.7191pt too wide) in alignment at lines 1127--1128
+ [] [][]
+ []
+
+
+
+[16]
+
+[17]
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1215.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1239.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1248.
+Package mdframed Info: Box was splittet wrong
+ starting loop to iterate the splitting point
+(mdframed)              on input line 1260.
+
+
+[18]
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1269.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1275.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1297.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1321.
+
+
+[19]
+<../images/handle_3_3.png, id=521, 284.06125pt x 281.05pt>
+File: ../images/handle_3_3.png Graphic file (type png)
+<use ../images/handle_3_3.png>
+Package pdftex.def Info: ../images/handle_3_3.png  used on input line 1341.
+(pdftex.def)             Requested size: 142.03026pt x 140.52464pt.
+<../images/handle_3_2.png, id=523, 271.0125pt x 278.03876pt>
+File: ../images/handle_3_2.png Graphic file (type png)
+<use ../images/handle_3_2.png>
+Package pdftex.def Info: ../images/handle_3_2.png  used on input line 1344.
+(pdftex.def)             Requested size: 135.5059pt x 139.01903pt.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1386.
+
+
+[20
+pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1404 \end{proof}
+                   <../images/handle_3_3.png> <../images/handle_3_2.png>]
+LaTeX Font Info:    Trying to load font information for U+bbm on input line 1479.
+ (/usr/local/texlive/2024/texmf-dist/tex/latex/bbm-macros/ubbm.fd
+File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
+)
+Underfull \hbox (badness 10000) detected at line 1491
+ |[] []
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 1491
+ |[] []
+ []
+
+
+
+[21]
+Underfull \hbox (badness 10000) detected at line 1551
+ |[] []
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 1551
+ |[] []
+ []
+
+
+
+[22]
+Overfull \hbox (29.54648pt too wide) in paragraph at lines 1621--1625
+ \OT1/cmr/m/n/10 In-for-mally, the in-duced monad of the bot-tom ad-junc-tion, eval-u-ated at the iden-tity $\U/bbm/m/n/10 1[]$\OT1/cmr/m/n/10 , up-grades to $[][]([][](\OMS/cmsy/m/n/10 A\OT1/cmr/m/n/10 )) \OMS/cmsy/m/n/10 '
+ []
+
+
+
+[23]
+
+[24]
+<../images/Y.png, id=624, 420.57124pt x 376.40625pt>
+File: ../images/Y.png Graphic file (type png)
+<use ../images/Y.png>
+Package pdftex.def Info: ../images/Y.png  used on input line 1796.
+(pdftex.def)             Requested size: 84.11275pt x 75.2799pt.
+<../images/X.png, id=625, 434.62375pt x 297.11pt>
+File: ../images/X.png Graphic file (type png)
+<use ../images/X.png>
+Package pdftex.def Info: ../images/X.png  used on input line 1798.
+(pdftex.def)             Requested size: 86.9232pt x 59.42094pt.
+<../images/R_2_1.png, id=626, 473.77pt x 138.5175pt>
+File: ../images/R_2_1.png Graphic file (type png)
+<use ../images/R_2_1.png>
+Package pdftex.def Info: ../images/R_2_1.png  used on input line 1800.
+(pdftex.def)             Requested size: 94.75232pt x 27.703pt.
+<../images/intermediate.png, id=627, 447.6725pt x 129.48375pt>
+File: ../images/intermediate.png Graphic file (type png)
+<use ../images/intermediate.png>
+Package pdftex.def Info: ../images/intermediate.png  used on input line 1802.
+(pdftex.def)             Requested size: 89.53291pt x 25.89629pt.
+<../images/R_1.png, id=628, 414.54875pt x 21.07875pt>
+File: ../images/R_1.png Graphic file (type png)
+<use ../images/R_1.png>
+Package pdftex.def Info: ../images/R_1.png  used on input line 1804.
+(pdftex.def)             Requested size: 82.90828pt x 4.21567pt.
+
+
+[25]
+Overfull \hbox (8.80252pt too wide) in paragraph at lines 1862--1866
+[][]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 M; B\OT1/cmr/m/n/10 )$) act-ing on $\OML/cmm/m/it/10 M$\OT1/cmr/m/n/10 . We de-note these the \OT1/cmr/bx/n/10 canon-i-cal $[][]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 M; A\OT1/cmr/m/n/10 ) \U/msb/m/n/10 y \OML/cmm/m/it/10 M$ \OT1/cmr/bx/n/10 and $\OML/cmm/m/it/10 M \U/msb/m/n/10 x [][]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 M; B\OT1/cmr/m/n/10 )$
+ []
+
+
+
+[26
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1866 \end{construction}
+                          <../images/Y.png> <../images/X.png> <../images/R_2_1.png> <../images/intermediate.png> <../images/R_1.png>]
+<../images/action.png, id=660, 607.26875pt x 307.1475pt>
+File: ../images/action.png Graphic file (type png)
+<use ../images/action.png>
+Package pdftex.def Info: ../images/action.png  used on input line 1890.
+(pdftex.def)             Requested size: 242.9032pt x 122.85681pt.
+
+
+[27
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1933 
+        <../images/action.png>]
+
+[28] (./alpha.bbl
+
+[29]
+
+[30])
+
+[31] (./alpha.aux)
+ ***********
+LaTeX2e <2024-06-01>
+L3 programming layer <2024-05-27>
+ ***********
+ ) 
+Here is how much of TeX's memory you used:
+ 42465 strings out of 473600
+ 986098 string characters out of 5728703
+ 2013891 words of memory out of 5000000
+ 64410 multiletter control sequences out of 15000+600000
+ 579523 words of font info for 115 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 122i,34n,124p,2082b,1727s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+pdfTeX warning (dest): name{equation.4.1} has been referenced but does not exist, replaced by a fixed one
+
+ </Users/pablo/Library/texlive/2024/texmf-var/fonts/pk/ljfour/public/bbm/bbm9.600pk> </Users/pablo/Library/texlive/2024/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.600pk></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msam7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
+Output written on alpha.pdf (31 pages, 832228 bytes).
+PDF statistics:
+ 997 PDF objects out of 1000 (max. 8388607)
+ 856 compressed objects within 9 object streams
+ 247 named destinations out of 1000 (max. 500000)
+ 187 words of extra memory for PDF output out of 10000 (max. 10000000)
+

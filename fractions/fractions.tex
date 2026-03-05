@@ -1,0 +1,909 @@
+\documentclass{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PACKAGES
+\usepackage[utf8]{inputenc}
+\usepackage{verbatim}
+\usepackage[all]{xy}
+\usepackage{amsmath,amsfonts,amssymb,amsthm,xspace,a4wide,color}
+\usepackage{mathabx, mathtools}
+\usepackage{xcolor}
+\usepackage{enumitem}   
+\usepackage{hyperref}
+\hypersetup{
+	linktoc=all
+	hidelinks=true
+}
+\usepackage[textwidth=0.89in,textsize=scriptsize]{todonotes}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes,arrows,positioning,fit,matrix,calc}
+\usepackage{adjustbox}
+\usetikzlibrary{fit, patterns}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ENVIRONMENTS LAYOUT
+\numberwithin{equation}{section}
+\newlength\Colsep
+\setlength\Colsep{10pt}
+\theoremstyle{definition}
+\begingroup
+\newtheorem{remark}[equation]{Remark}
+\newtheorem{example}[equation]{Example}
+\newtheorem*{observation}{Observation}
+\newtheorem{nobservation}{Observation}
+\newtheorem{notation}[equation]{Notation}
+\endgroup
+\theoremstyle{plain}
+\begingroup
+\newtheorem{theorem}[equation]{Theorem}
+\newtheorem{lemma}[equation]{Lemma}
+\newtheorem{proposition}[equation]{Proposition}
+\newtheorem{corollary}[equation]{Corollary}
+\newtheorem{fact}[equation]{Fact}
+\newtheorem{facts}[equation]{Facts}
+\newtheorem{assumption}[equation]{Assumption}
+\newtheorem{definition}[equation]{Definition}
+\newtheorem{convention}[equation]{Convention}
+\newtheorem{construction}[equation]{Construction}
+\endgroup
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% (CO)LIMITS NEW COMMANDS
+\makeatletter
+\def\varcolim@#1#2{%
+	\vtop{\m@th\ialign{##\cr
+			\hfil$#1\operator@font colim$\hfil\cr
+			\noalign{\nointerlineskip\kern1.5\ex@}#2\cr
+			\noalign{\nointerlineskip\kern-\ex@}\cr}}
+}
+\def\varbilim@#1#2{%
+	\vtop{\m@th\ialign{##\cr
+			\hfil$#1\operator@font bilim$\hfil\cr
+			\noalign{\nointerlineskip\kern1.5\ex@}#2\cr
+			\noalign{\nointerlineskip\kern-\ex@}\cr}}
+}
+\def\varbicolim@#1#2{%
+	\vtop{\m@th\ialign{##\cr
+			\hfil$#1\operator@font bicolim$\hfil\cr
+			\noalign{\nointerlineskip\kern1.5\ex@}#2\cr
+			\noalign{\nointerlineskip\kern-\ex@}\cr}}
+}
+\def\Lim{%
+	\mathop{\mathpalette\varlim@{\leftarrowfill@\textstyle}}\nmlimits@
+}
+\def\Colim{%
+	\mathop{\mathpalette\varcolim@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\def\Bilim{%
+	\mathop{\mathpalette\varbilim@{\leftarrowfill@\textstyle}}\nmlimits@
+}
+\def\Bicolim{%
+	\mathop{\mathpalette\varbicolim@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+%%%%%%%%%%%%%%%%% ARROWS NEW COMMANDS
+\newcommand{\mono}{\hookrightarrow \hspace{-0.1em}}
+\newcommand{\wto}{\to \hspace{-1.1em} \circ \hspace{0.6em}}
+%%%%%%%%%%%%%%%%% PROOF NEW COMMANDS
+\newcommand{\cqd}{\hfill$\Box$}
+\newcommand{\cqdhere}{$\Box$}
+%%%%%%%%%%%%%%%%% CATS NEW COMMANDS
+\newcommand{\cc}[1]{\mathcal{#1}}
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\Set}{\textnormal{\textbf{Set}}}
+\newcommand{\Cat}{\textnormal{\textbf{Cat}}}
+\newcommand{\Bicat}{\textnormal{\textbf{Bicat}}}
+\newcommand{\Tricat}{\textnormal{\textbf{Tricat}}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\bb}{\mathbb}
+\newcommand{\ff}{\mathsf}
+
+%%%%%%%%%%%%%Buckley's commands
+\newcommand{\cd}[2][]{\vcenter{\hbox{\xymatrix#1{#2}}}}
+%\newcommand{\Mapsto}[1]{\cd[]{ \ar@{|->}[r]^{{#1}} & }}
+
+\newcommand{\E}{\mathcal{E}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\To}{\Rightarrow}
+
+
+\newcommand{\pair        }[4][10pt]{\ar@/^#1/[#2]^-{#3} \ar@/_#1/[#2]_-{#4}}
+\newcommand{\dotpair     }[4][10pt]{\ar@{.>}@/^#1/[#2]^{#3} \ar@{.>}@/_#1/[#2]_{#4}}
+\newcommand{\triple      }[5]{\ar@/^#5/[#1]^{#2} \ar@/_#5/[#1]_{#4} \ar@/12pt/[#1]|{#3}}
+
+%%%% Two-cells
+
+\newcommand{\ltwocell    }[3][0.5]{\ar@{}[#2] \ar@{=>}?(#1)+/r 0.2cm/;?(#1)+/l 0.2cm/^{#3}}
+\newcommand{\rtwocell    }[3][0.5]{\ar@{}[#2] \ar@{=>}?(#1)+/l 0.2cm/;?(#1)+/r 0.2cm/^{#3}}
+\newcommand{\dtwocell    }[3][0.5]{\ar@{}[#2] \ar@{=>}?(#1)+/u 0.2cm/;?(#1)+/d 0.2cm/^{#3}}
+\newcommand{\utwocell    }[3][0.5]{\ar@{}[#2] \ar@{=>}?(#1)+/d 0.2cm/;?(#1)+/u 0.2cm/_{#3}}
+
+\newcommand{\dltwocell   }[3][0.5]{\ar@{}[#2] \ar@{=>}?(#1)+/ur 0.2cm/;?(#1)+/dl 0.2cm/^{#3}}
+\newcommand{\drtwocell   }[3][0.5]{\ar@{}[#2] \ar@{=>}?(#1)+/ul 0.2cm/;?(#1)+/dr 0.2cm/^{#3}}
+\newcommand{\ultwocell   }[3][0.5]{\ar@{}[#2] \ar@{=>}?(#1)+/dr 0.2cm/;?(#1)+/ul 0.2cm/^{#3}}
+\newcommand{\urtwocell   }[3][0.5]{\ar@{}[#2] \ar@{=>}?(#1)+/dl 0.2cm/;?(#1)+/ur 0.2cm/^{#3}}
+
+\newcommand{\dotltwocell }[3][0.5]{\ar@{}[#2] \ar@{:>}?(#1)+/r 0.2cm/;?(#1)+/l 0.2cm/^{#3}}
+\newcommand{\dotrtwocell }[3][0.5]{\ar@{}[#2] \ar@{:>}?(#1)+/l 0.2cm/;?(#1)+/r 0.2cm/^{#3}}
+\newcommand{\dotdtwocell }[3][0.5]{\ar@{}[#2] \ar@{:>}?(#1)+/u 0.2cm/;?(#1)+/d 0.2cm/^{#3}}
+\newcommand{\dotutwocell }[3][0.5]{\ar@{}[#2] \ar@{:>}?(#1)+/d 0.2cm/;?(#1)+/u 0.2cm/_{#3}}
+\newcommand{\doturtwocell}[3][0.5]{\ar@{}[#2] \ar@{:>}?(#1)+/dl 0.2cm/;?(#1)+/ur 0.2cm/^{#3}}
+
+%%%%%%%%%%%%%%%%% COMMENTS NEW COMMANDS
+\newcommand{\pablo}[1]{\todo[color=red!20]{{\bf Pablo:} #1}\xspace}
+\newcommand{\martin}[1]{\todo[color=green!15]{{\bf Martin:} #1}\xspace}
+\newcommand{\dorette}[1]{\todo[color=yellow!55]{{\bf Dorette:} #1}\xspace}
+\newcommand{\bigpablo}[1]{\todo[inline,color=red!20]{{\bf Pablo:} #1}}
+\newcommand{\bigmartin}[1]{\todo[inline,color=green!15]{{\bf Martin:} #1}}
+\newcommand{\bigdorette}[1]{\todo[inline,color=yellow!55]{{\bf Dorette:} #1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%% TITLE PAGE
+\title{On the Axioms of Fractions for Categories and Bicategories}
+\author{}
+\date{}
+
+\begin{document}
+	
+\maketitle
+
+\tableofcontents
+
+\newpage
+
+\section{Introduction}
+
+Often in mathematics, and very often in category theory, a single idea can be defined in several equivalent ways. Sometimes, a formulation of the idea can be judged to be the ``weakest'', as it yields the axioms that are easiest to check. Similarly, the ``strongest'' formulation would yield the axioms that are more practical and powerful to use. For example, the notion of \textit{filtered category} can be defined with either:
+
+\begin{enumerate}[label = $(\roman*)$]
+	\item A non-empty category such that: every binary coproduct diagram has a cocone (every pair of objects is linked by a cospan) \textbf{and} every coequalizer diagram has a cocone (every pair of parallel arrows can be coequalized)
+	\item A category such that: every finite diagram has a cocone
+\end{enumerate}
+
+The definitions are equivalent so one can decide to use whichever he wants. However, they correspond to two very different approaches. It often appears that $(i)$, the ``weakest'' form, is the more practical to \textit{check}, and $(ii)$, the ``strongest'' form which strictly contains the former, is the more practical to \textit{use}. Furthermore, one could argue that $(ii)$ gives more insight on the fundamental meaning of being \textit{filtered}. Firstly, the choice of sufficient cocones in $(i)$ is somewhat arbitrary, when $(ii)$ tells us all the generated ones in a more unbiased way. Secondly, the definition $(ii)$ offers an easier path to generalization to higher dimension: for example, a filtered bicategory is simply one that has a cocone on every finite diagram, where the notion of diagram is the appropriate one for dimension 2 (in this case a weight is non-necessary), but in order to find the equivalent of definition $(i)$, one has to be a bit more careful and add coequifiers.
+
+The point of this paper is to explore the definition of calculus of fractions in category and bicategory theory. In the literature, the ``weakest'' formulation has been explored and described by many authors. We construct here the ``strongest'' formulation of the axioms of calculus of fractions and study the notion in its full generality using this new definition. We also justify in what sense is this new formulation the ``strongest''. We then define localization of bicategories in general and develop the same results in dimension 2.
+
+\section{Fractions in Category Theory}
+
+\subsection{Reminder: Localization of a Category}
+
+Before diving into this appendix, we remind the reader of the construction of the localization of a category $\mathcal{I}[\mathcal{W}^{-1}]$:
+\begin{enumerate}[label = $\bullet$]
+	\item \textbf{Objects:} The set of objects of $\mathcal{I}[\mathcal{W}^{-1}]$ is the same as the set of objects $\mathcal{I}_0$ of $\mathcal{I}$.
+	\item \textbf{Paths:} We define $\mathcal{I}_1$ to be the set of arrows of $\mathcal{I}$. We define formally a set $\mathcal{W}_{\mathcal{I}}^{-1} = \{w^{-1}\mid w:\mathcal{W}_{\mathcal{I}}\}$ which is a copy of the set $\mathcal{W}_{\mathcal{I}}$. We also write $w = (w^{-1})^{-1}$ (the $-^{-1}$ symbol won't be used for actual inverses of arrows of $\mathcal{I}$ but only as a way to describe those ``formal inverses''). We also extend the functions $\textnormal{dom}, \textnormal{codom}: \mathcal{I}_1 \to \mathcal{I}_0$ to $\mathcal{I}_1 \bigsqcup \mathcal{W}_{\mathcal{I}}^{-1}$ by defining:
+	\[\begin{array}{lcr}
+		\textnormal{dom}(w^{-1}) = \textnormal{codom}(w) &&  \textnormal{codom}(w^{-1}) = \textnormal{dom}(w)
+	\end{array}\]
+	Now, for $n\ge 0$, a path of size $n$ from $i:\mathcal{I}$ to $j:\mathcal{I}$ is a $n$-tuples $(u_1, \dots, u_n) \in (\mathcal{I}_1 \bigsqcup \mathcal{W}_{\mathcal{I}}^{-1})^n$ such that
+	\[\begin{array}{cc}
+		\forall 1 \le k \le n-1 & \textnormal{codom}(u_k) = \textnormal{dom}(u_{k+1})\\
+		i = \textnormal{codom}(u_1) & j = \textnormal{dom}(u_{n})
+	\end{array}\]
+	We write $(u_1, \dots, u_n): i \to j$. We draw the path by drawing the arrows of $\mathcal{I}_1$ in the ``right'' direction and the arrows of $\mathcal{W}_{\mathcal{I}}^{-1}$ in the ``opposite'' direction and by marking them by the symbol ``$\circ$'':
+	\[\xymatrix{
+		\bullet \ar[r] & \bullet \ar@{<-}[r]|{\circ} & \bullet \ar@{<-}[r]|{\circ} & \cdots \ar[r] & \bullet \ar@{<-}[r]|{\circ} & \bullet
+	}\]
+	\item \textbf{Elementary Equivalence:} Let $(u_1, \dots, u_n): i \to j$ be a path. We have the following four elementary equivalences:
+	\begin{enumerate}[label = $(\roman*)$]
+		\item \textbf{Adding identities:} for all $0 \le k \le n$, with $a = \textnormal{dom}(u_{k+1}) = \textnormal{codom}(u_{k})$ (when it make sense), \[(u_1, \dots, u_n) \sim (u_1, \dots, u_k, 1_a, u_{k+1}, \dots, u_n)\]
+		\item \textbf{Composing:} for all $1 \le k \le n-1$, if $u_k, u_{k+1} \in \mathcal{I}_1$, \[(u_1, \dots, u_n) \sim (u_1, \dots, u_{k+1} \circ u_k, \dots, u_n)\]
+		\item \textbf{Right Inverse:} for all $0 \le k \le n$, and for all $w \in \mathcal{W}_{\mathcal{I}}$, \[(u_1, \dots, u_n) \sim (u_1, \dots, u_k, w^{-1}, w, u_{k+1}, \dots, u_n)\]
+		\item \textbf{Left Inverse:} for all $0 \le k \le n$, and for all $w \in \mathcal{W}_{\mathcal{I}}$, \[(u_1, \dots, u_n) \sim (u_1, \dots, u_k, w, w^{-1}, u_{k+1}, \dots, u_n)\]
+	\end{enumerate}
+	\item \textbf{Arrows:} Equivalence classes of paths under the relation generated by the elementeray equivalences.
+	\item \textbf{Identities:} The identity arrow on $i$ is the equivalence class $[\emptyset] = [(1_i)]$
+	\item \textbf{Composition:} The composition of paths is the juxtaposition. It is compatible with the equivalence relation.
+\end{enumerate}
+
+\subsection{Introduction}
+
+In dimension 1, it is well known that we can localize any category $\mathcal{B}$ by any family of arrows $\mathcal{W}$ (putting size considerations aside). The general description of localization describes arrows as equivalence classes of ``paths'' (sequences of arrows where the ones in $\mathcal{W}$ can be written in the ``opposite'' direction). This description however is particularly cumbersome and we usually want to find a simpler description of those paths. Calculus of fractions is a specific situation in which each path is equivalent to a 2-step zig-zag:
+
+\[\xymatrix{
+	& \bullet \ar[dr] \ar[dl]|{\circ}\\
+	\bullet && \bullet
+}\]
+
+It is not true, however, that if every path in a localization can be written like this, then it is a calculus of fractions.  We will see, later on, that this requirement leads to a weaker but very similar situation. We will also see that, to have a meaningful notion of calculus of fractions, we also need that the equivalences between paths can be simplified. The usual definition of calculus of fractions is given by 3 axioms. Fritz \cite{fritz2011categories} studies left calculus of frations and calls them \textbf{L0}, \textbf{L1} and \textbf{L2}. We will call them \textbf{R0}, \textbf{R1} and \textbf{R2} to insist on the fact that we consider right fractions. They are the following:
+\begin{enumerate}[label = $\bullet$]
+	\item \textbf{R0:} $\mathcal{W}$ is stable by composition and contains all identities
+	\item \textbf{R1:} for any objects $a,b,c:\mathcal{B}$ and arrows $w: b \to c \in \mathcal{W}$, $f: a \to c$, there is an object $p:\mathcal{B}$ and arrows $h: p \to b$, $u: p \to a \in \mathcal{W}$ such that \[\xymatrix{p \ar@{.>}[r]^h \ar@{.>}[d]_u|{\circ} & b\ar[d]^w|{\circ}\\a \ar[r]_f & c}\]
+	
+	\item \textbf{R2:} for any objects $a,b,c:\mathcal{B}$, arrows $w: b \to c \in \mathcal{W}$, $f,g: a \to b$, such that $wf = wg$, there exist an object $p:\mathcal{B}$ and an arrow $u: p \to a \in \mathcal{W}$, such that $fu = gu$:
+	
+	\[\xymatrix{
+		a \ar@/^/[r]^f \ar@/_/[r]_g & b \ar[r]^w|{\circ} & c
+	}
+	\qquad \leadsto \qquad
+	\xymatrix{
+		p\ar@{.>}[r]^u|{\circ} & a \ar@/^/[r]^f \ar@/_/[r]_g & b
+	}
+	\]
+\end{enumerate}
+
+We will argue here that \textbf{R0} is too strong (which has already been explored in the literature) and that the weaker version of \textbf{R0}, together with \textbf{R1} and \textbf{R2}, is equivalent to a neater definition. Throughout most of this section, we will not assume knowledge of the construction of the localization by calculus of fractions. Indeed, we want to first ``blindly'' work with the axioms of fractions, then use our work to show that it yields a simplified construction of the localization. Only after having proven that, in this case, the localization takes this simpler form, we will use this form to justify that we have found the weakest possible axioms of fraction.
+
+\subsection{The axiom \textbf{R0}}
+
+Let's first dive into the axiom \textbf{R0}. In the literature, there are several variants of this axiom. We chose here to describe several possibilities to replace it:
+
+\begin{enumerate}[label = $\bullet$]
+	\item \textbf{Weak:} for all $b:\mathcal{B}$, there exists $a:\mathcal{B}$ and $w: a \to b \in \mathcal{W}$, \textbf{and} for all pair of composable arrows in $\mathcal{W}$, 
+	\[\xymatrix{b \ar[r]^v|{\circ} & c \ar[r]^w|{\circ} & d}\] there exists $a:\mathcal{B}$ and $u:a \to b$ such that $wvu \in \mathcal{W}$
+	\item \textbf{2-out-of-3:} $\mathcal{W}$ contains identities, \textbf{and} for each pair of composable arrows \[\xymatrix{a \ar[r]^u & b \ar[r]^v & c}\] if two of the three arrows $u$, $v$, $vu$ are in $\mathcal{W}$, then so is the last one
+	\item \textbf{2-out-of-6:} $\mathcal{W}$ contains identities, \textbf{and} for each pair of composable arrows \[\xymatrix{a \ar[r]^u & b \ar[r]^v & c \ar[r]^w & d}\] if $vu$ and $wv$ are in $\mathcal{W}$, then are $u$, $v$, $w$ and $wvu$
+\end{enumerate}
+
+In order of strength, we have $\textbf{2-out-of-6} \Rightarrow \textbf{2-out-of-3} \Rightarrow \textbf{R0} \Rightarrow \textbf{Weak}$. We can easily notice, by a small induction, that \textbf{Weak} can be written in an equivalent \textit{stronger} form that will come in handy:
+
+\[\begin{array}{rcl}
+	\textnormal{\textbf{Weak}} & \Longleftrightarrow & \text{``for any (potentially empty) sequence of composable arrows in $\mathcal{W}$}\\
+	&& \qquad  \qquad \xymatrix{b \ar[r]|{\circ} & \bullet \ar[r]|{\circ} & \bullet \ar[r]|{\circ} & \cdots \ar[r]|{\circ} & \bullet \ar[r]|{\circ} & c}\\
+	&& \text{from $b:\mathcal{B}$ to $c:\mathcal{B}$, there exists an object $a:\mathcal{B}$ and an arrow $u: a \to b$ such that}\\
+	&& \qquad \xymatrix{a \ar[r] & b \ar[r]|{\circ} & \bullet \ar[r]|{\circ} & \bullet \ar[r]|{\circ} & \cdots \ar[r]|{\circ} & \bullet \ar[r]|{\circ} & c & \in \mathcal{W}}\\
+	&& \text{composes to an arrow in $\mathcal{W}$''}
+\end{array}\]
+
+We will argue later in this section that \textbf{Weak} actually is the weakest axiom that can replace \textbf{R0}. Similarly, it is already known that \textbf{2-out-of-6} is its strongest form. Indeed, for a family of arrows respecting at least \textbf{Weak}, \textbf{R1} and \textbf{R2}, we will later show that \textbf{2-out-of-6} is equivalent to saturation:
+\begin{enumerate}[label = $\bullet$]
+	\item \textbf{Sat:} $w \in \mathcal{W}$ if and only if $[(w)]$ is an isomorphism in $\mathcal{B}[\mathcal{W}^{-1}]$
+\end{enumerate}
+and also to:
+\begin{enumerate}[label = $\bullet$]
+	\item \textbf{Iso:} every arrow \[\xymatrix{ \bullet & \bullet \ar[r]|{\circ} \ar[l]^f & \bullet}\] in $\mathcal{B}[\mathcal{W}^{-1}]$ is an isomorphism if and only if $f \in \mathcal{W}$.
+\end{enumerate}
+
+Throughout the rest of this section we will call, for \textbf{U} being either \textbf{Weak}, \textbf{R0}, \textbf{2-out-of-3} or \textbf{2-out-of-6}, a ``\textbf{U}-calculus of fractions'' any family of arrows $\mathcal{W}$ in a category $\mathcal{B}$ that satisfies \textbf{U}, \textbf{R1} and \textbf{R2}. We also abbreviate ``\textbf{Weak}-calculus of fractions'' by simply ``calculus of fractions'', and ``\textbf{2-out-of-6}-calculus of fractions'' by simply ``saturated calculus of fractions''.
+
+\subsection{The axioms \textbf{R1} and \textbf{R2}}
+
+Let's now dive into \textbf{R1} and \textbf{R2}. These two conditions are very similar to the usual axioms of filteredness (existence of a coproduct cocone and existence of an coequalizer cocone), and even more so  to the axioms of pseudo-filteredness (existence of a fiber coproduct cocone and existence of an coequalizer cocone). Motivated by this similarity and by the powerful link between the two notions discussed in this paper, one could ask oneself: is there a definition of fractions similar to the existence of a cone on all finite (connected) diagrams?
+
+We will try to find such a "diagrammatic" definition of fractions. First, we need to ask ourselves what is the most general form such a definition can take. We notice, similarly to the (pseudo)cofilteredness case, that both \textbf{R1} and \textbf{R2} yields cones to specific diagrams. Hence all arrows created by using those axioms will always be oriented \textit{from} the newly created object \textit{to} the already given objects. Using those axioms successively on some objects and arrows lying in $\mathcal{B}$, will always create a sequence of new objects and a collection of arrows going from those new objects to previously existing objects. It is then natural to consider a general form of a fraction condition as the existence of specific cones on specific diagrams. Another remark is that, similarly to filteredness, all the data given or created by those axioms is always finite. Hence it we reach such a potential form for our condition:
+
+\begin{definition}[Raw Fraction Conditions] Let $\mathcal{I}$ be a finite non-empty category, let $\mathcal{W}_I$ be a family of arrows of $\mathcal{I}$ and let $S$ be a family of objects of $\mathcal{I}$. For \textbf{U} being either \textbf{Weak}, \textbf{R0}, \textbf{2-out-of-3} or \textbf{2-out-of-6}, the $(\mathcal{I}, \mathcal{W}_{\mathcal{I}}, S)$ raw \textbf{U}-fraction property is: 
+	\[\begin{array}{rcl}
+		\textnormal{\textbf{U}-Frac}(\mathcal{I}, \mathcal{W}_{\mathcal{I}}, S) & = & \text{``for all categories $\mathcal{B}$, for all \textbf{U}-calculus of fractions $\mathcal{W}$ on $\mathcal{B}$,}  \\
+		&& \text{for all functors $F: \mathcal{I} \to \mathcal{B}$ that sends arrows of $\mathcal{W}_{\mathcal{I}}$ to arrows of $\mathcal{W}$,}\\
+		&& \text{we have an object $p:\mathcal{B}$ and a cone at $p$ of $F$,}\\
+		&& \text{such that all projections on the objects of $S$ are in $\mathcal{W}$''}
+	\end{array}\]
+\end{definition}
+
+For example, we can see \[\textbf{R1} \textnormal{ as \textbf{U}-Frac}\left(\left\{\vcenter{\xymatrix{& b\ar[d]^w|{\circ}\\a \ar[r]_f & c}}\right\}, \{w\}, \{a\}\right)\] and \[\textbf{R2} \textnormal{ as \textbf{U}-Frac}\left(\left\{\vcenter{\xymatrix{a \ar@/^/[r]^f \ar@/_/[r]_g & b \ar[r]^w|{\circ} & c}}\right\}, \{w\}, \{a\}\right)\]
+
+We shall call $\mathcal{I}_1$ and $\mathcal{I}_2$ the finite categories involved respectively in the description of \textbf{R1} and \textbf{R2}.
+
+The question is now: what are all triples $(\mathcal{I}, \mathcal{W}_{\mathcal{I}}, S)$ such that the raw \textbf{U}-fraction condition is true? In order to answer this question, let's imagine how it would be possible to prove such a raw \textbf{U}-fraction condition. Arguably, by completeness, one can imagine that such a property would be true only if we can find a proof of this statement in some basic first order theory describing this. Let's think about how such a proof would go. We start with $\mathcal{I}, \mathcal{W}_{\mathcal{I}}, S, \mathcal{B}, \mathcal{W}, F$ such as above. In order to \textit{construct} a cone on $F$, we are only authorized to use \textbf{R1} and \textbf{R2}. The only data available in $\mathcal{B}$ that we have access to is the one lying in $F$. Hence, unless the triple $(\mathcal{I}, \mathcal{W}_{\mathcal{I}}, S)$ is completely trivial and the cone already exists, the only way to create new objects and arrows is by using \textbf{R1} or \textbf{R2} on the data lying in $F$. What this means is: for either $i = 1 \textnormal{ or } 2$, constructing a functor $U:\mathcal{I}_i \to \mathcal{I}$ sending $w$ to an arrow of $\mathcal{W}_{\mathcal{I}}$, then invoking $\textbf{Ri}=\textnormal{\textbf{U}-Frac}(\mathcal{I}_i, \{w\}, \{a\})$ on the functor $F\circ U$. This process constructs a cone on $F\circ U$ such that the projection at $a$ is in $\mathcal{W}$. This is equivalent to \textit{extending} the diagram $F$ to include this new object and those new arrows. We can extend the category $\widehat{\mathcal{I}}$ by formally adding a cone on $U$ to $\mathcal{I}$. We can extend $\widehat{\mathcal{W}_{\mathcal{I}}}$ by adding the identity on the apex, the arrow corresponding to $u$ in the cone, and all compositions using $u$ and arrows of $\mathcal{W}_{\mathcal{I}}$. We then get an extended functor $\widehat{F}:\widehat{\mathcal{I}} \to\mathcal{B}$ sending arrows of $\widehat{\mathcal{W}_{\mathcal{I}}}$ to arrows of $\mathcal{W}$. this process is the only process by which we can use the axioms \textbf{R1} and \textbf{R2} to build eventually build a cone on $F$. Hence we can expect that $\textnormal{\textbf{U}-Frac}(\mathcal{I}, \mathcal{W}_{\mathcal{I}}, S)$ is true if and only if there exists a sequence of such steps reaching finally a trivial situation in which the data of the cone lies in the new $\mathcal{I}^{\prime}$. Let's make a few remarks about this process:
+
+\begin{enumerate}[label = $(\roman*)$]
+	\item The operation of using either \textbf{R1} or \textbf{R2} to extend $(\mathcal{I}, \mathcal{W}_{\mathcal{I}}, F)$ to $(\mathcal{I}^{\prime}, \mathcal{W}^{\prime}_{I^{\prime}}, F^{\prime})$ has an invariant: for any two objects $i_0,i_1: \mathcal{I}$, the map induced by the inclusion \[\mathcal{I}[\mathcal{W}^{-1}_{\mathcal{I}}](i_0,i_1) \simeq \mathcal{I}^{\prime}[\mathcal{W}^{\prime-1}_{I^{\prime}}](i_0,i_1)\]
+	is a bijection. In other words the functor $\mathcal{I}[\mathcal{W}^{-1}_{\mathcal{I}}]\to \mathcal{I}^{\prime}[\mathcal{W}^{\prime-1}_{I^{\prime}}]$ is fully faithful, as is the functor $I \to I^{\prime}$.
+	\item Let's imagine a sequence $(\mathcal{I}^n, \mathcal{W}_{\mathcal{I}}^n, F^n)$ of such steps starting from $(\mathcal{I}, \mathcal{W}_{\mathcal{I}}, F)$. At any step, we have another invariant: for every $n$, for every $j:\mathcal{I}^n$, there exists an object $i:\mathcal{I}$ and a path from $j$ to $i$ composed of arrows of $\mathcal{W}_{\mathcal{I}}^n$.
+\end{enumerate}
+
+Now, let's imagine that this process ends at the construction of a good cone at the step $n$. Let $p$ be the apex in $\mathcal{I}^n$. By the remark $(ii)$, there exists an object $i_0:\mathcal{I}$ that is isomorphic to $p$ in $\mathcal{I}^n[\mathcal{W}^{n-1}_{\mathcal{I}}]$. One can show that this implies that $i_0$ is initial in the localization. Indeed by playing with the property of being a cone, one can see that the projection from the apex $p$ to $i_0$ has to be equivalent to the sequence of arrows of $\mathcal{W}_{\mathcal{I}}^n$ given by $(ii)$. One can also notice that any path from $i_0$ to any other $j:\mathcal{I}$ in the localization can be computed by going "through" the apex in the cone. This shows the uniqueness of any such path. So in the end $i_0$ would be initial in $\mathcal{I}[\mathcal{W}^{-1}_{\mathcal{I}}]$ and so would be any object of $S$ for the same reason. This motivates us to conjecture:
+
+\begin{theorem}[General Fraction Condition] 
+	Let $\mathcal{I}$ be a non-empty finite category, let $\mathcal{W}_{\mathcal{I}}$ be a family of arrows of $\mathcal{I}$ and let $S$ be a family of objects of $\mathcal{I}$. Then the $(\mathcal{I}, \mathcal{W}_{\mathcal{I}}, S)$ raw fraction conditions are equivalent to the following conditions:
+	\[\begin{array}{rcl}
+		\textnormal{\textbf{Weak}-Frac}(\mathcal{I}, \mathcal{W}_{\mathcal{I}}, S) & \Longleftrightarrow & \text{``$\mathcal{I}[\mathcal{W}_{\mathcal{I}}^{-1}]$ has an initial object $i_0$,}  \\
+		&& \text{and $S \subseteq \{i_0\}$ ''}\\
+		
+		\textnormal{\textbf{R0}-Frac}(\mathcal{I}, \mathcal{W}_{\mathcal{I}}, S) & \Longleftrightarrow & \text{``$\mathcal{I}[\mathcal{W}_{\mathcal{I}}^{-1}]$ has an initial object $i_0$,}  \\
+		&& \text{and all objects of $S$ are codomain of a path from $i_0$,}\\
+		&& \text{which consists of a sequence of composable arrows of $\mathcal{W}_{\mathcal{I}}$''}\\
+		
+		\textnormal{\textbf{2-out-of-3}-Frac}(\mathcal{I}, \mathcal{W}_{\mathcal{I}}, S) & \Longleftrightarrow & \text{``$\mathcal{I}[\mathcal{W}_{\mathcal{I}}^{-1}]$ has an initial object $i_0$,}  \\
+		&& \text{and all objects of $S$ are codomain of a path from $i_0$,}\\
+		&& \text{which consists of arrows of $\mathcal{W}_{\mathcal{I}}$ in whichever direction''}\\
+		
+		\textnormal{\textbf{2-out-of-6}-Frac}(\mathcal{I}, \mathcal{W}_{\mathcal{I}}, S) & \Longleftrightarrow & \text{``$\mathcal{I}[\mathcal{W}_{\mathcal{I}}^{-1}]$ has an initial object $i_0$,}  \\
+		&& \text{and all objects of $S$ are initial in $\mathcal{I}[\mathcal{W}_{\mathcal{I}}^{-1}]$''}
+	\end{array}\]
+\end{theorem}
+\begin{proof} 
+	
+	We will prove the four equivalences simultaneously. The parts of the proof that are dependant on the choice of \textbf{U} being either \textbf{Weak}, \textbf{R0}, \textbf{2-out-of-3} or \textbf{2-out-of-6} will be highlighted by an enumeration.
+	
+	\begin{enumerate}
+		\item[$(\Rightarrow)$] Depending on \textbf{U} being:
+		\begin{enumerate}[label = $\bullet$]
+			\item \textbf{Weak:} We don't assume anything
+			\item \textbf{R0:} We assume without loss of generality that $\mathcal{W}_{\mathcal{I}}$ respects \textbf{R0}. In practise it means that we take the new arrows of $\mathcal{W}_{\mathcal{I}}$ to be any (potentially empty) composition of old arrows of $\mathcal{W}_{\mathcal{I}}$. This doesn't change the localization $\mathcal{I}[\mathcal{W}_{\mathcal{I}}^{-1}]$ and it doesn't change $\textnormal{\textbf{R0}-Frac}(\mathcal{I}, \mathcal{W}_{\mathcal{I}}, S)$ either (as any functor from $\mathcal{I}$ to $\mathcal{B}$ sending arrows of $\mathcal{W}_{\mathcal{I}}$ to arrows of $\mathcal{W}$ will also do the same on the ``generated'' arrows).
+			\item \textbf{2-out-of-3:} We assume without loss of generality that $\mathcal{W}_{\mathcal{I}}$ respects \textbf{2-out-of-3}. In practise it means that we take the new arrows of $\mathcal{W}_{\mathcal{I}}$ to be any arrows that are equivalent in the localization to a (potentially empty) path of arrows of $\mathcal{W}_{\mathcal{I}}$ in whichever direction. This doesn't change the localization $\mathcal{I}[\mathcal{W}_{\mathcal{I}}^{-1}]$ and it doesn't change $\textnormal{\textbf{2-out-of-3}-Frac}(\mathcal{I}, \mathcal{W}_{\mathcal{I}}, S)$ either (as any functor from $\mathcal{I}$ to $\mathcal{B}$ sending arrows of $\mathcal{W}_{\mathcal{I}}$ to arrows of $\mathcal{W}$ will also do the same on the ``generated'' arrows as the family of such fully-$\mathcal{W}_{\mathcal{I}}$ paths is stable under equivalence when \textbf{2-out-of-3} is true).
+			\item \textbf{2-out-of-6:} We assume without loss of generality that $\mathcal{W}_{\mathcal{I}}$ respects \textbf{2-out-of-6}. In practise it means that we take the new arrows of $\mathcal{W}_{\mathcal{I}}$ to be any arrow being sent to an isomorphism in the localization. This doesn't change the localization $\mathcal{I}[\mathcal{W}_{\mathcal{I}}^{-1}]$, and it doesn't change $\textnormal{\textbf{2-out-of-6}-Frac}(\mathcal{I}, \mathcal{W}_{\mathcal{I}}, S)$ either (as any functor from $\mathcal{I}$ to $\mathcal{B}$ sending arrows of $\mathcal{W}_{\mathcal{I}}$ to arrows of $\mathcal{W}$ will also do the same on the ``generated'' arrows).
+		\end{enumerate}
+		
+		We construct the category $\widehat{\mathcal{I}}$ to be sub-category of $[\mathcal{I}, \Set]^{op}$ consisting of: the image of the co-Yoneda embedding $\mathcal{I} \to [\mathcal{I}, \Set]^{op}$ (for which we use the same notations as for $\mathcal{I}$), the image of the composition of the co-Yoneda embedding and the pre-composition $\mathcal{I}[\mathcal{W}_{\mathcal{I}}^{-1}] \to [\mathcal{I}[\mathcal{W}_{\mathcal{I}}^{-1}], \Set]^{op} \to [\mathcal{I}, \Set]^{op}$ (for which we use the notation $\widehat{i} = \mathcal{I}[\mathcal{W}^{-1}_{\mathcal{I}}](i,-)$), and all arrows going from the objects of the latter to the objects of the former (corresponding to zig-zags by the co-Yoneda lemma). We introduce the class of arrows $\widehat{\mathcal{W}}_{\mathcal{I}}$ to be the union of the newly generated $\mathcal{W}_{\mathcal{I}}$ and, depending on \textbf{U} being:
+		\begin{enumerate}[label = $\bullet$]
+			\item \textbf{Weak:} identities between objects of the form $\widehat{i}$, \textbf{and} arrows from objects of the form $\widehat{i}$ to objects of the form $i$ corresponding, by the co-Yoneda lemma, to the empty path
+			\item \textbf{R0:} identities between objects of the form $\widehat{i}$, \textbf{and} arrows from objects of the form $\widehat{i}$ to objects of the form $j$ corresponding, by the co-Yoneda lemma, to a path composed of a single arrow of $\mathcal{W}_{\mathcal{I}}$ in the ``right'' direction
+			\item \textbf{2-out-of-3:} from an object of the form $\widehat{i}$ to any objects, arrows corresponding, by the co-Yoneda lemma, to a path composed of arrows of $\mathcal{W}_{\mathcal{I}}$ in whichever direction
+			\item \textbf{2-out-of-6:} from an object of the form $\widehat{i}$ to any objects, arrows corresponding, by the co-Yoneda lemma, to a path that is an isomorphism in the localization
+		\end{enumerate}
+		
+		We will now prove that $\widehat{\mathcal{W}}_{\mathcal{I}}$ admits a \textbf{U}-calculus of fractions in $\widehat{\mathcal{I}}$.  Frist we want to prove that this class respects \textbf{U}. In the \textbf{Weak} case, one just has to consider ``$u$'' to be the inverse path of the sequence of composable arrows and change $c$ by $\widehat{c}$ if it's not already of this form. In the \textbf{R0} case, it is clear as we made sure to have identities and have assured that $\mathcal{W}_{\mathcal{I}}$ is stable by composition. The \textbf{2-out-of-3} and \textbf{2-out-of-6} cases are also clear by construction. Now for \textbf{R1} and \textbf{R2}, we can always pick $p = \widehat{a}$ if $a$ is not already of this form, and $u$ corresponding to $1_a$ (and in \textbf{R1}, $h$ corresponding to the juxtaposition of paths $w^{-1}\circ f$).
+		
+		Hence $(\widehat{\mathcal{I}},\widehat{\mathcal{W}}_{\mathcal{I}})$ is a \textbf{U}-calculus of fractions and we can apply $\textnormal{\textbf{U}-Frac}(\mathcal{I}, \mathcal{W}_{\mathcal{I}}, S)$ to the co-Yoneda embedding. We get an object $p$ apex of the resulting cone. Either $p$ is an object of $\mathcal{I}$, which implies that it was initial in $\mathcal{I}$ and hence initial in $\mathcal{I}[\mathcal{W}^{-1}_{\mathcal{I}}]$ too, or $p$ is an object of the form $\widehat{i_0}$. Let's consider the latter case that $p = \widehat{i_0}$. The projection $\pi_{i_0}$ of the cone at $i_0$ correspond to a path from $i_0$ to itself in the localization:
+		
+		\[\xymatrix{
+			&& \widehat{i_0}\ar@{.>}[ddll]_{[1_{i_0}] = \pi_{i_0}} \ar@{.>}[ddl] \ar@{.>}[dd] \ar@{.>}[ddrr] \ar@{.>}[ddrrr]^{\pi_{i_0}}\\
+			\\
+			i_0 \ar[r] & \bullet \ar@{<-}[r]|{\circ} & \bullet \ar@{<-}[r]|{\circ} & \cdots \ar[r] & \bullet \ar@{<-}[r]|{\circ} & i_0
+		}\]
+		
+		By using the fact that we have a cone, we can walk our way back in the zig-zag defining $\pi_{i_0}$. At each step (going from right to left in the drawing), we see that the projection of the cone is equivalent to the path it ``covers''. Hence in the end we get $[1_{i_0}] = \pi_{i_0}$. Because it is a cone, we know that $\mathcal{I}[\mathcal{W}^{-1}_{\mathcal{I}}]$ is connected. Let $j: \mathcal{I}$. Now take any path $z$ from $i_0$ to $j$ in the localization. This time by walking our way forward in the path, we show that $\pi_j = [z]$. Hence we have shown that $i_0$ is initial in the localization, hence there exists an initial object. Furthermore, for any object $s$ of $S$, we know that $\pi_s$ is in $\widehat{\mathcal{W}}_{\mathcal{I}}$ and hence we get each time the second part of the criterion.
+		
+		\item[$(\Leftarrow)$] Let $\mathcal{B}$ be a category, $\mathcal{W}$ be a \textbf{U}-calculus of fractions on $\mathcal{B}$, $F:\mathcal{I} \to \mathcal{B}$ be a functor sending arrows of $\mathcal{W}_{\mathcal{I}}$ to arrows of $\mathcal{W}$. Let's first describe the idea of the proof. As $i_0$ is initial, we want to consider paths out of $i_0$. For every such path we want to construct a common apex $p$ and a ``cone'':
+		
+		\[\xymatrix{
+			p\ar@{.>}[dd] \ar@{.>}[ddr] \ar@{.>}[ddrr] \ar@{.>}[ddrrrr] \ar@{.>}[ddrrrrr]\\
+			\\
+			F(i_0) \ar[r] & \bullet \ar@{<-}[r]|{\circ} & \bullet \ar@{<-}[r]|{\circ} & \cdots \ar[r] & \bullet \ar@{<-}[r]|{\circ} & \bullet
+		}\]
+		
+		By ``cone'', we mean that, when seen in the category $\mathcal{B}$, this is an actual cone (when the arrow $w^{-1}$ drawn in the opposite direction is just seen as the arrow $F(w)$ drawn in its own right direction). We could ask for all this data to be common to each path by asking that: each projection of the ``cone'' drawn only depend on the section of path from $i_0$ that it covers. Now using this construction we would like to exhibit a cone on $\mathcal{I}$ by using the fact that there is a unique equivalence class of paths from $i_0$ to any $j:\mathcal{I}$. For this idea to make sense, we need that the collection of projections $x_{(u_1, \dots, u_n)}: p \to F(\textnormal{codom}((u_1, \dots, u_n))) = F(\textnormal{codom}(u_n))$ that we created are compatible with the equivalence relation. As we are working ``out of $i_0$'', it is natural to start by fixing a projection to $i_0$ then try to construct all the other projections using \textbf{R1} and \textbf{R2} in $\mathcal{B}$. This leads us naturally to consider a construction by induction on the size of the paths. Hence, in more precise terms, we want to construct by induction on $n \ge 0$:
+		
+		\begin{enumerate}[label = $\bullet$]
+			\item \textbf{Induction Hypothesis:} an object $p^n: \mathcal{B}$ and a family of arrows $x^n_{(u_1, \dots, u_k)}: p \to F(\textnormal{codom}(u_k))$ for each $0 \le k \le n$, for each object $j:\mathcal{I}$ and each path $(u_1, \dots, u_k): i_0 \to j$ of size $k$, such that:
+			\begin{enumerate}[label = $(\Roman*)$]
+				\item $x^n_{\emptyset} \in \mathcal{W}$
+				\item for any two elementarily equivalent parallel paths $(u_1, \dots, u_k) \sim (v_1, \dots, v_l): i_0 \to j$ of size smaller than $n$, we have $x^n_{(u_1, \dots, u_k)} = x^n_{(v_1, \dots, v_l)}$
+				\item for any path $(u_1, \dots, u_k): i_0 \to j$ of size $1 \le k \le n$, we have $x^n_{(u_1, \dots, u_k)} = F(u_k) \circ x^n_{(u_1, \dots, u_{k-1})}$ when $u_k \in \mathcal{I}_1$ and $F(u_k^{-1}) \circ x^n_{(u_1, \dots, u_k)} = x^n_{(u_1, \dots, u_{k-1})}$ when $u_k \in \mathcal{W}_{\mathcal{I}}^{-1}$.
+			\end{enumerate}
+			\item \textbf{Initialization at $n=0$:} We take $p^0 = F(i_0)$ and $x^0_{\emptyset} = 1_{F(i_0)}$.
+			\item \textbf{Induction Step:} Let's assume that the induction hypothesis as been completed for some $n\ge 0$ and let's construct the $(n+1)$-th step. As the properties $(I-III)$ that we want are stable by pre-composition of the family of arrows $x^n$ by some arrow in $\mathcal{W}$ (in the \textbf{Weak} case, we need to pre-compose by this arrow then a new one in $\mathcal{B}$ to make sure $(I)$ stays true, but the end result is the same), we will introduce here a slight abuse of notations. We will start with $p^{n+1} = p^n$ and keep ``updating'' $p^{n+1}$ till we have constructed all the desired arrows and verified all the desired properties. Each ``update'' of $p^{n+1}$ correspond to building a new object $p^{n+1\prime}$ and an arrow $p^{n+1\prime} \to p^{n+1} \in \mathcal{W}$ (or for \textbf{Weak}, an arrow $p^{n+1\prime} \to p^{n+1}$ such that the composition $p^{n+1\prime} \to p^{n+1} \to F(i_0) \in \mathcal{W}$). The abuse of notation here is that we will just completely replace $p^{n+1}$ by $p^{n+1\prime}$ and $x^{n+1}$ by the pre-composition without using the symbol $-^{\prime}$, as if $p^{n+1}$ and $x^{n+1}$ were some sort of re-adressable variables.
+			First, let's define for all $0\le k \le n$, $x^{n+1}_{(u_1, \dots, u_k)} = x^n_{(u_1, \dots, u_k)}$. Then for each path $(u_1, \dots, u_n): i_0 \to j$ of size $n$ and for each $u \in \mathcal{I}_1$ out of $j$, we define $x^{n+1}_{(u_1, \dots, u_n, u)} = F(u) \circ x^{n}_{(u_1, \dots, u_n)}$. Now for each path $(u_1, \dots, u_n): i_0 \to j$ of size $n$ and for each $u \in \mathcal{W}_{\mathcal{I}}$ into of $j$, we update $p^{n+1}$ using \textbf{R1} on $x^{n}_{(u_1, \dots, u_n)}$ and $u$:
+			\[\xymatrix{
+				\bullet \ar@{.>}[r] \ar@{.>}[d]|{\circ} & F(\textnormal{codom}((u_1, \dots, u_{n},u^{-1})))\ar[d]^{F(u)}|{\circ}\\ p^{n+1} \ar[r]_{x^n_{(u_1, \dots, u_{n})}} & F(j)
+			}\]
+			This creates the whole family of arrows $x^{n+1}$. We know want to make sure that it respects the properties $(I-III)$. $(I-II)$ are true by construction. $(III)$ will also be verified by construction whenever the elementary equivalence doesn't involve the last arrow of the path. Hence we just need to focus on $(III)$ in these special cases. Let's treat one by one the elementary equivalences $(i-iv)$:
+			\begin{enumerate}[label = $(\roman*)$]
+				\item clear by construction as $x^{n+1}(u_1, \dots, u_{n}, 1_a) = F(1_a) \circ x^{n+1}(u_1, \dots, u_{n}) = x^{n+1}(u_1, \dots, u_{n})$,
+				\item clear by construction as when $u_n, u_{n+1} \in \mathcal{I}_1$, we have $x^{n+1}(u_1, \dots, u_{n}, u_{n+1}) = F(u_{n+1}) \circ x^{n+1}(u_1, \dots, u_{n}) = F(u_{n+1}) \circ F(u_n) \circ x^{n+1}(u_1, \dots, u_{n-1}) = F(u_{n+1} \circ u_n) \circ x^{n+1}(u_1, \dots, u_{n-1}) = x^{n+1}(u_1, \dots, u_{n-1}, u_{n+1} \circ u_n)$,
+				\item clear by construction as for $(u_1, \dots, u_{n-1}): i_0 \to j$ a path of size $n-1$, and for $w\in \mathcal{W}_{\mathcal{I}}$ into $j$, we have $x^{n+1}(u_1, \dots, w^{-1}, w) = F(w) \circ x^{n+1}(u_1, \dots, w^{-1}) = x^{n+1}(u_1, \dots, u_{n-1})$,
+				\item for the final condition, for $(u_1, \dots, u_{n-1}): i_0 \to j$ a path of size $n-1$, and for $w\in \mathcal{W}_{\mathcal{I}}$ out of $j$, we have
+				\[F(w) \circ x^{n+1}(u_1, \dots, w, w^{-1}) = x^{n+1}(u_1, \dots, w) = F(w) \circ x^{n+1}(u_1, \dots, u_{n-1})\]
+				Hence it is \textit{not} clear by construction that $x^{n+1}(u_1, \dots, w, w^{-1})$ is the same as $x^{n+1}(u_1, \dots, u_{n-1})$. However, using \textbf{R2} on those two arrows and $F(w)$, we can update $p^{n+1}$ to make sure that $x^{n+1}(u_1, \dots, w, w^{-1}) = x^{n+1}(u_1, \dots, u_{n-1})$.
+			\end{enumerate}
+			Hence we have proved the induction step.
+		\end{enumerate}
+		
+		Now that have establish this inductive construction we are left to find with a problem. We wanted to construct an arrow $x_{(u_1, \dots, u_n)}: p \to F(\textnormal{codom}((u_1, \dots, u_n)))$ for every $n \ge 0$. However the paths can be arbitrarily long and the candidate for $p$ that we constructed depends on this size. In other words: as we can't \textit{a priori} take limits in $\mathcal{B}$, we have to bound the size of the paths to consider. Luckily, the statement ``$i_0$ is initial in $\mathcal{I}[\mathcal{W}^{-1}]$'' allows us to do just that. Let's fix for all $j:\mathcal{I}$ a path $(u^j_1, \dots, u^j_{n_j}): i_0 \to j$, which always exists by intiality of $i_0$. For all $j$ we consider the set of paths $U_j = \{(u^{j^{\prime}}_1, \dots, u^{j^{\prime}}_{n_{j^{\prime}}},u) \mid j^{\prime}: \mathcal{I} \textnormal{ and } u \in \mathcal{I}_1 \textnormal{ with dom}(u) = \textnormal{codom}(u^{j^{\prime}}_{n_{j^{\prime}}})\}$. We know that any two paths in $U_j$ are equivalent by intiality of $i_0$. Hence for any two paths in $U_j$, we can exhibit a finite sequence of paths, elementary equivalent from one to the next, going from the first path to the second. We decide to add those paths to the set $U_j$. After adding all those paths for all $j:\mathcal{I}$, we still have a finite collection of finite sets $(U_j)_{j:\mathcal{I}}$. Hence there is a bound $n\ge 0$ such that all the paths in all the $U_j$ are smaller than $n$. We claim that $p = p^n$ will give us the desired cone. For all $j:\mathcal{I}$, we define $\pi_j = x^n_{(u^j_1, \dots, u^j_{n_j})}$. By definition of $x^n$, we have that, for all $u: j^{\prime} \to j$,
+		\[\begin{array}{rclr}
+			\pi_j & = & x^n_{(u^j_1, \dots, u^j_{n_j})} & \text{(by definition of $\pi_j$)}\\
+			& = &  x^n_{(u^{j^{\prime}}_1, \dots, u^{j^{\prime}}_{n_{j^{\prime}}},u)} & \text{(by existence of the sequence of elementary equivalences)}\\
+			& = & F(u) \circ x^n_{(u^{j^{\prime}}_1, \dots, u^{j^{\prime}}_{n_{j^{\prime}}})} & \text{(by definition of $x^n$)}\\
+			& = & F(u) \circ \pi_{j^{\prime}} & \text{(by definition of $\pi_{j^{\prime}}$)}
+		\end{array}\]
+		
+		Hence we have created an object $p:\mathcal{B}$ and a cone at $p$ on $F$ such that the projection at $i_0$ is in $\mathcal{W}$. Now for any object $s$ of $S$, it is also clear that the projection $\pi_s$ is in $\mathcal{W}$, except in the case where \textbf{U} is \textbf{2-out-of-6} which requires a bit of knowledge about saturation: we need to use that \textbf{2-out-of-6}, \textbf{R1} and \textbf{R2} imply \textbf{Iso}. Using \textbf{Iso} it is clear that all the $\pi_s$ are in $\mathcal{W}$ for $s \in S$. This is the only time in this proof (or even this section) where we authorize ourselves to use some known result on calculus of fractions that uses the explicit construction of the localization. For the curious reader, this is proven again in the next section. For now, we will take it for granted, and conclude this long proof.
+	\end{enumerate}
+\end{proof}
+
+\begin{remark}
+	The category $\widehat{\mathcal{I}}$ is in some sense the ``biggest'' diagram that can be built out of the data of a diagram on $\mathcal{I}$. By adjusting $\widehat{\mathcal{W}_I}$ to the stability condition considered in our fraction axioms (following the previous remark), we can see $\widehat{\mathcal{I}}$ as the free ``fractionification'' of $\mathcal{I}$. Exploring a formal way to express this could lead to an interesting take on calculus of fractions.
+\end{remark}
+
+\begin{remark}
+	We can see that \textbf{Weak} is a special case of $\textnormal{\textbf{U}-Frac}$ when considering the diagram $\mathcal{I}$ being a juxtaposition of composable arrows in $\mathcal{W}_{\mathcal{I}}$ and chosing $S$ to be the singleton formed by the codomain of this chain of composition. This is already a good reason to claim that \textbf{Weak} is the weakest form the axiom \textbf{R0} can take. We will explore this in more detail in the next section.
+\end{remark}
+
+\begin{remark}
+	If we had allowed ourselves to freely use the construction of the calculus of fractions in this proof (which is done in the next section), we would have been able to write a quicker proof of the ``$\Leftarrow$'' part. Indeed every paths from $i_0$ is sent in $\mathcal{B}$ to a path equivalent to a 2-step zig-zag. Using this and using \textbf{R1}, we can make all those 2-steps zig-zag with a common apex. Then we would be done by initiality. We chose to avoid this proof as it ``cheats'' by using the construction of the calculus of fractions that we haven't proven yet and want to expose in the next section. The version of the proof that we decided to expose is also closer to the ideas used to show that every finite (connected) diagram has a cocone in a (pseudo)filtered category, which was one of goal of this exposition.
+\end{remark}
+
+This theorem shows how irrelevant the set $S$ is in the final description of the raw condition: indeed there is no reason to consider $S$ to be bigger than a single element, as the fact that the projections to the elements of $S$ are in $\mathcal{W}$ is implied by the fact that the projection to $i_0$ is and by \textbf{U}. Hence we have the following useful corollary and characterization of calculus of fractions:
+
+\begin{corollary}[A New Definition of Fractions] Let $\mathcal{B}$ be a category and $\mathcal{W}$ be a family of arrows of $\mathcal{B}$. Then \textbf{Weak}, \textbf{R1}, \textbf{R2} is equivalent to \textbf{Frac} where:
+	\begin{enumerate}
+		\item[\textbf{Frac:}] for each $\mathcal{I}$ finite category, $\mathcal{W}_{\mathcal{I}}$ family of arrows of $\mathcal{I}$, $i_0:\mathcal{I}$ initial in $\mathcal{I}[\mathcal{W}_{\mathcal{I}}^{-1}]$, and for each $F:\mathcal{I} \to \mathcal{B}$ functor that sends arrows of $\mathcal{W}_{\mathcal{I}}$ to arrows of $\mathcal{W}$, we have an object $p:\mathcal{B}$ and a cone at $p$ on $F$, such that the projection at $i_0$ is an arrow of $\mathcal{W}$.
+	\end{enumerate}
+\end{corollary}
+
+\subsection{The axiom \textbf{Frac}}
+
+This new characterisation of calculus of fractions gives quick proofs to a lot of results using calculus of fractions. Here we list situations in which this axiom quickly gives a proof of a result. The proofs are not thoroughly detailed to make them more visual. The reader is free to complete any missing detail. Let $\mathcal{B}$ be a category together with a family of arrows $\mathcal{W}$ respecting \textbf{Frac}.
+
+\begin{enumerate}
+	\item \textbf{The arrows of the localization are simplified:} If we take a path from $a$ to $b$ in $\mathcal{B}[\mathcal{
+		W}^{-1}]$, then $a$ is intial in the localization of the diagram corresponding to this path:
+	\[\xymatrix{
+		a \ar[r] & \bullet \ar@{<-}[r]|{\circ} & \bullet \ar@{<-}[r]|{\circ} & \cdots \ar[r] & \bullet \ar@{<-}[r]|{\circ} & b
+	}\]
+	Hence by \textbf{Frac}, we can take a cone on this diagram with the projection at $a$ being in $\mathcal{W}$:
+	\[\xymatrix{
+		&& p \ar[ddll]|{\circ} \ar[ddl] \ar[dd] \ar[ddrr] \ar[ddrrr]\\
+		\\
+		a \ar[r] & \bullet \ar@{<-}[r]|{\circ} & \bullet \ar@{<-}[r]|{\circ} & \cdots \ar[r] & \bullet \ar@{<-}[r]|{\circ} & b
+	}\]
+	This in turn implies that our path is equivalent to the simpler $\xymatrix{a & p \ar[l]|{\circ} \ar[r] & b}$.
+	\item \textbf{The equivalences of the localization are simplified:} If we take two paths from $a$ to $b$ in $\mathcal{B}[\mathcal{
+		W}^{-1}]$ that are equivalent, then $a$ is initial in the localization of the diagram corresponding to drawing the sequence of elementary equivalences between them (this drawing is just a visualization of what such a diagram would be):
+	\[\xymatrix{
+		&& \bullet \ar[r] & \cdots \ar@{<-}[r]|{\circ} & \bullet \ar[dr]\\
+		& \bullet \ar@{<-}[ur]|{\circ} &&&& \bullet \ar[dr]\\
+		a \ar[ur] \ar@{<-}[dr]|{\circ} \ar[r] & \bullet \ar[u] \ar@{<-}[r]|{\circ} & \bullet \ar[ul] \ar[uu] && \cdots&& b\\
+		& \bullet \ar@{<-}[dr]|{\circ} && \cdots&& \bullet \ar[ur]\\
+		&& \bullet \ar[r] & \cdots \ar[r] & \bullet \ar@{<-}[ur]|{\circ}\\
+	}\]
+	Hence by \textbf{Frac}, we can take a cone on this diagram with the projection at $a$ being in $\mathcal{W}$ (we draw here only the ``outer'' border of the cone):
+	\[\xymatrix{
+		&& \bullet \ar[r] & \cdots \ar@{<-}[r]|{\circ} & \bullet \ar[dr]\\
+		& \bullet \ar@{<-}[ur]|{\circ} &&&& \bullet \ar[dr]\\
+		a \ar[ur] \ar@{<-}[dr]|{\circ}  &&& p \ar[lll]|{\circ} \ar[ull] \ar[uul] \ar[uu] \ar[uur] \ar[urr] \ar[rrr] \ar[dll] \ar[ddl] \ar[dd] \ar[ddr] \ar[drr] &&& b\\
+		& \bullet \ar@{<-}[dr]|{\circ} &&&& \bullet \ar[ur]\\
+		&& \bullet \ar[r] & \cdots \ar[r] & \bullet \ar@{<-}[ur]|{\circ}\\
+	}\]
+	This gives a simpler general form for the equivalences between paths.
+	\item \textbf{Composition of 2-steps zig-zags is simplified:} If we consider a series of two composable 2-step zig-zags:
+	\[\xymatrix{
+		& a^{\prime} \ar[dl]|{\circ} \ar[dr] && b^{\prime} \ar[dl]|{\circ} \ar[dr]\\
+		a && b && c
+	}\]
+	then by the remark number $1$, we can express the composition with a cone on this diagram. However, considering that the path starts with an arrow in the ``opposite'' direction, we are free to choose $a^{\prime}$ as the initial object. If we remove the redundant arrows (that can be expressed by composing others), we have the diagram:
+	\[\xymatrix{
+		&& p \ar[dl]|{\circ} \ar[dr]\\
+		& a^{\prime} \ar[dl]|{\circ} \ar[dr] && b^{\prime} \ar[dl]|{\circ} \ar[dr]\\
+		a && b && c
+	}\]
+	Hence the composition of those two 2-step zig-zags can be done simply by taking a cone of the form \textbf{R1} on the middle shape.
+	\item \textbf{Equivalence between 2-steps zig-zags is simplified:} If we consider two equivalent parallel 2-step zig-zags:
+	\[\xymatrix{
+		& a^{\prime}_1 \ar[dl]|{\circ} \ar[drrr] && a^{\prime}_2 \ar[dlll]|{\circ} \ar[dr]\\
+		a &&&& b
+	}\]
+	then by the remark number $2$, we can express the equivalence with a cone on this diagram. If we remove the redundant arrows (that can be expressed by composing others), we have the diagram:
+	\[\xymatrix{
+		&& p \ar[dl] \ar[dr]\\
+		& a^{\prime}_1 \ar[dl]|{\circ} \ar[drrr] && a^{\prime}_2 \ar[dlll]|{\circ} \ar[dr]\\
+		a &&&& b
+	}\]
+	such that the unique composition from $p$ to $a$ is in $\mathcal{W}$.
+	\item \textbf{Localization by calculus of fractions:} The four previous points prove that \textbf{Frac} implies that the localization can be simplified by the usual construction of the calculus of fractions. We will see later that the other implication is also true.
+	\item \textbf{$\mathcal{W}/a$ is co-filtered:} Let $a: \mathcal{B}$. We define $\mathcal{W}/a$ to be the full sub-category of the slice $(\mathcal{B} \downarrow a)$ at the objects that correspond to arrows in $\mathcal{W}$. A finite diagram of shape $\mathcal{I}$ in $\mathcal{W}/a$ is the same thing as a finite diagram of shape $\mathcal{I}$ in $\mathcal{B}$ together with a cocone at $a$ such that every projection is in $\mathcal{W}$. If we freely add a terminal object to $\mathcal{I}$, creating a new finite category $\widehat{\mathcal{I}}$, and if we call $i_0$ this terminal object and define $\mathcal{W}_{\widehat{\mathcal{I}}}$ to be the class of arrows with codomain $i_0$, then we have a diagram of shape $\widehat{\mathcal{I}}$ in $\mathcal{B}$ to which we can apply \textbf{Frac}. The apex of the cone we get, together with the projection at $i_0$, is an object of $\mathcal{W}/a$ apex of a cone of our diagram. Hence we have proven that $\mathcal{W}/a$ is co-filtered.
+	\item \textbf{Filtered implies fractions:} If $\mathcal{B}$ is filtered and $\mathcal{W}$ is the class of all arrows, then it is clear that \textbf{Frac} is true.
+	\item \textbf{Fibrations lift fractions:} Let $p: \mathcal{E} \to \mathcal{B}$ be a fibration, let $\mathcal{C}_{\mathcal{W}}$ be the family of cartesian arrows above arrows of $\mathcal{W}$, let $\mathcal{I}$, $i_0$, $\mathcal{W}_{\mathcal{I}}$ and $F:\mathcal{I} \to \mathcal{E}$ be as in \textbf{Frac}. Then we can apply \textbf{Frac} to $p\circ F$. We get a cone of apex $b:\mathcal{B}$ on $p\circ F$ with the projection at $p(F(i_0))$ being in $\mathcal{W}$. We can lift each projection to cartesian arrows. This gives us a diagram $H: \mathcal{I} \to \mathcal{E}_b$. We can also notice that $H$ sends arrows of $\mathcal{W}_I$ to isomorphisms, as the composition of cartesian arrows is cartesian, and as cartesian lifts are unique up to isomorphisms. Hence $H(i_0)$ is the apex of a cone on $F$ with the projection at $i_0$ being in $\mathcal{C}_{\mathcal{W}}$.
+\end{enumerate}
+
+Now that we have mentioned a series of results implied by \textbf{Frac}, let's try to think about what implies \textbf{Frac}. We have seen that it is equivalent to \textbf{Weak}, \textbf{R1} and \textbf{R2}, but a good motivation for this new definition of fraction would be to show that is naturally comes from the simplification we want on the construction of the localization.
+
+One could imagine that \textbf{Frac} is equivalent to the fact that every arrow in the localization can be written as $\xymatrix{\bullet & \bullet \ar[l]|{\circ} \ar[r] & \bullet}$. However, this is actually weaker than \textbf{Frac}. Indeed for a calculus of fractions we also need a simplified form for the equivalences between paths. One can easily check by following the roughly the same proof as in the last section the following result:
+
+\begin{proposition}[Weak Fractions] Let $\mathcal{B}$ be a category and $\mathcal{W}$ be a family of arrows. Then every arrows of $\mathcal{B}[\mathcal{W}^{-1}]$ is represented by a ``2-step zig-zag'' $\xymatrix{\bullet & \bullet \ar[l]|{\circ} \ar[r] & \bullet}$ if and only if:
+	\begin{enumerate}
+		\item[\textbf{[Frac]:}] for each $\mathcal{I}$ finite category, $\mathcal{W}_{\mathcal{I}}$ family of arrows of $\mathcal{I}$, $i_0:\mathcal{I}$ initial in $\mathcal{I}[\mathcal{W}_{\mathcal{I}}^{-1}]$, and for each $F:\mathcal{I} \to \mathcal{B}$ functor that sends arrows of $\mathcal{W}_{\mathcal{I}}$ to arrows of $\mathcal{W}$, we have an object $p:\mathcal{B}$ and a family of arrows $\pi_i:p \to F(i)$ for each $i:\mathcal{I}$, such that the projection at $i_0$ is an arrow of $\mathcal{W}$, and $(p,[\pi])$ is a cone on $L_{\mathcal{}}\circ F$ in the localization.
+	\end{enumerate}
+\end{proposition}
+This is the same axiom as \textbf{Frac} but weakened by requiring that the commutativity of the diagrams of the cone are only up to equivalence of paths. One can check that this in turn is equivalent to asking for \textbf{[Weak]} and \textbf{[R1]} (where once again the commutativity is only required up to equivalence).
+
+Hence it is not enough, to have fractions, to only ask for some simplified form for the arrows of the localization. However, if we add a requirement on the equivalences, we get exactly \textbf{Frac}:
+
+\begin{proposition}[Fractions and Calculus]  Let $\mathcal{B}$ be a category and $\mathcal{W}$ be a family of arrows. Then \textbf{Frac} is equivalent to:
+	\begin{enumerate}[label = $(\roman*)$]
+		\item \textbf{Simplified Arrows:} every arrows of $\mathcal{B}[\mathcal{W}^{-1}]$ is represented by a ``2-step zig-zag'' \[\xymatrix{\bullet & \bullet \ar[l]|{\circ} \ar[r] & \bullet}\]
+		\item \textbf{Simplified Equivalences:} for every path, \textnormal{of length 2}, and every ``2-step zig-zag'' equivalent to this path, the equivalence relation can be simplified by a diagram of the form:
+		\[\xymatrix{
+			&& \bullet \ar[r] & \cdots \ar@{<-}[r]|{\circ} & \bullet \ar[dr]\\
+			& \bullet \ar@{<-}[ur]|{\circ} &&&& \bullet \ar[dr]\\
+			a \ar[ur]  &&& p \ar[lll]|{\circ} \ar[ull] \ar[uul] \ar[uu] \ar[uur] \ar[urr] \ar[rrr] \ar[dd] &&& b\\
+			\\
+			&&& \bullet \ar[uulll]|{\circ} \ar[uurrr]\\
+		}\]
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	It's clear that \textbf{Frac} implies these two properties. Let's now show these properties imply \textbf{Weak}, \textbf{R1} and \textbf{R2}:
+	\begin{enumerate}[label = $\bullet$]
+		\item \textbf{Weak:} The existence of a ``2-step zig-zag'' representation of the identity arrows tells us that: for all $a:\mathcal{B}$, there exists an arrow $p \to a \in \mathcal{W}$. Now take a pair of composable arrows in $\mathcal{W}$ from $b$ to $a$. It corresponds to a path from $a$ to $b$. We know by $(i)$ that this path as a representation as a 2-step zig-zag, and we can consider the equivalence between them in the form of $(ii)$:
+		\[\xymatrix{
+			& c \ar[dl]|{\circ} \\
+			a  & p \ar[l]|{\circ}\ar[u]\ar[r]\ar[d] & b \ar[ul]|{\circ}\\
+			& \bullet \ar[ul]|{\circ} \ar[ur]
+		}\]
+		Hence $p$ and his projection to $b$ gives us the property \textbf{Weak}.
+		\item \textbf{R1:} Consider a wrongly ordered 2-step zig-zag from $a$ to $b$: $\xymatrix{a \ar[r] & c & b \ar[l]|{\circ}}$. Then by considering the correctly ordered 2-step zig-zag equivalent to it by $(i)$ and considering the equivalence as in $(ii)$, we have a diagram:
+		\[\xymatrix{
+			& c \\
+			a \ar[ur]  & p \ar[l]|{\circ}\ar[u]\ar[r]\ar[d] & b \ar[ul]|{\circ}\\
+			& \bullet \ar[ul]|{\circ} \ar[ur]
+		}\]
+		Hence $p$ and his projection to $a$ and $b$ gives us the property \textbf{R1}.
+		\item \textbf{R2:} We can easily see that the property $(ii)$ extends to any two paths, of length two, that are equivalent. Indeed, we can pick a 2-step zig-zag corresponding to this equivalence class, and then each path can be linked via $p_1$ and $p_2$ to it by $(ii)$. In the notation of $(ii)$, we can see that the paths $\xymatrix{a & p_1 \ar[l]|{\circ} \ar[r] & b}$ and $\xymatrix{a & p_2 \ar[l]|{\circ} \ar[r] & b}$ are equivalent. Hence by applying $(ii)$ to those two again, we get the general form of $(ii)$ for any two equivalent paths. Let's now come back to \textbf{R2}. We pick a diagram
+		\[\xymatrix{
+			a \ar@/^/[r]^f \ar@/_/[r]_g & b \ar[r]^w|{\circ} & c
+		}\]
+		such that $wf = wg$. This implies that the paths $(f)$ and $(g)$ are equivalent. Hence we have by $(ii)$:
+		\[\xymatrix{
+			a \ar@/^2pc/[rr]^f \ar@/_2pc/[rr]_g & p \ar[l]|{\circ}^u \ar[r] & b
+		}\]
+		such that $fu = gu$. Hence we have $(ii)$.
+	\end{enumerate}
+\end{proof}
+
+This result justifies our claim that \textbf{Frac} is the weakest possible form for a fraction condition. We also have with \textbf{Frac} (or even only with \textbf{[Frac]}), the following result. Let's remind the reader that a functor $F:\mathcal{A} \to \mathcal{B}$ is (representably) flat when $(b \downarrow F)$ is co-filtered for all $b:\mathcal{B}$.
+
+\begin{proposition}[Weak Calculus of Fractions are Flat] Let $\mathcal{B}$ be category and let $\mathcal{W}$ be a family of arrows respecting \textbf{[Frac]}. Then the localization functor $L_{\mathcal{W}}: \mathcal{B} \to \mathcal{B}[\mathcal{W}^{-1}]$ is (representably) flat.
+\end{proposition}
+\begin{proof}
+	By carefully looking at what co-filterdness of the slices mean, one can see that the localization being (representably) flat is equivalent to:
+	\begin{enumerate}
+		\item[\textbf{Flat:}] for each $\mathcal{I}$ finite category, $\mathcal{W}_{\mathcal{I}}$ family of arrows of $\mathcal{I}$, $i_0:\mathcal{I}$ initial in $\mathcal{I}[\mathcal{W}_{\mathcal{I}}^{-1}]$, and for each $F:\mathcal{I} \to \mathcal{B}$ functor that sends arrows of $\mathcal{W}_{\mathcal{I}}$ to arrows of $\mathcal{W}$, we have an object $p:\mathcal{B}$ and a family of arrows $\pi_i:p \to F(i)$ for each $i:\mathcal{I}$, such that $[(\pi_{i_0})]$ has a left inverse, and $(p,[\pi])$ is a cone on $L_{\mathcal{}}\circ F$ in the localization.
+	\end{enumerate}
+	which is clearly implied by \textbf{[Frac]}.
+\end{proof}
+
+Hence we have the corollary, slightly more general than the usual result:
+
+\begin{corollary} Let $\mathcal{B}$ be category and let $\mathcal{W}$ be a family of arrows respecting \textbf{[Frac]}. Then the localization functor $L_{\mathcal{W}}:\mathcal{B} \to \mathcal{B}[\mathcal{W}^{-1}]$ preserves finite limits.
+\end{corollary}
+
+Finally, let's mention some results on saturation:
+
+\begin{proposition}[Saturated Calculus of Fractions] Let $\mathcal{B}$ be category and let $\mathcal{W}$ be a family of arrows respecting \textbf{Frac}. Then
+	\[\textbf{2-out-of-6} \Longleftrightarrow\textbf{Sat} \Longleftrightarrow \textbf{Iso}\]
+\end{proposition}
+\begin{proof}
+	$\textbf{Sat}\Rightarrow\textbf{2-out-of-6}$ is clear as the family of isomorphisms of a category always satisfies \textbf{2-out-of-6}, and \textbf{2-out-of-6} is stable by taking the preimage of a family.
+	It is clear that $\textbf{Sat}\Leftrightarrow\textbf{Iso}$ as the path $\xymatrix{\bullet & \bullet \ar[l]|{\circ}\ar[r]^f & \bullet}$ is an isomorphism in the localization, if and only if $[(f)]$ is an isomorphism, if and only if $f \in \mathcal{W}$. We are just left to prove $\textbf{2-out-of-6}\Rightarrow\textbf{Sat}$. Let $f$ be an arrow such that $[(f)]$ is an isomorphism. Let us write the inverse as $\xymatrix{\bullet & \bullet \ar[l]|{\circ}_w\ar[r]^g & \bullet}$. By the form of the simplified equivalences, the fact that $gw^{-1}f = 1$ implies that we have:
+	\[\xymatrix{
+		&p_1 \ar[dl]|{\circ} \ar[d] \ar[dr]\\
+		\bullet \ar[r]^f & \bullet & \bullet \ar[l]|{\circ}_w\ar@/^1pc/[ll]^g
+	}\]
+	and $fgw^{-1} = 1$ implies that we have:
+	\[\xymatrix{
+		&p_2 \ar[dl] \ar[d]|{\circ} \ar[dr]\\
+		\bullet \ar[r]^f & \bullet & \bullet \ar[l]|{\circ}_w\ar@/^1pc/[ll]^g
+	}\]
+	By \textbf{Frac} on this small diagram we then have:
+	\[\xymatrix{
+		&p \ar@{.>}[dl] \ar@{.>}[dr] \ar@{.>}[dd]|{\circ}\\
+		p_1\ar[dr] && p_2 \ar[dl]\\
+		& \textnormal{dom}(f)
+	}\]
+	Hence we can use \textbf{2-out-of-6} on $\xymatrix{p \ar[r] & p_2 \ar[r]& \bullet \ar[r]^f & \bullet}$ to conclude.
+\end{proof}
+
+\subsection{Conclusion}
+
+Let's finish this section by a recap, from the strongest to the weakest, of the various properties considered. Each time we consider the strongest and weakest ``diagrammatic'' formulation, and a ``localized'' condition, by which we mean a condition on the construction of the localization $\mathcal{B}[\mathcal{W}^{-1}]$.
+
+\begin{enumerate}[label = $\bullet$]
+	\item \textbf{Saturated Calculus of Fractions:} This is the situation in which the localization by $\mathcal{W}$ is a calculus of fractions and the class $\mathcal{W}$ is saturated. It allows us to write all isomorphism of the localization as $\xymatrix{\bullet & \bullet \ar[r]|{\circ} \ar[l]|{\circ} & \bullet}$, and we also now that $[(f)]$ is an isomorphism if and only if $f \in \mathcal{W}$. It is equivalent in its stronger diagrammatic formulation to  \textbf{Sat} and \textbf{Frac}, or in its weakest diagrammatic formulation to \textbf{2-out-of-6}, \textbf{R1} and \textbf{R2}, or in its localized formulation to \textbf{Simplified Arrows}, \textbf{Simplified Equivalences} and \textbf{Iso}.
+	\item \textbf{Calculus of Fractions:} This is the most general situation possible in which we can compute the localization by a calculus of fractions. It is equivalent in its strongest diagrammatic formulation to \textbf{Frac}, or in its weakest diagrammatic formulation to \textbf{Weak}, \textbf{R1} and \textbf{R2}, or in its localized formulation to \textbf{Simplified Arrows} and \textbf{Simplified Equivalences}.
+	\item \textbf{Weak Calculus of Fractions:} This is the situation in which every arrow in the localization can be written as $\xymatrix{\bullet & \bullet \ar[r]|{\circ} \ar[l] & \bullet}$, with no requirement on how complicated the equivalences are. It is equivalent in its strongest diagrammatic formulation to \textbf{[Frac]}, or in its weakest diagrammatic formulation to \textbf{[Weak]} and \textbf{[R1]}, or in its localized formulation to \textbf{Simplified Arrows}.
+	\item \textbf{Flat Localization:} This is the situation in which the localization functor $\mathcal{B} \to \mathcal{B}[\mathcal{W}^{-1}]$ is (representably) flat, which is already a ``localized'' formulation. This is equivalent to \textbf{Flat}, which would be the strong diagrammatic formulation. The reader is left with finding whichever weak diagrammatic formulation he cares for.
+\end{enumerate}
+
+\newpage
+
+\section{Free Bicategories, Coherence and Localization}
+
+Fundamentally, the localization of a category is the category obtained by ``freely'' adding new generators (the inverses of the arrows of $\mathcal{W}$) under some new relations (the left and right inverse identities) to the already existing category (already generated by all its arrows under all the possible relations given by composition and unity of the identities). Localizing a bicategory should not be any different as a bicategory is also defined by an algebraic structure. The difficulty however lies in the description. We describe here an easy definition of the construction. We decide to put here any size consideration aside and to work naively with ``collections'' instead of sets. The work here can be interpreted in any first order logic that can makes sense of basic statements such that the declaration of the (co)domain of an arrow or 2-cell, or such that the declaration of some equalities between compositions of 2-cells. For the reader that wants a more precise foundation, this whole development works for small categories and bicategories (where all the ``collections'' are sets), which is enough for the next section.
+
+\subsection{Free Category and Coherence}
+
+Let us briefly describe how a free category is defined. Let us consider two collections $\mathcal{B}_0$ and $\mathcal{B}_1$ together with domain and codomain maps (in fact being a mapping is not necessary, we could weaken this by only having predicaments of the form $d(u) = a$ that are not necessarily functional, which would lead to what is describe as ``protocategories'')
+
+\[\xymatrix{\mathcal{B}_1 \ar@/^1pc/[r]|d \ar@/_1pc/[r]|c & \mathcal{B}_0 }\]
+
+We see $\mathcal{B}_0$ and $\mathcal{B}_1$ respectively as the collection of objects and arrows we give ourselves. We want to define the category generated by this data. Instead of speaking of ``objects'' and ``paths'' as in the description of localization that we used, we will use the words ``$0$-shape'' and ``$1$-shape''.
+
+\begin{definition}[$0$-Shape] A $0$-shape is an element of $\mathcal{B}_0$. We write $\mathcal{S}_0 = \mathcal{B}_0$ for the collection of all $0$-shapes.
+\end{definition}
+
+\begin{definition}[1-Shape] A 1-shape of size $n$ is a $n$-tuples $(u_1, \dots u_n)$ of elements of $\mathcal{B}_1$ such that $c(u_i) = d(u_{i+1})$ for all $1 \le i \le n-1$. We define $d(u_1, \dots u_n) = d(u_1)$ and $c(u_1, \dots u_n) = c(u_n)$. We write $\mathcal{S}_1$ for the collection of all $1$-shapes.
+\end{definition}
+
+We have extended our collections to
+
+\[\xymatrix{\mathcal{S}_1 \ar@/^1pc/[r]|d \ar@/_1pc/[r]|c & \mathcal{S}_0 }\]
+
+One can then easily check that the juxtaposition of $1$-shapes, together with the identity empty $1$-shape of size $0$, forms a category. This is the free category generated by the graph $\xymatrix{\mathcal{B}_1 \ar@/^/[r]|d \ar@/_/[r]|c & \mathcal{B}_0 }$. Using this description we get the coherence theorem of categories.
+
+\begin{definition}[Computation of 1-shapes] A \textnormal{bracketing} of an $n$-tuples $(u_1, \dots, u_n)$ is a formal expression defined recursively as being either ``$u_1(-)$'' when $-$ is a bracketing of $(u_2, \dots, u_n)$, or ``$(-)u_n$'' when $-$ is a bracketing of $(u_1, \dots, u_{n-1})$, or the empty formal expression if $n=0$. An $m$-tuple $(v_1, \dots, v_m)$ is obtained by \textnormal{adding identities} to an $n$-tuples $(u_1, \dots, u_n)$ if there is a strictly increasing function $\phi: \{1, \dots, n\} \to \{1, \dots, m\}$ such that $v_{\phi(k)} = u_k$ for all $1 \le k \le n$, and the other $v_i$'s are identities. A \textnormal{computation} $c$ of a 1-shape $u$ is the choice of a one shape $u^{\prime}$ obtained from $u$ by adding identities, and of a bracketing of $u^{\prime}$.
+\end{definition}
+
+If $\xymatrix{\mathcal{B}_1 \ar@/^/[r]|d \ar@/_/[r]|c & \mathcal{B}_0 }$ was the collection of arrows and objects of a category, for each computation $c$ of a 1-shape $u$, we can define recursively an arrow $|u|_c$ corresponding to its composition.
+
+\begin{theorem}[Coherence of Categories] Let $\mathcal{B}$ be a category. Let
+	\[\xymatrix{\mathcal{B}_1 \ar@/^1pc/[r]|d \ar@/_1pc/[r]|c & \mathcal{B}_0 }\]
+	be its collection of arrows and objects with the domain and codomain maps. Let $u$ be a 1-shape. There exists a unique arrow $[u]: d(u) \to c(u)$, such that all computations of $u$ composes to this arrow.
+\end{theorem}
+
+\subsection{Free Bicategory and Coherence}
+
+To define a free bicategory, we first define the underlying free category on all objects and arrows we want: $\xymatrix{\mathcal{B}_1 \ar@/^/[r]|d \ar@/_/[r]|c & \mathcal{B}_0 }$ gives us $\xymatrix{\mathcal{S}_1 \ar@/^/[r]|d \ar@/_/[r]|c & \mathcal{S}_0 }$ as in the last section. Then we introduce a collection of 2-cells and domain and codomain maps such that this diagram commute:
+
+\[\xymatrix{\mathcal{B}_2 \ar@/^1pc/[r]|d \ar@/_1pc/[r]|c & \mathcal{S}_1 \ar@/^1pc/[r]|d \ar@/_1pc/[r]|c & \mathcal{S}_0}\]
+
+This means that we allow ourselves to freely consider any $2$-cell from any composition of arrows to any composition of arrows (including empty compositions):
+
+\[\xymatrix{
+	&& \bullet \ar[r] & \cdots \ar[r] & \bullet \ar[dr]\\
+	& \bullet \ar[ur] &&&& \bullet \ar[dr]\\
+	a \ar[ur] \ar[dr]  &&& \Downarrow &&& b\\
+	& \bullet \ar[dr] &&&& \bullet \ar[ur]\\
+	&& \bullet \ar[r] & \cdots \ar[r] & \bullet \ar[ur]
+}\]
+
+with the condition that both those $1$-shapes need to have a common domain and codomain. Now the difficulty lies in describing the generated class of all ``$2$-shapes'', i.e. all the possible ways to compose or ``paste'' those 2-cells. For a $1$-shape $u = (u_1, \dots, u_n)$, we write $|u| = \bigsqcup_{1 \le i \le n} \{u_i\}$ for the set of the arrows composing it counted with multiplicity.
+
+\begin{definition}[pseudo-$2$-shape] A pseudo-$2$-shape is a non-ordered finite collection $S \subset \mathcal{B}_2$ together with two $1$-shapes $d(S)$ and $c(S)$ and a bijection called ``identification'':
+	\[|c(S)|\sqcup \bigsqcup_{s \in S}|d(s)| \simeq |d(S)|\sqcup \bigsqcup_{s \in S}|c(s)|\]
+	The size of a pseudo-$2$-shape is the cardinal of its set $S$.
+\end{definition}
+
+The idea of this identification is the following: when composing several 2-cells, each arrows involved is either: an arrow of the domain or the codomain, appearing once, or an arrow playing a role of an intermediary step in the composition, appearing twice. We then define by induction on $n\ge 0$:
+
+\begin{definition}[$2$-shape] A $2$-shape of size $0$ is a pseudo-$2$-shape of size $0$ such that $d(S)=c(S)$ and the identification is the identity. A $2$-shape of size $n$ is a pseudo-$2$-shape of size $n$ such that there exists $s_0 \in S$ and a $1$-shape $c^{\prime}$ such that:
+	\begin{enumerate}[label = $\bullet$]
+		\item $S^{\prime} = S\setminus \{s_0\}$ together with $d(S^{\prime}) = d(S)$ and $c(S^{\prime}) = c^{\prime}$ can be given an identification making it into a $2$-shape of size $n-1$, and
+		\item there exists two $1$-shapes $a,b$ such that we can write
+		\[\left\{\begin{array}{rcl}
+			c^{\prime} &=& a \circ d(s_0) \circ b\\
+			c(S) &=& a \circ c(s_0) \circ b
+		\end{array}\right.\]
+		\item the identification of $S$ is given by extending the identification of $S^{\prime}$ as:
+		\[\begin{array}{rcl}
+			|c(S)|\sqcup \bigsqcup_{s \in S}|d(s)| &=& |a| \sqcup |c(s_0)| \sqcup |b| \sqcup \bigsqcup_{s \in S}|d(s)|\\
+			&=& |a| \sqcup |c(s_0)| \sqcup |b| \sqcup |d(s_0)|\sqcup \bigsqcup_{s \in S^{\prime}}|d(s)|\\
+			&=& |c(s_0)| \sqcup |a| \sqcup |d(s_0)| \sqcup |b| \sqcup \bigsqcup_{s \in S^{\prime}}|d(s)|\\
+			&=& |c(s_0)| \sqcup |c(S^{\prime})| \sqcup \bigsqcup_{s \in S^{\prime}}|d(s)|\\
+			&\simeq& |c(s_0)| \sqcup |d(S^{\prime})| \sqcup \bigsqcup_{s \in S^{\prime}}|c(s)|\\
+			&=& |d(S)|\sqcup \bigsqcup_{s \in S}|c(s)|
+		\end{array}\]
+	\end{enumerate}
+\end{definition}
+
+This definition may seem very arbitrary, but truly we are only describing what it means to add a single 2-cell at the end of an existing pasting. One can then easily verify that this definition yields the same notion of ``pasting diagram'' as in Niles Johnson and Donald Yau's work: our approach is an algebraic one when their approach is more topological. In their work, they define a \textit{pasting diagram} as an ``assignment'' of objects, arrows and 2-cells to a \textit{anchored graph} (some form of finite planar directed graph) that has a \textit{pasting scheme} (a consistent rule to paste the 2-cells). It is clear that our $2$-shapes correspond to pasting diagrams and vice-versa, as we essentially both build our notion by gluing ``atomic'' $2$-shapes (the 2-cells). Hence we inherit their statement of coherence theorems for bicategories. Similarly to the dimension 1 case, we first need a notion of computation of shapes.
+
+\begin{definition}[Computation of $2$-shapes]
+	
+\end{definition}
+
+\begin{theorem}[Coherence of Bicategories] Let $\mathcal{B}$ be a bicategory. Let
+	\[\xymatrix{\mathcal{B}_2 \ar@/^1pc/[r]|d \ar@/_1pc/[r]|c & \mathcal{B}_1 \ar@/^1pc/[r]|d \ar@/_1pc/[r]|c & \mathcal{B}_0}\]
+	be its collection of 2-cells, arrows and objects with the domain and codomain maps. We define $\mathcal{B}_2^{\prime}$ to be the set of triples $(u,\alpha, v)$ where $u$ and $v$ are $1$-shapes and $\alpha$ is a 2-cell, such that there exists computations $c_u, c_v$ of $u,v$ with:
+	\[d(\alpha) = |u|_{c_u} \qquad \qquad c(\alpha) = |v|_{c_v}\]
+	Hence we have new domain and codomain maps giving us
+	\[\xymatrix{\mathcal{B}_2^{\prime} \ar@/^1pc/[r]|d \ar@/_1pc/[r]|c & \mathcal{S}_1 \ar@/^1pc/[r]|d \ar@/_1pc/[r]|c & \mathcal{S}_0}\]
+	For every $2$-shape $S$ on the original data, and for every computation $c_d,c_c$ of $d(S),c(S)$ respectively, there exists a unique 2-cell  $[S]_{c_d}^{c_c}: |d(S)|_{c_d} \to |c(S)|_{c_c}$ obtained as a pasting of $S$ with this specific computation on the domain and codomain.
+\end{theorem}
+
+We also have coherence theorems for pseudo-functors, pseudo-natural transformations and modifications.
+
+\subsection{Localization of a Bicategory}
+
+Let $\mathcal{B}$ be a bicategory and $\mathcal{W}$ be a family of arrows of $\mathcal{B}$. 
+
+\newpage
+\section{Fractions in Bicategory Theory}
+
+\subsection{Introduction}
+
+The first time a notion of localization for bicategories was considered is in \cite{CM_1996__102_3_243_0}, where a set of conditions $\bf BF1$-$\bf BF5$ was considered that allows for a construction of the localization generalizing the one in [GZ]. In \cite{DoretteLaura}, a weaker set of axioms $\bf WB1$-$\bf WB5$ is seen to suffice for this construction.
+We recall now for convenience this set of axioms:
+
+%these conditions were shown to be equivalent to
+
+\begin{enumerate}[label = $\bullet$]
+	\item \textbf{WB1:} All identities are in $\mathcal{W}$.
+	
+	\item \textbf{WB2:}  For any pair of composable arrows in $\mathcal{W}$, 
+	\[\xymatrix{b \ar[r]^v|{\circ} & c \ar[r]^w|{\circ} & d}\] there exists $a:\mathcal{B}$ and $u:a \to b$ such that $(wv)u: a \wto d$
+	
+	\item \textbf{WB3:} For any objects $a,b,c:\mathcal{B}$ and arrows $w: a \wto b$, $f: c \to b$, there is an object $d:\mathcal{B}$, arrows $h: d \to a$, $v: d \wto c$ and an invertible 2-cell $\alpha: fv \simeq wh$ \[\xymatrix{d \ar@{.>}[r]^h \ar@{.>}[d]_v|{\circ} \ar@{}[dr]|{\overset{\alpha}{\underset{\sim}{\Longrightarrow}}}& a\ar[d]^w|{\circ}\\c \ar[r]_f & b}\]
+	
+	\item \textbf{WB4:} For any objects $b,c,d:\mathcal{B}$, arrows $w: c \wto d$, $f,g: b \to c$, and a 2-cell $\alpha: wf \to wg$,  there exist an object $a:\mathcal{B}$, an arrow $u: a \wto b$, and a 2-cell $\beta: fu \to gu$   such that $\alpha \star u = w \star \beta$:
+	
+	\[\xymatrix{
+		b \ar@/^/[r]^f \ar@/_/[r]_g \ar@/^1.5pc/[rr]^{wf}="1" \ar@/_1.5pc/[rr]_{wg}="2" & c \ar[r]^w|{\circ} & d \ar@/^/@{=>}^(0.7){\alpha}"1";"2"
+	}
+	\qquad \leadsto \qquad
+	\xymatrix{
+		a\ar@{.>}[r]^u|{\circ} \ar@{.>}@/^1.5pc/[rr]^{fu}="1" \ar@{.>}@/_1.5pc/[rr]_{gu}="2" & b \ar@/^/[r]^f \ar@/_/[r]_g & c \ar@/_/@{:>}_(0.7){\beta}"1";"2"
+	}
+	\]
+	\[
+	\xymatrix{
+		a \ar@{.>}[r]^u|{\circ}  & b \ar@/^1pc/[r]^{wf}="1" \ar@/_0.7pc/[r]_{wg}="2" & d & = & a \ar@{.>}@/^1pc/[r]^{fu}="3" \ar@{.>}@/_0.7pc/[r]_{gu}="4" & c \ar[r]^w|{\circ} & d \ar@{=>}^{\alpha}"1";"2"\ar@{:>}^{\beta}"3";"4"
+	}
+	\]
+	Furthermore, the collection of triples $(a, u, \beta)$ such that $\alpha \star u = a_{w,u,g}^{-1} \circ (w \star \beta) \circ a_{w,u,f}$ as in {\bf WB4} satisfies the following property: for any two such triples $(a_1, u_1, \beta_1)$, $(a_2, u_2, \beta_2)$, there exists an object $x:\mathcal{B}$, arrows $s: x \to a_1$ and $t:x \to a_2$, and an invertible 2-cell $\epsilon: u_1 s \simeq u_2 t$ such that $u_1 s,u_2 t: x \wto b$ and the following diagram commutes: 
+	
+	\[\xymatrix{f(u_1s) \ar[d]_{f \star \epsilon} \ar[r]^{a^{-1}_{f,u_1,s}} & (fu_1)s \ar[r]^{\beta_1 \star s} & (gu_1)s \ar[r]^{a_{g,u_1,s}} & g(u_1s)\ar[d]^{g \star \epsilon}\\f(u_2t)\ar[r]^{a^{-1}_{f,u_2,t}} & (fu_1)t  \ar[r]_{\beta_2 \star t} & (gu_2)t\ar[r]^{a_{g,u_2,t}} & g(u_1t)}\]
+	
+	
+	\item \textbf{WB5:} If $w:a \wto b$ and there is an invertible 2-cell $v \simeq w$, then $v:a \wto b$
+\end{enumerate}
+
+We will argue here that \textbf{WB1+2+5} are too strong and that the weaker version of those axioms, together with \textbf{WB3+4}, is equivalent to a bicategorical version of \textbf{Frac}. We also write an equivalent formulation of \textbf{WB3+4} that looks more similar to the one-dimensional \textbf{R1+2}.
+
+\subsection{The axioms \textbf{WB1+2+5}}
+
+We will claim in this section that \textbf{WB5} is not necessary, and that \textbf{WB1+2} can be replaced by a single weaker axiom:
+
+\begin{enumerate}[label = $\bullet$]
+	\item \textbf{BWeak:} for all $b:\mathcal{B}$, there exists $a:\mathcal{B}$ and $w: a \wto b$, \textbf{and} for all pair of composable arrows in $\mathcal{W}$, 
+	\[\xymatrix{b \ar[r]^v|{\circ} & c \ar[r]^w|{\circ} & d}\] there exists $a:\mathcal{B}$, $s:a \to b$ and $u:a \wto d$ such that $u \simeq (wv)s$
+\end{enumerate}
+that also has a familiar \textit{stronger} formulation:
+\[\begin{array}{rcl}
+	\textnormal{\textbf{BWeak}} & \Longleftrightarrow & \text{``for any (potentially empty) sequence of composable arrows in $\mathcal{W}$}\\
+	&& \qquad  \qquad \xymatrix{b \ar[r]|{\circ} & \bullet \ar[r]|{\circ} & \bullet \ar[r]|{\circ} & \cdots \ar[r]|{\circ} & \bullet \ar[r]|{\circ} & c}\\
+	&& \text{from $b:\mathcal{B}$ to $c:\mathcal{B}$, there exists $a:\mathcal{B}$, $s: a \to b$, $u:a \wto c$ such that}\\
+	&& \qquad \xymatrix{a \ar@/^/[drrrrr]^{u}|{\circ} \ar[d]_{s} \ar@{}[drrr]|{\simeq}\\ b \ar[r]|{\circ} & \bullet \ar[r]|{\circ} & \bullet \ar[r]|{\circ} & \cdots \ar[r]|{\circ} & \bullet \ar[r]|{\circ} & c}\\
+	&& \text{commutes up to invertible 2-cells''}
+\end{array}\]
+
+\begin{proposition}[\textbf{WB1+2} $\Longrightarrow$ \textbf{BWeak}]
+	Let $\mathcal{B}$ be a category and $\mathcal{W}$ be a family of arrows satisfying \textbf{WB1+2}. Then $\mathcal{W}$ satisfies \textbf{BWeak}.
+\end{proposition}
+
+We decide to call \textbf{Pronk} the set of axioms \textbf{WB1+2+5}.
+
+\subsection{The axioms \textbf{WB3+4}}
+
+We will prove that, under \textbf{BWeak}, we the axioms \textbf{WB3+4} are together equivalent to \textbf{BR1+2+3} stated here:
+
+\begin{enumerate}[label = $\bullet$]
+	\item \textbf{BR1:} For any objects $a,b,c:\mathcal{B}$ and arrows $w: a \wto b$, $f: c \to b$, there is an object $d:\mathcal{B}$, arrows $h: d \to a$, $v: d \wto c$ and an invertible 2-cell $\alpha: fv \simeq wh$ \[\xymatrix{d \ar@{.>}[r]^h \ar@{.>}[d]_v|{\circ} \ar@{}[dr]|{\overset{\alpha}{\underset{\sim}{\Longrightarrow}}}& a\ar[d]^w|{\circ}\\c \ar[r]_f & b}\]
+	\item \textbf{BR2:} For any objects $b,c,d:\mathcal{B}$, arrows $w: c \wto d$, $f,g: b \to c$, and a 2-cell $\alpha: wf \to wg$,  there exist an object $a:\mathcal{B}$, an arrow $u: a \wto b$, and a 2-cell $\beta: fu \to gu$   such that $\alpha \star u = w \star \beta$:
+	
+	\[\xymatrix{
+		b \ar@/^/[r]^f \ar@/_/[r]_g \ar@/^1.5pc/[rr]^{wf}="1" \ar@/_1.5pc/[rr]_{wg}="2" & c \ar[r]^w|{\circ} & d \ar@/^/@{=>}^(0.7){\alpha}"1";"2"
+	}
+	\qquad \leadsto \qquad
+	\xymatrix{
+		a\ar@{.>}[r]^u|{\circ} \ar@{.>}@/^1.5pc/[rr]^{fu}="1" \ar@{.>}@/_1.5pc/[rr]_{gu}="2" & b \ar@/^/[r]^f \ar@/_/[r]_g & c \ar@/_/@{:>}_(0.7){\beta}"1";"2"
+	}
+	\]
+	\[
+	\xymatrix{
+		a \ar@{.>}[r]^u|{\circ}  & b \ar@/^1pc/[r]^{wf}="1" \ar@/_0.7pc/[r]_{wg}="2" & d & = & a \ar@{.>}@/^1pc/[r]^{fu}="3" \ar@{.>}@/_0.7pc/[r]_{gu}="4" & c \ar[r]^w|{\circ} & d \ar@{=>}^{\alpha}"1";"2"\ar@{:>}^{\beta}"3";"4"
+	}
+	\]
+	\item \textbf{BR3:} For any objects $b,c,d:\mathcal{B}$, arrows $w: c \wto d$, $f,g: b \to c$, and 2-cells $\alpha, \beta: f \to g$,  such that $w \star \alpha = w \star \beta$, there exist an object $a:\mathcal{B}$ and an arrow $u: a \wto b$, such that $\alpha \star u = \beta \star u$:
+	
+	\[\xymatrix{
+		b \ar@/^1pc/[r]^f_{}="1" \ar@/_1pc/[r]_g^{}="2" & c \ar[r]^w|{\circ} & d \ar@/^/@{=>}^{\alpha}"1";"2" \ar@/_/@{=>}_{\beta}"1";"2"
+	}
+	\qquad \leadsto \qquad
+	\xymatrix{
+		a\ar@{.>}[r]^u|{\circ} & b \ar@/^1pc/[r]^f_{}="1" \ar@/_1pc/[r]_g^{}="2" & c \ar@/^/@{=>}^{\alpha}"1";"2" \ar@/_/@{=>}_{\beta}"1";"2"
+	}
+	\]
+\end{enumerate}
+
+\begin{proposition}[\textbf{WB3+4} $\Longleftrightarrow$ \textbf{BR1+2+3}]
+	Let $\mathcal{B}$ be a category and $\mathcal{W}$ be a family of arrows satsifying \textbf{BWeak}. Then the set of axioms \textbf{WB3+4} is equivalent to \textbf{BR1+2+3}.
+\end{proposition}
+
+Throughout the rest of this section we will call, for \textbf{U} being either \textbf{Weak} or \textbf{Pronk}, a ``\textbf{U}-calculus of fractions'' any family of arrows $\mathcal{W}$ in a category $\mathcal{B}$ that satisfies \textbf{U} and \textbf{BR1+2+3}. We also abbreviate ``\textbf{Weak}-calculus of fractions'' by simply ``calculus of fractions''.
+
+Our goal here is to find a general form of a ``diagrammatic'' axiom of fractions as we did in ordinary category theory. In dimension 2 and higher, the naive generalization of the definition of cone is not general enough. One needs to introduce some larger notion to study, for example, limits. Weighted cones are a very natural generalization. 
+
+\begin{remark}[Intuition Behind the Notion of Weights]
+	Essentially, the idea of a weight is can be stated shortly as: instead of asking for a family of projections all ``compatible'' with each other (for all arrows in the diagram we have a commutative triangle), we just want to ask for a family of projections together with \textit{some} list of compatibility requirements. A good starting point to understand this generalization is to consider the following situation. If we have a diagram $F:\mathcal{I} \to \mathcal{B}$, and an object $p$ that will be out apex, then each arrow $u: p \to Fi$ \textit{generates} a collection of other projections: for all $j: I$, we have a post-composition functor $\mathcal{I}(i,j) \to \mathcal{B}(p,Fj)$. All those ``generated'' arrows are linked by some sort compatibility requirements: the post-composition by an arrow sends all projection to $j$ to projections to $j^{\prime}$, and different projections to $j$ may be linked together by 2-cells. The idea of a weight is simply to encapsulate such conditions. A weight is the assignement, for each $i:I$, of a collection of projections in the form of a category $Wi$. Those collections are subject to post-composition compatibilities (we have functors $Wu:Wi \to Wj$ for each $u:i \to j$), and within each collection we find comparaison 2-cells (in other words, the $Wi$'s are categories). In other words, a weight is a functor $W: \mathcal{I} \to \Cat$ and a weighted cone at the apex $p$ is a natural transformation $W \to \mathcal{B}(p,F(-))$. If one gives oneself a diagram $F:\mathcal{I} \to \mathcal{B}$ and any series of projections, 2-cells between projections and any series of equations written with those 2-cells, he can always \textit{generate} a weight as sketched above. This notion of cone is the good one to consider to do higher category theory and enriched category theory. In bicategory theory, we also have several other notions of cones that look more ``conical'' and are often preferred: lax and $\sigma$ cones. The ``lax'' case is not general enough to describe all describe all cones, but the $\sigma$ case actually generates all weights. One could attempt to describe the following conditions in the language of $\sigma$ cones, however, this case exploits a specific geometry of the diagrams that may not necessarily translate into a simpler statement.
+\end{remark}
+
+\begin{remark}[Finite Weights]
+	As weights are structures generated by some data, even if the input data is finite, the weight might not yields finite categories $Wi$ if $\mathcal{I}$ is not finite. There is no harm in redefining finite weights as functors $W$ that can be generated by finite data: this in turn says that $W$ is a finite (finite diagram and weight) colimit of corepresentables.
+\end{remark}
+
+This yield us to define in a slightly different way the \textit{raw fraction conditions}:
+
+\begin{definition}[Raw Fraction Conditions] Let $\mathcal{I}$ be a category, let $\mathcal{W}_I$ be a family of arrows of $\mathcal{I}$, let $W: \mathcal{I} \to \Cat$ be a finite non-empty weight and let $S$ be a family of elements of $W$. For \textbf{U} being either \textbf{BWeak} or \textbf{Pronk} the $(\mathcal{I}, \mathcal{W}_{\mathcal{I}}, W, S)$ raw \textbf{U}-fraction property is: 
+	\[\begin{array}{rcl}
+		\textnormal{\textbf{U}-Frac}(\mathcal{I}, \mathcal{W}_{\mathcal{I}}, W, S) & = & \text{``for all categories $\mathcal{B}$, for all \textbf{U}-calculus of fractions $\mathcal{W}$ on $\mathcal{B}$,}  \\
+		&& \text{for all functors $F: \mathcal{I} \to \mathcal{B}$ that sends arrows of $\mathcal{W}_{\mathcal{I}}$ to arrows of $\mathcal{W}$,}\\
+		&& \text{we have an object $p:\mathcal{B}$ and a $W$-weighted cone at $p$ of $F$,}\\
+		&& \text{such that all projections on the objects of $S$ are in $\mathcal{W}$''}
+	\end{array}\]
+\end{definition}
+
+We can then guess the statement of the general fraction condition theorem:
+
+\begin{theorem}[General Fraction Condition] 
+	Let $\mathcal{I}$ be a category, let $\mathcal{W}_I$ be a family of arrows of $\mathcal{I}$, let $W: \mathcal{I} \to \Cat$ be a finite non-empty weight and let $S$ be a family of elements of $W$. Then the $(\mathcal{I}, \mathcal{W}_{\mathcal{I}}, W, S)$ raw fraction conditions are equivalent to the following conditions:
+	\[\begin{array}{rcl}
+		\textnormal{\textbf{BWeak}-Frac}(\mathcal{I}, \mathcal{W}_{\mathcal{I}}, W, S) & \Longleftrightarrow & \text{``there exists an object $i_0: I$}  \\
+		&& \text{and a pointwise fully faithful natural transformation $W \hookrightarrow \mathcal{I}[\mathcal{W}_{\mathcal{I}}^{-1}](i_0,-)$}\\
+		&& \text{and $S \subseteq \{i_0\}$ ''}\\
+		
+		\textnormal{\textbf{Pronk}-Frac}(\mathcal{I}, \mathcal{W}_{\mathcal{I}}, W, S) & \Longleftrightarrow & \text{``there exists an object $i_0: I$}  \\
+		&& \text{and a pointwise fully faithful natural transformation $W \hookrightarrow \mathcal{I}[\mathcal{W}_{\mathcal{I}}^{-1}](i_0,-)$}\\
+		&& \text{and all objects of $S$ are codomain of a path from $i_0$,}\\
+		&& \text{which consists of a sequence of composable arrows of $\mathcal{W}_{\mathcal{I}}$''}
+	\end{array}\]
+\end{theorem}
+\begin{proof} We procede in a similar fashion as for the proof in dimension 1.
+\begin{enumerate}
+\item[$(\Rightarrow)$]Depending on \textbf{U} being:
+\begin{enumerate}[label = $\bullet$]
+	\item \textbf{BWeak:} We don't assume anything
+	\item \textbf{Pronk:} We assume without loss of generality that $\mathcal{W}_{\mathcal{I}}$ satisfies \textbf{WB1+5}
+\end{enumerate}
+
+We construct the bicategory $\widehat{\mathcal{I}}$ to be sub-bicategory of $[\mathcal{I}, \Cat]^{op}$ consisting of: the image of the co-Yoneda embedding $\mathcal{I} \to [\mathcal{I}, \Cat]^{op}$ (for which we use the same notations as for $\mathcal{I}$), the image of the composition of the co-Yoneda embedding and the pre-composition $\mathcal{I}[\mathcal{W}_{\mathcal{I}}^{-1}] \to [\mathcal{I}[\mathcal{W}_{\mathcal{I}}^{-1}], \Cat]^{op} \to [\mathcal{I}, \Cat]^{op}$ (for which we use the notation $\widehat{i} = \mathcal{I}[\mathcal{W}^{-1}_{\mathcal{I}}](i,-)$), and all arrows going from the objects of the latter to the objects of the former (corresponding to zig-zags by the co-Yoneda lemma). We introduce the class of arrows $\widehat{\mathcal{W}}_{\mathcal{I}}$ to be the union of the newly generated $\mathcal{W}_{\mathcal{I}}$ and, depending on \textbf{U} being:
+\begin{enumerate}[label = $\bullet$]
+	\item \textbf{Weak:} identities between objects of the form $\widehat{i}$, \textbf{and} arrows from objects of the form $\widehat{i}$ to objects of the form $i$ corresponding, by the co-Yoneda lemma, to the empty path
+	\item \textbf{Pronk:} arrows isomorphic to an identity between objects of the form $\widehat{i}$, \textbf{and} arrows from objects of the form $\widehat{i}$ to objects of the form $i$ corresponding, by the co-Yoneda lemma, to a path isomorphic to the empty path
+\end{enumerate}
+
+We will now prove that $\widehat{\mathcal{W}}_{\mathcal{I}}$ admits a \textbf{U}-calculus of fractions in $\widehat{\mathcal{I}}$.  First we want to prove that this class respects \textbf{U}. In the \textbf{Weak} case, one just has to consider ``$u$'' to be the inverse path of the sequence of composable arrows and change $c$ by $\widehat{c}$ if it's not already of this form. In the \textbf{R0} case, it is clear as we made sure to have identities and have assured that $\mathcal{W}_{\mathcal{I}}$ is stable by composition. The \textbf{2-out-of-3} and \textbf{2-out-of-6} cases are also clear by construction. Now for \textbf{R1} and \textbf{R2}, we can always pick $p = \widehat{a}$ if $a$ is not already of this form, and $u$ corresponding to $1_a$ (and in \textbf{R1}, $h$ corresponding to the juxtaposition of paths $w^{-1}\circ f$).
+
+Hence $(\widehat{\mathcal{I}},\widehat{\mathcal{W}}_{\mathcal{I}})$ is a \textbf{U}-calculus of fractions and we can apply $\textnormal{\textbf{U}-Frac}(\mathcal{I}, \mathcal{W}_{\mathcal{I}}, S)$ to the co-Yoneda embedding. We get an object $p$ apex of the resulting cone. Either $p$ is an object of $\mathcal{I}$, which implies that it was initial in $\mathcal{I}$ and hence initial in $\mathcal{I}[\mathcal{W}^{-1}_{\mathcal{I}}]$ too, or $p$ is an object of the form $\widehat{i_0}$. Let's consider the latter case that $p = \widehat{i_0}$. The projection $\pi_{i_0}$ of the cone at $i_0$ correspond to a path from $i_0$ to itself in the localization:
+
+\[\xymatrix{
+	&& \widehat{i_0}\ar@{.>}[ddll]_{[1_{i_0}] = \pi_{i_0}} \ar@{.>}[ddl] \ar@{.>}[dd] \ar@{.>}[ddrr] \ar@{.>}[ddrrr]^{\pi_{i_0}}\\
+	\\
+	i_0 \ar[r] & \bullet \ar@{<-}[r]|{\circ} & \bullet \ar@{<-}[r]|{\circ} & \cdots \ar[r] & \bullet \ar@{<-}[r]|{\circ} & i_0
+}\]
+
+By using the fact that we have a cone, we can walk our way back in the zig-zag defining $\pi_{i_0}$. At each step (going from right to left in the drawing), we see that the projection of the cone is equivalent to the path it ``covers''. Hence in the end we get $[1_{i_0}] = \pi_{i_0}$. Because it is a cone, we know that $\mathcal{I}[\mathcal{W}^{-1}_{\mathcal{I}}]$ is connected. Let $j: \mathcal{I}$. Now take any path $z$ from $i_0$ to $j$ in the localization. This time by walking our way forward in the path, we show that $\pi_j = [z]$. Hence we have shown that $i_0$ is initial in the localization, hence there exists an initial object. Furthermore, for any object $s$ of $S$, we know that $\pi_s$ is in $\widehat{\mathcal{W}}_{\mathcal{I}}$ and hence we get each time the second part of the criterion.
+
+\item[$(\Leftarrow)$] Let $\mathcal{B}$ be a category, $\mathcal{W}$ be a \textbf{U}-calculus of fractions on $\mathcal{B}$, $F:\mathcal{I} \to \mathcal{B}$ be a functor sending arrows of $\mathcal{W}_{\mathcal{I}}$ to arrows of $\mathcal{W}$. Let's first describe the idea of the proof. As $i_0$ is initial, we want to consider paths out of $i_0$. For every such path we want to construct a common apex $p$ and a ``cone'':
+
+\[\xymatrix{
+	p\ar@{.>}[dd] \ar@{.>}[ddr] \ar@{.>}[ddrr] \ar@{.>}[ddrrrr] \ar@{.>}[ddrrrrr]\\
+	\\
+	F(i_0) \ar[r] & \bullet \ar@{<-}[r]|{\circ} & \bullet \ar@{<-}[r]|{\circ} & \cdots \ar[r] & \bullet \ar@{<-}[r]|{\circ} & \bullet
+}\]
+
+By ``cone'', we mean that, when seen in the category $\mathcal{B}$, this is an actual cone (when the arrow $w^{-1}$ drawn in the opposite direction is just seen as the arrow $F(w)$ drawn in its own right direction). We could ask for all this data to be common to each path by asking that: each projection of the ``cone'' drawn only depend on the section of path from $i_0$ that it covers. Now using this construction we would like to exhibit a cone on $\mathcal{I}$ by using the fact that there is a unique equivalence class of paths from $i_0$ to any $j:\mathcal{I}$. For this idea to make sense, we need that the collection of projections $x_{(u_1, \dots, u_n)}: p \to F(\textnormal{codom}((u_1, \dots, u_n))) = F(\textnormal{codom}(u_n))$ that we created are compatible with the equivalence relation. As we are working ``out of $i_0$'', it is natural to start by fixing a projection to $i_0$ then try to construct all the other projections using \textbf{R1} and \textbf{R2} in $\mathcal{B}$. This leads us naturally to consider a construction by induction on the size of the paths. Hence, in more precise terms, we want to construct by induction on $n \ge 0$:
+
+\begin{enumerate}[label = $\bullet$]
+	\item \textbf{Induction Hypothesis:} an object $p^n: \mathcal{B}$ and a family of arrows $x^n_{(u_1, \dots, u_k)}: p \to F(\textnormal{codom}(u_k))$ for each $0 \le k \le n$, for each object $j:\mathcal{I}$ and each path $(u_1, \dots, u_k): i_0 \to j$ of size $k$, such that:
+	\begin{enumerate}[label = $(\Roman*)$]
+		\item $x^n_{\emptyset} \in \mathcal{W}$
+		\item for any two elementarily equivalent parallel paths $(u_1, \dots, u_k) \sim (v_1, \dots, v_l): i_0 \to j$ of size smaller than $n$, we have $x^n_{(u_1, \dots, u_k)} = x^n_{(v_1, \dots, v_l)}$
+		\item for any path $(u_1, \dots, u_k): i_0 \to j$ of size $1 \le k \le n$, we have $x^n_{(u_1, \dots, u_k)} = F(u_k) \circ x^n_{(u_1, \dots, u_{k-1})}$ when $u_k \in \mathcal{I}_1$ and $F(u_k^{-1}) \circ x^n_{(u_1, \dots, u_k)} = x^n_{(u_1, \dots, u_{k-1})}$ when $u_k \in \mathcal{W}_{\mathcal{I}}^{-1}$.
+	\end{enumerate}
+	\item \textbf{Initialization at $n=0$:} We take $p^0 = F(i_0)$ and $x^0_{\emptyset} = 1_{F(i_0)}$.
+	\item \textbf{Induction Step:} Let's assume that the induction hypothesis as been completed for some $n\ge 0$ and let's construct the $(n+1)$-th step. As the properties $(I-III)$ that we want are stable by pre-composition of the family of arrows $x^n$ by some arrow in $\mathcal{W}$ (in the \textbf{Weak} case, we need to pre-compose by this arrow then a new one in $\mathcal{B}$ to make sure $(I)$ stays true, but the end result is the same), we will introduce here a slight abuse of notations. We will start with $p^{n+1} = p^n$ and keep ``updating'' $p^{n+1}$ till we have constructed all the desired arrows and verified all the desired properties. Each ``update'' of $p^{n+1}$ correspond to building a new object $p^{n+1\prime}$ and an arrow $p^{n+1\prime} \to p^{n+1} \in \mathcal{W}$ (or for \textbf{Weak}, an arrow $p^{n+1\prime} \to p^{n+1}$ such that the composition $p^{n+1\prime} \to p^{n+1} \to F(i_0) \in \mathcal{W}$). The abuse of notation here is that we will just completely replace $p^{n+1}$ by $p^{n+1\prime}$ and $x^{n+1}$ by the pre-composition without using the symbol $-^{\prime}$, as if $p^{n+1}$ and $x^{n+1}$ were some sort of re-adressable variables.
+	First, let's define for all $0\le k \le n$, $x^{n+1}_{(u_1, \dots, u_k)} = x^n_{(u_1, \dots, u_k)}$. Then for each path $(u_1, \dots, u_n): i_0 \to j$ of size $n$ and for each $u \in \mathcal{I}_1$ out of $j$, we define $x^{n+1}_{(u_1, \dots, u_n, u)} = F(u) \circ x^{n}_{(u_1, \dots, u_n)}$. Now for each path $(u_1, \dots, u_n): i_0 \to j$ of size $n$ and for each $u \in \mathcal{W}_{\mathcal{I}}$ into of $j$, we update $p^{n+1}$ using \textbf{R1} on $x^{n}_{(u_1, \dots, u_n)}$ and $u$:
+	\[\xymatrix{
+		\bullet \ar@{.>}[r] \ar@{.>}[d]|{\circ} & F(\textnormal{codom}((u_1, \dots, u_{n},u^{-1})))\ar[d]^{F(u)}|{\circ}\\ p^{n+1} \ar[r]_{x^n_{(u_1, \dots, u_{n})}} & F(j)
+	}\]
+	This creates the whole family of arrows $x^{n+1}$. We know want to make sure that it respects the properties $(I-III)$. $(I-II)$ are true by construction. $(III)$ will also be verified by construction whenever the elementary equivalence doesn't involve the last arrow of the path. Hence we just need to focus on $(III)$ in these special cases. Let's treat one by one the elementary equivalences $(i-iv)$:
+	\begin{enumerate}[label = $(\roman*)$]
+		\item clear by construction as $x^{n+1}(u_1, \dots, u_{n}, 1_a) = F(1_a) \circ x^{n+1}(u_1, \dots, u_{n}) = x^{n+1}(u_1, \dots, u_{n})$,
+		\item clear by construction as when $u_n, u_{n+1} \in \mathcal{I}_1$, we have $x^{n+1}(u_1, \dots, u_{n}, u_{n+1}) = F(u_{n+1}) \circ x^{n+1}(u_1, \dots, u_{n}) = F(u_{n+1}) \circ F(u_n) \circ x^{n+1}(u_1, \dots, u_{n-1}) = F(u_{n+1} \circ u_n) \circ x^{n+1}(u_1, \dots, u_{n-1}) = x^{n+1}(u_1, \dots, u_{n-1}, u_{n+1} \circ u_n)$,
+		\item clear by construction as for $(u_1, \dots, u_{n-1}): i_0 \to j$ a path of size $n-1$, and for $w\in \mathcal{W}_{\mathcal{I}}$ into $j$, we have $x^{n+1}(u_1, \dots, w^{-1}, w) = F(w) \circ x^{n+1}(u_1, \dots, w^{-1}) = x^{n+1}(u_1, \dots, u_{n-1})$,
+		\item for the final condition, for $(u_1, \dots, u_{n-1}): i_0 \to j$ a path of size $n-1$, and for $w\in \mathcal{W}_{\mathcal{I}}$ out of $j$, we have
+		\[F(w) \circ x^{n+1}(u_1, \dots, w, w^{-1}) = x^{n+1}(u_1, \dots, w) = F(w) \circ x^{n+1}(u_1, \dots, u_{n-1})\]
+		Hence it is \textit{not} clear by construction that $x^{n+1}(u_1, \dots, w, w^{-1})$ is the same as $x^{n+1}(u_1, \dots, u_{n-1})$. However, using \textbf{R2} on those two arrows and $F(w)$, we can update $p^{n+1}$ to make sure that $x^{n+1}(u_1, \dots, w, w^{-1}) = x^{n+1}(u_1, \dots, u_{n-1})$.
+	\end{enumerate}
+	Hence we have proved the induction step.
+\end{enumerate}
+
+Now that have establish this inductive construction we are left to find with a problem. We wanted to construct an arrow $x_{(u_1, \dots, u_n)}: p \to F(\textnormal{codom}((u_1, \dots, u_n)))$ for every $n \ge 0$. However the paths can be arbitrarily long and the candidate for $p$ that we constructed depends on this size. In other words: as we can't \textit{a priori} take limits in $\mathcal{B}$, we have to bound the size of the paths to consider. Luckily, the statement ``$i_0$ is initial in $\mathcal{I}[\mathcal{W}^{-1}]$'' allows us to do just that. Let's fix for all $j:\mathcal{I}$ a path $(u^j_1, \dots, u^j_{n_j}): i_0 \to j$, which always exists by intiality of $i_0$. For all $j$ we consider the set of paths $U_j = \{(u^{j^{\prime}}_1, \dots, u^{j^{\prime}}_{n_{j^{\prime}}},u) \mid j^{\prime}: \mathcal{I} \textnormal{ and } u \in \mathcal{I}_1 \textnormal{ with dom}(u) = \textnormal{codom}(u^{j^{\prime}}_{n_{j^{\prime}}})\}$. We know that any two paths in $U_j$ are equivalent by intiality of $i_0$. Hence for any two paths in $U_j$, we can exhibit a finite sequence of paths, elementary equivalent from one to the next, going from the first path to the second. We decide to add those paths to the set $U_j$. After adding all those paths for all $j:\mathcal{I}$, we still have a finite collection of finite sets $(U_j)_{j:\mathcal{I}}$. Hence there is a bound $n\ge 0$ such that all the paths in all the $U_j$ are smaller than $n$. We claim that $p = p^n$ will give us the desired cone. For all $j:\mathcal{I}$, we define $\pi_j = x^n_{(u^j_1, \dots, u^j_{n_j})}$. By definition of $x^n$, we have that, for all $u: j^{\prime} \to j$,
+\[\begin{array}{rclr}
+	\pi_j & = & x^n_{(u^j_1, \dots, u^j_{n_j})} & \text{(by definition of $\pi_j$)}\\
+	& = &  x^n_{(u^{j^{\prime}}_1, \dots, u^{j^{\prime}}_{n_{j^{\prime}}},u)} & \text{(by existence of the sequence of elementary equivalences)}\\
+	& = & F(u) \circ x^n_{(u^{j^{\prime}}_1, \dots, u^{j^{\prime}}_{n_{j^{\prime}}})} & \text{(by definition of $x^n$)}\\
+	& = & F(u) \circ \pi_{j^{\prime}} & \text{(by definition of $\pi_{j^{\prime}}$)}
+\end{array}\]
+
+Hence we have created an object $p:\mathcal{B}$ and a cone at $p$ on $F$ such that the projection at $i_0$ is in $\mathcal{W}$. Now for any object $s$ of $S$, it is also clear that the projection $\pi_s$ is in $\mathcal{W}$, except in the case where \textbf{U} is \textbf{2-out-of-6} which requires a bit of knowledge about saturation: we need to use that \textbf{2-out-of-6}, \textbf{R1} and \textbf{R2} imply \textbf{Iso}. Using \textbf{Iso} it is clear that all the $\pi_s$ are in $\mathcal{W}$ for $s \in S$. This is the only time in this proof (or even this section) where we authorize ourselves to use some known result on calculus of fractions that uses the explicit construction of the localization. For the curious reader, this is proven again in the next section. For now, we will take it for granted, and conclude this long proof.
+\end{enumerate}
+\end{proof}
+
+\newpage
+
+\subsection{The axiom \textbf{BiFrac}}
+
+\subsection{Conclusion}
+
+\newpage
+\section{A Path for Further Generalization}
+
+
+\newpage
+\bibliographystyle{alpha}
+\bibliography{reference}
+	
+\end{document}

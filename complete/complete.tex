@@ -1,10 +1,14 @@
 \documentclass{article}
-\input{../mypreamble/a-preamble}
+\input{../mypreamble/preamble}
 \usepackage{mathdots}
 \usepackage{bookmark}
 
 \newcommand{\PL}{\mathrm{PL}}
 \renewcommand{\O}{\mathrm{O}}
+\newcommand{\quotient}[2]{{\raisebox{.2ex}{$#1$}/\raisebox{-.2ex}{$#2$}}}
+\newcommand{\Bin}[1]{\quotient{\mathbb{Z}}{2^{#1}\mathbb{Z}}}
+\newcommand{\Tau}[1]{\mathbb{T}_{2^{#1}}}
+\DeclareMathOperator{\Hull}{\mathsf{Hull}}
 
 %%%%% TITLE PAGE
 \title{Univalent Bordism Categories are Controlled}
@@ -16,7 +20,9 @@
 \tableofcontents
 \newpage
 
-\section{Definitions}
+\section{Introduction}
+
+Here is (up to potential mistakes) how the usual definition of the category of cobordisms goes:
 
 \begin{definition}[Pre-Bordism Category]
     We define an $(n+1)$-fold simplicial set $\PBord^n$ as follows.
@@ -38,6 +44,10 @@
         \end{enumerate}
     \end{enumerate}
 \end{definition}
+
+Famously, this is not univalent.
+The goal of this paper is to construct its univalent completion explicitly.
+The main intuition is that making this category univalent involves seeing a $k$-morphism not as a $k$-manifold 
 
 \subsection{Tameness}
 
@@ -172,10 +182,68 @@ But could be very difficult to actually work out the homotopy colimits.
         \item second part should be easier?
     \end{enumerate}
 \end{enumerate}
+\end{remark}
 
-\begin{proof}[of the equivalences of homs]
-    
-\end{proof}
+\subsection{Invertible Data as a Paving}
+
+For $n \geq 0$, we have a distance on $\Bin{n}$ given by the cyclic picture:
+    $d(i,j) = \min\{|i-j|, 2^n - |i-j|\}$ for all $i,j \inset \Bin{n}$.
+This is the shortest path distance for the undirected graph given by the edges $(i, i+1)$ for all $i \inset \Bin{n}$.
+This induces a product distance on $\Tau{n} \coloneq \Bin{n} \times \Bin{n+1}$.
+
+\begin{definition}[Exclusion on the Modulo Torus]
+    For $n \geq 0$, we define a subset $E_n \subset \Tau{n}$ as
+    \[
+        E_n = \{(i,j) \inset \Tau{n} \mid (i,j) \textnormal{ is at distance } \geq 2^{n-1} \textnormal{ from both } (0,0), (2^{n-1},2^n)\}
+    \]
+\end{definition}
+
+Bellow is an illustration of the first few $E_n$:
+
+\[\begin{array}{cccc}
+\circ & \bullet & \bullet & \bullet \\
+\bullet & \bullet & \circ & \bullet \\
+\end{array}\]
+
+
+\[\begin{array}{cccccccc}
+\circ & \circ & \bullet & \bullet & \bullet & \bullet & \bullet & \circ \\
+\circ & \bullet & \bullet & \bullet & \circ & \bullet & \bullet & \bullet \\
+\bullet & \bullet & \bullet & \circ & \circ & \circ & \bullet & \bullet \\
+\circ & \bullet & \bullet & \bullet & \circ & \bullet & \bullet & \bullet \\
+\end{array}\]
+
+\[\begin{array}{cccccccccccccccc}
+\circ & \circ & \circ & \circ & \bullet & \bullet & \bullet & \bullet & \bullet & \bullet & \bullet & \bullet & \bullet & \circ & \circ & \circ \\
+\circ & \circ & \circ & \bullet & \bullet & \bullet & \bullet & \bullet & \circ & \bullet & \bullet & \bullet & \bullet & \bullet & \circ & \circ \\
+\circ & \circ & \bullet & \bullet & \bullet & \bullet & \bullet & \circ & \circ & \circ & \bullet & \bullet & \bullet & \bullet & \bullet & \circ \\
+\circ & \bullet & \bullet & \bullet & \bullet & \bullet & \circ & \circ & \circ & \circ & \circ & \bullet & \bullet & \bullet & \bullet & \bullet \\
+\bullet & \bullet & \bullet & \bullet & \bullet & \circ & \circ & \circ & \circ & \circ & \circ & \circ & \bullet & \bullet & \bullet & \bullet \\
+\circ & \bullet & \bullet & \bullet & \bullet & \bullet & \circ & \circ & \circ & \circ & \circ & \bullet & \bullet & \bullet & \bullet & \bullet \\
+\circ & \circ & \bullet & \bullet & \bullet & \bullet & \bullet & \circ & \circ & \circ & \bullet & \bullet & \bullet & \bullet & \bullet & \circ \\
+\circ & \circ & \circ & \bullet & \bullet & \bullet & \bullet & \bullet & \circ & \bullet & \bullet & \bullet & \bullet & \bullet & \circ & \circ \\
+\end{array}\]
+
+
+\begin{definition}[Nodes of the Paving]
+    For $n \geq 0$, we define a subset $A_n \subset \mathbb{Z}^n$ as
+    \[
+        A_n = \{i \inset \mathbb{Z}^n \mid \forall 0 \leq j \leq n-1, \; (i_j, i_{j+1}) \inset E_n\}
+    \]
+\end{definition}
+
+\begin{definition}[Paving]
+    A rectangle in $\mathbb{Z}^n$ is a choice of a set of corners $R = \prod_{i = 1}^n R_i \subset \mathbb{Z}^n$ where $R_i \subset \mathbb{Z}$ is of cardinality either $1$ or $2$.
+    A paving is a collection of rectangles forming a cell decomposition of $\mathbb{R}^n$.
+    For $n \geq 0$, we have a paving $\mathcal{A}_n$ of $\mathbb{R}^n$ given by the following rule:
+    \begin{enumerate}
+        \item for all rectangles $R$, we have $R \inset \mathcal{A}_n$ if and only if $R \subset A_n$ and $\Hull(R)^\circ \cap A_n = \emptyset$.
+    \end{enumerate}
+\end{definition}
+
+\begin{remark}[Wavelets]
+    Consider $f = \sum_{i=1}^n \cos(\pi x_i)$ as a Morse function.
+    What we're doing is we're providing the ways to "fill" the gabs to create a diffeomorphism.
 \end{remark}
 
 \section{The Space of Objects}

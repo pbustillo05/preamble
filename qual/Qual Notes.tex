@@ -1,5 +1,5 @@
 \documentclass{article}
-\input{mypreamble/a-preamble}
+\input{../mypreamble/preamble}
 
 %%%%% TITLE PAGE
 \title{Qualification Exam Notes}
@@ -64,7 +64,6 @@ The latter is the object of interest here, which we call the $\infty$-category o
 The core of the proof lies in using Phillips Submersion Theorem, one of the first instance of a \textbf{microflexible h-Principle}.
 Instead of following Phillips' original proof to the letter, we will follow an exposition of his proof by Haeflinger \cite{Hae71}, further elucidated by Geiges \cite{Gei03}.
 At no cost, one can change notations to transform this argument into a proof of a microflexible h-Principle for general isotopy-invariant $\cat{X}$-sheaves, which we will do.
-
 
 \section{Smoothly Parametrized Spaces}
 
@@ -836,8 +835,136 @@ We define $\Phi \in X \times \mathbb{R} \times \mathbb{R} \to  X$ as follows:
 which is smooth and transverse to $(\pi,f)$.
 We can define $W_\Phi \subset (X \times \mathbb{R}) \times \mathbb{R} \times M$ which is a concordance between the idenity ($s = 0$) and an element in $N_k\cat{C}^\perp(X)$ ($s = 1$).
 
+\section{The $(\infty, n)$-Category of Cobordisms}
+
+In this section, the principles of microflexibility and concordance established in previous sections are elevated to classify the $(\infty, n)$-category of cobordisms.
+Where the GMTW theorem successfully computes the geometric realization of the $1$-fold cobordism category utilizing the h-principle, the natural generalization proposed by Schommer-Pries requires capturing the structure of manifolds with corners structured along an $n$-dimensional grid. 
+
+The prevailing literature often models this structure through an explicit point-set topology on the space of submanifolds, followed by an intricate manipulation of Segal's edgewise subdivision.
+Here, we depart entirely from the point-set topological approach.
+Instead, we rigidly adhere to the sheaf-theoretic methodology developed in Sections 1 through 4.
+By defining the $n$-fold cobordism category as an $n$-fold multi-simplicial sheaf over the site $\cat{X}$ of smooth manifolds, the geometric operation of "removing cuts" is executed naturally over a test manifold $X$.
+The problem is ultimately reduced, via inductive geometric realization, to the microflexible h-principle.
+
+\subsection{Definitions and the $n$-fold Segal Space}
+
+Fix integers $d, n \geq 0$, and let $M$ be a fixed, finite-dimensional ambient manifold without boundary. We consider unoriented, unframed submanifolds embedded into the product space $M \times \mathbb{R}^n$.
+
+\begin{definition}
+We define an $n$-fold simplicial sheaf $\cat{C}_{d;n}^\perp(M) \in (\Delta^\op)^n \to \sh(\cat{X})$ representing the $(\infty,n)$-category of $d$-dimensional cobordisms. 
+For an object $[\mathbf{k}] = (k_1, \dots, k_n) \in (\Delta^\op)^n$, the collection of sections over a test manifold $X \in \cat{X}$, denoted $\cat{C}_{d;n}^\perp(M)_{[\mathbf{k}]}(X)$, consists of pairs $\left( \mathbf{a}, W \right)$ satisfying the following structural conditions:
+\begin{enumerate}
+    \item \textbf{The Categorical Grid:} $\mathbf{a} = (\mathbf{a}^1, \dots, \mathbf{a}^n)$ is a collection of $n$ tuples, where for each $1 \leq i \leq n$, $\mathbf{a}^i = (a^i_0, a^i_1, \dots, a^i_{k_i})$ is a sequence of smooth maps $a^i_j \in X \to \mathbb{R}$ such that $a^i_0 < a^i_1 < \dots < a^i_{k_i}$ everywhere on the parameter space $X$.
+    \item \textbf{The Submanifold:} $W \subset_d X \times \mathbb{R}^n \times M$ is a closed subset such that the projection map $W \epi X$ is a proper smooth submersion whose fibers are $d$-dimensional manifolds.
+    \item \textbf{Compactness within the Grid:} The projection of the submanifold $W$ into the $\mathbb{R}^n$ factor is strictly bounded by the extremal grid values. Specifically, $W$ is required to be a subset of the localized region $X \underline{\times} \prod_{i=1}^n (a^i_0 - \epsilon, a^i_{k_i} + \epsilon) \times M$ for some strictly positive smooth function $\epsilon \in X \to (0, \infty)$.
+    \item \textbf{Cylindricality (Globularity):} For each coordinate direction $1 \leq i \leq n$ and each grid index $0 \leq j \leq k_i$, the submanifold $W$ must be cylindrical near the hyperplane defined by $a^i_j$. That is, there exists a neighborhood $U$ of the graph of $a^i_j$ in $X \times \mathbb{R}$ such that $W$ is invariant under translation in the $i$-th coordinate of $\mathbb{R}^n$ over $U$.
+\end{enumerate}
+\end{definition}
+
+The face and degeneracy maps of the multi-simplicial structure operate entirely by manipulating the grid $\mathbf{a}$. A face map drops a grid function $a^i_j$, effectively composing two adjacent cobordisms by forgetting the boundary that separated them. A degeneracy map duplicates a grid function, seamlessly inserting an identity cobordism. The strict cylindricality condition guarantees that these geometric compositions are smooth and well-defined, satisfying the requisite Segal conditions to model a coherent $(\infty,n)$-category.
+
+\subsection{The Strategy of Removing Cuts}
+
+To compute the total geometric realization $| \cat{C}_{d;n}^\perp(M) |$, which evaluates the functor $|-| \in \sh(\cat{X}) \to \Top$ across all $n$ simplicial directions simultaneously, we must systematically "remove the cuts" defined by the categorical grid.
+
+The grid essentially divides the manifold $W$ into a lattice of $n$-morphisms. Geometrically, taking the classifying space (geometric realization) of this category with respect to the $i$-th simplicial direction corresponds to integrating over all possible locations of the cuts $a^i_j$. Because the specific locations of the cuts do not alter the underlying topological structure of the manifold $W$, the geometric realization should yield a space equivalent to one where the cuts in the $i$-th direction have simply been erased. 
+
+Let $B_n$ denote the geometric realization functor applied exclusively to the $n$-th simplicial direction. Our immediate goal is to establish a weak equivalence of $(n-1)$-fold simplicial sheaves:
+
+Once this single-direction reduction is rigorously established, a trivial induction applies. Repeating this process $n$ times systematically removes the entire grid, reducing the complex $n$-fold categorical realization to the 0-fold classifying space of manifolds embedded in $M \times \mathbb{R}^n$, completely devoid of any categorical cuts:
+
+This $0$-fold space is nothing more than the fundamental sheaf of embedded, proper submersions parameterized over $X$. This is the exact domain where the microflexible h-principle governs.
+
+\subsection{Intermediate Categories and Transversality}
+
+To prove the equivalence $B_n \left| \cat{C}_{d;n}^\perp(M) \right| \simeq \left| \cat{C}_{d;n-1}^\perp(M \times \mathbb{R}) \right|$, we isolate the $n$-th simplicial direction and introduce three intermediate multi-simplicial sheaves. These intermediates mimic the logic of Section 4 by gradually relaxing the stringent cylindricality requirement into a mere transversality requirement, before dropping the cuts entirely.
+
+\begin{definition}
+Let $\cat{C}_{d;n}^\pitchfork(M)$ be the $n$-fold simplicial sheaf defined identically to $\cat{C}_{d;n}^\perp(M)$, except the cylindricality condition in the $n$-th direction is replaced by a standard transversality condition. For each $0 \leq j \leq k_n$, we require that the mapping $a^n_j$ acts as a regular value for the projection map $W \to \mathbb{R}^{\{n\}}$. The cylindricality conditions for the first $n-1$ directions remain strictly enforced.
+\end{definition}
+
+\begin{definition}
+Let $\cat{D}_{d;n}^\pitchfork(M)$ be the $n$-fold simplicial sheaf where the $n$-th direction represents the nerve of a topological poset. A $k_n$-simplex over $X$ consists of a manifold $W$ that is bounded and cylindrical in the first $n-1$ directions, but extends unbounded across the entire $n$-th coordinate $\mathbb{R}$. The simplex data includes a tuple $a^n_0 < a^n_1 < \dots < a^n_{k_n} \in X \to \mathbb{R}$ such that every $a^n_j$ is a regular value of the projection $p \in W \to \mathbb{R}^{\{n\}}$. Unlike $\cat{C}^\pitchfork$, the manifold $W$ does not terminate or change geometric structure near the outermost cuts; the cuts merely act as marked regular values along an infinite topological continuum.
+\end{definition}
+
+\begin{definition}
+Let $\cat{D}_{d;n}^\perp(M)$ denote the $(n-1)$-fold simplicial sheaf formed by completely discarding the $n$-th grid sequence $\mathbf{a}^n$. A section consists of a manifold $W \subset_d X \times \mathbb{R}^{n-1} \times (M \times \mathbb{R})$ that is cylindrical in the first $n-1$ directions and properly submersed over $X$. This sheaf is constant with respect to the $n$-th simplicial index. Note that $\cat{D}_{d;n}^\perp(M)$ is canonically isomorphic to the reduced category $\cat{C}_{d;n-1}^\perp(M \times \mathbb{R})$.
+\end{definition}
+
+We construct a zigzag of natural morphisms of $n$-fold simplicial sheaves:
+
+We will now prove that, upon applying the geometric realization $B_n$ to the $n$-th simplicial direction, each of these morphisms induces a weak homotopy equivalence.
+
+\subsection{Equivalence of Realizations: Executing the Removal of Cuts}
+
+We execute the "removing cuts" argument step-by-step using the criteria for weak homotopy equivalences of sheaves established in Section 2 (specifically Criterion 2.5). We evaluate the spaces over a fixed compact test manifold $X$ and a closed subset $A \subset X$.
+
+\subsubsection{Straightening Transversality to Cylindricality}
+
+\begin{lemma}
+The map $B_n | \cat{C}_{d;n}^\pitchfork(M) | \to B_n | \cat{C}_{d;n}^\perp(M) |$ is a weak homotopy equivalence.
+\end{lemma}
+
+\begin{proof}
+We must demonstrate that any section $u \in \cat{C}_{d;n}^\pitchfork(M)(X)$ can be deformed via concordance into a section in $\cat{C}_{d;n}^\perp(M)(X)$. The disparity between the two sheaves is solely the geometric behavior of $W$ near the hyperplanes $a^n_j$. In $\cat{C}^\pitchfork$, $W$ intersects these hyperplanes transversely; in $\cat{C}^\perp$, $W$ is perfectly cylindrical.
+
+Since transversality is an open condition, we can define a smooth isotopy of the ambient space $X \times \mathbb{R}^n \times M$ that flattens the $n$-th coordinate of $W$ near the cuts without introducing critical points. Choose a sufficiently small smooth function $\epsilon \in X \to (0, \infty)$ such that the intervals $(a^n_j - \epsilon, a^n_j + \epsilon)$ are disjoint. 
+
+Define a smooth family of diffeomorphisms $\Psi_t \in X \times \mathbb{R}^n \times M \to X \times \mathbb{R}^n \times M$ parameterized by a time variable $t \in $. The diffeomorphism leaves $X$, $M$, and the first $n-1$ coordinates of $\mathbb{R}^n$ entirely invariant. On the $n$-th coordinate $s \in \mathbb{R}$, we define $\Psi_t$ utilizing a smooth bump function $\rho(s)$ where $\rho(s) = 0$ for $|s| \leq 1/3$, $\rho(s) = s$ for $|s| \geq 2/3$, and $\rho'(s) > 0$ elsewhere. 
+
+We set the coordinate transformation locally near each cut to:
+\[
+\Psi_t(x, s) = (1-t)s + t \left( a^n_j(x) + \epsilon(x) \rho\left(\frac{s - a^n_j(x)}{\epsilon(x)}\right) \right)
+\]
+for $s$ within the $\epsilon$-neighborhood of any cut $a^n_j(x)$, and as the identity function elsewhere. 
+
+At $t=0$, $\Psi_0$ is the identity mapping. At $t=1$, $\Psi_1$ maps a neighborhood of $a^n_j$ constantly to the value $a^n_j$, effectively "stretching" the transverse intersection into a cylindrical collar of width $\epsilon/3$. Because $a^n_j$ is a strictly regular value, the geometric pullback $W_t = \Psi_t^{-1}(W)$ remains a smooth, proper submersion over $X$ for all $t$. The resulting family $W_t$ provides a strict, continuous concordance between the transverse cobordism and a fully cylindrical one, fulfilling Criterion 2.5 and proving the equivalence. 
+\end{proof}
+
+\subsubsection{Gluing the Cobordisms}
+
+\begin{lemma}
+The inclusion map $B_n | \cat{C}_{d;n}^\pitchfork(M) | \to B_n | \cat{D}_{d;n}^\pitchfork(M) |$ is a weak homotopy equivalence.
+\end{lemma}
+
+A $k_n$-simplex in $\cat{C}_{d;n}^\pitchfork$ consists of $k_n$ consecutive, compact cobordisms whose boundaries align transversely at the grid cuts $a^n_j$. Conversely, a $k_n$-simplex in $\cat{D}_{d;n}^\pitchfork$ consists of a single, unified manifold $W$ extending indefinitely in the $n$-th direction, simply marked with transverse regular values $a^n_0 < \dots < a^n_{k_n}$. 
+
+The equivalence is proven via a direct deformation retraction over the parameter space $X$. For any $W \in \cat{D}_{d;n}^\pitchfork$, the manifold extends over an unbounded range in $\mathbb{R}^{\{n\}}$. We define a smooth cutoff isotopy that smoothly retracts the infinite tails $(-\infty, a^n_0]$ and
+where the $n$-th coordinate of $\mathbb{R}^n$ has been seamlessly absorbed into the ambient background manifold, transitioning the background from $M$ to $M \times \mathbb{R}$.
+
+The $(\infty, n)$-category is structured entirely symmetrically with respect to its $n$ simplicial directions. Therefore, this geometric argument proceeds by simple induction. Applying the geometric realization functor iteratively across all $n$ simplicial directions yields a complete collapse of the grid:
+
+The resulting 0-fold simplicial sheaf $\cat{C}_{d;0}^\perp(M \times \mathbb{R}^n)$ contains no grid structure, no posets, and no categorical cuts. It is precisely the space of closed, $d$-dimensional manifolds embedded in $M \times \mathbb{R}^n$ that map down to $X$ as a proper smooth submersion. In the established notation of Section 4, this space is identically $\Phi^c(M \times \mathbb{R}^n)$.
+
+\subsection{Final Reduction via the Microflexible h-Principle}
+
+We have successfully reduced the geometric realization of the formidable $(\infty,n)$-category of cobordisms down to the bare, geometric sheaf of embedded manifolds $\Phi^c(M \times \mathbb{R}^n)$. The final step is to determine the absolute homotopy type of this space utilizing the microflexible h-principle.
+
+Let the total ambient space be $V = M \times \mathbb{R}^n$. We are interested in evaluating the sheaf $\Phi^c(V)(X)$, which represents the space of $d$-dimensional submanifolds $W \subset_d X \times V$ that are proper submersions over $X$. 
+
+We strictly analyze the unoriented, unframed geometry of the submanifolds to preserve the general applicability of the proof. For any test point $x \in X$ and any point on the manifold $w \in W_x$, the tangent space $T_w W_x$ forms a $d$-dimensional subspace of the ambient tangent space $T_w V$. This inclusion naturally induces a canonical Gauss map from the submanifold to the Grassmannian bundle:
+
+Because $W$ is smoothly embedded in $V$, it possesses a well-defined normal bundle $\nu_{W/X}$. Let $m = \dim(M)$. The dimension of the total ambient space $V$ is $m + n$. Therefore, the rank of the normal bundle is exactly the codimension, which is $m + n - d$. Let us define the relative ambient parameter $b = \dim(M) - d = m - d$. The rank of the normal bundle can thus be written as $b + n$.
+
+The normal bundle $\nu_{W/X}$ naturally classifies a continuous mapping into the orthogonal complement of the universal bundle over the Grassmannian. Let $\gamma_d$ be the tautological $d$-plane bundle over $\Gr_d(TV)$, and let $\gamma_d^\perp$ be its orthogonal complement of rank $b + n$. The normal bundle $\nu_{W/X}$ is canonically isomorphic to the pullback $\tau_{W/X}^* (\gamma_d^\perp)$.
+
+According to the microflexible h-principle (derived directly from Phillips's Submersion Theorem in Section 3), the sheaf of actual geometric submersions $\Phi^c(V)$ is weakly homotopy equivalent to the sheaf of \emph{formal} submersions. A formal submersion drops the rigid geometric integrability condition of the tangent bundle. It replaces the strict geometric embedding with purely bundle-theoretic data: a continuous map into $V$ accompanied by an injective bundle map over it. 
+
+By applying the Pontryagin-Thom collapse construction fiberwise over the ambient space $V$, the data of a formal submanifold equipped with a normal bundle $\gamma_d^\perp$ translates directly and bijectively into a continuous map into the Thom space of that bundle.
+
+Specifically, we form the fiberwise Thom space $\Thom^\fib(\gamma_d^\perp) \to V$. The fiber over a point $v \in V$ is the classic Thom space of the vector bundle $\gamma_d^\perp$ restricted to the Grassmannian $\Gr_d(T_v V)$. The Pontryagin-Thom construction dictates that for a test space $X$, the formal bundle data over $X \times V$ is equivalent to a compactly supported section of this fiberwise Thom bundle.
+
+Therefore, the h-principle furnishes a natural weak homotopy equivalence:
+
+This expression gives the space of compactly supported sections over the full ambient space $M \times \mathbb{R}^n$. However, we can refine this. Because the space $\mathbb{R}^n$ is contractible, the bundle topology over $M \times \mathbb{R}^n$ retracts smoothly onto the topology over the base manifold $M$. The compactly supported sections extending over the $\mathbb{R}^n$ factor correspond topologically to the $n$-fold loop space operation $\Omega^n$. 
+
+Integrating out the $\mathbb{R}^n$ directions, we recover the final, simplified target space over the base manifold $M$:
+
+where $b = \dim(M)-d$.
+
+This concludes the proof. The geometric realization of the unoriented $(\infty, n)$-category of cobordisms embedded in $M$ is wholly determined by the space of compactly supported sections of the fiberwise Thom fibration over $M$. The rigorous implementation of the multi-simplicial h-principle completely circumvents the necessity for complex point-set topological approximations, leveraging the robustness of the sheaf-theoretic $\beta$-construction to natively and elegantly eliminate the categorical grid cuts.
 
 \bibliographystyle{alpha}
-\bibliography{jabref}
+\bibliography{../mypreamble/jabref}
 
 \end{document}

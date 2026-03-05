@@ -1,0 +1,19 @@
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}%
+\contentsline {section}{\numberline {2}Fractions in Category Theory}{2}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Reminder: Localization of a Category}{2}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Introduction}{3}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}The axiom \textbf {R0}}{4}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}The axioms \textbf {R1} and \textbf {R2}}{5}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}The axiom \textbf {Frac}}{11}{subsection.2.5}%
+\contentsline {subsection}{\numberline {2.6}Conclusion}{16}{subsection.2.6}%
+\contentsline {section}{\numberline {3}Free Bicategories, Coherence and Localization}{17}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Free Category and Coherence}{17}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Free Bicategory and Coherence}{18}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Localization of a Bicategory}{19}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Fractions in Bicategory Theory}{20}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Introduction}{20}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}The axioms \textbf {WB1+2+5}}{21}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}The axioms \textbf {WB3+4}}{21}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}The axiom \textbf {BiFrac}}{27}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}Conclusion}{27}{subsection.4.5}%
+\contentsline {section}{\numberline {5}A Path for Further Generalization}{28}{section.5}%

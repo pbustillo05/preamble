@@ -2,12 +2,12 @@ This is BibTeX, Version 0.99d (TeX Live 2024)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: Qual Notes.aux
 The style file: alpha.bst
-Database file #1: jabref.bib
+Database file #1: ../mypreamble/jabref.bib
 Warning--empty journal in Clo23
 Warning--empty journal in Hae71
 You've used 5 entries,
             2543 wiz_defined-function locations,
-            598 strings with 5198 characters,
+            598 strings with 5212 characters,
 and the built_in function-call counts, 1972 in all, are:
 = -- 202
 > -- 74
