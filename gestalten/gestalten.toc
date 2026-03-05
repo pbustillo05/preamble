@@ -1,5 +1,0 @@
-\contentsline {subsection}{\numberline {0.1}Dualizability Composes}{2}{subsection.0.1}%
-\contentsline {subsection}{\numberline {0.2}Rigidity}{2}{subsection.0.2}%
-\contentsline {subsection}{\numberline {0.3}Dualizability}{2}{subsection.0.3}%
-\contentsline {subsection}{\numberline {0.4}Types of Maps}{2}{subsection.0.4}%
-\contentsline {subsection}{\numberline {0.5}$n$-proper is useful to understand diagonals and tensoring}{2}{subsection.0.5}%
